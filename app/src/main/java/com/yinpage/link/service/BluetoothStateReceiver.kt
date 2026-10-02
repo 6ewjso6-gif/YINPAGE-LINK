@@ -1,1 +1,129 @@
-cGFja2FnZSBjb20ueWlucGFnZS5saW5rLnNlcnZpY2UKCmltcG9ydCBhbmRyb2lkLmJsdWV0b290aC5CbHVldG9vdGhBMmRwCmltcG9ydCBhbmRyb2lkLmJsdWV0b290aC5CbHVldG9vdGhBZGFwdGVyCmltcG9ydCBhbmRyb2lkLmJsdWV0b290aC5CbHVldG9vdGhEZXZpY2UKaW1wb3J0IGFuZHJvaWQuYmx1ZXRvb3RoLkJsdWV0b290aEhlYWRzZXQKaW1wb3J0IGFuZHJvaWQuYmx1ZXRvb3RoLkJsdWV0b290aFByb2ZpbGUKaW1wb3J0IGFuZHJvaWQuY29udGVudC5Ccm9hZGNhc3RSZWNlaXZlcgppbXBvcnQgYW5kcm9pZC5jb250ZW50LkNvbnRleHQKaW1wb3J0IGFuZHJvaWQuY29udGVudC5JbnRlbnQKaW1wb3J0IGFuZHJvaWQub3MuQnVpbGQKaW1wb3J0IGNvbS55aW5wYWdlLmxpbmsuY29yZS5BcHBTdGF0ZQppbXBvcnQgY29tLnlpbnBhZ2UubGluay5jb3JlLkV2ZW50TG9nCgovKioKICogPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQogKiAg57O757uf6JOd54mZ54q25oCB5bm/5pKt5o6l5pS25ZmoCiAqID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KICogIOebkeWQrCBBQ0wg6L+e5o6lIC8g5pat5byA44CB6YCC6YWN5Zmo5byA5YWz44CBSEZQIOS4jiBBMkRQIOi/nuaOpeWPmOWMlu+8jAogKiAg55So5LqO5Zyo57O757uf5bGC6Z2i6ICz5py654q25oCB5Y+Y5YyW5pe25Yi35pawIFVJIOWPr+inguWvn+eKtuaAgeOAggogKgogKiAg57qm5p2f77yaCiAqICAgLSDlj6rlgZrjgIzor7vlub/mkq0gKyDliLfnirbmgIEgKyDmiZPml6Xlv5fjgI3vvIznu53kuI3lgZrov57mjqXjgIHmiavmj4/nrYnogJfml7bliqjkvZzvvJsKICogICAtIG9uUmVjZWl2ZSDov5DooYzlnKjkuLvnur/nqIvvvIzmiYDmnInorr7lpIfkv6Hmga/or7vlj5bpg73nlKggcnVuQ2F0Y2hpbmcg5YyF5L2PCiAqICAgICDvvIhBbmRyb2lkIDEyKyDor7sgbmFtZS9hZGRyZXNzIOmcgOimgSBCTFVFVE9PVEhfQ09OTkVDVO+8ieOAggogKgogKiAg4pqg77iPIOiDveWKm+i+ueeVjO+8muacrOaOpeaUtuWZqOWPqui0n+i0o+OAjOaKiuezu+e7n+W5v+aSree/u+ivkeaIkCBBcHBTdGF0ZSDnirbmgIHmm7TmlrDjgI3jgIIKICogIOiTneeJmeW8gOWFs+S4juiuvuWkh+aWreW8gOmDveS8muWQjOatpeWIsCBVSe+8jOmBv+WFjeWHuueOsCLns7vnu5/lt7Lmlq3lvIDkvYbnlYzpnaLku43mmL7npLrlt7Lov57mjqUi55qE5bm954G154q25oCB44CCCiAqID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KICovCmNsYXNzIEJsdWV0b290aFN0YXRlUmVjZWl2ZXIgOiBCcm9hZGNhc3RSZWNlaXZlcigpIHsKCiAgICBvdmVycmlkZSBmdW4gb25SZWNlaXZlKGNvbnRleHQ6IENvbnRleHQ/LCBpbnRlbnQ6IEludGVudD8pIHsKICAgICAgICB2YWwgYWN0aW9uID0gaW50ZW50Py5hY3Rpb24gPzogcmV0dXJuCgogICAgICAgIHdoZW4gKGFjdGlvbikgewogICAgICAgICAgICBCbHVldG9vdGhBZGFwdGVyLkFDVElPTl9TVEFURV9DSEFOR0VEIC0+IHsKICAgICAgICAgICAgICAgIHZhbCBzdGF0ZSA9IGludGVudC5nZXRJbnRFeHRyYShCbHVldG9vdGhBZGFwdGVyLkVYVFJBX1NUQVRFLCBCbHVldG9vdGhBZGFwdGVyLkVSUk9SKQogICAgICAgICAgICAgICAgRXZlbnRMb2cuaW5mbyhUQUcsICLok53niZnpgILphY3lmajnirbmgIHlj5jljJbvvJoke2Rlc2NyaWJlQWRhcHRlclN0YXRlKHN0YXRlKX0iKQogICAgICAgICAgICAgICAgLy8g5Y+q5pyJ55yf5q2j6JC95YiwIE9GRi9PTiDmiY3liLfmlrDvvIxUVVJOSU5HXyog5Lit6Ze05oCB5LiN5aSE55CGCiAgICAgICAgICAgICAgICBpZiAoc3RhdGUgPT0gQmx1ZXRvb3RoQWRhcHRlci5TVEFURV9PRkYgfHwgc3RhdGUgPT0gQmx1ZXRvb3RoQWRhcHRlci5TVEFURV9PTikgewogICAgICAgICAgICAgICAgICAgIHJ1bkNhdGNoaW5nIHsgQXBwU3RhdGUucmVmcmVzaEJsdWV0b290aFN0YXRlKCkgfQogICAgICAgICAgICAgICAgICAgICAgICAub25GYWlsdXJlIHsgRXZlbnRMb2cuZGVidWcoVEFHLCAicmVmcmVzaEJsdWV0b290aFN0YXRlIOWksei0pe+8miR7aXQubWVzc2FnZX0iKSB9CiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgIH0KCiAgICAgICAgICAgIEJsdWV0b290aERldmljZS5BQ1RJT05fQUNMX0NPTk5FQ1RFRCAtPiB7CiAgICAgICAgICAgICAgICBFdmVudExvZy5pbmZvKFRBRywgIkFDTCDlt7Lov57mjqXvvJoke2Rlc2NyaWJlRGV2aWNlKGludGVudCl9IikKICAgICAgICAgICAgfQoKICAgICAgICAgICAgQmx1ZXRvb3RoRGV2aWNlLkFDVElPTl9BQ0xfRElTQ09OTkVDVEVEIC0+IHsKICAgICAgICAgICAgICAgIEV2ZW50TG9nLmluZm8oVEFHLCAiQUNMIOW3suaWreW8gO+8miR7ZGVzY3JpYmVEZXZpY2UoaW50ZW50KX0iKQogICAgICAgICAgICAgICAgLy8g6Iul5piv5b2T5YmN5q2j5Zyo5o6n5Yi255qE6ICz5py65o6J57q/77yM5oqK5Lya6K+d54q25oCB5ZCM5q2l5Li65bey5pat5byACiAgICAgICAgICAgICAgICBkZXZpY2VBZGRyZXNzKGludGVudCk/LmxldCB7IGFkZHJlc3MgLT4KICAgICAgICAgICAgICAgICAgICBydW5DYXRjaGluZyB7IEFwcFN0YXRlLm9uRGV2aWNlRGlzY29ubmVjdGVkKGFkZHJlc3MpIH0KICAgICAgICAgICAgICAgICAgICAgICAgLm9uRmFpbHVyZSB7IEV2ZW50TG9nLmRlYnVnKFRBRywgIm9uRGV2aWNlRGlzY29ubmVjdGVkIOWksei0pe+8miR7aXQubWVzc2FnZX0iKSB9CiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgIH0KCiAgICAgICAgICAgIEJsdWV0b290aEhlYWRzZXQuQUNUSU9OX0NPTk5FQ1RJT05fU1RBVEVfQ0hBTkdFRCAtPiB7CiAgICAgICAgICAgICAgICB2YWwgc3RhdGUgPSBpbnRlbnQuZ2V0SW50RXh0cmEoQmx1ZXRvb3RoUHJvZmlsZS5FWFRSQV9TVEFURSwgQmx1ZXRvb3RoUHJvZmlsZS5TVEFURV9ESVNDT05ORUNURUQpCiAgICAgICAgICAgICAgICBFdmVudExvZy5pbmZvKFRBRywgIkhGUCDpgJror53pn7PpopHnirbmgIE9JHtkZXNjcmliZVByb2ZpbGVTdGF0ZShzdGF0ZSl9IOiuvuWkhz0ke2Rlc2NyaWJlRGV2aWNlKGludGVudCl9IikKICAgICAgICAgICAgICAgIGlmIChzdGF0ZSA9PSBCbHVldG9vdGhQcm9maWxlLlNUQVRFX0RJU0NPTk5FQ1RFRCkgewogICAgICAgICAgICAgICAgICAgIGRldmljZUFkZHJlc3MoaW50ZW50KT8ubGV0IHsgYWRkcmVzcyAtPgogICAgICAgICAgICAgICAgICAgICAgICBydW5DYXRjaGluZyB7IEFwcFN0YXRlLm9uRGV2aWNlRGlzY29ubmVjdGVkKGFkZHJlc3MpIH0KICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgIH0KCiAgICAgICAgICAgIEJsdWV0b290aEEyZHAuQUNUSU9OX0NPTk5FQ1RJT05fU1RBVEVfQ0hBTkdFRCAtPiB7CiAgICAgICAgICAgICAgICB2YWwgc3RhdGUgPSBpbnRlbnQuZ2V0SW50RXh0cmEoQmx1ZXRvb3RoUHJvZmlsZS5FWFRSQV9TVEFURSwgQmx1ZXRvb3RoUHJvZmlsZS5TVEFURV9ESVNDT05ORUNURUQpCiAgICAgICAgICAgICAgICBFdmVudExvZy5pbmZvKFRBRywgIkEyRFAg5aqS5L2T6Z+z6aKR54q25oCBPSR7ZGVzY3JpYmVQcm9maWxlU3RhdGUoc3RhdGUpfSDorr7lpIc9JHtkZXNjcmliZURldmljZShpbnRlbnQpfSIpCiAgICAgICAgICAgICAgICAvLyBBMkRQIOaWreW8gOS4jeS7o+ihqCBTUFAg5o6n5Yi26YCa6YGT5pat5byA77yI5Y+N5LmL5Lqm54S277yJ77yM5Y+q6K6w5b2V5LiN572u5pat6L+e5oCBCiAgICAgICAgICAgIH0KCiAgICAgICAgICAgIGVsc2UgLT4gRXZlbnRMb2cuZGVidWcoVEFHLCAi5pyq5aSE55CG55qE5bm/5pKtICRhY3Rpb24iKQogICAgICAgIH0KCiAgICAgICAgLy8g57uf5LiA6Kem5Y+R5LiA5qyhIFVJIOWQjOatpe+8iOadg+mZkOWcqOezu+e7n+iuvue9rumHjOiiq+aUueWKqOaXtueUqOW+l+S4iu+8ieOAggogICAgICAgIHJ1bkNhdGNoaW5nIHsgQXBwU3RhdGUucmVmcmVzaFBlcm1pc3Npb25zKCkgfQogICAgICAgICAgICAub25GYWlsdXJlIHsgRXZlbnRMb2cuZGVidWcoVEFHLCAicmVmcmVzaFBlcm1pc3Npb25zIOWksei0pe+8miR7aXQubWVzc2FnZX0iKSB9CiAgICB9CgogICAgLyoqIOS7juW5v+aSremHjOWPluWHuuiuvuWkh+WcsOWdgO+8m+ivu+S4jeWIsOWwsei/lOWbniBudWxs77yIQW5kcm9pZCAxMisg6ZyA6KaBIEJMVUVUT09USF9DT05ORUNU77yJ44CCICovCiAgICBwcml2YXRlIGZ1biBkZXZpY2VBZGRyZXNzKGludGVudDogSW50ZW50KTogU3RyaW5nPyA9IHJ1bkNhdGNoaW5nIHsKICAgICAgICB2YWwgZGV2aWNlID0gaWYgKEJ1aWxkLlZFUlNJT04uU0RLX0lOVCA+PSBCdWlsZC5WRVJTSU9OX0NPREVTLlRJUkFNSVNVKSB7CiAgICAgICAgICAgIGludGVudC5nZXRQYXJjZWxhYmxlRXh0cmEoQmx1ZXRvb3RoRGV2aWNlLkVYVFJBX0RFVklDRSwgQmx1ZXRvb3RoRGV2aWNlOjpjbGFzcy5qYXZhKQogICAgICAgIH0gZWxzZSB7CiAgICAgICAgICAgIEBTdXBwcmVzcygiREVQUkVDQVRJT04iKQogICAgICAgICAgICBpbnRlbnQuZ2V0UGFyY2VsYWJsZUV4dHJhKEJsdWV0b290aERldmljZS5FWFRSQV9ERVZJQ0UpIGFzPyBCbHVldG9vdGhEZXZpY2UKICAgICAgICB9CiAgICAgICAgZGV2aWNlPy5hZGRyZXNzCiAgICB9LmdldE9yTnVsbCgpCgogICAgcHJpdmF0ZSBmdW4gZGVzY3JpYmVEZXZpY2UoaW50ZW50OiBJbnRlbnQpOiBTdHJpbmcgewogICAgICAgIHZhbCBkZXZpY2UgPSBydW5DYXRjaGluZyB7CiAgICAgICAgICAgIGlmIChCdWlsZC5WRVJTSU9OLlNES19JTlQgPj0gQnVpbGQuVkVSU0lPTl9DT0RFUy5USVJBTUlTVSkgewogICAgICAgICAgICAgICAgaW50ZW50LmdldFBhcmNlbGFibGVFeHRyYShCbHVldG9vdGhEZXZpY2UuRVhUUkFfREVWSUNFLCBCbHVldG9vdGhEZXZpY2U6OmNsYXNzLmphdmEpCiAgICAgICAgICAgIH0gZWxzZSB7CiAgICAgICAgICAgICAgICBAU3VwcHJlc3MoIkRFUFJFQ0FUSU9OIikKICAgICAgICAgICAgICAgIGludGVudC5nZXRQYXJjZWxhYmxlRXh0cmEoQmx1ZXRvb3RoRGV2aWNlLkVYVFJBX0RFVklDRSkgYXM/IEJsdWV0b290aERldmljZQogICAgICAgICAgICB9CiAgICAgICAgfS5nZXRPck51bGwoKSA/OiByZXR1cm4gIuacquefpeiuvuWkhyIKCiAgICAgICAgdmFsIG5hbWUgPSBydW5DYXRjaGluZyB7IGRldmljZS5uYW1lIH0uZ2V0T3JOdWxsKCkgPzogIuaXoOWQjSIKICAgICAgICB2YWwgYWRkcmVzcyA9IHJ1bkNhdGNoaW5nIHsgZGV2aWNlLmFkZHJlc3MgfS5nZXRPck51bGwoKSA/OiAiPyIKICAgICAgICByZXR1cm4gIiRuYW1lKCRhZGRyZXNzKSIKICAgIH0KCiAgICBwcml2YXRlIGZ1biBkZXNjcmliZUFkYXB0ZXJTdGF0ZShzdGF0ZTogSW50KTogU3RyaW5nID0gd2hlbiAoc3RhdGUpIHsKICAgICAgICBCbHVldG9vdGhBZGFwdGVyLlNUQVRFX09GRiAtPiAi5bey5YWz6ZetIFNUQVRFX09GRiIKICAgICAgICBCbHVldG9vdGhBZGFwdGVyLlNUQVRFX1RVUk5JTkdfT04gLT4gIuato+WcqOW8gOWQryBTVEFURV9UVVJOSU5HX09OIgogICAgICAgIEJsdWV0b290aEFkYXB0ZXIuU1RBVEVfT04gLT4gIuW3suW8gOWQryBTVEFURV9PTiIKICAgICAgICBCbHVldG9vdGhBZGFwdGVyLlNUQVRFX1RVUk5JTkdfT0ZGIC0+ICLmraPlnKjlhbPpl60gU1RBVEVfVFVSTklOR19PRkYiCiAgICAgICAgZWxzZSAtPiAi5pyq55+lIHN0YXRlPSRzdGF0ZSIKICAgIH0KCiAgICBwcml2YXRlIGZ1biBkZXNjcmliZVByb2ZpbGVTdGF0ZShzdGF0ZTogSW50KTogU3RyaW5nID0gd2hlbiAoc3RhdGUpIHsKICAgICAgICBCbHVldG9vdGhQcm9maWxlLlNUQVRFX0RJU0NPTk5FQ1RFRCAtPiAi5bey5pat5byAIgogICAgICAgIEJsdWV0b290aFByb2ZpbGUuU1RBVEVfQ09OTkVDVElORyAtPiAi6L+e5o6l5LitIgogICAgICAgIEJsdWV0b290aFByb2ZpbGUuU1RBVEVfQ09OTkVDVEVEIC0+ICLlt7Lov57mjqUiCiAgICAgICAgQmx1ZXRvb3RoUHJvZmlsZS5TVEFURV9ESVNDT05ORUNUSU5HIC0+ICLmlq3lvIDkuK0iCiAgICAgICAgZWxzZSAtPiAic3RhdGU9JHN0YXRlIgogICAgfQoKICAgIHByaXZhdGUgY29tcGFuaW9uIG9iamVjdCB7CiAgICAgICAgY29uc3QgdmFsIFRBRyA9ICLok53niZnlub/mkq0iCiAgICB9Cn0K
+package com.yinpage.link.service
+
+import android.bluetooth.BluetoothA2dp
+import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothHeadset
+import android.bluetooth.BluetoothProfile
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.os.Build
+import com.yinpage.link.core.AppState
+import com.yinpage.link.core.EventLog
+
+/**
+ * ============================================================================
+ *  系统蓝牙状态广播接收器
+ * ============================================================================
+ *  监听 ACL 连接 / 断开、适配器开关、HFP 与 A2DP 连接变化，
+ *  用于在系统层面耳机状态变化时刷新 UI 可观察状态。
+ *
+ *  约束：
+ *   - 只做「读广播 + 刷状态 + 打日志」，绝不做连接、扫描等耗时动作；
+ *   - onReceive 运行在主线程，所有设备信息读取都用 runCatching 包住
+ *     （Android 12+ 读 name/address 需要 BLUETOOTH_CONNECT）。
+ *
+ *  ⚠️ 能力边界：本接收器只负责「把系统广播翻译成 AppState 状态更新」。
+ *  蓝牙开关与设备断开都会同步到 UI，避免出现"系统已断开但界面仍显示已连接"的幽灵状态。
+ * ============================================================================
+ */
+class BluetoothStateReceiver : BroadcastReceiver() {
+
+    override fun onReceive(context: Context?, intent: Intent?) {
+        val action = intent?.action ?: return
+
+        when (action) {
+            BluetoothAdapter.ACTION_STATE_CHANGED -> {
+                val state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR)
+                EventLog.info(TAG, "蓝牙适配器状态变化：${describeAdapterState(state)}")
+                // 只有真正落到 OFF/ON 才刷新，TURNING_* 中间态不处理
+                if (state == BluetoothAdapter.STATE_OFF || state == BluetoothAdapter.STATE_ON) {
+                    runCatching { AppState.refreshBluetoothState() }
+                        .onFailure { EventLog.debug(TAG, "refreshBluetoothState 失败：${it.message}") }
+                }
+            }
+
+            BluetoothDevice.ACTION_ACL_CONNECTED -> {
+                EventLog.info(TAG, "ACL 已连接：${describeDevice(intent)}")
+            }
+
+            BluetoothDevice.ACTION_ACL_DISCONNECTED -> {
+                EventLog.info(TAG, "ACL 已断开：${describeDevice(intent)}")
+                // 若是当前正在控制的耳机掉线，把会话状态同步为已断开
+                deviceAddress(intent)?.let { address ->
+                    runCatching { AppState.onDeviceDisconnected(address) }
+                        .onFailure { EventLog.debug(TAG, "onDeviceDisconnected 失败：${it.message}") }
+                }
+            }
+
+            BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED -> {
+                val state = intent.getIntExtra(BluetoothProfile.EXTRA_STATE, BluetoothProfile.STATE_DISCONNECTED)
+                EventLog.info(TAG, "HFP 通话音频状态=${describeProfileState(state)} 设备=${describeDevice(intent)}")
+                if (state == BluetoothProfile.STATE_DISCONNECTED) {
+                    deviceAddress(intent)?.let { address ->
+                        runCatching { AppState.onDeviceDisconnected(address) }
+                    }
+                }
+            }
+
+            BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED -> {
+                val state = intent.getIntExtra(BluetoothProfile.EXTRA_STATE, BluetoothProfile.STATE_DISCONNECTED)
+                EventLog.info(TAG, "A2DP 媒体音频状态=${describeProfileState(state)} 设备=${describeDevice(intent)}")
+                // A2DP 断开不代表 SPP 控制通道断开（反之亦然），只记录不置断连态
+            }
+
+            else -> EventLog.debug(TAG, "未处理的广播 $action")
+        }
+
+        // 统一触发一次 UI 同步（权限在系统设置里被改动时用得上）。
+        runCatching { AppState.refreshPermissions() }
+            .onFailure { EventLog.debug(TAG, "refreshPermissions 失败：${it.message}") }
+    }
+
+    /** 从广播里取出设备地址；读不到就返回 null（Android 12+ 需要 BLUETOOTH_CONNECT）。 */
+    private fun deviceAddress(intent: Intent): String? = runCatching {
+        val device = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE, BluetoothDevice::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE) as? BluetoothDevice
+        }
+        device?.address
+    }.getOrNull()
+
+    private fun describeDevice(intent: Intent): String {
+        val device = runCatching {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE, BluetoothDevice::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE) as? BluetoothDevice
+            }
+        }.getOrNull() ?: return "未知设备"
+
+        val name = runCatching { device.name }.getOrNull() ?: "无名"
+        val address = runCatching { device.address }.getOrNull() ?: "?"
+        return "$name($address)"
+    }
+
+    private fun describeAdapterState(state: Int): String = when (state) {
+        BluetoothAdapter.STATE_OFF -> "已关闭 STATE_OFF"
+        BluetoothAdapter.STATE_TURNING_ON -> "正在开启 STATE_TURNING_ON"
+        BluetoothAdapter.STATE_ON -> "已开启 STATE_ON"
+        BluetoothAdapter.STATE_TURNING_OFF -> "正在关闭 STATE_TURNING_OFF"
+        else -> "未知 state=$state"
+    }
+
+    private fun describeProfileState(state: Int): String = when (state) {
+        BluetoothProfile.STATE_DISCONNECTED -> "已断开"
+        BluetoothProfile.STATE_CONNECTING -> "连接中"
+        BluetoothProfile.STATE_CONNECTED -> "已连接"
+        BluetoothProfile.STATE_DISCONNECTING -> "断开中"
+        else -> "state=$state"
+    }
+
+    private companion object {
+        const val TAG = "蓝牙广播"
+    }
+}

@@ -1,1 +1,30 @@
-PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLQogIFRoZW1lLllpbnBhZ2VMaW5rIOKAlOKAlCDlj6rmnI3liqHjgIzov5vlhaUgQ29tcG9zZSDkuYvliY3jgI3nmoTnqpflj6PlpJbop4LvvIjnqpflj6Pog4zmma8gLyDnirbmgIHmoI8gLyDlkK/liqjnnqzpl7TvvInjgIIKCiAg4pqg77iPIOmHjeimgeivtOaYju+8iOS4jumcgOaxguaWh+aho+eahOS4gOWkhOWBj+W3ru+8jOW3suWcqOS6pOS7mOaxh+aKpemHjOazqOaYju+8ie+8mgogICAgICDpnIDmsYLlhpnnmoTmmK/nu6fmib8gVGhlbWUuTWF0ZXJpYWwzLkRheU5pZ2h0Lk5vQWN0aW9uQmFy77yM5L2G6K+l5qC35byP5bGe5LqOCiAgICAgIGNvbS5nb29nbGUuYW5kcm9pZC5tYXRlcmlhbDptYXRlcmlhbO+8iE1hdGVyaWFsIENvbXBvbmVudHMgZm9yIEFuZHJvaWTvvInvvIwKICAgICAg5pys5bel56iLIGFwcC9idWlsZC5ncmFkbGUua3RzIOW5tuacquWjsOaYjuivpeS+nei1lu+8jOiLpeeFp+WGmeS8muebtOaOpeWvvOiHtCBhYXB0MiDotYTmupDpk77mjqXlpLHotKUKICAgICAg77yIcmVzb3VyY2Ugc3R5bGUvVGhlbWUuTWF0ZXJpYWwzLkRheU5pZ2h0Lk5vQWN0aW9uQmFyIG5vdCBmb3VuZO+8ieOAggogICAgICDlm6DmraTov5nph4zmlLnnlKjlubPlj7DkuLvpopjkvZzkuLrniLbmoLflvI/vvIznlYzpnaLop4LmhJ/lrozlhajnlLEgQ29tcG9zZSBNYXRlcmlhbDMg6LSf6LSj44CCCiAgICAgIOiLpeWQjue7reimgeaBouWkjSBNYXRlcmlhbDMgWE1MIOS4u+mimO+8jOWPqumcgO+8mgogICAgICAgIDEpIOWcqCBhcHAvYnVpbGQuZ3JhZGxlLmt0cyDliqDlhaUgaW1wbGVtZW50YXRpb24oImNvbS5nb29nbGUuYW5kcm9pZC5tYXRlcmlhbDptYXRlcmlhbDo8dmVyPiIpCiAgICAgICAgMikg5oqKIHBhcmVudCDmlLnlm54gIlRoZW1lLk1hdGVyaWFsMy5EYXlOaWdodC5Ob0FjdGlvbkJhciIKLS0+CjxyZXNvdXJjZXM+CgogICAgPHN0eWxlIG5hbWU9IlRoZW1lLllpbnBhZ2VMaW5rIiBwYXJlbnQ9IkBhbmRyb2lkOnN0eWxlL1RoZW1lLk1hdGVyaWFsLk5vQWN0aW9uQmFyIj4KICAgICAgICA8aXRlbSBuYW1lPSJhbmRyb2lkOndpbmRvd0JhY2tncm91bmQiPkBjb2xvci93aW5kb3dfYmFja2dyb3VuZDwvaXRlbT4KICAgICAgICA8aXRlbSBuYW1lPSJhbmRyb2lkOndpbmRvd05vVGl0bGUiPnRydWU8L2l0ZW0+CiAgICAgICAgPCEtLSDns7vnu5/moI/vvJrmt7HoibLlupUgKyDmtYXoibLlm77moIfvvJtDb21wb3NlIOmHjCBlbmFibGVFZGdlVG9FZGdlKCkg5Lya5o6l566h5ZCO57ut6KGo546wIC0tPgogICAgICAgIDxpdGVtIG5hbWU9ImFuZHJvaWQ6c3RhdHVzQmFyQ29sb3IiPkBjb2xvci93aW5kb3dfYmFja2dyb3VuZDwvaXRlbT4KICAgICAgICA8aXRlbSBuYW1lPSJhbmRyb2lkOm5hdmlnYXRpb25CYXJDb2xvciI+QGNvbG9yL3dpbmRvd19iYWNrZ3JvdW5kPC9pdGVtPgogICAgICAgIDxpdGVtIG5hbWU9ImFuZHJvaWQ6d2luZG93TGlnaHRTdGF0dXNCYXIiPmZhbHNlPC9pdGVtPgogICAgICAgIDxpdGVtIG5hbWU9ImFuZHJvaWQ6d2luZG93TGlnaHROYXZpZ2F0aW9uQmFyIj5mYWxzZTwvaXRlbT4KICAgICAgICA8IS0tIG1pblNkayAyNyA9PSBBUEkgMjfvvIzor6XlsZ7mgKfoh6ogQVBJIDI3IOi1t+WPr+eUqCAtLT4KICAgICAgICA8aXRlbSBuYW1lPSJhbmRyb2lkOndpbmRvd0xheW91dEluRGlzcGxheUN1dG91dE1vZGUiPnNob3J0RWRnZXM8L2l0ZW0+CiAgICAgICAgPGl0ZW0gbmFtZT0iYW5kcm9pZDpjb2xvckFjY2VudCI+QGNvbG9yL2JyYW5kX3ByaW1hcnk8L2l0ZW0+CiAgICA8L3N0eWxlPgoKPC9yZXNvdXJjZXM+Cg==
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Theme.YinpageLink —— 只服务「进入 Compose 之前」的窗口外观（窗口背景 / 状态栏 / 启动瞬间）。
+
+  ⚠️ 重要说明（与需求文档的一处偏差，已在交付汇报里注明）：
+      需求写的是继承 Theme.Material3.DayNight.NoActionBar，但该样式属于
+      com.google.android.material:material（Material Components for Android），
+      本工程 app/build.gradle.kts 并未声明该依赖，若照写会直接导致 aapt2 资源链接失败
+      （resource style/Theme.Material3.DayNight.NoActionBar not found）。
+      因此这里改用平台主题作为父样式，界面观感完全由 Compose Material3 负责。
+      若后续要恢复 Material3 XML 主题，只需：
+        1) 在 app/build.gradle.kts 加入 implementation("com.google.android.material:material:<ver>")
+        2) 把 parent 改回 "Theme.Material3.DayNight.NoActionBar"
+-->
+<resources>
+
+    <style name="Theme.YinpageLink" parent="@android:style/Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/window_background</item>
+        <item name="android:windowNoTitle">true</item>
+        <!-- 系统栏：深色底 + 浅色图标；Compose 里 enableEdgeToEdge() 会接管后续表现 -->
+        <item name="android:statusBarColor">@color/window_background</item>
+        <item name="android:navigationBarColor">@color/window_background</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <!-- minSdk 27 == API 27，该属性自 API 27 起可用 -->
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+        <item name="android:colorAccent">@color/brand_primary</item>
+    </style>
+
+</resources>

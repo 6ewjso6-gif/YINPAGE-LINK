@@ -1,1 +1,182 @@
-cGFja2FnZSBjb20ueWlucGFnZS5saW5rLnVpCgppbXBvcnQgYW5kcm9pZC5NYW5pZmVzdAppbXBvcnQgYW5kcm9pZC5jb250ZW50LkNvbnRleHQKaW1wb3J0IGFuZHJvaWQuY29udGVudC5wbS5QYWNrYWdlTWFuYWdlcgppbXBvcnQgYW5kcm9pZC5vcy5CdWlsZAppbXBvcnQgYW5kcm9pZC5vcy5CdW5kbGUKaW1wb3J0IGFuZHJvaWR4LmFjdGl2aXR5LkNvbXBvbmVudEFjdGl2aXR5CmltcG9ydCBhbmRyb2lkeC5hY3Rpdml0eS5jb21wb3NlLnJlbWVtYmVyTGF1bmNoZXJGb3JBY3Rpdml0eVJlc3VsdAppbXBvcnQgYW5kcm9pZHguYWN0aXZpdHkuY29tcG9zZS5zZXRDb250ZW50CmltcG9ydCBhbmRyb2lkeC5hY3Rpdml0eS5lbmFibGVFZGdlVG9FZGdlCmltcG9ydCBhbmRyb2lkeC5hY3Rpdml0eS5yZXN1bHQuY29udHJhY3QuQWN0aXZpdHlSZXN1bHRDb250cmFjdHMKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UuZm91bmRhdGlvbi5sYXlvdXQuQm94CmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLmZvdW5kYXRpb24ubGF5b3V0LkNvbHVtbgppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5mb3VuZGF0aW9uLmxheW91dC5Sb3cKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UuZm91bmRhdGlvbi5sYXlvdXQuU3BhY2VyCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLmZvdW5kYXRpb24ubGF5b3V0LmZpbGxNYXhTaXplCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLmZvdW5kYXRpb24ubGF5b3V0LmZpbGxNYXhXaWR0aAppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5mb3VuZGF0aW9uLmxheW91dC5oZWlnaHQKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UuZm91bmRhdGlvbi5sYXlvdXQucGFkZGluZwppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5mb3VuZGF0aW9uLmxheW91dC5zaXplCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLmZvdW5kYXRpb24ubGF5b3V0LnN0YXR1c0JhcnNQYWRkaW5nCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLmZvdW5kYXRpb24ubGF5b3V0LndpZHRoCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLm1hdGVyaWFsLmljb25zLkljb25zCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLm1hdGVyaWFsLmljb25zLnJvdW5kZWQuQmx1ZXRvb3RoCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLm1hdGVyaWFsMy5CdXR0b24KaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UubWF0ZXJpYWwzLkNhcmQKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UubWF0ZXJpYWwzLkNhcmREZWZhdWx0cwppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5tYXRlcmlhbDMuSWNvbgppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5tYXRlcmlhbDMuTWF0ZXJpYWxUaGVtZQppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5tYXRlcmlhbDMuVGV4dAppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5ydW50aW1lLkNvbXBvc2FibGUKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UucnVudGltZS5MYXVuY2hlZEVmZmVjdAppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5ydW50aW1lLmdldFZhbHVlCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLnJ1bnRpbWUubXV0YWJsZVN0YXRlT2YKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UucnVudGltZS5yZW1lbWJlcgppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5ydW50aW1lLnNhdmVhYmxlLnJlbWVtYmVyU2F2ZWFibGUKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UucnVudGltZS5zZXRWYWx1ZQppbXBvcnQgYW5kcm9pZHguY29tcG9zZS51aS5BbGlnbm1lbnQKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UudWkuTW9kaWZpZXIKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UudWkucGxhdGZvcm0uTG9jYWxDb250ZXh0CmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLnVpLnJlcy5zdHJpbmdSZXNvdXJjZQppbXBvcnQgYW5kcm9pZHguY29tcG9zZS51aS51bml0LmRwCmltcG9ydCBhbmRyb2lkeC5jb3JlLmNvbnRlbnQuQ29udGV4dENvbXBhdAppbXBvcnQgY29tLnlpbnBhZ2UubGluay5SCmltcG9ydCBjb20ueWlucGFnZS5saW5rLnVpLnRoZW1lLllpbnBhZ2VMaW5rVGhlbWUKCi8qKgogKiDljZUgQWN0aXZpdHkg5YWl5Y+j44CCCiAqCiAqIOWPquWBmuS4ieS7tuS6i++8mgogKiAgMS4g5byA5ZCvIGVkZ2UtdG8tZWRnZe+8iENvbXBvc2Ug6Ieq5bex5aSE55CG57O757uf5qCP77yJ77ybCiAqICAyLiDlpZfkuIogTWF0ZXJpYWwzIOS4u+mimO+8mwogKiAgMy4g5ZyoIFVJIOS5i+WJjeWll+S4gOWxguiTneeJmei/kOihjOaXtuadg+mZkOWFs+WNoe+8jOadg+mZkOayoee7meS5i+WJjeeUqOaCrOa1ruWNoeeJh+aPkOekuuOAggogKi8KY2xhc3MgTWFpbkFjdGl2aXR5IDogQ29tcG9uZW50QWN0aXZpdHkoKSB7CiAgICBvdmVycmlkZSBmdW4gb25DcmVhdGUoc2F2ZWRJbnN0YW5jZVN0YXRlOiBCdW5kbGU/KSB7CiAgICAgICAgc3VwZXIub25DcmVhdGUoc2F2ZWRJbnN0YW5jZVN0YXRlKQogICAgICAgIGVuYWJsZUVkZ2VUb0VkZ2UoKQogICAgICAgIHNldENvbnRlbnQgewogICAgICAgICAgICBZaW5wYWdlTGlua1RoZW1lIHsKICAgICAgICAgICAgICAgIEJsdWV0b290aFBlcm1pc3Npb25HYXRlIHsgZ3JhbnRlZCAtPgogICAgICAgICAgICAgICAgICAgIEFwcChwZXJtaXNzaW9uR3JhbnRlZCA9IGdyYW50ZWQpCiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgIH0KICAgICAgICB9CiAgICB9Cn0KCi8qKgogKiDok53niZnov5DooYzml7bmnYPpmZDlhbPljaHjgIIKICoKICogLSBBbmRyb2lkIDEy77yIQVBJIDMx77yJ5Y+K5Lul5LiK77yaQkxVRVRPT1RIX1NDQU4gKyBCTFVFVE9PVEhfQ09OTkVDVO+8iOOAjOmZhOi/keeahOiuvuWkh+OAje+8ie+8mwogKiAtIEFuZHJvaWQgMTEg5Y+K5Lul5LiL77ya57uP5YW46JOd54mZ5Y+R546w6ZyA6KaBIEFDQ0VTU19GSU5FX0xPQ0FUSU9O44CCCiAqCiAqIOmmluasoei/m+WFpeiHquWKqOW8ueS4gOasoeezu+e7n+adg+mZkOahhu+8m+iiq+aLkue7neWQjuWNoeeJh+W4uOmpu++8jOeCueOAjOaOiOS6iOadg+mZkOOAjeWPr+WGjeasoeaLiei1t+OAggogKiBjb250ZW50IOS8muaUtuWIsOOAjOW9k+WJjeaYr+WQpuW3suaOiOadg+OAje+8jFVJIOaNruatpOWxleekuuiuvuWkh+mhteeahOW8leWvvOaWh+ahiOOAggogKi8KQENvbXBvc2FibGUKZnVuIEJsdWV0b290aFBlcm1pc3Npb25HYXRlKAogICAgbW9kaWZpZXI6IE1vZGlmaWVyID0gTW9kaWZpZXIsCiAgICBjb250ZW50OiBAQ29tcG9zYWJsZSAoQm9vbGVhbikgLT4gVW5pdCwKKSB7CiAgICB2YWwgY29udGV4dCA9IExvY2FsQ29udGV4dC5jdXJyZW50CiAgICB2YWwgcmVxdWlyZWQgPSByZW1lbWJlciB7IHJlcXVpcmVkQmx1ZXRvb3RoUGVybWlzc2lvbnMoKSB9CgogICAgdmFyIGdyYW50ZWQgYnkgcmVtZW1iZXIgeyBtdXRhYmxlU3RhdGVPZihoYXNBbGxQZXJtaXNzaW9ucyhjb250ZXh0LCByZXF1aXJlZCkpIH0KICAgIHZhciBhc2tlZCBieSByZW1lbWJlclNhdmVhYmxlIHsgbXV0YWJsZVN0YXRlT2YoZmFsc2UpIH0KCiAgICB2YWwgbGF1bmNoZXIgPSByZW1lbWJlckxhdW5jaGVyRm9yQWN0aXZpdHlSZXN1bHQoCiAgICAgICAgY29udHJhY3QgPSBBY3Rpdml0eVJlc3VsdENvbnRyYWN0cy5SZXF1ZXN0TXVsdGlwbGVQZXJtaXNzaW9ucygpLAogICAgKSB7IHJlc3VsdCAtPgogICAgICAgIGdyYW50ZWQgPSByZXF1aXJlZC5hbGwgeyBwZXJtaXNzaW9uIC0+CiAgICAgICAgICAgIHJlc3VsdFtwZXJtaXNzaW9uXSA9PSB0cnVlIHx8CiAgICAgICAgICAgICAgICBDb250ZXh0Q29tcGF0LmNoZWNrU2VsZlBlcm1pc3Npb24oY29udGV4dCwgcGVybWlzc2lvbikgPT0gUGFja2FnZU1hbmFnZXIuUEVSTUlTU0lPTl9HUkFOVEVECiAgICAgICAgfQogICAgfQoKICAgIExhdW5jaGVkRWZmZWN0KHJlcXVpcmVkKSB7CiAgICAgICAgaWYgKCFncmFudGVkICYmICFhc2tlZCAmJiByZXF1aXJlZC5pc05vdEVtcHR5KCkpIHsKICAgICAgICAgICAgYXNrZWQgPSB0cnVlCiAgICAgICAgICAgIGxhdW5jaGVyLmxhdW5jaChyZXF1aXJlZCkKICAgICAgICB9CiAgICB9CgogICAgQm94KG1vZGlmaWVyID0gbW9kaWZpZXIuZmlsbE1heFNpemUoKSkgewogICAgICAgIGNvbnRlbnQoZ3JhbnRlZCkKCiAgICAgICAgaWYgKCFncmFudGVkKSB7CiAgICAgICAgICAgIFBlcm1pc3Npb25DYXJkKAogICAgICAgICAgICAgICAgb25SZXF1ZXN0ID0geyBpZiAocmVxdWlyZWQuaXNOb3RFbXB0eSgpKSBsYXVuY2hlci5sYXVuY2gocmVxdWlyZWQpIH0sCiAgICAgICAgICAgICAgICBtb2RpZmllciA9IE1vZGlmaWVyLmFsaWduKEFsaWdubWVudC5Ub3BDZW50ZXIpLAogICAgICAgICAgICApCiAgICAgICAgfQogICAgfQp9CgpAQ29tcG9zYWJsZQpwcml2YXRlIGZ1biBQZXJtaXNzaW9uQ2FyZChvblJlcXVlc3Q6ICgpIC0+IFVuaXQsIG1vZGlmaWVyOiBNb2RpZmllciA9IE1vZGlmaWVyKSB7CiAgICBDYXJkKAogICAgICAgIG1vZGlmaWVyID0gbW9kaWZpZXIKICAgICAgICAgICAgLnN0YXR1c0JhcnNQYWRkaW5nKCkKICAgICAgICAgICAgLmZpbGxNYXhXaWR0aCgpCiAgICAgICAgICAgIC5wYWRkaW5nKGhvcml6b250YWwgPSAxMi5kcCwgdmVydGljYWwgPSA4LmRwKSwKICAgICAgICBzaGFwZSA9IE1hdGVyaWFsVGhlbWUuc2hhcGVzLmxhcmdlLAogICAgICAgIGNvbG9ycyA9IENhcmREZWZhdWx0cy5jYXJkQ29sb3JzKGNvbnRhaW5lckNvbG9yID0gTWF0ZXJpYWxUaGVtZS5jb2xvclNjaGVtZS5lcnJvckNvbnRhaW5lciksCiAgICAgICAgZWxldmF0aW9uID0gQ2FyZERlZmF1bHRzLmNhcmRFbGV2YXRpb24oZGVmYXVsdEVsZXZhdGlvbiA9IDMuZHApLAogICAgKSB7CiAgICAgICAgQ29sdW1uKG1vZGlmaWVyID0gTW9kaWZpZXIuZmlsbE1heFdpZHRoKCkucGFkZGluZygxNi5kcCkpIHsKICAgICAgICAgICAgUm93KHZlcnRpY2FsQWxpZ25tZW50ID0gQWxpZ25tZW50LkNlbnRlclZlcnRpY2FsbHkpIHsKICAgICAgICAgICAgICAgIEljb24oCiAgICAgICAgICAgICAgICAgICAgaW1hZ2VWZWN0b3IgPSBJY29ucy5Sb3VuZGVkLkJsdWV0b290aCwKICAgICAgICAgICAgICAgICAgICBjb250ZW50RGVzY3JpcHRpb24gPSBudWxsLAogICAgICAgICAgICAgICAgICAgIHRpbnQgPSBNYXRlcmlhbFRoZW1lLmNvbG9yU2NoZW1lLm9uRXJyb3JDb250YWluZXIsCiAgICAgICAgICAgICAgICAgICAgbW9kaWZpZXIgPSBNb2RpZmllci5zaXplKDIwLmRwKSwKICAgICAgICAgICAgICAgICkKICAgICAgICAgICAgICAgIFNwYWNlcihtb2RpZmllciA9IE1vZGlmaWVyLndpZHRoKDguZHApKQogICAgICAgICAgICAgICAgVGV4dCgKICAgICAgICAgICAgICAgICAgICB0ZXh0ID0gc3RyaW5nUmVzb3VyY2UoUi5zdHJpbmcucGVybV90aXRsZSksCiAgICAgICAgICAgICAgICAgICAgc3R5bGUgPSBNYXRlcmlhbFRoZW1lLnR5cG9ncmFwaHkudGl0bGVTbWFsbCwKICAgICAgICAgICAgICAgICAgICBjb2xvciA9IE1hdGVyaWFsVGhlbWUuY29sb3JTY2hlbWUub25FcnJvckNvbnRhaW5lciwKICAgICAgICAgICAgICAgICkKICAgICAgICAgICAgfQogICAgICAgICAgICBTcGFjZXIobW9kaWZpZXIgPSBNb2RpZmllci5oZWlnaHQoNi5kcCkpCiAgICAgICAgICAgIFRleHQoCiAgICAgICAgICAgICAgICB0ZXh0ID0gaWYgKEJ1aWxkLlZFUlNJT04uU0RLX0lOVCA+PSBCdWlsZC5WRVJTSU9OX0NPREVTLlMpIHsKICAgICAgICAgICAgICAgICAgICBzdHJpbmdSZXNvdXJjZShSLnN0cmluZy5wZXJtX2Rlc2NfYW5kcm9pZDEyKQogICAgICAgICAgICAgICAgfSBlbHNlIHsKICAgICAgICAgICAgICAgICAgICBzdHJpbmdSZXNvdXJjZShSLnN0cmluZy5wZXJtX2Rlc2NfbGVnYWN5KQogICAgICAgICAgICAgICAgfSwKICAgICAgICAgICAgICAgIHN0eWxlID0gTWF0ZXJpYWxUaGVtZS50eXBvZ3JhcGh5LmJvZHlTbWFsbCwKICAgICAgICAgICAgICAgIGNvbG9yID0gTWF0ZXJpYWxUaGVtZS5jb2xvclNjaGVtZS5vbkVycm9yQ29udGFpbmVyLAogICAgICAgICAgICApCiAgICAgICAgICAgIFNwYWNlcihtb2RpZmllciA9IE1vZGlmaWVyLmhlaWdodCg0LmRwKSkKICAgICAgICAgICAgVGV4dCgKICAgICAgICAgICAgICAgIHRleHQgPSBzdHJpbmdSZXNvdXJjZShSLnN0cmluZy5wZXJtX2RlbmllZF9oaW50KSwKICAgICAgICAgICAgICAgIHN0eWxlID0gTWF0ZXJpYWxUaGVtZS50eXBvZ3JhcGh5LmxhYmVsU21hbGwsCiAgICAgICAgICAgICAgICBjb2xvciA9IE1hdGVyaWFsVGhlbWUuY29sb3JTY2hlbWUub25FcnJvckNvbnRhaW5lciwKICAgICAgICAgICAgKQogICAgICAgICAgICBTcGFjZXIobW9kaWZpZXIgPSBNb2RpZmllci5oZWlnaHQoMTAuZHApKQogICAgICAgICAgICBCdXR0b24ob25DbGljayA9IG9uUmVxdWVzdCkgewogICAgICAgICAgICAgICAgVGV4dCh0ZXh0ID0gc3RyaW5nUmVzb3VyY2UoUi5zdHJpbmcucGVybV9ncmFudCkpCiAgICAgICAgICAgIH0KICAgICAgICB9CiAgICB9Cn0KCi8qKiDlvZPliY3ns7vnu5/niYjmnKzkuIvpnIDopoHnlLPor7fnmoTok53niZnnm7jlhbPmnYPpmZDjgIIgKi8KcHJpdmF0ZSBmdW4gcmVxdWlyZWRCbHVldG9vdGhQZXJtaXNzaW9ucygpOiBBcnJheTxTdHJpbmc+ID0KICAgIGlmIChCdWlsZC5WRVJTSU9OLlNES19JTlQgPj0gQnVpbGQuVkVSU0lPTl9DT0RFUy5TKSB7CiAgICAgICAgYXJyYXlPZigKICAgICAgICAgICAgTWFuaWZlc3QucGVybWlzc2lvbi5CTFVFVE9PVEhfU0NBTiwKICAgICAgICAgICAgTWFuaWZlc3QucGVybWlzc2lvbi5CTFVFVE9PVEhfQ09OTkVDVCwKICAgICAgICApCiAgICB9IGVsc2UgewogICAgICAgIGFycmF5T2YoTWFuaWZlc3QucGVybWlzc2lvbi5BQ0NFU1NfRklORV9MT0NBVElPTikKICAgIH0KCnByaXZhdGUgZnVuIGhhc0FsbFBlcm1pc3Npb25zKGNvbnRleHQ6IENvbnRleHQsIHBlcm1pc3Npb25zOiBBcnJheTxTdHJpbmc+KTogQm9vbGVhbiA9CiAgICBwZXJtaXNzaW9ucy5pc05vdEVtcHR5KCkgJiYgcGVybWlzc2lvbnMuYWxsIHsgcGVybWlzc2lvbiAtPgogICAgICAgIENvbnRleHRDb21wYXQuY2hlY2tTZWxmUGVybWlzc2lvbihjb250ZXh0LCBwZXJtaXNzaW9uKSA9PSBQYWNrYWdlTWFuYWdlci5QRVJNSVNTSU9OX0dSQU5URUQKICAgIH0K
+package com.yinpage.link.ui
+
+import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Bluetooth
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
+import com.yinpage.link.R
+import com.yinpage.link.ui.theme.YinpageLinkTheme
+
+/**
+ * 单 Activity 入口。
+ *
+ * 只做三件事：
+ *  1. 开启 edge-to-edge（Compose 自己处理系统栏）；
+ *  2. 套上 Material3 主题；
+ *  3. 在 UI 之前套一层蓝牙运行时权限关卡，权限没给之前用悬浮卡片提示。
+ */
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            YinpageLinkTheme {
+                BluetoothPermissionGate { granted ->
+                    App(permissionGranted = granted)
+                }
+            }
+        }
+    }
+}
+
+/**
+ * 蓝牙运行时权限关卡。
+ *
+ * - Android 12（API 31）及以上：BLUETOOTH_SCAN + BLUETOOTH_CONNECT（「附近的设备」）；
+ * - Android 11 及以下：经典蓝牙发现需要 ACCESS_FINE_LOCATION。
+ *
+ * 首次进入自动弹一次系统权限框；被拒绝后卡片常驻，点「授予权限」可再次拉起。
+ * content 会收到「当前是否已授权」，UI 据此展示设备页的引导文案。
+ */
+@Composable
+fun BluetoothPermissionGate(
+    modifier: Modifier = Modifier,
+    content: @Composable (Boolean) -> Unit,
+) {
+    val context = LocalContext.current
+    val required = remember { requiredBluetoothPermissions() }
+
+    var granted by remember { mutableStateOf(hasAllPermissions(context, required)) }
+    var asked by rememberSaveable { mutableStateOf(false) }
+
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestMultiplePermissions(),
+    ) { result ->
+        granted = required.all { permission ->
+            result[permission] == true ||
+                ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
+        }
+    }
+
+    LaunchedEffect(required) {
+        if (!granted && !asked && required.isNotEmpty()) {
+            asked = true
+            launcher.launch(required)
+        }
+    }
+
+    Box(modifier = modifier.fillMaxSize()) {
+        content(granted)
+
+        if (!granted) {
+            PermissionCard(
+                onRequest = { if (required.isNotEmpty()) launcher.launch(required) },
+                modifier = Modifier.align(Alignment.TopCenter),
+            )
+        }
+    }
+}
+
+@Composable
+private fun PermissionCard(onRequest: () -> Unit, modifier: Modifier = Modifier) {
+    Card(
+        modifier = modifier
+            .statusBarsPadding()
+            .fillMaxWidth()
+            .padding(horizontal = 12.dp, vertical = 8.dp),
+        shape = MaterialTheme.shapes.large,
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer),
+        elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
+    ) {
+        Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    imageVector = Icons.Rounded.Bluetooth,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onErrorContainer,
+                    modifier = Modifier.size(20.dp),
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = stringResource(R.string.perm_title),
+                    style = MaterialTheme.typography.titleSmall,
+                    color = MaterialTheme.colorScheme.onErrorContainer,
+                )
+            }
+            Spacer(modifier = Modifier.height(6.dp))
+            Text(
+                text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    stringResource(R.string.perm_desc_android12)
+                } else {
+                    stringResource(R.string.perm_desc_legacy)
+                },
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onErrorContainer,
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = stringResource(R.string.perm_denied_hint),
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onErrorContainer,
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Button(onClick = onRequest) {
+                Text(text = stringResource(R.string.perm_grant))
+            }
+        }
+    }
+}
+
+/** 当前系统版本下需要申请的蓝牙相关权限。 */
+private fun requiredBluetoothPermissions(): Array<String> =
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        arrayOf(
+            Manifest.permission.BLUETOOTH_SCAN,
+            Manifest.permission.BLUETOOTH_CONNECT,
+        )
+    } else {
+        arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
+    }
+
+private fun hasAllPermissions(context: Context, permissions: Array<String>): Boolean =
+    permissions.isNotEmpty() && permissions.all { permission ->
+        ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
+    }

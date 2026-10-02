@@ -1,1 +1,164 @@
-cGFja2FnZSBjb20ueWlucGFnZS5saW5rLnVpCgppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5mb3VuZGF0aW9uLmxheW91dC5Cb3gKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UuZm91bmRhdGlvbi5sYXlvdXQuZmlsbE1heFNpemUKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UuZm91bmRhdGlvbi5sYXlvdXQucGFkZGluZwppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5tYXRlcmlhbC5pY29ucy5JY29ucwppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5tYXRlcmlhbC5pY29ucy5yb3VuZGVkLkRldmljZXMKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UubWF0ZXJpYWwuaWNvbnMucm91bmRlZC5Ib21lCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLm1hdGVyaWFsLmljb25zLnJvdW5kZWQuU2V0dGluZ3MKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UubWF0ZXJpYWwzLkljb24KaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UubWF0ZXJpYWwzLk1hdGVyaWFsVGhlbWUKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UubWF0ZXJpYWwzLk5hdmlnYXRpb25CYXIKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UubWF0ZXJpYWwzLk5hdmlnYXRpb25CYXJJdGVtCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLm1hdGVyaWFsMy5TY2FmZm9sZAppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5tYXRlcmlhbDMuVGV4dAppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5ydW50aW1lLkNvbXBvc2FibGUKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UucnVudGltZS5nZXRWYWx1ZQppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5ydW50aW1lLm11dGFibGVTdGF0ZU9mCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLnJ1bnRpbWUucmVtZW1iZXIKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UucnVudGltZS5yZW1lbWJlckNvcm91dGluZVNjb3BlCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLnJ1bnRpbWUuc2F2ZWFibGUucmVtZW1iZXJTYXZlYWJsZQppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5ydW50aW1lLnNldFZhbHVlCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLnVpLk1vZGlmaWVyCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLnVpLnJlcy5zdHJpbmdSZXNvdXJjZQppbXBvcnQgYW5kcm9pZHgubGlmZWN5Y2xlLmNvbXBvc2UuY29sbGVjdEFzU3RhdGVXaXRoTGlmZWN5Y2xlCmltcG9ydCBjb20ueWlucGFnZS5saW5rLlIKaW1wb3J0IGNvbS55aW5wYWdlLmxpbmsuY29uZmlnLkFwcENvbmZpZwppbXBvcnQgY29tLnlpbnBhZ2UubGluay5jb25maWcuQ29uZmlnTWFuYWdlcgppbXBvcnQgY29tLnlpbnBhZ2UubGluay5jb3JlLkFwcFN0YXRlCmltcG9ydCBrb3RsaW54LmNvcm91dGluZXMubGF1bmNoCgovKioKICogPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQogKiAg5bqU55So6aqo5p6277ya5bqV6YOo5a+86Iiq77yI6aaW6aG1IC8g6K6+5aSHIC8g6K6+572u77yJKyDpobXpnaLliIfmjaIgKyDosIPor5XpnaLmnb/lhajlsY/opobnm5blsYLjgIIKICogPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQogKiAg4pqg77iPIOacrOaWh+S7tuaYr+aVtOS4qiBVSSDlsYLkuI4gY29yZSDnmoTllK/kuIDmjqXnur/ngrnvvJoKICogICAgICAtIOWQkeS4iu+8muWPquiupOivhiBBcHBTdGF0Ze+8iGNvcmXvvInjgIFDb25maWdNYW5hZ2Vy77yIY29uZmln77yJ77ybCiAqICAgICAgLSDlkJHkuIvvvJrmiornirbmgIHkuI7lm57osIPkuqTnu5kgSG9tZVBhZ2UgLyBEZXZpY2VQYWdlIC8gU2V0dGluZ3NQYWdlIC8gRGVidWdQYWdl77yMCiAqICAgICAgICDpobXpnaLmnKzouqvkuI0gaW1wb3J0IGNvcmXvvIxjb3JlIOS+p+etvuWQjeeahOS7u+S9leaUueWKqOWPqumcgOS/rui/memHjOOAggogKgogKiAg5pyf5pyb55qEIGNvcmUgQVBJ77yI5LiOIGRvYy9DT05UUkFDVCDkuK0gQXBwU3RhdGUg57qm5a6a5LiA6Ie077yJ77yaCiAqICAgICAgQXBwU3RhdGUudWkgICAgICA6IFN0YXRlRmxvdzxQb2RVaVN0YXRlPgogKiAgICAgIEFwcFN0YXRlLmRldmljZXMgOiBTdGF0ZUZsb3c8TGlzdDxCbHVldG9vdGhEZXZpY2VJdGVtPj4KICogICAgICBBcHBTdGF0ZS5zdGFydFNjYW4oKSAvIHN0b3BTY2FuKCkgLyBjb25uZWN0KGl0ZW0pIC8gZGlzY29ubmVjdCgpIC8gcmVmcmVzaCgpCiAqICAgICAgQXBwU3RhdGUuc2V0Tm9pc2UoTm9pc2VNb2RlKSAvIHNldEVxKEVxTW9kZSkKICogICAgICBBcHBTdGF0ZS5zZXRHYW1lTW9kZShCb29sZWFuKSAvIHNldEluRWFyKEJvb2xlYW4pCiAqICAgICAgQXBwU3RhdGUuc2V0RHVhbENvbm5lY3Rpb24oQm9vbGVhbikgLyBzZXRXaW5kU3VwcHJlc3Npb24oQm9vbGVhbikKICogPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQogKi8KQENvbXBvc2FibGUKZnVuIEFwcCgKICAgIG1vZGlmaWVyOiBNb2RpZmllciA9IE1vZGlmaWVyLAogICAgcGVybWlzc2lvbkdyYW50ZWQ6IEJvb2xlYW4/ID0gbnVsbCwKKSB7CiAgICB2YWwgdWkgYnkgQXBwU3RhdGUudWkuY29sbGVjdEFzU3RhdGVXaXRoTGlmZWN5Y2xlKCkKICAgIHZhbCBkZXZpY2VzIGJ5IEFwcFN0YXRlLmRldmljZXMuY29sbGVjdEFzU3RhdGVXaXRoTGlmZWN5Y2xlKCkKCiAgICB2YWwgc2NvcGUgPSByZW1lbWJlckNvcm91dGluZVNjb3BlKCkKCiAgICAvLyDphY3nva7lr7nosaHnlLEgY29yZSDliJ3lp4vljJbvvJvkuIfkuI3lvpflt7LvvIjkvovlpoLljZXlhYPmtYvor5Uv6aKE6KeI77yJ5rKh5pyJ5Yid5aeL5YyW5pe277yMCiAgICAvLyDmnKzlnLAgcGVuZGluZ0NvbmZpZyDku43nhLbog73orqnlvIDlhbPigJznnIvotbfmnaXmmK/mtLvnmoTigJ3vvIzkuI3kvJrkuIDngrnlsLHlvLnlm57jgIIKICAgIHZhbCBjb25maWdNYW5hZ2VyID0gcmVtZW1iZXIgeyBydW5DYXRjaGluZyB7IENvbmZpZ01hbmFnZXIuZ2V0KCkgfS5nZXRPck51bGwoKSB9CiAgICB2YXIgcGVuZGluZ0NvbmZpZyBieSByZW1lbWJlciB7IG11dGFibGVTdGF0ZU9mPEFwcENvbmZpZz8+KG51bGwpIH0KICAgIHZhbCBjb25maWc6IEFwcENvbmZpZyA9IHBlbmRpbmdDb25maWcgPzogdWkuY29uZmlnCgogICAgdmFyIHRhYiBieSByZW1lbWJlclNhdmVhYmxlIHsgbXV0YWJsZVN0YXRlT2YoMCkgfQogICAgdmFyIHNob3dEZWJ1ZyBieSByZW1lbWJlclNhdmVhYmxlIHsgbXV0YWJsZVN0YXRlT2YoZmFsc2UpIH0KCiAgICB2YWwgYXBwbHlDb25maWc6IChBcHBDb25maWcpIC0+IFVuaXQgPSB7IHVwZGF0ZWQgLT4KICAgICAgICBwZW5kaW5nQ29uZmlnID0gdXBkYXRlZAogICAgICAgIGNvbmZpZ01hbmFnZXI/LnVwZGF0ZSB7IHVwZGF0ZWQgfQogICAgfQoKICAgIHZhbCBwZXJtaXNzaW9uT2sgPSBwZXJtaXNzaW9uR3JhbnRlZCA/OiB1aS5wZXJtaXNzaW9uR3JhbnRlZAoKICAgIGlmIChzaG93RGVidWcpIHsKICAgICAgICBEZWJ1Z1BhZ2UoCiAgICAgICAgICAgIGxpbmVzID0gdWkuZGVidWdMaW5lcywKICAgICAgICAgICAgcG9kID0gdWkucG9kLAogICAgICAgICAgICBkZWJ1Z0VuYWJsZWQgPSBjb25maWcuZGVidWdQYW5lbCwKICAgICAgICAgICAgb25CYWNrID0geyBzaG93RGVidWcgPSBmYWxzZSB9LAogICAgICAgICkKICAgICAgICByZXR1cm4KICAgIH0KCiAgICBTY2FmZm9sZCgKICAgICAgICBtb2RpZmllciA9IG1vZGlmaWVyLmZpbGxNYXhTaXplKCksCiAgICAgICAgY29udGFpbmVyQ29sb3IgPSBNYXRlcmlhbFRoZW1lLmNvbG9yU2NoZW1lLmJhY2tncm91bmQsCiAgICAgICAgYm90dG9tQmFyID0gewogICAgICAgICAgICBOYXZpZ2F0aW9uQmFyKGNvbnRhaW5lckNvbG9yID0gTWF0ZXJpYWxUaGVtZS5jb2xvclNjaGVtZS5zdXJmYWNlQ29udGFpbmVyKSB7CiAgICAgICAgICAgICAgICBOYXZpZ2F0aW9uQmFySXRlbSgKICAgICAgICAgICAgICAgICAgICBzZWxlY3RlZCA9IHRhYiA9PSAwLAogICAgICAgICAgICAgICAgICAgIG9uQ2xpY2sgPSB7IHRhYiA9IDAgfSwKICAgICAgICAgICAgICAgICAgICBpY29uID0geyBJY29uKGltYWdlVmVjdG9yID0gSWNvbnMuUm91bmRlZC5Ib21lLCBjb250ZW50RGVzY3JpcHRpb24gPSBudWxsKSB9LAogICAgICAgICAgICAgICAgICAgIGxhYmVsID0geyBUZXh0KHRleHQgPSBzdHJpbmdSZXNvdXJjZShSLnN0cmluZy50YWJfaG9tZSkpIH0sCiAgICAgICAgICAgICAgICApCiAgICAgICAgICAgICAgICBOYXZpZ2F0aW9uQmFySXRlbSgKICAgICAgICAgICAgICAgICAgICBzZWxlY3RlZCA9IHRhYiA9PSAxLAogICAgICAgICAgICAgICAgICAgIG9uQ2xpY2sgPSB7IHRhYiA9IDEgfSwKICAgICAgICAgICAgICAgICAgICBpY29uID0geyBJY29uKGltYWdlVmVjdG9yID0gSWNvbnMuUm91bmRlZC5EZXZpY2VzLCBjb250ZW50RGVzY3JpcHRpb24gPSBudWxsKSB9LAogICAgICAgICAgICAgICAgICAgIGxhYmVsID0geyBUZXh0KHRleHQgPSBzdHJpbmdSZXNvdXJjZShSLnN0cmluZy50YWJfZGV2aWNlcykpIH0sCiAgICAgICAgICAgICAgICApCiAgICAgICAgICAgICAgICBOYXZpZ2F0aW9uQmFySXRlbSgKICAgICAgICAgICAgICAgICAgICBzZWxlY3RlZCA9IHRhYiA9PSAyLAogICAgICAgICAgICAgICAgICAgIG9uQ2xpY2sgPSB7IHRhYiA9IDIgfSwKICAgICAgICAgICAgICAgICAgICBpY29uID0geyBJY29uKGltYWdlVmVjdG9yID0gSWNvbnMuUm91bmRlZC5TZXR0aW5ncywgY29udGVudERlc2NyaXB0aW9uID0gbnVsbCkgfSwKICAgICAgICAgICAgICAgICAgICBsYWJlbCA9IHsgVGV4dCh0ZXh0ID0gc3RyaW5nUmVzb3VyY2UoUi5zdHJpbmcudGFiX3NldHRpbmdzKSkgfSwKICAgICAgICAgICAgICAgICkKICAgICAgICAgICAgfQogICAgICAgIH0sCiAgICApIHsgaW5uZXJQYWRkaW5nIC0+CiAgICAgICAgQm94KAogICAgICAgICAgICBtb2RpZmllciA9IE1vZGlmaWVyCiAgICAgICAgICAgICAgICAuZmlsbE1heFNpemUoKQogICAgICAgICAgICAgICAgLnBhZGRpbmcoaW5uZXJQYWRkaW5nKSwKICAgICAgICApIHsKICAgICAgICAgICAgd2hlbiAodGFiKSB7CiAgICAgICAgICAgICAgICAwIC0+IEhvbWVQYWdlKAogICAgICAgICAgICAgICAgICAgIHBvZCA9IHVpLnBvZCwKICAgICAgICAgICAgICAgICAgICBkZWJ1Z0VuYWJsZWQgPSBjb25maWcuZGVidWdQYW5lbCwKICAgICAgICAgICAgICAgICAgICBvbk9wZW5EZXZpY2VzID0geyB0YWIgPSAxIH0sCiAgICAgICAgICAgICAgICAgICAgb25SZWZyZXNoID0geyBBcHBTdGF0ZS5yZWZyZXNoKCkgfSwKICAgICAgICAgICAgICAgICAgICBvbk5vaXNlID0geyBBcHBTdGF0ZS5zZXROb2lzZShpdCkgfSwKICAgICAgICAgICAgICAgICAgICBvbkVxID0geyBBcHBTdGF0ZS5zZXRFcShpdCkgfSwKICAgICAgICAgICAgICAgICAgICBvbkdhbWVNb2RlID0geyBBcHBTdGF0ZS5zZXRHYW1lTW9kZShpdCkgfSwKICAgICAgICAgICAgICAgICAgICBvbkluRWFyRGV0ZWN0aW9uID0geyBBcHBTdGF0ZS5zZXRJbkVhcihpdCkgfSwKICAgICAgICAgICAgICAgICAgICBvbkR1YWxDb25uZWN0aW9uID0geyBBcHBTdGF0ZS5zZXREdWFsQ29ubmVjdGlvbihpdCkgfSwKICAgICAgICAgICAgICAgICAgICBvbldpbmRTdXBwcmVzc2lvbiA9IHsgQXBwU3RhdGUuc2V0V2luZFN1cHByZXNzaW9uKGl0KSB9LAogICAgICAgICAgICAgICAgICAgIG9uT3BlbkRlYnVnID0geyBzaG93RGVidWcgPSB0cnVlIH0sCiAgICAgICAgICAgICAgICApCgogICAgICAgICAgICAgICAgMSAtPiBEZXZpY2VQYWdlKAogICAgICAgICAgICAgICAgICAgIGRldmljZXMgPSBkZXZpY2VzLm1hcCB7IGl0ZW0gLT4KICAgICAgICAgICAgICAgICAgICAgICAgRGV2aWNlSXRlbSgKICAgICAgICAgICAgICAgICAgICAgICAgICAgIG5hbWUgPSBpdGVtLm5hbWUsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICBhZGRyZXNzID0gaXRlbS5hZGRyZXNzLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgYm9uZGVkID0gaXRlbS5ib25kZWQsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICByc3NpID0gaXRlbS5yc3NpLAogICAgICAgICAgICAgICAgICAgICAgICApCiAgICAgICAgICAgICAgICAgICAgfSwKICAgICAgICAgICAgICAgICAgICBwb2QgPSB1aS5wb2QsCiAgICAgICAgICAgICAgICAgICAgc2Nhbm5pbmcgPSB1aS5zY2FubmluZywKICAgICAgICAgICAgICAgICAgICBwZXJtaXNzaW9uR3JhbnRlZCA9IHBlcm1pc3Npb25PaywKICAgICAgICAgICAgICAgICAgICBibHVldG9vdGhFbmFibGVkID0gdWkuYmx1ZXRvb3RoRW5hYmxlZCwKICAgICAgICAgICAgICAgICAgICBvblN0YXJ0U2NhbiA9IHsgc2NvcGUubGF1bmNoIHsgQXBwU3RhdGUuc3RhcnRTY2FuKCkgfSB9LAogICAgICAgICAgICAgICAgICAgIG9uU3RvcFNjYW4gPSB7IEFwcFN0YXRlLnN0b3BTY2FuKCkgfSwKICAgICAgICAgICAgICAgICAgICBvbkNvbm5lY3QgPSB7IGRldmljZSAtPgogICAgICAgICAgICAgICAgICAgICAgICBkZXZpY2VzCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAuZmlyc3RPck51bGwgeyBpdC5hZGRyZXNzLmVxdWFscyhkZXZpY2UuYWRkcmVzcywgaWdub3JlQ2FzZSA9IHRydWUpIH0KICAgICAgICAgICAgICAgICAgICAgICAgICAgID8ubGV0IHsgQXBwU3RhdGUuY29ubmVjdChpdCkgfQogICAgICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgICAgICAgb25EaXNjb25uZWN0ID0geyBBcHBTdGF0ZS5kaXNjb25uZWN0KCkgfSwKICAgICAgICAgICAgICAgICkKCiAgICAgICAgICAgICAgICBlbHNlIC0+IFNldHRpbmdzUGFnZSgKICAgICAgICAgICAgICAgICAgICBjb25maWcgPSBjb25maWcsCiAgICAgICAgICAgICAgICAgICAgcG9kID0gdWkucG9kLAogICAgICAgICAgICAgICAgICAgIG9uQ29uZmlnQ2hhbmdlID0gYXBwbHlDb25maWcsCiAgICAgICAgICAgICAgICAgICAgb25PcGVuRGVidWcgPSB7IHNob3dEZWJ1ZyA9IHRydWUgfSwKICAgICAgICAgICAgICAgICkKICAgICAgICAgICAgfQogICAgICAgIH0KICAgIH0KfQo=
+package com.yinpage.link.ui
+
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Devices
+import androidx.compose.material.icons.rounded.Home
+import androidx.compose.material.icons.rounded.Settings
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.yinpage.link.R
+import com.yinpage.link.config.AppConfig
+import com.yinpage.link.config.ConfigManager
+import com.yinpage.link.core.AppState
+import kotlinx.coroutines.launch
+
+/**
+ * ============================================================================
+ *  应用骨架：底部导航（首页 / 设备 / 设置）+ 页面切换 + 调试面板全屏覆盖层。
+ * ============================================================================
+ *  ⚠️ 本文件是整个 UI 层与 core 的唯一接线点：
+ *      - 向上：只认识 AppState（core）、ConfigManager（config）；
+ *      - 向下：把状态与回调交给 HomePage / DevicePage / SettingsPage / DebugPage，
+ *        页面本身不 import core，core 侧签名的任何改动只需修这里。
+ *
+ *  期望的 core API（与 doc/CONTRACT 中 AppState 约定一致）：
+ *      AppState.ui      : StateFlow<PodUiState>
+ *      AppState.devices : StateFlow<List<BluetoothDeviceItem>>
+ *      AppState.startScan() / stopScan() / connect(item) / disconnect() / refresh()
+ *      AppState.setNoise(NoiseMode) / setEq(EqMode)
+ *      AppState.setGameMode(Boolean) / setInEar(Boolean)
+ *      AppState.setDualConnection(Boolean) / setWindSuppression(Boolean)
+ * ============================================================================
+ */
+@Composable
+fun App(
+    modifier: Modifier = Modifier,
+    permissionGranted: Boolean? = null,
+) {
+    val ui by AppState.ui.collectAsStateWithLifecycle()
+    val devices by AppState.devices.collectAsStateWithLifecycle()
+
+    val scope = rememberCoroutineScope()
+
+    // 配置对象由 core 初始化；万不得已（例如单元测试/预览）没有初始化时，
+    // 本地 pendingConfig 仍然能让开关“看起来是活的”，不会一点就弹回。
+    val configManager = remember { runCatching { ConfigManager.get() }.getOrNull() }
+    var pendingConfig by remember { mutableStateOf<AppConfig?>(null) }
+    val config: AppConfig = pendingConfig ?: ui.config
+
+    var tab by rememberSaveable { mutableStateOf(0) }
+    var showDebug by rememberSaveable { mutableStateOf(false) }
+
+    val applyConfig: (AppConfig) -> Unit = { updated ->
+        pendingConfig = updated
+        configManager?.update { updated }
+    }
+
+    val permissionOk = permissionGranted ?: ui.permissionGranted
+
+    if (showDebug) {
+        DebugPage(
+            lines = ui.debugLines,
+            pod = ui.pod,
+            debugEnabled = config.debugPanel,
+            onBack = { showDebug = false },
+        )
+        return
+    }
+
+    Scaffold(
+        modifier = modifier.fillMaxSize(),
+        containerColor = MaterialTheme.colorScheme.background,
+        bottomBar = {
+            NavigationBar(containerColor = MaterialTheme.colorScheme.surfaceContainer) {
+                NavigationBarItem(
+                    selected = tab == 0,
+                    onClick = { tab = 0 },
+                    icon = { Icon(imageVector = Icons.Rounded.Home, contentDescription = null) },
+                    label = { Text(text = stringResource(R.string.tab_home)) },
+                )
+                NavigationBarItem(
+                    selected = tab == 1,
+                    onClick = { tab = 1 },
+                    icon = { Icon(imageVector = Icons.Rounded.Devices, contentDescription = null) },
+                    label = { Text(text = stringResource(R.string.tab_devices)) },
+                )
+                NavigationBarItem(
+                    selected = tab == 2,
+                    onClick = { tab = 2 },
+                    icon = { Icon(imageVector = Icons.Rounded.Settings, contentDescription = null) },
+                    label = { Text(text = stringResource(R.string.tab_settings)) },
+                )
+            }
+        },
+    ) { innerPadding ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding),
+        ) {
+            when (tab) {
+                0 -> HomePage(
+                    pod = ui.pod,
+                    debugEnabled = config.debugPanel,
+                    onOpenDevices = { tab = 1 },
+                    onRefresh = { AppState.refresh() },
+                    onNoise = { AppState.setNoise(it) },
+                    onEq = { AppState.setEq(it) },
+                    onGameMode = { AppState.setGameMode(it) },
+                    onInEarDetection = { AppState.setInEar(it) },
+                    onDualConnection = { AppState.setDualConnection(it) },
+                    onWindSuppression = { AppState.setWindSuppression(it) },
+                    onOpenDebug = { showDebug = true },
+                )
+
+                1 -> DevicePage(
+                    devices = devices.map { item ->
+                        DeviceItem(
+                            name = item.name,
+                            address = item.address,
+                            bonded = item.bonded,
+                            rssi = item.rssi,
+                        )
+                    },
+                    pod = ui.pod,
+                    scanning = ui.scanning,
+                    permissionGranted = permissionOk,
+                    bluetoothEnabled = ui.bluetoothEnabled,
+                    onStartScan = { scope.launch { AppState.startScan() } },
+                    onStopScan = { AppState.stopScan() },
+                    onConnect = { device ->
+                        devices
+                            .firstOrNull { it.address.equals(device.address, ignoreCase = true) }
+                            ?.let { AppState.connect(it) }
+                    },
+                    onDisconnect = { AppState.disconnect() },
+                )
+
+                else -> SettingsPage(
+                    config = config,
+                    pod = ui.pod,
+                    onConfigChange = applyConfig,
+                    onOpenDebug = { showDebug = true },
+                )
+            }
+        }
+    }
+}

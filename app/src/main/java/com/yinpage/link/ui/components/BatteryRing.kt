@@ -1,1 +1,150 @@
-cGFja2FnZSBjb20ueWlucGFnZS5saW5rLnVpLmNvbXBvbmVudHMKCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLmFuaW1hdGlvbi5jb3JlLmFuaW1hdGVGbG9hdEFzU3RhdGUKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UuYW5pbWF0aW9uLmNvcmUudHdlZW4KaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UuZm91bmRhdGlvbi5DYW52YXMKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UuZm91bmRhdGlvbi5iYWNrZ3JvdW5kCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLmZvdW5kYXRpb24ubGF5b3V0LkJveAppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5mb3VuZGF0aW9uLmxheW91dC5Db2x1bW4KaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UuZm91bmRhdGlvbi5sYXlvdXQuU3BhY2VyCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLmZvdW5kYXRpb24ubGF5b3V0LmZpbGxNYXhTaXplCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLmZvdW5kYXRpb24ubGF5b3V0LmhlaWdodAppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5mb3VuZGF0aW9uLmxheW91dC5zaXplCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLmZvdW5kYXRpb24uc2hhcGUuQ2lyY2xlU2hhcGUKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UubWF0ZXJpYWwuaWNvbnMuSWNvbnMKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UubWF0ZXJpYWwuaWNvbnMucm91bmRlZC5Cb2x0CmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLm1hdGVyaWFsMy5JY29uCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLm1hdGVyaWFsMy5NYXRlcmlhbFRoZW1lCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLm1hdGVyaWFsMy5UZXh0CmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLnJ1bnRpbWUuQ29tcG9zYWJsZQppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5ydW50aW1lLmdldFZhbHVlCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLnVpLkFsaWdubWVudAppbXBvcnQgYW5kcm9pZHguY29tcG9zZS51aS5Nb2RpZmllcgppbXBvcnQgYW5kcm9pZHguY29tcG9zZS51aS5kcmF3LmNsaXAKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UudWkuZ2VvbWV0cnkuT2Zmc2V0CmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLnVpLmdlb21ldHJ5LlNpemUKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UudWkuZ3JhcGhpY3MuQ29sb3IKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UudWkuZ3JhcGhpY3MuU3Ryb2tlQ2FwCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLnVpLmdyYXBoaWNzLmRyYXdzY29wZS5TdHJva2UKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UudWkucmVzLnN0cmluZ1Jlc291cmNlCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLnVpLnRleHQuZm9udC5Gb250V2VpZ2h0CmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLnVpLnVuaXQuRHAKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UudWkudW5pdC5kcAppbXBvcnQgYW5kcm9pZHguY29tcG9zZS51aS51bml0LnNwCmltcG9ydCBjb20ueWlucGFnZS5saW5rLlIKaW1wb3J0IGNvbS55aW5wYWdlLmxpbmsudWkudGhlbWUuQ2hhcmdpbmdHcmVlbgppbXBvcnQgY29tLnlpbnBhZ2UubGluay51aS50aGVtZS5iYXR0ZXJ5Q29sb3IKCi8qKgogKiDnlLXph4/njq/jgILnlKggQ2FudmFzIOeUu+S4pOauteWchuW8p++8muW6leiJsui9qOmBkyArIOaMieeZvuWIhuavlOaJq+aPj+eahOi/m+W6puW8p+OAggogKgogKiBAcGFyYW0gcGVyY2VudCAgbnVsbCDooajnpLrogLPmnLrmnKrkuIrmiqXor6XlgLzvvIzmraTml7bmmL7npLogIi0tIiDkuJTnjq/kuLrngbDoibLjgIIKICogQHBhcmFtIGNoYXJnaW5nIOaYr+WQpuWFheeUteS4re+8iOWPs+S4i+inkuWHuueOsOmXqueUteinkuagh++8ieOAggogKi8KQENvbXBvc2FibGUKZnVuIEJhdHRlcnlSaW5nKAogICAgcGVyY2VudDogSW50PywKICAgIGxhYmVsOiBTdHJpbmcsCiAgICBtb2RpZmllcjogTW9kaWZpZXIgPSBNb2RpZmllciwKICAgIGNoYXJnaW5nOiBCb29sZWFuID0gZmFsc2UsCiAgICBkaWFtZXRlcjogRHAgPSA3OC5kcCwKICAgIHN0cm9rZTogRHAgPSA4LmRwLAopIHsKICAgIHZhbCB0YXJnZXQgPSAoKHBlcmNlbnQgPzogMCkuY29lcmNlSW4oMCwgMTAwKSkgLyAxMDBmCiAgICB2YWwgYW5pbWF0ZWQgYnkgYW5pbWF0ZUZsb2F0QXNTdGF0ZSgKICAgICAgICB0YXJnZXRWYWx1ZSA9IGlmIChwZXJjZW50ID09IG51bGwpIDBmIGVsc2UgdGFyZ2V0LAogICAgICAgIGFuaW1hdGlvblNwZWMgPSB0d2VlbihkdXJhdGlvbk1pbGxpcyA9IDcwMCksCiAgICAgICAgbGFiZWwgPSAiYmF0dGVyeVJpbmciLAogICAgKQoKICAgIHZhbCByaW5nQ29sb3I6IENvbG9yID0gYmF0dGVyeUNvbG9yKHBlcmNlbnQpCiAgICB2YWwgdHJhY2tDb2xvciA9IE1hdGVyaWFsVGhlbWUuY29sb3JTY2hlbWUuc3VyZmFjZVZhcmlhbnQKICAgIHZhbCB0ZXh0Q29sb3IgPSBpZiAocGVyY2VudCA9PSBudWxsKSB7CiAgICAgICAgTWF0ZXJpYWxUaGVtZS5jb2xvclNjaGVtZS5vblN1cmZhY2VWYXJpYW50CiAgICB9IGVsc2UgewogICAgICAgIE1hdGVyaWFsVGhlbWUuY29sb3JTY2hlbWUub25TdXJmYWNlCiAgICB9CgogICAgQ29sdW1uKG1vZGlmaWVyID0gbW9kaWZpZXIsIGhvcml6b250YWxBbGlnbm1lbnQgPSBBbGlnbm1lbnQuQ2VudGVySG9yaXpvbnRhbGx5KSB7CiAgICAgICAgQm94KAogICAgICAgICAgICBtb2RpZmllciA9IE1vZGlmaWVyLnNpemUoZGlhbWV0ZXIpLAogICAgICAgICAgICBjb250ZW50QWxpZ25tZW50ID0gQWxpZ25tZW50LkNlbnRlciwKICAgICAgICApIHsKICAgICAgICAgICAgQ2FudmFzKG1vZGlmaWVyID0gTW9kaWZpZXIuZmlsbE1heFNpemUoKSkgewogICAgICAgICAgICAgICAgdmFsIHN0cm9rZVB4ID0gc3Ryb2tlLnRvUHgoKQogICAgICAgICAgICAgICAgdmFsIGluc2V0ID0gc3Ryb2tlUHggLyAyZgogICAgICAgICAgICAgICAgdmFsIGFyY1NpemUgPSBTaXplKHNpemUud2lkdGggLSBzdHJva2VQeCwgc2l6ZS5oZWlnaHQgLSBzdHJva2VQeCkKICAgICAgICAgICAgICAgIHZhbCB0b3BMZWZ0ID0gT2Zmc2V0KGluc2V0LCBpbnNldCkKCiAgICAgICAgICAgICAgICAvLyDovajpgZMKICAgICAgICAgICAgICAgIGRyYXdBcmMoCiAgICAgICAgICAgICAgICAgICAgY29sb3IgPSB0cmFja0NvbG9yLAogICAgICAgICAgICAgICAgICAgIHN0YXJ0QW5nbGUgPSAwZiwKICAgICAgICAgICAgICAgICAgICBzd2VlcEFuZ2xlID0gMzYwZiwKICAgICAgICAgICAgICAgICAgICB1c2VDZW50ZXIgPSBmYWxzZSwKICAgICAgICAgICAgICAgICAgICB0b3BMZWZ0ID0gdG9wTGVmdCwKICAgICAgICAgICAgICAgICAgICBzaXplID0gYXJjU2l6ZSwKICAgICAgICAgICAgICAgICAgICBzdHlsZSA9IFN0cm9rZSh3aWR0aCA9IHN0cm9rZVB4LCBjYXAgPSBTdHJva2VDYXAuUm91bmQpLAogICAgICAgICAgICAgICAgKQogICAgICAgICAgICAgICAgLy8g6L+b5bqm77yI5LuOIDEyIOeCueaWueWQkemhuuaXtumSiO+8iQogICAgICAgICAgICAgICAgaWYgKGFuaW1hdGVkID4gMC4wMDFmKSB7CiAgICAgICAgICAgICAgICAgICAgZHJhd0FyYygKICAgICAgICAgICAgICAgICAgICAgICAgY29sb3IgPSByaW5nQ29sb3IsCiAgICAgICAgICAgICAgICAgICAgICAgIHN0YXJ0QW5nbGUgPSAtOTBmLAogICAgICAgICAgICAgICAgICAgICAgICBzd2VlcEFuZ2xlID0gMzYwZiAqIGFuaW1hdGVkLAogICAgICAgICAgICAgICAgICAgICAgICB1c2VDZW50ZXIgPSBmYWxzZSwKICAgICAgICAgICAgICAgICAgICAgICAgdG9wTGVmdCA9IHRvcExlZnQsCiAgICAgICAgICAgICAgICAgICAgICAgIHNpemUgPSBhcmNTaXplLAogICAgICAgICAgICAgICAgICAgICAgICBzdHlsZSA9IFN0cm9rZSh3aWR0aCA9IHN0cm9rZVB4LCBjYXAgPSBTdHJva2VDYXAuUm91bmQpLAogICAgICAgICAgICAgICAgICAgICkKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgfQoKICAgICAgICAgICAgQ29sdW1uKGhvcml6b250YWxBbGlnbm1lbnQgPSBBbGlnbm1lbnQuQ2VudGVySG9yaXpvbnRhbGx5KSB7CiAgICAgICAgICAgICAgICBUZXh0KAogICAgICAgICAgICAgICAgICAgIHRleHQgPSBpZiAocGVyY2VudCA9PSBudWxsKSB7CiAgICAgICAgICAgICAgICAgICAgICAgIHN0cmluZ1Jlc291cmNlKFIuc3RyaW5nLmJhdHRlcnlfdW5rbm93bikKICAgICAgICAgICAgICAgICAgICB9IGVsc2UgewogICAgICAgICAgICAgICAgICAgICAgICAiJHBlcmNlbnQlIgogICAgICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgICAgICAgc3R5bGUgPSBNYXRlcmlhbFRoZW1lLnR5cG9ncmFwaHkudGl0bGVNZWRpdW0sCiAgICAgICAgICAgICAgICAgICAgZm9udFdlaWdodCA9IEZvbnRXZWlnaHQuU2VtaUJvbGQsCiAgICAgICAgICAgICAgICAgICAgY29sb3IgPSB0ZXh0Q29sb3IsCiAgICAgICAgICAgICAgICAgICAgZm9udFNpemUgPSAxNi5zcCwKICAgICAgICAgICAgICAgICkKICAgICAgICAgICAgICAgIGlmIChjaGFyZ2luZykgewogICAgICAgICAgICAgICAgICAgIFRleHQoCiAgICAgICAgICAgICAgICAgICAgICAgIHRleHQgPSBzdHJpbmdSZXNvdXJjZShSLnN0cmluZy5iYXR0ZXJ5X2NoYXJnaW5nKSwKICAgICAgICAgICAgICAgICAgICAgICAgc3R5bGUgPSBNYXRlcmlhbFRoZW1lLnR5cG9ncmFwaHkubGFiZWxTbWFsbCwKICAgICAgICAgICAgICAgICAgICAgICAgY29sb3IgPSBDaGFyZ2luZ0dyZWVuLAogICAgICAgICAgICAgICAgICAgICkKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgfQoKICAgICAgICAgICAgaWYgKGNoYXJnaW5nKSB7CiAgICAgICAgICAgICAgICBCb3goCiAgICAgICAgICAgICAgICAgICAgbW9kaWZpZXIgPSBNb2RpZmllcgogICAgICAgICAgICAgICAgICAgICAgICAuYWxpZ24oQWxpZ25tZW50LkJvdHRvbUVuZCkKICAgICAgICAgICAgICAgICAgICAgICAgLnNpemUoMjAuZHApCiAgICAgICAgICAgICAgICAgICAgICAgIC5jbGlwKENpcmNsZVNoYXBlKQogICAgICAgICAgICAgICAgICAgICAgICAuYmFja2dyb3VuZChNYXRlcmlhbFRoZW1lLmNvbG9yU2NoZW1lLnN1cmZhY2UpLAogICAgICAgICAgICAgICAgICAgIGNvbnRlbnRBbGlnbm1lbnQgPSBBbGlnbm1lbnQuQ2VudGVyLAogICAgICAgICAgICAgICAgKSB7CiAgICAgICAgICAgICAgICAgICAgSWNvbigKICAgICAgICAgICAgICAgICAgICAgICAgaW1hZ2VWZWN0b3IgPSBJY29ucy5Sb3VuZGVkLkJvbHQsCiAgICAgICAgICAgICAgICAgICAgICAgIGNvbnRlbnREZXNjcmlwdGlvbiA9IG51bGwsCiAgICAgICAgICAgICAgICAgICAgICAgIHRpbnQgPSBDaGFyZ2luZ0dyZWVuLAogICAgICAgICAgICAgICAgICAgICAgICBtb2RpZmllciA9IE1vZGlmaWVyLnNpemUoMTQuZHApLAogICAgICAgICAgICAgICAgICAgICkKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgfQogICAgICAgIH0KCiAgICAgICAgU3BhY2VyKG1vZGlmaWVyID0gTW9kaWZpZXIuaGVpZ2h0KDYuZHApKQogICAgICAgIFRleHQoCiAgICAgICAgICAgIHRleHQgPSBsYWJlbCwKICAgICAgICAgICAgc3R5bGUgPSBNYXRlcmlhbFRoZW1lLnR5cG9ncmFwaHkubGFiZWxNZWRpdW0sCiAgICAgICAgICAgIGNvbG9yID0gTWF0ZXJpYWxUaGVtZS5jb2xvclNjaGVtZS5vblN1cmZhY2VWYXJpYW50LAogICAgICAgICkKICAgIH0KfQo=
+package com.yinpage.link.ui.components
+
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Bolt
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.yinpage.link.R
+import com.yinpage.link.ui.theme.ChargingGreen
+import com.yinpage.link.ui.theme.batteryColor
+
+/**
+ * 电量环。用 Canvas 画两段圆弧：底色轨道 + 按百分比扫描的进度弧。
+ *
+ * @param percent  null 表示耳机未上报该值，此时显示 "--" 且环为灰色。
+ * @param charging 是否充电中（右下角出现闪电角标）。
+ */
+@Composable
+fun BatteryRing(
+    percent: Int?,
+    label: String,
+    modifier: Modifier = Modifier,
+    charging: Boolean = false,
+    diameter: Dp = 78.dp,
+    stroke: Dp = 8.dp,
+) {
+    val target = ((percent ?: 0).coerceIn(0, 100)) / 100f
+    val animated by animateFloatAsState(
+        targetValue = if (percent == null) 0f else target,
+        animationSpec = tween(durationMillis = 700),
+        label = "batteryRing",
+    )
+
+    val ringColor: Color = batteryColor(percent)
+    val trackColor = MaterialTheme.colorScheme.surfaceVariant
+    val textColor = if (percent == null) {
+        MaterialTheme.colorScheme.onSurfaceVariant
+    } else {
+        MaterialTheme.colorScheme.onSurface
+    }
+
+    Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+        Box(
+            modifier = Modifier.size(diameter),
+            contentAlignment = Alignment.Center,
+        ) {
+            Canvas(modifier = Modifier.fillMaxSize()) {
+                val strokePx = stroke.toPx()
+                val inset = strokePx / 2f
+                val arcSize = Size(size.width - strokePx, size.height - strokePx)
+                val topLeft = Offset(inset, inset)
+
+                // 轨道
+                drawArc(
+                    color = trackColor,
+                    startAngle = 0f,
+                    sweepAngle = 360f,
+                    useCenter = false,
+                    topLeft = topLeft,
+                    size = arcSize,
+                    style = Stroke(width = strokePx, cap = StrokeCap.Round),
+                )
+                // 进度（从 12 点方向顺时针）
+                if (animated > 0.001f) {
+                    drawArc(
+                        color = ringColor,
+                        startAngle = -90f,
+                        sweepAngle = 360f * animated,
+                        useCenter = false,
+                        topLeft = topLeft,
+                        size = arcSize,
+                        style = Stroke(width = strokePx, cap = StrokeCap.Round),
+                    )
+                }
+            }
+
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(
+                    text = if (percent == null) {
+                        stringResource(R.string.battery_unknown)
+                    } else {
+                        "$percent%"
+                    },
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold,
+                    color = textColor,
+                    fontSize = 16.sp,
+                )
+                if (charging) {
+                    Text(
+                        text = stringResource(R.string.battery_charging),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = ChargingGreen,
+                    )
+                }
+            }
+
+            if (charging) {
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .size(20.dp)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.surface),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Icon(
+                        imageVector = Icons.Rounded.Bolt,
+                        contentDescription = null,
+                        tint = ChargingGreen,
+                        modifier = Modifier.size(14.dp),
+                    )
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(6.dp))
+        Text(
+            text = label,
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+    }
+}

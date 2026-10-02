@@ -1,1 +1,15 @@
-PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLQogIFhNTCDkvqfpopzoibLotYTmupDjgIJDb21wb3NlIOWGheeahOWujOaVtOmFjeiJsuingSB1aS90aGVtZS9Db2xvci5rdO+8jAogIOi/memHjOWPquS/neeVmeeql+WPoy/kuLvpopjpnIDopoHnmoTlsJHph4/popzoibLvvIzpgb/lhY3kuKTku73phY3oibLkupLnm7jmvILnp7vjgIIKLS0+CjxyZXNvdXJjZXM+CiAgICA8IS0tIOeql+WPo+iDjOaZr++8iOa1heiJsu+8ie+8mua3seiJsuWAvOingSB2YWx1ZXMtbmlnaHQvY29sb3JzLnhtbO+8jOmBv+WFjeWQr+WKqOeerOmXtOeZvS/pu5Hpl6rng4EgLS0+CiAgICA8Y29sb3IgbmFtZT0id2luZG93X2JhY2tncm91bmQiPiNGRkY2RjdGQjwvY29sb3I+CgogICAgPCEtLSDlk4HniYzkuLvoibLvvIjkvY7ppbHlkozpnZLok53vvInvvIznlKjkuo7ns7vnu5/lvLrosIPoibLkuI7pgJrnn6Xlm77moIfnnYDoibIgLS0+CiAgICA8Y29sb3IgbmFtZT0iYnJhbmRfcHJpbWFyeSI+I0ZGM0Y2M0M4PC9jb2xvcj4KICAgIDxjb2xvciBuYW1lPSJicmFuZF9wcmltYXJ5X2xpZ2h0Ij4jRkZBRUMzRkY8L2NvbG9yPgogICAgPGNvbG9yIG5hbWU9ImJyYW5kX3N1cmZhY2VfbGlnaHQiPiNGRkY2RjdGQjwvY29sb3I+CiAgICA8Y29sb3IgbmFtZT0iYnJhbmRfb25fc3VyZmFjZSI+I0ZGRTZFOEVGPC9jb2xvcj4KPC9yZXNvdXJjZXM+Cg==
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  XML 侧颜色资源。Compose 内的完整配色见 ui/theme/Color.kt，
+  这里只保留窗口/主题需要的少量颜色，避免两份配色互相漂移。
+-->
+<resources>
+    <!-- 窗口背景（浅色）：深色值见 values-night/colors.xml，避免启动瞬间白/黑闪烁 -->
+    <color name="window_background">#FFF6F7FB</color>
+
+    <!-- 品牌主色（低饱和青蓝），用于系统强调色与通知图标着色 -->
+    <color name="brand_primary">#FF3F63C8</color>
+    <color name="brand_primary_light">#FFAEC3FF</color>
+    <color name="brand_surface_light">#FFF6F7FB</color>
+    <color name="brand_on_surface">#FFE6E8EF</color>
+</resources>

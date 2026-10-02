@@ -1,1 +1,102 @@
-cGFja2FnZSBjb20ueWlucGFnZS5saW5rLnVpLmNvbXBvbmVudHMKCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLmZvdW5kYXRpb24uYmFja2dyb3VuZAppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5mb3VuZGF0aW9uLmxheW91dC5BcnJhbmdlbWVudAppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5mb3VuZGF0aW9uLmxheW91dC5Cb3gKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UuZm91bmRhdGlvbi5sYXlvdXQuUm93CmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLmZvdW5kYXRpb24ubGF5b3V0LnBhZGRpbmcKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UuZm91bmRhdGlvbi5sYXlvdXQuc2l6ZQppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5mb3VuZGF0aW9uLnNoYXBlLkNpcmNsZVNoYXBlCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLmZvdW5kYXRpb24uc2hhcGUuUm91bmRlZENvcm5lclNoYXBlCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLm1hdGVyaWFsMy5JY29uCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLm1hdGVyaWFsMy5NYXRlcmlhbFRoZW1lCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLm1hdGVyaWFsMy5UZXh0CmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLnJ1bnRpbWUuQ29tcG9zYWJsZQppbXBvcnQgYW5kcm9pZHguY29tcG9zZS51aS5BbGlnbm1lbnQKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UudWkuTW9kaWZpZXIKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UudWkuZHJhdy5jbGlwCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLnVpLmdyYXBoaWNzLkNvbG9yCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLnVpLmdyYXBoaWNzLnZlY3Rvci5JbWFnZVZlY3RvcgppbXBvcnQgYW5kcm9pZHguY29tcG9zZS51aS5yZXMuc3RyaW5nUmVzb3VyY2UKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UudWkudGV4dC5mb250LkZvbnRXZWlnaHQKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UudWkudW5pdC5EcAppbXBvcnQgYW5kcm9pZHguY29tcG9zZS51aS51bml0LmRwCmltcG9ydCBjb20ueWlucGFnZS5saW5rLlIKaW1wb3J0IGNvbS55aW5wYWdlLmxpbmsucHJvdG9jb2wuQ29ubmVjdGlvblN0YXRlCmltcG9ydCBjb20ueWlucGFnZS5saW5rLnVpLnRoZW1lLkNvbm5lY3RlZEdyZWVuCmltcG9ydCBjb20ueWlucGFnZS5saW5rLnVpLnRoZW1lLkRhbmdlclJlZAppbXBvcnQgY29tLnlpbnBhZ2UubGluay51aS50aGVtZS5OZXV0cmFsR3JleQppbXBvcnQgY29tLnlpbnBhZ2UubGluay51aS50aGVtZS5XYXJuaW5nQW1iZXIKCi8qKgogKiDlsI/og7blm4rmoIfnrb7vvJrnlKjmnaXmmL7npLrjgIzlt7Lov57mjqXjgI3jgIzljY/orq7lkI3jgI3jgIzlt7LphY3lr7njgI3ov5nnsbvnn63nirbmgIHjgIIKICoKICogQHBhcmFtIGZpbGxlZCB0cnVlID0g5a6e5b+D77yI55So5LqO5pyA6ZyA6KaB5oqi55y855qE6YKj5LiA5Liq54q25oCB77yJ77yMZmFsc2UgPSDljYrpgI/mmI7lupXjgIIKICovCkBDb21wb3NhYmxlCmZ1biBTdGF0dXNDaGlwKAogICAgdGV4dDogU3RyaW5nLAogICAgY29sb3I6IENvbG9yLAogICAgbW9kaWZpZXI6IE1vZGlmaWVyID0gTW9kaWZpZXIsCiAgICBpY29uOiBJbWFnZVZlY3Rvcj8gPSBudWxsLAogICAgZmlsbGVkOiBCb29sZWFuID0gZmFsc2UsCikgewogICAgUm93KAogICAgICAgIG1vZGlmaWVyID0gbW9kaWZpZXIKICAgICAgICAgICAgLmNsaXAoUm91bmRlZENvcm5lclNoYXBlKDUwKSkKICAgICAgICAgICAgLmJhY2tncm91bmQoaWYgKGZpbGxlZCkgY29sb3IgZWxzZSBjb2xvci5jb3B5KGFscGhhID0gMC4xNWYpKQogICAgICAgICAgICAucGFkZGluZyhob3Jpem9udGFsID0gMTAuZHAsIHZlcnRpY2FsID0gNS5kcCksCiAgICAgICAgdmVydGljYWxBbGlnbm1lbnQgPSBBbGlnbm1lbnQuQ2VudGVyVmVydGljYWxseSwKICAgICAgICBob3Jpem9udGFsQXJyYW5nZW1lbnQgPSBBcnJhbmdlbWVudC5zcGFjZWRCeSg0LmRwKSwKICAgICkgewogICAgICAgIGlmIChpY29uICE9IG51bGwpIHsKICAgICAgICAgICAgSWNvbigKICAgICAgICAgICAgICAgIGltYWdlVmVjdG9yID0gaWNvbiwKICAgICAgICAgICAgICAgIGNvbnRlbnREZXNjcmlwdGlvbiA9IG51bGwsCiAgICAgICAgICAgICAgICB0aW50ID0gaWYgKGZpbGxlZCkgQ29sb3IuV2hpdGUgZWxzZSBjb2xvciwKICAgICAgICAgICAgICAgIG1vZGlmaWVyID0gTW9kaWZpZXIuc2l6ZSgxMy5kcCksCiAgICAgICAgICAgICkKICAgICAgICB9CiAgICAgICAgVGV4dCgKICAgICAgICAgICAgdGV4dCA9IHRleHQsCiAgICAgICAgICAgIGNvbG9yID0gaWYgKGZpbGxlZCkgQ29sb3IuV2hpdGUgZWxzZSBjb2xvciwKICAgICAgICAgICAgc3R5bGUgPSBNYXRlcmlhbFRoZW1lLnR5cG9ncmFwaHkubGFiZWxTbWFsbCwKICAgICAgICAgICAgZm9udFdlaWdodCA9IEZvbnRXZWlnaHQuTWVkaXVtLAogICAgICAgICkKICAgIH0KfQoKLyoqIOe6r+iJsuWwj+WchueCue+8jOeUqOS6juWIl+ihqOmhueWJjeeahOi/nuaOpS/kv6Hlj7fmjIfnpLrjgIIgKi8KQENvbXBvc2FibGUKZnVuIFN0YXR1c0RvdCgKICAgIGNvbG9yOiBDb2xvciwKICAgIG1vZGlmaWVyOiBNb2RpZmllciA9IE1vZGlmaWVyLAogICAgc2l6ZTogRHAgPSA4LmRwLAopIHsKICAgIEJveCgKICAgICAgICBtb2RpZmllciA9IG1vZGlmaWVyCiAgICAgICAgICAgIC5zaXplKHNpemUpCiAgICAgICAgICAgIC5jbGlwKENpcmNsZVNoYXBlKQogICAgICAgICAgICAuYmFja2dyb3VuZChjb2xvciksCiAgICApCn0KCi8qKiDov57mjqXnirbmgIEg4oaSIOS4reaWh+aWh+ahiOOAgiAqLwpAQ29tcG9zYWJsZQpmdW4gY29ubmVjdGlvbkxhYmVsKHN0YXRlOiBDb25uZWN0aW9uU3RhdGUpOiBTdHJpbmcgPSB3aGVuIChzdGF0ZSkgewogICAgQ29ubmVjdGlvblN0YXRlLkJMVUVUT09USF9PRkYgLT4gc3RyaW5nUmVzb3VyY2UoUi5zdHJpbmcuc3RhdGVfYmx1ZXRvb3RoX29mZikKICAgIENvbm5lY3Rpb25TdGF0ZS5JRExFIC0+IHN0cmluZ1Jlc291cmNlKFIuc3RyaW5nLnN0YXRlX2lkbGUpCiAgICBDb25uZWN0aW9uU3RhdGUuQ09OTkVDVElORyAtPiBzdHJpbmdSZXNvdXJjZShSLnN0cmluZy5zdGF0ZV9jb25uZWN0aW5nKQogICAgQ29ubmVjdGlvblN0YXRlLkhBTkRTSEFLSU5HIC0+IHN0cmluZ1Jlc291cmNlKFIuc3RyaW5nLnN0YXRlX2hhbmRzaGFraW5nKQogICAgQ29ubmVjdGlvblN0YXRlLkNPTk5FQ1RFRCAtPiBzdHJpbmdSZXNvdXJjZShSLnN0cmluZy5zdGF0ZV9jb25uZWN0ZWQpCiAgICBDb25uZWN0aW9uU3RhdGUuUkVDT05ORUNUSU5HIC0+IHN0cmluZ1Jlc291cmNlKFIuc3RyaW5nLnN0YXRlX3JlY29ubmVjdGluZykKICAgIENvbm5lY3Rpb25TdGF0ZS5GQUlMRUQgLT4gc3RyaW5nUmVzb3VyY2UoUi5zdHJpbmcuc3RhdGVfZmFpbGVkKQp9CgovKiog6L+e5o6l54q25oCBIOKGkiDor63kuYnoibLjgIIgKi8KZnVuIGNvbm5lY3Rpb25Db2xvcihzdGF0ZTogQ29ubmVjdGlvblN0YXRlKTogQ29sb3IgPSB3aGVuIChzdGF0ZSkgewogICAgQ29ubmVjdGlvblN0YXRlLkNPTk5FQ1RFRCAtPiBDb25uZWN0ZWRHcmVlbgogICAgQ29ubmVjdGlvblN0YXRlLkNPTk5FQ1RJTkcsIENvbm5lY3Rpb25TdGF0ZS5IQU5EU0hBS0lORywgQ29ubmVjdGlvblN0YXRlLlJFQ09OTkVDVElORyAtPiBXYXJuaW5nQW1iZXIKICAgIENvbm5lY3Rpb25TdGF0ZS5GQUlMRUQsIENvbm5lY3Rpb25TdGF0ZS5CTFVFVE9PVEhfT0ZGIC0+IERhbmdlclJlZAogICAgQ29ubmVjdGlvblN0YXRlLklETEUgLT4gTmV1dHJhbEdyZXkKfQo=
+package com.yinpage.link.ui.components
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import com.yinpage.link.R
+import com.yinpage.link.protocol.ConnectionState
+import com.yinpage.link.ui.theme.ConnectedGreen
+import com.yinpage.link.ui.theme.DangerRed
+import com.yinpage.link.ui.theme.NeutralGrey
+import com.yinpage.link.ui.theme.WarningAmber
+
+/**
+ * 小胶囊标签：用来显示「已连接」「协议名」「已配对」这类短状态。
+ *
+ * @param filled true = 实心（用于最需要抢眼的那一个状态），false = 半透明底。
+ */
+@Composable
+fun StatusChip(
+    text: String,
+    color: Color,
+    modifier: Modifier = Modifier,
+    icon: ImageVector? = null,
+    filled: Boolean = false,
+) {
+    Row(
+        modifier = modifier
+            .clip(RoundedCornerShape(50))
+            .background(if (filled) color else color.copy(alpha = 0.15f))
+            .padding(horizontal = 10.dp, vertical = 5.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+    ) {
+        if (icon != null) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = if (filled) Color.White else color,
+                modifier = Modifier.size(13.dp),
+            )
+        }
+        Text(
+            text = text,
+            color = if (filled) Color.White else color,
+            style = MaterialTheme.typography.labelSmall,
+            fontWeight = FontWeight.Medium,
+        )
+    }
+}
+
+/** 纯色小圆点，用于列表项前的连接/信号指示。 */
+@Composable
+fun StatusDot(
+    color: Color,
+    modifier: Modifier = Modifier,
+    size: Dp = 8.dp,
+) {
+    Box(
+        modifier = modifier
+            .size(size)
+            .clip(CircleShape)
+            .background(color),
+    )
+}
+
+/** 连接状态 → 中文文案。 */
+@Composable
+fun connectionLabel(state: ConnectionState): String = when (state) {
+    ConnectionState.BLUETOOTH_OFF -> stringResource(R.string.state_bluetooth_off)
+    ConnectionState.IDLE -> stringResource(R.string.state_idle)
+    ConnectionState.CONNECTING -> stringResource(R.string.state_connecting)
+    ConnectionState.HANDSHAKING -> stringResource(R.string.state_handshaking)
+    ConnectionState.CONNECTED -> stringResource(R.string.state_connected)
+    ConnectionState.RECONNECTING -> stringResource(R.string.state_reconnecting)
+    ConnectionState.FAILED -> stringResource(R.string.state_failed)
+}
+
+/** 连接状态 → 语义色。 */
+fun connectionColor(state: ConnectionState): Color = when (state) {
+    ConnectionState.CONNECTED -> ConnectedGreen
+    ConnectionState.CONNECTING, ConnectionState.HANDSHAKING, ConnectionState.RECONNECTING -> WarningAmber
+    ConnectionState.FAILED, ConnectionState.BLUETOOTH_OFF -> DangerRed
+    ConnectionState.IDLE -> NeutralGrey
+}

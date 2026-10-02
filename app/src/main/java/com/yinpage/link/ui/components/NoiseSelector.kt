@@ -1,1 +1,124 @@
-cGFja2FnZSBjb20ueWlucGFnZS5saW5rLnVpLmNvbXBvbmVudHMKCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLmFuaW1hdGlvbi5hbmltYXRlQ29sb3JBc1N0YXRlCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLmFuaW1hdGlvbi5jb3JlLnR3ZWVuCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLmZvdW5kYXRpb24uYmFja2dyb3VuZAppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5mb3VuZGF0aW9uLmNsaWNrYWJsZQppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5mb3VuZGF0aW9uLmxheW91dC5BcnJhbmdlbWVudAppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5mb3VuZGF0aW9uLmxheW91dC5Db2x1bW4KaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UuZm91bmRhdGlvbi5sYXlvdXQuUm93CmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLmZvdW5kYXRpb24ubGF5b3V0LlNwYWNlcgppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5mb3VuZGF0aW9uLmxheW91dC5maWxsTWF4V2lkdGgKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UuZm91bmRhdGlvbi5sYXlvdXQuaGVpZ2h0CmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLmZvdW5kYXRpb24ubGF5b3V0LnBhZGRpbmcKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UuZm91bmRhdGlvbi5sYXlvdXQuc2l6ZQppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5mb3VuZGF0aW9uLnNoYXBlLlJvdW5kZWRDb3JuZXJTaGFwZQppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5tYXRlcmlhbC5pY29ucy5JY29ucwppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5tYXRlcmlhbC5pY29ucy5yb3VuZGVkLkFpcgppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5tYXRlcmlhbC5pY29ucy5yb3VuZGVkLkdyYXBoaWNFcQppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5tYXRlcmlhbC5pY29ucy5yb3VuZGVkLkhlYXJpbmcKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UubWF0ZXJpYWwuaWNvbnMucm91bmRlZC5UdW5lCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLm1hdGVyaWFsLmljb25zLnJvdW5kZWQuVm9sdW1lT2ZmCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLm1hdGVyaWFsLmljb25zLnJvdW5kZWQuV2F2ZXMKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UubWF0ZXJpYWwzLkljb24KaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UubWF0ZXJpYWwzLk1hdGVyaWFsVGhlbWUKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UubWF0ZXJpYWwzLlN1cmZhY2UKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UubWF0ZXJpYWwzLlRleHQKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UucnVudGltZS5Db21wb3NhYmxlCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLnJ1bnRpbWUuZ2V0VmFsdWUKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UudWkuQWxpZ25tZW50CmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLnVpLk1vZGlmaWVyCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLnVpLmRyYXcuY2xpcAppbXBvcnQgYW5kcm9pZHguY29tcG9zZS51aS5ncmFwaGljcy5Db2xvcgppbXBvcnQgYW5kcm9pZHguY29tcG9zZS51aS5ncmFwaGljcy52ZWN0b3IuSW1hZ2VWZWN0b3IKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UudWkucmVzLnN0cmluZ1Jlc291cmNlCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLnVpLnRleHQuc3R5bGUuVGV4dEFsaWduCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLnVpLnVuaXQuZHAKaW1wb3J0IGNvbS55aW5wYWdlLmxpbmsuUgppbXBvcnQgY29tLnlpbnBhZ2UubGluay5wcm90b2NvbC5Ob2lzZU1vZGUKCi8qKiDpmY3lmarmoaPkvY3lr7nlupTnmoTlm77moIfjgILmnKrnn6XmoaPkvY3lm57okL3liLDpgJrnlKjosIPoioLlm77moIfjgIIgKi8KZnVuIG5vaXNlSWNvbihtb2RlOiBOb2lzZU1vZGUpOiBJbWFnZVZlY3RvciA9IHdoZW4gKG1vZGUpIHsKICAgIE5vaXNlTW9kZS5PRkYgLT4gSWNvbnMuUm91bmRlZC5Wb2x1bWVPZmYKICAgIE5vaXNlTW9kZS5UUkFOU1BBUkVOVCAtPiBJY29ucy5Sb3VuZGVkLkhlYXJpbmcKICAgIE5vaXNlTW9kZS5OT1JNQUwgLT4gSWNvbnMuUm91bmRlZC5HcmFwaGljRXEKICAgIE5vaXNlTW9kZS5ERUVQIC0+IEljb25zLlJvdW5kZWQuV2F2ZXMKICAgIE5vaXNlTW9kZS5BREFQVElWRSAtPiBJY29ucy5Sb3VuZGVkLlR1bmUKICAgIE5vaXNlTW9kZS5XSU5EIC0+IEljb25zLlJvdW5kZWQuQWlyCiAgICBlbHNlIC0+IEljb25zLlJvdW5kZWQuVHVuZQp9CgovKiog6ZmN5Zmq5qGj5L2N55qE5Lit5paH55+t5ZCN77yI5Zub5qGj5o6n5Lu25LiK5Y+q5pS+55+t5ZCN77yJ44CCICovCkBDb21wb3NhYmxlCmZ1biBub2lzZUxhYmVsKG1vZGU6IE5vaXNlTW9kZSk6IFN0cmluZyA9IHdoZW4gKG1vZGUpIHsKICAgIE5vaXNlTW9kZS5PRkYgLT4gc3RyaW5nUmVzb3VyY2UoUi5zdHJpbmcubm9pc2Vfb2ZmKQogICAgTm9pc2VNb2RlLlRSQU5TUEFSRU5UIC0+IHN0cmluZ1Jlc291cmNlKFIuc3RyaW5nLm5vaXNlX3RyYW5zcGFyZW50KQogICAgTm9pc2VNb2RlLk5PUk1BTCAtPiBzdHJpbmdSZXNvdXJjZShSLnN0cmluZy5ub2lzZV9ub3JtYWwpCiAgICBOb2lzZU1vZGUuREVFUCAtPiBzdHJpbmdSZXNvdXJjZShSLnN0cmluZy5ub2lzZV9kZWVwKQogICAgZWxzZSAtPiBtb2RlLmxhYmVsWmgKfQoKLyoqCiAqIOWbm+ahoyBBTkMg5YiG5q615o6n5Lu277yI6Ieq57uY77yM5LiN5L6d6LWW5a6e6aqM5oCnIFNlZ21lbnRlZEJ1dHRvbu+8ieOAggogKiDpobrluo/lm7rlrprkuLog5YWz6ZetIC8g6YCa6YCPIC8g5qCH5YeGIC8g5rex5bqm77yM5LiO57O757uf5Y6f55Sf5o6n5Lu255qE5qGj5L2N6K+t5LmJ5LiA6Ie044CCCiAqLwpAQ29tcG9zYWJsZQpmdW4gTm9pc2VTZWxlY3RvcigKICAgIHNlbGVjdGVkOiBOb2lzZU1vZGUsCiAgICBvblNlbGVjdDogKE5vaXNlTW9kZSkgLT4gVW5pdCwKICAgIG1vZGlmaWVyOiBNb2RpZmllciA9IE1vZGlmaWVyLAogICAgZW5hYmxlZDogQm9vbGVhbiA9IHRydWUsCiAgICBtb2RlczogTGlzdDxOb2lzZU1vZGU+ID0gTm9pc2VNb2RlLlNXSVRDSEFCTEUsCikgewogICAgU3VyZmFjZSgKICAgICAgICBtb2RpZmllciA9IG1vZGlmaWVyLmZpbGxNYXhXaWR0aCgpLAogICAgICAgIHNoYXBlID0gUm91bmRlZENvcm5lclNoYXBlKDIwLmRwKSwKICAgICAgICBjb2xvciA9IE1hdGVyaWFsVGhlbWUuY29sb3JTY2hlbWUuc3VyZmFjZVZhcmlhbnQsCiAgICApIHsKICAgICAgICBSb3coCiAgICAgICAgICAgIG1vZGlmaWVyID0gTW9kaWZpZXIucGFkZGluZyg0LmRwKSwKICAgICAgICAgICAgaG9yaXpvbnRhbEFycmFuZ2VtZW50ID0gQXJyYW5nZW1lbnQuc3BhY2VkQnkoNC5kcCksCiAgICAgICAgICAgIHZlcnRpY2FsQWxpZ25tZW50ID0gQWxpZ25tZW50LkNlbnRlclZlcnRpY2FsbHksCiAgICAgICAgKSB7CiAgICAgICAgICAgIG1vZGVzLmZvckVhY2ggeyBtb2RlIC0+CiAgICAgICAgICAgICAgICB2YWwgaXNTZWxlY3RlZCA9IG1vZGUgPT0gc2VsZWN0ZWQKICAgICAgICAgICAgICAgIHZhbCBiYWNrZ3JvdW5kIGJ5IGFuaW1hdGVDb2xvckFzU3RhdGUoCiAgICAgICAgICAgICAgICAgICAgdGFyZ2V0VmFsdWUgPSBpZiAoaXNTZWxlY3RlZCkgTWF0ZXJpYWxUaGVtZS5jb2xvclNjaGVtZS5wcmltYXJ5IGVsc2UgQ29sb3IuVHJhbnNwYXJlbnQsCiAgICAgICAgICAgICAgICAgICAgYW5pbWF0aW9uU3BlYyA9IHR3ZWVuKGR1cmF0aW9uTWlsbGlzID0gMjAwKSwKICAgICAgICAgICAgICAgICAgICBsYWJlbCA9ICJub2lzZVNlZ21lbnQiLAogICAgICAgICAgICAgICAgKQogICAgICAgICAgICAgICAgdmFsIGZvcmVncm91bmQgPSBpZiAoaXNTZWxlY3RlZCkgewogICAgICAgICAgICAgICAgICAgIE1hdGVyaWFsVGhlbWUuY29sb3JTY2hlbWUub25QcmltYXJ5CiAgICAgICAgICAgICAgICB9IGVsc2UgewogICAgICAgICAgICAgICAgICAgIE1hdGVyaWFsVGhlbWUuY29sb3JTY2hlbWUub25TdXJmYWNlVmFyaWFudAogICAgICAgICAgICAgICAgfQoKICAgICAgICAgICAgICAgIENvbHVtbigKICAgICAgICAgICAgICAgICAgICBtb2RpZmllciA9IE1vZGlmaWVyCiAgICAgICAgICAgICAgICAgICAgICAgIC53ZWlnaHQoMWYpCiAgICAgICAgICAgICAgICAgICAgICAgIC5jbGlwKFJvdW5kZWRDb3JuZXJTaGFwZSgxNi5kcCkpCiAgICAgICAgICAgICAgICAgICAgICAgIC5iYWNrZ3JvdW5kKGJhY2tncm91bmQpCiAgICAgICAgICAgICAgICAgICAgICAgIC5jbGlja2FibGUoZW5hYmxlZCA9IGVuYWJsZWQpIHsgb25TZWxlY3QobW9kZSkgfQogICAgICAgICAgICAgICAgICAgICAgICAucGFkZGluZyh2ZXJ0aWNhbCA9IDEwLmRwLCBob3Jpem9udGFsID0gMi5kcCksCiAgICAgICAgICAgICAgICAgICAgaG9yaXpvbnRhbEFsaWdubWVudCA9IEFsaWdubWVudC5DZW50ZXJIb3Jpem9udGFsbHksCiAgICAgICAgICAgICAgICAgICAgdmVydGljYWxBcnJhbmdlbWVudCA9IEFycmFuZ2VtZW50LkNlbnRlciwKICAgICAgICAgICAgICAgICkgewogICAgICAgICAgICAgICAgICAgIEljb24oCiAgICAgICAgICAgICAgICAgICAgICAgIGltYWdlVmVjdG9yID0gbm9pc2VJY29uKG1vZGUpLAogICAgICAgICAgICAgICAgICAgICAgICBjb250ZW50RGVzY3JpcHRpb24gPSBudWxsLAogICAgICAgICAgICAgICAgICAgICAgICB0aW50ID0gZm9yZWdyb3VuZCwKICAgICAgICAgICAgICAgICAgICAgICAgbW9kaWZpZXIgPSBNb2RpZmllci5zaXplKDIwLmRwKSwKICAgICAgICAgICAgICAgICAgICApCiAgICAgICAgICAgICAgICAgICAgU3BhY2VyKG1vZGlmaWVyID0gTW9kaWZpZXIuaGVpZ2h0KDQuZHApKQogICAgICAgICAgICAgICAgICAgIFRleHQoCiAgICAgICAgICAgICAgICAgICAgICAgIHRleHQgPSBub2lzZUxhYmVsKG1vZGUpLAogICAgICAgICAgICAgICAgICAgICAgICBzdHlsZSA9IE1hdGVyaWFsVGhlbWUudHlwb2dyYXBoeS5sYWJlbE1lZGl1bSwKICAgICAgICAgICAgICAgICAgICAgICAgY29sb3IgPSBmb3JlZ3JvdW5kLAogICAgICAgICAgICAgICAgICAgICAgICBtYXhMaW5lcyA9IDEsCiAgICAgICAgICAgICAgICAgICAgICAgIHRleHRBbGlnbiA9IFRleHRBbGlnbi5DZW50ZXIsCiAgICAgICAgICAgICAgICAgICAgKQogICAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CiAgICAgICAgfQogICAgfQp9Cg==
+package com.yinpage.link.ui.components
+
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Air
+import androidx.compose.material.icons.rounded.GraphicEq
+import androidx.compose.material.icons.rounded.Hearing
+import androidx.compose.material.icons.rounded.Tune
+import androidx.compose.material.icons.rounded.VolumeOff
+import androidx.compose.material.icons.rounded.Waves
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import com.yinpage.link.R
+import com.yinpage.link.protocol.NoiseMode
+
+/** 降噪档位对应的图标。未知档位回落到通用调节图标。 */
+fun noiseIcon(mode: NoiseMode): ImageVector = when (mode) {
+    NoiseMode.OFF -> Icons.Rounded.VolumeOff
+    NoiseMode.TRANSPARENT -> Icons.Rounded.Hearing
+    NoiseMode.NORMAL -> Icons.Rounded.GraphicEq
+    NoiseMode.DEEP -> Icons.Rounded.Waves
+    NoiseMode.ADAPTIVE -> Icons.Rounded.Tune
+    NoiseMode.WIND -> Icons.Rounded.Air
+    else -> Icons.Rounded.Tune
+}
+
+/** 降噪档位的中文短名（四档控件上只放短名）。 */
+@Composable
+fun noiseLabel(mode: NoiseMode): String = when (mode) {
+    NoiseMode.OFF -> stringResource(R.string.noise_off)
+    NoiseMode.TRANSPARENT -> stringResource(R.string.noise_transparent)
+    NoiseMode.NORMAL -> stringResource(R.string.noise_normal)
+    NoiseMode.DEEP -> stringResource(R.string.noise_deep)
+    else -> mode.labelZh
+}
+
+/**
+ * 四档 ANC 分段控件（自绘，不依赖实验性 SegmentedButton）。
+ * 顺序固定为 关闭 / 通透 / 标准 / 深度，与系统原生控件的档位语义一致。
+ */
+@Composable
+fun NoiseSelector(
+    selected: NoiseMode,
+    onSelect: (NoiseMode) -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    modes: List<NoiseMode> = NoiseMode.SWITCHABLE,
+) {
+    Surface(
+        modifier = modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(20.dp),
+        color = MaterialTheme.colorScheme.surfaceVariant,
+    ) {
+        Row(
+            modifier = Modifier.padding(4.dp),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            modes.forEach { mode ->
+                val isSelected = mode == selected
+                val background by animateColorAsState(
+                    targetValue = if (isSelected) MaterialTheme.colorScheme.primary else Color.Transparent,
+                    animationSpec = tween(durationMillis = 200),
+                    label = "noiseSegment",
+                )
+                val foreground = if (isSelected) {
+                    MaterialTheme.colorScheme.onPrimary
+                } else {
+                    MaterialTheme.colorScheme.onSurfaceVariant
+                }
+
+                Column(
+                    modifier = Modifier
+                        .weight(1f)
+                        .clip(RoundedCornerShape(16.dp))
+                        .background(background)
+                        .clickable(enabled = enabled) { onSelect(mode) }
+                        .padding(vertical = 10.dp, horizontal = 2.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
+                ) {
+                    Icon(
+                        imageVector = noiseIcon(mode),
+                        contentDescription = null,
+                        tint = foreground,
+                        modifier = Modifier.size(20.dp),
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = noiseLabel(mode),
+                        style = MaterialTheme.typography.labelMedium,
+                        color = foreground,
+                        maxLines = 1,
+                        textAlign = TextAlign.Center,
+                    )
+                }
+            }
+        }
+    }
+}

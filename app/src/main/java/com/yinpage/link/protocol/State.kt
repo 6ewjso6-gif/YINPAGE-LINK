@@ -1,1 +1,180 @@
-cGFja2FnZSBjb20ueWlucGFnZS5saW5rLnByb3RvY29sCgovKioKICogPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQogKiAgWUlOUEFHRS1MSU5LIOWNj+iuruWxguWFrOWFseaVsOaNruaooeWeiyAg4oCU4oCUICDlhrvnu5PlpZHnuqbvvIh2Me+8iQogKiA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CiAqICDnuqblrprvvJoKICogICAtIOWtl+iKgue7n+S4gOeUqCBJbnTvvIgwLi4yNTXvvInvvIzpgb/lhY0gS290bGluIEJ5dGUg55qE5pyJ56ym5Y+3L+aXoOespuWPt+i9rOaNoumUmeivr++8mwogKiAgICAg5LuF5Zyo5pS25Y+R5YyF55qE556s6Ze05YGaIEJ5dGUgPC0+IEludCDovazmjaLjgIIKICogICAtIOeKtuaAgeexu+WFqOmDqOS4uuS4jeWPr+WPmCBkYXRhIGNsYXNz77yMVUkg55SoIFN0YXRlRmxvdyDop4Llr5/vvIzlpKnnhLbmlK/mjIEgZGlmZuOAggogKiAgIC0g5pys5paH5Lu25pivIHByb3RvY29sIC8gY29yZSAvIHVpIOS4ieS4quaooeWdl+eahOWUr+S4gOWFseS6q+ivjeaxh+ihqOOAggogKiAgICAg5L+u5pS56L+Z6YeM5b+F6aG75ZCM5q2l5pS55YqoIGRvYy9DT05UUkFDVC5tZO+8jOW5tumAmuefpeaJgOacieaooeWdl+OAggogKiA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CiAqLwoKLyoqIOS+v+aNt+exu+Wei++8muaXoOespuWPt+Wtl+iKguWAvOeahOaVsOe7hO+8iOavj+S4quWFg+e0oCAwLi4yNTXvvInjgIIgKi8KdHlwZWFsaWFzIEJ5dGVzID0gSW50QXJyYXkKCi8qKiDljZXlj6rogLPmnLrnmoTnlLXph4/jgIIgKi8KZGF0YSBjbGFzcyBCYXR0ZXJ5TGV2ZWwoCiAgICAvKiogMC4uMTAw77ybbnVsbCDooajnpLrogLPmnLrmnKrkuIrmiqXor6XlgLzvvIjkvovlpoLmnKrkvanmiLQv5pyq5Zyo55uS5YaF77yJ44CCICovCiAgICB2YWwgcGVyY2VudDogSW50PywKICAgIC8qKiDmmK/lkKbmraPlnKjlhYXnlLXvvIjlnKjlhYXnlLXnm5LlhoXmiJbmj5Lnur/vvInjgIIgKi8KICAgIHZhbCBjaGFyZ2luZzogQm9vbGVhbiA9IGZhbHNlLAopIHsKICAgIHZhbCBrbm93bjogQm9vbGVhbiBnZXQoKSA9IHBlcmNlbnQgIT0gbnVsbAogICAgY29tcGFuaW9uIG9iamVjdCB7CiAgICAgICAgdmFsIFVOS05PV04gPSBCYXR0ZXJ5TGV2ZWwobnVsbCwgZmFsc2UpCiAgICAgICAgZnVuIG9mKHBlcmNlbnQ6IEludCwgY2hhcmdpbmc6IEJvb2xlYW4gPSBmYWxzZSkgPQogICAgICAgICAgICBCYXR0ZXJ5TGV2ZWwocGVyY2VudC5jb2VyY2VJbigwLCAxMDApLCBjaGFyZ2luZykKICAgIH0KfQoKLyoqIOaVtOacuueUtemHj+W/q+eFp+OAgiAqLwpkYXRhIGNsYXNzIEJhdHRlcnlTdGF0ZSgKICAgIHZhbCBsZWZ0OiBCYXR0ZXJ5TGV2ZWwgPSBCYXR0ZXJ5TGV2ZWwuVU5LTk9XTiwKICAgIHZhbCByaWdodDogQmF0dGVyeUxldmVsID0gQmF0dGVyeUxldmVsLlVOS05PV04sCiAgICB2YWwgY2FzZTogQmF0dGVyeUxldmVsID0gQmF0dGVyeUxldmVsLlVOS05PV04sCikgewogICAgdmFsIGFueUtub3duOiBCb29sZWFuIGdldCgpID0gbGVmdC5rbm93biB8fCByaWdodC5rbm93biB8fCBjYXNlLmtub3duCn0KCi8qKgogKiDpmY3lmarmqKHlvI/jgILlm5vmoaMgQU5DIOaOp+S7tueahOesrOS4gOaho+aYryBPRkbvvIzpmo/lkI7mmK/ns7vnu58gVUkg5LiK5bi46KeB55qECiAqICLpgJrpgI8gLyDmoIflh4YgLyDmt7HluqYiIOS4ieaho++8jOS4jiBIeXBlck9TIOWOn+eUn+aOp+S7tueahOaho+S9jeivreS5ieS/neaMgeS4gOiHtOOAggogKi8KZW51bSBjbGFzcyBOb2lzZU1vZGUodmFsIGNvZGU6IEludCwgdmFsIGxhYmVsWmg6IFN0cmluZykgewogICAgT0ZGKDB4MDAsICLlhbPpl60iKSwKICAgIFRSQU5TUEFSRU5UKDB4MDEsICLpgJrpgI/mqKHlvI8iKSwKICAgIE5PUk1BTCgweDAyLCAi5qCH5YeG6ZmN5ZmqIiksCiAgICBERUVQKDB4MDMsICLmt7HluqbpmY3lmaoiKSwKICAgIC8qKiDpg6jliIbnmb3niYzmlrnmoYjmj5DkvpvnmoTpop3lpJbmoaPkvY3vvJroh6rpgILlupQv5a6e6aqM5qGjICovCiAgICBBREFQVElWRSgweDEwLCAi6Ieq6YCC5bqUIiksCiAgICAvKiog5oqX6aOO5ZmqICovCiAgICBXSU5EKDB4MTEsICLmipfpo47lmaoiKTsKCiAgICBjb21wYW5pb24gb2JqZWN0IHsKICAgICAgICAvKiog57O757uf5Zub5qGj5o6n5Lu255qE6aG65bqP77yIVUkg5Li75o6n5Lu255So6L+Z5Liq77yJ44CCICovCiAgICAgICAgdmFsIFNXSVRDSEFCTEU6IExpc3Q8Tm9pc2VNb2RlPiA9IGxpc3RPZihPRkYsIFRSQU5TUEFSRU5ULCBOT1JNQUwsIERFRVApCiAgICAgICAgZnVuIGZyb21Db2RlKGNvZGU6IEludCk6IE5vaXNlTW9kZT8gPSBlbnRyaWVzLmZpcnN0T3JOdWxsIHsgaXQuY29kZSA9PSBjb2RlIH0KICAgIH0KfQoKLyoqIEVRIOmfs+aViOaho+S9jeOAgmxhYmVsIOi3n+maj+WumOaWuSBBcHAg55qE5ZG95ZCN5L2T57O777yI6YCG5ZCR5b6X5Ye65YmN5YWI55So6YCa55So5ZG95ZCN77yJ44CCICovCmVudW0gY2xhc3MgRXFNb2RlKHZhbCBjb2RlOiBJbnQsIHZhbCBsYWJlbDogU3RyaW5nKSB7CiAgICBCQUxBTkNFRCgweDAwLCAi5Z2H6KGhIiksCiAgICBCQVNTKDB4MDEsICLph43kvY7pn7MiKSwKICAgIFZPQ0FMKDB4MDIsICLkurrlo7AiKSwKICAgIFRSRUJMRSgweDAzLCAi6auY6Z+z5aKe5by6IiksCiAgICBMSVZFKDB4MDQsICLnjrDlnLoiKSwKICAgIEdBTUUoMHgwNSwgIua4uOaIj+WinuW8uiIpOwoKICAgIGNvbXBhbmlvbiBvYmplY3QgewogICAgICAgIGZ1biBmcm9tQ29kZShjb2RlOiBJbnQpOiBFcU1vZGUgPSBlbnRyaWVzLmZpcnN0T3JOdWxsIHsgaXQuY29kZSA9PSBjb2RlIH0gPzogQkFMQU5DRUQKICAgIH0KfQoKLyoqIOmfs+mikee8luino+eggeWZqO+8iOWPquivu+Wxleekuu+8ieOAgiAqLwplbnVtIGNsYXNzIEF1ZGlvQ29kZWModmFsIGxhYmVsOiBTdHJpbmcpIHsKICAgIFNCQygiU0JDIiksIEFBQygiQUFDIiksIExEQUMoIkxEQUMiKSwgTEhEQygiTEhEQyIpLAogICAgQVBUWCgiYXB0WCIpLCBBUFRYX0FEQVBUSVZFKCJhcHRYIEFkYXB0aXZlIiksIFVOS05PV04oIuacquefpSIpCn0KCi8qKiBTUFAvQkxFIOmAmumBk+eKtuaAgeOAgiAqLwplbnVtIGNsYXNzIENvbm5lY3Rpb25TdGF0ZSB7CiAgICAvKiog6JOd54mZ6YCC6YWN5Zmo5YWz6ZetICovCiAgICBCTFVFVE9PVEhfT0ZGLAogICAgLyoqIOacqumAieaLqeiuvuWkhyAqLwogICAgSURMRSwKICAgIC8qKiDmraPlnKjlu7rnq4vpgJrpgZMgKi8KICAgIENPTk5FQ1RJTkcsCiAgICAvKiog6YCa6YGT5bCx57uq77yM5q2j5Zyo5ZCM5q2l54q25oCBICovCiAgICBIQU5EU0hBS0lORywKICAgIC8qKiDlt7LlsLHnu6ogKi8KICAgIENPTk5FQ1RFRCwKICAgIC8qKiDov57mjqXkuK3mlq3vvIzmraPlnKjoh6rliqjph43ov54gKi8KICAgIFJFQ09OTkVDVElORywKICAgIEZBSUxFRCwKfQoKLyoqIOiAs+acuui6q+S7veS/oeaBr++8iOadpeiHquiTneeJmeagiCArIOWNj+iuruS4iuaKpe+8ieOAgiAqLwpkYXRhIGNsYXNzIERldmljZUluZm8oCiAgICB2YWwgbmFtZTogU3RyaW5nLAogICAgLyoqIOiTneeJmeWcsOWdgO+8jOW9ouWmgiBBQTpCQjpDQzpERDpFRTpGRiAqLwogICAgdmFsIGFkZHJlc3M6IFN0cmluZywKICAgIHZhbCBmaXJtd2FyZTogU3RyaW5nPyA9IG51bGwsCiAgICB2YWwgaGFyZHdhcmU6IFN0cmluZz8gPSBudWxsLAogICAgdmFsIHNlcmlhbDogU3RyaW5nPyA9IG51bGwsCiAgICB2YWwgY29kZWM6IEF1ZGlvQ29kZWMgPSBBdWRpb0NvZGVjLlVOS05PV04sCikKCi8qKiDlrp7ml7bnirbmgIHjgIJVSSDnm7TmjqXmuLLmn5Pov5nkuKrlr7nosaHjgIIgKi8KZGF0YSBjbGFzcyBQb2RTdGF0ZSgKICAgIHZhbCBjb25uZWN0aW9uOiBDb25uZWN0aW9uU3RhdGUgPSBDb25uZWN0aW9uU3RhdGUuSURMRSwKICAgIHZhbCBkZXZpY2U6IERldmljZUluZm8/ID0gbnVsbCwKICAgIHZhbCBiYXR0ZXJ5OiBCYXR0ZXJ5U3RhdGUgPSBCYXR0ZXJ5U3RhdGUoKSwKICAgIHZhbCBub2lzZTogTm9pc2VNb2RlID0gTm9pc2VNb2RlLk9GRiwKICAgIHZhbCBlcTogRXFNb2RlID0gRXFNb2RlLkJBTEFOQ0VELAogICAgdmFsIGdhbWVNb2RlOiBCb29sZWFuID0gZmFsc2UsCiAgICB2YWwgaW5FYXJEZXRlY3Rpb246IEJvb2xlYW4gPSBmYWxzZSwKICAgIHZhbCBkdWFsQ29ubmVjdGlvbjogQm9vbGVhbiA9IGZhbHNlLAogICAgdmFsIHdpbmRTdXBwcmVzc2lvbjogQm9vbGVhbiA9IGZhbHNlLAogICAgLyoqIOW9k+WJjeeUn+aViOeahOWNj+iuruWunueOsOWQje+8jOS+i+WmgiAieXNjb2NvLXYxIiAvICJnYWlhLXY0IiAvICJyYXctc3BwIiAqLwogICAgdmFsIHByb3RvY29sTmFtZTogU3RyaW5nPyA9IG51bGwsCiAgICAvKiog5LiK5LiA5qyh5oiQ5Yqf6YCa5L+h55qE5pe26Ze05oiz77yI5q+r56eS77yJICovCiAgICB2YWwgbGFzdFNlZW5BdDogTG9uZyA9IDBMLAogICAgLyoqIOacgOi/keS4gOadoeS6uuexu+WPr+ivu+eahOiviuaWreS/oeaBr++8iFVJIOW6lemDqOWwj+Wtl+Wxleekuu+8iSAqLwogICAgdmFsIGxhc3RNZXNzYWdlOiBTdHJpbmc/ID0gbnVsbCwKKSB7CiAgICB2YWwgY29ubmVjdGVkOiBCb29sZWFuCiAgICAgICAgZ2V0KCkgPSBjb25uZWN0aW9uID09IENvbm5lY3Rpb25TdGF0ZS5DT05ORUNURUQgfHwgY29ubmVjdGlvbiA9PSBDb25uZWN0aW9uU3RhdGUuSEFORFNIQUtJTkcKfQoKLyoqCiAqIOWNj+iurue7meWHuueahCLnu5Pmnpwi77ya5LiA57uE5Y+v5bqU55So55qE54q25oCB5Y+Y5pu044CCCiAqIOeUqCBkZWx0YSDogIzkuI3mmK/lrozmlbTlv6vnhafvvIzpgb/lhY3ljY/orq7lj6rkuIrmiqXljZXogLPnlLXph4/ml7bopobnm5blj6bkuIDlj6rjgIIKICovCnNlYWxlZCBpbnRlcmZhY2UgUG9kVXBkYXRlIHsKICAgIGRhdGEgY2xhc3MgQmF0dGVyeSh2YWwgYmF0dGVyeTogQmF0dGVyeVN0YXRlKSA6IFBvZFVwZGF0ZQogICAgZGF0YSBjbGFzcyBOb2lzZSh2YWwgbW9kZTogTm9pc2VNb2RlKSA6IFBvZFVwZGF0ZQogICAgZGF0YSBjbGFzcyBFcSh2YWwgbW9kZTogRXFNb2RlKSA6IFBvZFVwZGF0ZQogICAgZGF0YSBjbGFzcyBHYW1lTW9kZSh2YWwgZW5hYmxlZDogQm9vbGVhbikgOiBQb2RVcGRhdGUKICAgIGRhdGEgY2xhc3MgSW5FYXJEZXRlY3Rpb24odmFsIGVuYWJsZWQ6IEJvb2xlYW4pIDogUG9kVXBkYXRlCiAgICBkYXRhIGNsYXNzIER1YWxDb25uZWN0aW9uKHZhbCBlbmFibGVkOiBCb29sZWFuKSA6IFBvZFVwZGF0ZQogICAgZGF0YSBjbGFzcyBXaW5kU3VwcHJlc3Npb24odmFsIGVuYWJsZWQ6IEJvb2xlYW4pIDogUG9kVXBkYXRlCiAgICBkYXRhIGNsYXNzIEZpcm13YXJlKHZhbCB2ZXJzaW9uOiBTdHJpbmcpIDogUG9kVXBkYXRlCiAgICBkYXRhIGNsYXNzIENvZGVjKHZhbCBjb2RlYzogQXVkaW9Db2RlYykgOiBQb2RVcGRhdGUKICAgIC8qKiDljY/orq7lsYLop6PmnpDlh7rnmoTljp/lp4vkv6Hmga/vvIzku4XnlKjkuo7osIPor5XpnaLmnb8gKi8KICAgIGRhdGEgY2xhc3MgUmF3KHZhbCB0ZXh0OiBTdHJpbmcpIDogUG9kVXBkYXRlCn0KCi8qKiDmjqfliLblkb3ku6TjgIJUcmFuc3BvcnQg6LSf6LSj5oqK5a6D57yW56CB5oiQ5a2X6IqC5Y+R5Ye65Y6744CCICovCnNlYWxlZCBpbnRlcmZhY2UgUG9kQ29tbWFuZCB7CiAgICBkYXRhIGNsYXNzIFNldE5vaXNlKHZhbCBtb2RlOiBOb2lzZU1vZGUpIDogUG9kQ29tbWFuZAogICAgZGF0YSBjbGFzcyBTZXRFcSh2YWwgbW9kZTogRXFNb2RlKSA6IFBvZENvbW1hbmQKICAgIGRhdGEgY2xhc3MgU2V0R2FtZU1vZGUodmFsIGVuYWJsZWQ6IEJvb2xlYW4pIDogUG9kQ29tbWFuZAogICAgZGF0YSBjbGFzcyBTZXRJbkVhckRldGVjdGlvbih2YWwgZW5hYmxlZDogQm9vbGVhbikgOiBQb2RDb21tYW5kCiAgICBkYXRhIGNsYXNzIFNldER1YWxDb25uZWN0aW9uKHZhbCBlbmFibGVkOiBCb29sZWFuKSA6IFBvZENvbW1hbmQKICAgIGRhdGEgY2xhc3MgU2V0V2luZFN1cHByZXNzaW9uKHZhbCBlbmFibGVkOiBCb29sZWFuKSA6IFBvZENvbW1hbmQKICAgIC8qKiDlhajph4/nirbmgIHmn6Xor6LvvIjov57mjqXlkI7nq4vljbPlj5HkuIDmrKHvvIkgKi8KICAgIGRhdGEgb2JqZWN0IFF1ZXJ5QWxsIDogUG9kQ29tbWFuZAogICAgZGF0YSBvYmplY3QgUXVlcnlCYXR0ZXJ5IDogUG9kQ29tbWFuZAogICAgZGF0YSBvYmplY3QgUXVlcnlGaXJtd2FyZSA6IFBvZENvbW1hbmQKfQoKLyoqIOaKiiBQb2RVcGRhdGUg5Y+g5Yqg5YiwIFBvZFN0YXRlIOS4iuOAgumbhuS4reWcqOi/memHjO+8jOS/neivgSBVSSDkuI4gY29yZSDor63kuYnkuIDoh7TjgIIgKi8KZnVuIFBvZFN0YXRlLmFwcGx5KHVwZGF0ZTogUG9kVXBkYXRlKTogUG9kU3RhdGUgPSB3aGVuICh1cGRhdGUpIHsKICAgIGlzIFBvZFVwZGF0ZS5CYXR0ZXJ5IC0+IGNvcHkoYmF0dGVyeSA9IHVwZGF0ZS5iYXR0ZXJ5KQogICAgaXMgUG9kVXBkYXRlLk5vaXNlIC0+IGNvcHkobm9pc2UgPSB1cGRhdGUubW9kZSkKICAgIGlzIFBvZFVwZGF0ZS5FcSAtPiBjb3B5KGVxID0gdXBkYXRlLm1vZGUpCiAgICBpcyBQb2RVcGRhdGUuR2FtZU1vZGUgLT4gY29weShnYW1lTW9kZSA9IHVwZGF0ZS5lbmFibGVkKQogICAgaXMgUG9kVXBkYXRlLkluRWFyRGV0ZWN0aW9uIC0+IGNvcHkoaW5FYXJEZXRlY3Rpb24gPSB1cGRhdGUuZW5hYmxlZCkKICAgIGlzIFBvZFVwZGF0ZS5EdWFsQ29ubmVjdGlvbiAtPiBjb3B5KGR1YWxDb25uZWN0aW9uID0gdXBkYXRlLmVuYWJsZWQpCiAgICBpcyBQb2RVcGRhdGUuV2luZFN1cHByZXNzaW9uIC0+IGNvcHkod2luZFN1cHByZXNzaW9uID0gdXBkYXRlLmVuYWJsZWQpCiAgICBpcyBQb2RVcGRhdGUuRmlybXdhcmUgLT4gY29weShkZXZpY2UgPSBkZXZpY2U/LmNvcHkoZmlybXdhcmUgPSB1cGRhdGUudmVyc2lvbikpCiAgICBpcyBQb2RVcGRhdGUuQ29kZWMgLT4gY29weShkZXZpY2UgPSBkZXZpY2U/LmNvcHkoY29kZWMgPSB1cGRhdGUuY29kZWMpKQogICAgaXMgUG9kVXBkYXRlLlJhdyAtPiBjb3B5KGxhc3RNZXNzYWdlID0gdXBkYXRlLnRleHQpCn0KCmZ1biBJdGVyYWJsZTxQb2RVcGRhdGU+LmFwcGx5QWxsVG8oc3RhdGU6IFBvZFN0YXRlKTogUG9kU3RhdGUgPSBmb2xkKHN0YXRlKSB7IGFjYywgdSAtPiBhY2MuYXBwbHkodSkgfQo=
+package com.yinpage.link.protocol
+
+/**
+ * ============================================================================
+ *  YINPAGE-LINK 协议层公共数据模型  ——  冻结契约（v1）
+ * ============================================================================
+ *  约定：
+ *   - 字节统一用 Int（0..255），避免 Kotlin Byte 的有符号/无符号转换错误；
+ *     仅在收发包的瞬间做 Byte <-> Int 转换。
+ *   - 状态类全部为不可变 data class，UI 用 StateFlow 观察，天然支持 diff。
+ *   - 本文件是 protocol / core / ui 三个模块的唯一共享词汇表。
+ *     修改这里必须同步改动 doc/CONTRACT.md，并通知所有模块。
+ * ============================================================================
+ */
+
+/** 便捷类型：无符号字节值的数组（每个元素 0..255）。 */
+typealias Bytes = IntArray
+
+/** 单只耳机的电量。 */
+data class BatteryLevel(
+    /** 0..100；null 表示耳机未上报该值（例如未佩戴/未在盒内）。 */
+    val percent: Int?,
+    /** 是否正在充电（在充电盒内或插线）。 */
+    val charging: Boolean = false,
+) {
+    val known: Boolean get() = percent != null
+    companion object {
+        val UNKNOWN = BatteryLevel(null, false)
+        fun of(percent: Int, charging: Boolean = false) =
+            BatteryLevel(percent.coerceIn(0, 100), charging)
+    }
+}
+
+/** 整机电量快照。 */
+data class BatteryState(
+    val left: BatteryLevel = BatteryLevel.UNKNOWN,
+    val right: BatteryLevel = BatteryLevel.UNKNOWN,
+    val case: BatteryLevel = BatteryLevel.UNKNOWN,
+) {
+    val anyKnown: Boolean get() = left.known || right.known || case.known
+}
+
+/**
+ * 降噪模式。四档 ANC 控件的第一档是 OFF，随后是系统 UI 上常见的
+ * "通透 / 标准 / 深度" 三档，与 HyperOS 原生控件的档位语义保持一致。
+ */
+enum class NoiseMode(val code: Int, val labelZh: String) {
+    OFF(0x00, "关闭"),
+    TRANSPARENT(0x01, "通透模式"),
+    NORMAL(0x02, "标准降噪"),
+    DEEP(0x03, "深度降噪"),
+    /** 部分白牌方案提供的额外档位：自适应/实验档 */
+    ADAPTIVE(0x10, "自适应"),
+    /** 抗风噪 */
+    WIND(0x11, "抗风噪");
+
+    companion object {
+        /** 系统四档控件的顺序（UI 主控件用这个）。 */
+        val SWITCHABLE: List<NoiseMode> = listOf(OFF, TRANSPARENT, NORMAL, DEEP)
+        fun fromCode(code: Int): NoiseMode? = entries.firstOrNull { it.code == code }
+    }
+}
+
+/** EQ 音效档位。label 跟随官方 App 的命名体系（逆向得出前先用通用命名）。 */
+enum class EqMode(val code: Int, val label: String) {
+    BALANCED(0x00, "均衡"),
+    BASS(0x01, "重低音"),
+    VOCAL(0x02, "人声"),
+    TREBLE(0x03, "高音增强"),
+    LIVE(0x04, "现场"),
+    GAME(0x05, "游戏增强");
+
+    companion object {
+        fun fromCode(code: Int): EqMode = entries.firstOrNull { it.code == code } ?: BALANCED
+    }
+}
+
+/** 音频编解码器（只读展示）。 */
+enum class AudioCodec(val label: String) {
+    SBC("SBC"), AAC("AAC"), LDAC("LDAC"), LHDC("LHDC"),
+    APTX("aptX"), APTX_ADAPTIVE("aptX Adaptive"), UNKNOWN("未知")
+}
+
+/** SPP/BLE 通道状态。 */
+enum class ConnectionState {
+    /** 蓝牙适配器关闭 */
+    BLUETOOTH_OFF,
+    /** 未选择设备 */
+    IDLE,
+    /** 正在建立通道 */
+    CONNECTING,
+    /** 通道就绪，正在同步状态 */
+    HANDSHAKING,
+    /** 已就绪 */
+    CONNECTED,
+    /** 连接中断，正在自动重连 */
+    RECONNECTING,
+    FAILED,
+}
+
+/** 耳机身份信息（来自蓝牙栈 + 协议上报）。 */
+data class DeviceInfo(
+    val name: String,
+    /** 蓝牙地址，形如 AA:BB:CC:DD:EE:FF */
+    val address: String,
+    val firmware: String? = null,
+    val hardware: String? = null,
+    val serial: String? = null,
+    val codec: AudioCodec = AudioCodec.UNKNOWN,
+)
+
+/** 实时状态。UI 直接渲染这个对象。 */
+data class PodState(
+    val connection: ConnectionState = ConnectionState.IDLE,
+    val device: DeviceInfo? = null,
+    val battery: BatteryState = BatteryState(),
+    val noise: NoiseMode = NoiseMode.OFF,
+    val eq: EqMode = EqMode.BALANCED,
+    val gameMode: Boolean = false,
+    val inEarDetection: Boolean = false,
+    val dualConnection: Boolean = false,
+    val windSuppression: Boolean = false,
+    /** 当前生效的协议实现名，例如 "yscoco-v1" / "gaia-v4" / "raw-spp" */
+    val protocolName: String? = null,
+    /** 上一次成功通信的时间戳（毫秒） */
+    val lastSeenAt: Long = 0L,
+    /** 最近一条人类可读的诊断信息（UI 底部小字展示） */
+    val lastMessage: String? = null,
+) {
+    val connected: Boolean
+        get() = connection == ConnectionState.CONNECTED || connection == ConnectionState.HANDSHAKING
+}
+
+/**
+ * 协议给出的"结果"：一组可应用的状态变更。
+ * 用 delta 而不是完整快照，避免协议只上报单耳电量时覆盖另一只。
+ */
+sealed interface PodUpdate {
+    data class Battery(val battery: BatteryState) : PodUpdate
+    data class Noise(val mode: NoiseMode) : PodUpdate
+    data class Eq(val mode: EqMode) : PodUpdate
+    data class GameMode(val enabled: Boolean) : PodUpdate
+    data class InEarDetection(val enabled: Boolean) : PodUpdate
+    data class DualConnection(val enabled: Boolean) : PodUpdate
+    data class WindSuppression(val enabled: Boolean) : PodUpdate
+    data class Firmware(val version: String) : PodUpdate
+    data class Codec(val codec: AudioCodec) : PodUpdate
+    /** 协议层解析出的原始信息，仅用于调试面板 */
+    data class Raw(val text: String) : PodUpdate
+}
+
+/** 控制命令。Transport 负责把它编码成字节发出去。 */
+sealed interface PodCommand {
+    data class SetNoise(val mode: NoiseMode) : PodCommand
+    data class SetEq(val mode: EqMode) : PodCommand
+    data class SetGameMode(val enabled: Boolean) : PodCommand
+    data class SetInEarDetection(val enabled: Boolean) : PodCommand
+    data class SetDualConnection(val enabled: Boolean) : PodCommand
+    data class SetWindSuppression(val enabled: Boolean) : PodCommand
+    /** 全量状态查询（连接后立即发一次） */
+    data object QueryAll : PodCommand
+    data object QueryBattery : PodCommand
+    data object QueryFirmware : PodCommand
+}
+
+/** 把 PodUpdate 叠加到 PodState 上。集中在这里，保证 UI 与 core 语义一致。 */
+fun PodState.apply(update: PodUpdate): PodState = when (update) {
+    is PodUpdate.Battery -> copy(battery = update.battery)
+    is PodUpdate.Noise -> copy(noise = update.mode)
+    is PodUpdate.Eq -> copy(eq = update.mode)
+    is PodUpdate.GameMode -> copy(gameMode = update.enabled)
+    is PodUpdate.InEarDetection -> copy(inEarDetection = update.enabled)
+    is PodUpdate.DualConnection -> copy(dualConnection = update.enabled)
+    is PodUpdate.WindSuppression -> copy(windSuppression = update.enabled)
+    is PodUpdate.Firmware -> copy(device = device?.copy(firmware = update.version))
+    is PodUpdate.Codec -> copy(device = device?.copy(codec = update.codec))
+    is PodUpdate.Raw -> copy(lastMessage = update.text)
+}
+
+fun Iterable<PodUpdate>.applyAllTo(state: PodState): PodState = fold(state) { acc, u -> acc.apply(u) }

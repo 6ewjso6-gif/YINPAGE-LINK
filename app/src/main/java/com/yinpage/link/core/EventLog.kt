@@ -1,1 +1,75 @@
-cGFja2FnZSBjb20ueWlucGFnZS5saW5rLmNvcmUKCmltcG9ydCBjb20ueWlucGFnZS5saW5rLmNvbmZpZy5BcHBDb25maWcKaW1wb3J0IGNvbS55aW5wYWdlLmxpbmsuY29uZmlnLkNvbmZpZ01hbmFnZXIKaW1wb3J0IGtvdGxpbnguY29yb3V0aW5lcy5mbG93Lk11dGFibGVTdGF0ZUZsb3cKaW1wb3J0IGtvdGxpbnguY29yb3V0aW5lcy5mbG93LlN0YXRlRmxvdwppbXBvcnQga290bGlueC5jb3JvdXRpbmVzLmZsb3cuYXNTdGF0ZUZsb3cKaW1wb3J0IGphdmEudGV4dC5TaW1wbGVEYXRlRm9ybWF0CmltcG9ydCBqYXZhLnV0aWwuQ29sbGVjdGlvbnMKaW1wb3J0IGphdmEudXRpbC5EYXRlCmltcG9ydCBqYXZhLnV0aWwuTG9jYWxlCgovKioKICog6L+b56iL5YaF5LqL5Lu25pel5b+X77yI6LCD6K+V6Z2i5p2/5pWw5o2u5rqQ77yJ44CCCiAqIOS4jiBMU1Bvc2VkIOWPguiAg+mhueebruS4jeWQjO+8jOi/memHjOayoeaciSBsb2djYXQg5rOo5YWl77yM5YWo6YOo6LWw5YaF5a2Y546v5b2i57yT5YayICsg5Y+v6YCJIGxvZ2NhdOOAggogKi8Kb2JqZWN0IEV2ZW50TG9nIHsKICAgIHByaXZhdGUgY29uc3QgdmFsIE1BWF9MSU5FUyA9IDQwMAogICAgcHJpdmF0ZSB2YWwgdGltZUZtdCA9IFNpbXBsZURhdGVGb3JtYXQoIkhIOm1tOnNzLlNTUyIsIExvY2FsZS5DSElOQSkKICAgIHByaXZhdGUgdmFsIGJ1ZmZlciA9IENvbGxlY3Rpb25zLnN5bmNocm9uaXplZExpc3QoQXJyYXlEZXF1ZTxTdHJpbmc+KCkpCgogICAgcHJpdmF0ZSB2YWwgX2xpbmVzID0gTXV0YWJsZVN0YXRlRmxvdzxMaXN0PFN0cmluZz4+KGVtcHR5TGlzdCgpKQogICAgdmFsIGxpbmVzOiBTdGF0ZUZsb3c8TGlzdDxTdHJpbmc+PiA9IF9saW5lcy5hc1N0YXRlRmxvdygpCgogICAgLyoqIOaYr+WQpuiusOW9lSBkZWJ1ZyDnuqfvvIjor6bnu4bmlLblj5HlrZfoioLvvInjgILnlLHorr7nva7pobXlvIDlhbPmjqfliLbjgIIgKi8KICAgIEBWb2xhdGlsZQogICAgcHJpdmF0ZSB2YXIgdmVyYm9zZTogQm9vbGVhbiA9IGZhbHNlCgogICAgZnVuIHNldFZlcmJvc2UoZW5hYmxlZDogQm9vbGVhbikgewogICAgICAgIHZlcmJvc2UgPSBlbmFibGVkCiAgICAgICAgYXBwZW5kKCLns7vnu58iLCBpZiAoZW5hYmxlZCkgIuW3suW8gOWQr+ivpue7huaXpeW/lyIgZWxzZSAi5bey5YWz6Zet6K+m57uG5pel5b+XIiwgZm9yY2UgPSB0cnVlKQogICAgfQoKICAgIGZ1biBpbmZvKHRhZzogU3RyaW5nLCBtZXNzYWdlOiBTdHJpbmcpID0gYXBwZW5kKHRhZywgbWVzc2FnZSwgZm9yY2UgPSBmYWxzZSkKCiAgICBmdW4gZGVidWcodGFnOiBTdHJpbmcsIG1lc3NhZ2U6IFN0cmluZykgewogICAgICAgIGlmICghdmVyYm9zZSkgcmV0dXJuCiAgICAgICAgYXBwZW5kKHRhZywgbWVzc2FnZSwgZm9yY2UgPSB0cnVlKQogICAgfQoKICAgIC8qKiDorrDlvZXkuIDmrKHmlLblj5HvvIjljYHlha3ov5vliLYgKyDlj6/miZPljbDlrZfnrKbvvInjgIIgKi8KICAgIGZ1biBieXRlcyh0YWc6IFN0cmluZywgZGlyZWN0aW9uOiBTdHJpbmcsIGRhdGE6IEludEFycmF5KSB7CiAgICAgICAgaWYgKCF2ZXJib3NlKSByZXR1cm4KICAgICAgICBhcHBlbmQodGFnLCAiJGRpcmVjdGlvbiAke2RhdGEuc2l6ZX1CICAke3RvSGV4KGRhdGEpfSAgfCR7dG9Bc2NpaShkYXRhKX18IiwgZm9yY2UgPSB0cnVlKQogICAgfQoKICAgIHByaXZhdGUgZnVuIGFwcGVuZCh0YWc6IFN0cmluZywgbWVzc2FnZTogU3RyaW5nLCBmb3JjZTogQm9vbGVhbikgewogICAgICAgIHZhbCBjb25maWdMZXZlbCA9IGlmIChDb25maWdNYW5hZ2VyLmluaXRpYWxpemVkKSBDb25maWdNYW5hZ2VyLmdldCgpLmN1cnJlbnQubG9nTGV2ZWwgZWxzZSAxCiAgICAgICAgaWYgKCFmb3JjZSAmJiBjb25maWdMZXZlbCA8IEFwcENvbmZpZy5MT0dfQkFTSUMpIHJldHVybgogICAgICAgIHZhbCBsaW5lID0gIiR7dGltZUZtdC5mb3JtYXQoRGF0ZSgpKX0gIFskdGFnXSAgJG1lc3NhZ2UiCiAgICAgICAgc3luY2hyb25pemVkKGJ1ZmZlcikgewogICAgICAgICAgICBidWZmZXIuYWRkTGFzdChsaW5lKQogICAgICAgICAgICB3aGlsZSAoYnVmZmVyLnNpemUgPiBNQVhfTElORVMpIGJ1ZmZlci5yZW1vdmVGaXJzdCgpCiAgICAgICAgICAgIF9saW5lcy52YWx1ZSA9IGJ1ZmZlci50b0xpc3QoKQogICAgICAgIH0KICAgIH0KCiAgICBmdW4gY2xlYXIoKSB7CiAgICAgICAgc3luY2hyb25pemVkKGJ1ZmZlcikgewogICAgICAgICAgICBidWZmZXIuY2xlYXIoKQogICAgICAgICAgICBfbGluZXMudmFsdWUgPSBlbXB0eUxpc3QoKQogICAgICAgIH0KICAgIH0KCiAgICBmdW4gZHVtcCgpOiBTdHJpbmcgPSBzeW5jaHJvbml6ZWQoYnVmZmVyKSB7IGJ1ZmZlci5qb2luVG9TdHJpbmcoIlxuIikgfQoKICAgIGZ1biB0b0hleChkYXRhOiBJbnRBcnJheSk6IFN0cmluZyA9IGRhdGEuam9pblRvU3RyaW5nKCIgIikgeyAiJTAyWCIuZm9ybWF0KGl0IGFuZCAweEZGKSB9CgogICAgZnVuIHRvQXNjaWkoZGF0YTogSW50QXJyYXkpOiBTdHJpbmcgPSBidWlsZFN0cmluZyB7CiAgICAgICAgZGF0YS5mb3JFYWNoIHsgYiAtPgogICAgICAgICAgICB2YWwgdiA9IGIgYW5kIDB4RkYKICAgICAgICAgICAgYXBwZW5kKGlmICh2IGluIDB4MjAuLjB4N0UpIHYudG9DaGFyKCkgZWxzZSAnLicpCiAgICAgICAgfQogICAgfQp9Cg==
+package com.yinpage.link.core
+
+import com.yinpage.link.config.AppConfig
+import com.yinpage.link.config.ConfigManager
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import java.text.SimpleDateFormat
+import java.util.Collections
+import java.util.Date
+import java.util.Locale
+
+/**
+ * 进程内事件日志（调试面板数据源）。
+ * 与 LSPosed 参考项目不同，这里没有 logcat 注入，全部走内存环形缓冲 + 可选 logcat。
+ */
+object EventLog {
+    private const val MAX_LINES = 400
+    private val timeFmt = SimpleDateFormat("HH:mm:ss.SSS", Locale.CHINA)
+    private val buffer = Collections.synchronizedList(ArrayDeque<String>())
+
+    private val _lines = MutableStateFlow<List<String>>(emptyList())
+    val lines: StateFlow<List<String>> = _lines.asStateFlow()
+
+    /** 是否记录 debug 级（详细收发字节）。由设置页开关控制。 */
+    @Volatile
+    private var verbose: Boolean = false
+
+    fun setVerbose(enabled: Boolean) {
+        verbose = enabled
+        append("系统", if (enabled) "已开启详细日志" else "已关闭详细日志", force = true)
+    }
+
+    fun info(tag: String, message: String) = append(tag, message, force = false)
+
+    fun debug(tag: String, message: String) {
+        if (!verbose) return
+        append(tag, message, force = true)
+    }
+
+    /** 记录一次收发（十六进制 + 可打印字符）。 */
+    fun bytes(tag: String, direction: String, data: IntArray) {
+        if (!verbose) return
+        append(tag, "$direction ${data.size}B  ${toHex(data)}  |${toAscii(data)}|", force = true)
+    }
+
+    private fun append(tag: String, message: String, force: Boolean) {
+        val configLevel = if (ConfigManager.initialized) ConfigManager.get().current.logLevel else 1
+        if (!force && configLevel < AppConfig.LOG_BASIC) return
+        val line = "${timeFmt.format(Date())}  [$tag]  $message"
+        synchronized(buffer) {
+            buffer.addLast(line)
+            while (buffer.size > MAX_LINES) buffer.removeFirst()
+            _lines.value = buffer.toList()
+        }
+    }
+
+    fun clear() {
+        synchronized(buffer) {
+            buffer.clear()
+            _lines.value = emptyList()
+        }
+    }
+
+    fun dump(): String = synchronized(buffer) { buffer.joinToString("\n") }
+
+    fun toHex(data: IntArray): String = data.joinToString(" ") { "%02X".format(it and 0xFF) }
+
+    fun toAscii(data: IntArray): String = buildString {
+        data.forEach { b ->
+            val v = b and 0xFF
+            append(if (v in 0x20..0x7E) v.toChar() else '.')
+        }
+    }
+}

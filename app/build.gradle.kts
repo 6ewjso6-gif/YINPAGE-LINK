@@ -1,1 +1,111 @@
-aW1wb3J0IG9yZy5qZXRicmFpbnMua290bGluLmdyYWRsZS5kc2wuSnZtVGFyZ2V0CgpwbHVnaW5zIHsKICAgIGFsaWFzKGxpYnMucGx1Z2lucy5hbmRyb2lkLmFwcGxpY2F0aW9uKQogICAgYWxpYXMobGlicy5wbHVnaW5zLmtvdGxpbi5hbmRyb2lkKQogICAgYWxpYXMobGlicy5wbHVnaW5zLmtvdGxpbi5jb21wb3NlKQogICAgYWxpYXMobGlicy5wbHVnaW5zLmtvdGxpbi5zZXJpYWxpemF0aW9uKQp9CgphbmRyb2lkIHsKICAgIG5hbWVzcGFjZSA9ICJjb20ueWlucGFnZS5saW5rIgogICAgY29tcGlsZVNkayA9IDM1CgogICAgLyoqCiAgICAgKiBEZWJ1ZyDnrb7lkI3phY3nva7jgIIKICAgICAqIOm7mOiupOaDheWGteS4iyBBR1Ag5Lya5oqKIGRlYnVnLmtleXN0b3JlIOaUvuWIsCB+Ly5hbmRyb2lkL++8jOWcqOWPl+mZkOeOr+WigwogICAgICog77yI5rKZ566xIC8g5Y+q6K+755So5oi355uu5b2V77yJ6YeM5Lya5ZugIEFjY2Vzc0RlbmllZEV4Y2VwdGlvbiDmiZPljIXlpLHotKXjgIIKICAgICAqIOi/memHjOaYvuW8j+aMh+WumuWIsOaehOW7uuebruW9leWGhe+8jOS/neivgeS7u+S9leeOr+Wig+mDveiDveWHuuWMheOAggogICAgICovCiAgICBzaWduaW5nQ29uZmlncyB7CiAgICAgICAgZ2V0QnlOYW1lKCJkZWJ1ZyIpIHsKICAgICAgICAgICAgc3RvcmVGaWxlID0gcm9vdFByb2plY3QubGF5b3V0LnByb2plY3REaXJlY3RvcnkKICAgICAgICAgICAgICAgIC5maWxlKCIuYW5kcm9pZC9kZWJ1Zy5rZXlzdG9yZSIpLmFzRmlsZQogICAgICAgICAgICBzdG9yZVBhc3N3b3JkID0gImFuZHJvaWQiCiAgICAgICAgICAgIGtleUFsaWFzID0gImFuZHJvaWRkZWJ1Z2tleSIKICAgICAgICAgICAga2V5UGFzc3dvcmQgPSAiYW5kcm9pZCIKICAgICAgICB9CiAgICB9CgogICAgZGVmYXVsdENvbmZpZyB7CiAgICAgICAgYXBwbGljYXRpb25JZCA9ICJjb20ueWlucGFnZS5saW5rIgogICAgICAgIG1pblNkayA9IDI3ICAgICAgICAgIC8vIOiTneeJmSA1Lngg56eB5pyJ5Y2P6K6uICsgQkxFIOaJq+aPj+aJgOmcgOacgOS9jueJiOacrAogICAgICAgIHRhcmdldFNkayA9IDM1CiAgICAgICAgdmVyc2lvbkNvZGUgPSAxCiAgICAgICAgdmVyc2lvbk5hbWUgPSAiMS4wLjAiCgogICAgICAgIHRlc3RJbnN0cnVtZW50YXRpb25SdW5uZXIgPSAiYW5kcm9pZHgudGVzdC5ydW5uZXIuQW5kcm9pZEpVbml0UnVubmVyIgogICAgICAgIHZlY3RvckRyYXdhYmxlcyB7IHVzZVN1cHBvcnRMaWJyYXJ5ID0gdHJ1ZSB9CgogICAgICAgIC8vIOivpSBBcHAg5LiN5L2/55So5Lu75L2V57O757uf57qnL+ahhuaetuazqOWFpeiDveWKm++8muWujOWFqOWFjSByb29044CB5YWNIExTUG9zZWQKICAgICAgICBtYW5pZmVzdFBsYWNlaG9sZGVyc1siYXBwTGFiZWwiXSA9ICJZSU5QQUdFLUxJTksiCiAgICB9CgogICAgYnVpbGRUeXBlcyB7CiAgICAgICAgZGVidWcgewogICAgICAgICAgICBpc01pbmlmeUVuYWJsZWQgPSBmYWxzZQogICAgICAgICAgICBhcHBsaWNhdGlvbklkU3VmZml4ID0gIi5kZWJ1ZyIKICAgICAgICB9CiAgICAgICAgcmVsZWFzZSB7CiAgICAgICAgICAgIGlzTWluaWZ5RW5hYmxlZCA9IHRydWUKICAgICAgICAgICAgaXNTaHJpbmtSZXNvdXJjZXMgPSB0cnVlCiAgICAgICAgICAgIHByb2d1YXJkRmlsZXMoCiAgICAgICAgICAgICAgICBnZXREZWZhdWx0UHJvZ3VhcmRGaWxlKCJwcm9ndWFyZC1hbmRyb2lkLW9wdGltaXplLnR4dCIpLAogICAgICAgICAgICAgICAgInByb2d1YXJkLXJ1bGVzLnBybyIKICAgICAgICAgICAgKQogICAgICAgICAgICAvLyDml6Dnrb7lkI3phY3nva7ml7bkuqflh7ogdW5zaWduZWQgQVBL77yb5aaC6ZyA562+5ZCN6K+36YWN572uIGtleXN0b3JlLnByb3BlcnRpZXMKICAgICAgICAgICAgc2lnbmluZ0NvbmZpZyA9IHNpZ25pbmdDb25maWdzLmZpbmRCeU5hbWUoInJlbGVhc2UiKQogICAgICAgIH0KICAgIH0KCiAgICBjb21waWxlT3B0aW9ucyB7CiAgICAgICAgc291cmNlQ29tcGF0aWJpbGl0eSA9IEphdmFWZXJzaW9uLlZFUlNJT05fMTcKICAgICAgICB0YXJnZXRDb21wYXRpYmlsaXR5ID0gSmF2YVZlcnNpb24uVkVSU0lPTl8xNwogICAgfQoKICAgIGtvdGxpbiB7CiAgICAgICAgY29tcGlsZXJPcHRpb25zIHsKICAgICAgICAgICAganZtVGFyZ2V0LnNldChKdm1UYXJnZXQuSlZNXzE3KQogICAgICAgIH0KICAgIH0KCiAgICBidWlsZEZlYXR1cmVzIHsKICAgICAgICBjb21wb3NlID0gdHJ1ZQogICAgICAgIGJ1aWxkQ29uZmlnID0gdHJ1ZQogICAgfQoKICAgIHBhY2thZ2luZyB7CiAgICAgICAgcmVzb3VyY2VzIHsKICAgICAgICAgICAgZXhjbHVkZXMgKz0gIi9NRVRBLUlORi97QUwyLjAsTEdQTDIuMX0iCiAgICAgICAgICAgIGV4Y2x1ZGVzICs9ICIvTUVUQS1JTkYvKioudmVyc2lvbiIKICAgICAgICB9CiAgICB9CgogICAgdGVzdE9wdGlvbnMgewogICAgICAgIHVuaXRUZXN0cy5pc1JldHVybkRlZmF1bHRWYWx1ZXMgPSB0cnVlCiAgICB9Cn0KCmRlcGVuZGVuY2llcyB7CiAgICBpbXBsZW1lbnRhdGlvbihsaWJzLmFuZHJvaWR4LmNvcmUua3R4KQogICAgaW1wbGVtZW50YXRpb24obGlicy5hbmRyb2lkeC5saWZlY3ljbGUucnVudGltZS5rdHgpCiAgICBpbXBsZW1lbnRhdGlvbihsaWJzLmFuZHJvaWR4LmxpZmVjeWNsZS5ydW50aW1lLmNvbXBvc2UpCiAgICBpbXBsZW1lbnRhdGlvbihsaWJzLmFuZHJvaWR4LmFjdGl2aXR5LmNvbXBvc2UpCgogICAgaW1wbGVtZW50YXRpb24ocGxhdGZvcm0obGlicy5hbmRyb2lkeC5jb21wb3NlLmJvbSkpCiAgICBpbXBsZW1lbnRhdGlvbihsaWJzLmFuZHJvaWR4LmNvbXBvc2UudWkpCiAgICBpbXBsZW1lbnRhdGlvbihsaWJzLmFuZHJvaWR4LmNvbXBvc2UudWkuZ3JhcGhpY3MpCiAgICBpbXBsZW1lbnRhdGlvbihsaWJzLmFuZHJvaWR4LmNvbXBvc2UudWkudG9vbGluZy5wcmV2aWV3KQogICAgaW1wbGVtZW50YXRpb24obGlicy5hbmRyb2lkeC5jb21wb3NlLmZvdW5kYXRpb24pCiAgICBpbXBsZW1lbnRhdGlvbihsaWJzLmFuZHJvaWR4LmNvbXBvc2UubWF0ZXJpYWwzKQogICAgaW1wbGVtZW50YXRpb24obGlicy5hbmRyb2lkeC5jb21wb3NlLm1hdGVyaWFsLmljb25zLmV4dGVuZGVkKQogICAgZGVidWdJbXBsZW1lbnRhdGlvbihsaWJzLmFuZHJvaWR4LmNvbXBvc2UudWkudG9vbGluZykKCiAgICBpbXBsZW1lbnRhdGlvbihsaWJzLmtvdGxpbnguY29yb3V0aW5lcy5jb3JlKQogICAgaW1wbGVtZW50YXRpb24obGlicy5rb3RsaW54LmNvcm91dGluZXMuYW5kcm9pZCkKICAgIGltcGxlbWVudGF0aW9uKGxpYnMua290bGlueC5zZXJpYWxpemF0aW9uLmpzb24pCgogICAgdGVzdEltcGxlbWVudGF0aW9uKGxpYnMuanVuaXQpCiAgICBhbmRyb2lkVGVzdEltcGxlbWVudGF0aW9uKGxpYnMuYW5kcm9pZHgudGVzdC5qdW5pdCkKICAgIGFuZHJvaWRUZXN0SW1wbGVtZW50YXRpb24obGlicy5hbmRyb2lkeC5lc3ByZXNzby5jb3JlKQp9Cg==
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
+}
+
+android {
+    namespace = "com.yinpage.link"
+    compileSdk = 35
+
+    /**
+     * Debug 签名配置。
+     * 默认情况下 AGP 会把 debug.keystore 放到 ~/.android/，在受限环境
+     * （沙箱 / 只读用户目录）里会因 AccessDeniedException 打包失败。
+     * 这里显式指定到构建目录内，保证任何环境都能出包。
+     */
+    signingConfigs {
+        getByName("debug") {
+            storeFile = rootProject.layout.projectDirectory
+                .file(".android/debug.keystore").asFile
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
+    }
+
+    defaultConfig {
+        applicationId = "com.yinpage.link"
+        minSdk = 27          // 蓝牙 5.x 私有协议 + BLE 扫描所需最低版本
+        targetSdk = 35
+        versionCode = 1
+        versionName = "1.0.0"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables { useSupportLibrary = true }
+
+        // 该 App 不使用任何系统级/框架注入能力：完全免 root、免 LSPosed
+        manifestPlaceholders["appLabel"] = "YINPAGE-LINK"
+    }
+
+    buildTypes {
+        debug {
+            isMinifyEnabled = false
+            applicationIdSuffix = ".debug"
+        }
+        release {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            // 无签名配置时产出 unsigned APK；如需签名请配置 keystore.properties
+            signingConfig = signingConfigs.findByName("release")
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+        }
+    }
+
+    buildFeatures {
+        compose = true
+        buildConfig = true
+    }
+
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "/META-INF/**.version"
+        }
+    }
+
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+    }
+}
+
+dependencies {
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.activity.compose)
+
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.graphics)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material.icons.extended)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.serialization.json)
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+}

@@ -1,1 +1,32 @@
-cGx1Z2luTWFuYWdlbWVudCB7CiAgICByZXBvc2l0b3JpZXMgewogICAgICAgIC8vIOWbveWGhemVnOWDj+S8mOWFiO+8jOWumOaWuea6kOWFnOW6le+8iOS9jumFjeacuuWZqCArIOWbveWGhee9kee7nO+8iQogICAgICAgIG1hdmVuIHsgdXJsID0gdXJpKCJodHRwczovL21pcnJvcnMuY2xvdWQudGVuY2VudC5jb20vbmV4dXMvcmVwb3NpdG9yeS9tYXZlbi1wdWJsaWMvIikgfQogICAgICAgIG1hdmVuIHsgdXJsID0gdXJpKCJodHRwczovL21hdmVuLmFsaXl1bi5jb20vcmVwb3NpdG9yeS9ncmFkbGUtcGx1Z2luIikgfQogICAgICAgIG1hdmVuIHsgdXJsID0gdXJpKCJodHRwczovL21hdmVuLmFsaXl1bi5jb20vcmVwb3NpdG9yeS9nb29nbGUiKSB9CiAgICAgICAgbWF2ZW4geyB1cmwgPSB1cmkoImh0dHBzOi8vbWF2ZW4uYWxpeXVuLmNvbS9yZXBvc2l0b3J5L3B1YmxpYyIpIH0KICAgICAgICBnb29nbGUgewogICAgICAgICAgICBjb250ZW50IHsKICAgICAgICAgICAgICAgIGluY2x1ZGVHcm91cEJ5UmVnZXgoImNvbVxcLmFuZHJvaWQuKiIpCiAgICAgICAgICAgICAgICBpbmNsdWRlR3JvdXBCeVJlZ2V4KCJjb21cXC5nb29nbGUuKiIpCiAgICAgICAgICAgICAgICBpbmNsdWRlR3JvdXBCeVJlZ2V4KCJhbmRyb2lkeC4qIikKICAgICAgICAgICAgfQogICAgICAgIH0KICAgICAgICBtYXZlbkNlbnRyYWwoKQogICAgICAgIGdyYWRsZVBsdWdpblBvcnRhbCgpCiAgICB9Cn0KCmRlcGVuZGVuY3lSZXNvbHV0aW9uTWFuYWdlbWVudCB7CiAgICByZXBvc2l0b3JpZXNNb2RlLnNldChSZXBvc2l0b3JpZXNNb2RlLlBSRUZFUl9TRVRUSU5HUykKICAgIHJlcG9zaXRvcmllcyB7CiAgICAgICAgbWF2ZW4geyB1cmwgPSB1cmkoImh0dHBzOi8vbWlycm9ycy5jbG91ZC50ZW5jZW50LmNvbS9uZXh1cy9yZXBvc2l0b3J5L21hdmVuLXB1YmxpYy8iKSB9CiAgICAgICAgbWF2ZW4geyB1cmwgPSB1cmkoImh0dHBzOi8vbWF2ZW4uYWxpeXVuLmNvbS9yZXBvc2l0b3J5L2dvb2dsZSIpIH0KICAgICAgICBtYXZlbiB7IHVybCA9IHVyaSgiaHR0cHM6Ly9tYXZlbi5hbGl5dW4uY29tL3JlcG9zaXRvcnkvcHVibGljIikgfQogICAgICAgIGdvb2dsZSgpCiAgICAgICAgbWF2ZW5DZW50cmFsKCkKICAgIH0KfQoKcm9vdFByb2plY3QubmFtZSA9ICJZSU5QQUdFLUxJTksiCmluY2x1ZGUoIjphcHAiKQo=
+pluginManagement {
+    repositories {
+        // 国内镜像优先，官方源兜底（低配机器 + 国内网络）
+        maven { url = uri("https://mirrors.cloud.tencent.com/nexus/repository/maven-public/") }
+        maven { url = uri("https://maven.aliyun.com/repository/gradle-plugin") }
+        maven { url = uri("https://maven.aliyun.com/repository/google") }
+        maven { url = uri("https://maven.aliyun.com/repository/public") }
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositories {
+        maven { url = uri("https://mirrors.cloud.tencent.com/nexus/repository/maven-public/") }
+        maven { url = uri("https://maven.aliyun.com/repository/google") }
+        maven { url = uri("https://maven.aliyun.com/repository/public") }
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.name = "YINPAGE-LINK"
+include(":app")

@@ -1,1 +1,338 @@
-IyDogLPmnLrljY/orq7pgIblkJHorrDlvZXvvIhGZWVsIDEgUHJv77yJCgo+IOacrOaWh+aho+iusOW9lSAqKllJTlBBR0Ug6Z+z6LSd5aWHIEZlZWwgMSBQcm8qKiDnp4HmnInljY/orq7nmoTpgIblkJHov4fnqIvkuI7nu5PorrrjgIIKPiAqKuS4peagvOWMuuWIhuOAjOW3suehruivgeOAjeS4juOAjOW+hemqjOivgeOAjSoq4oCU4oCU6L+Z5piv5pys6aG555uu55qE5qC45b+D5bel56iL57qq5b6L77yaCj4g5Y2P6K6u5YaZ6ZSZ5Lya6K6p6ICz5py65LiN5ZON5bqU55Sa6Iez6L+b5YWl5byC5bi454q25oCB77yM5a6B5Y+v5qCH5rOo5LiN56Gu5a6a77yM5Lmf5LiN6IO957yW6YCg5a2X6IqC44CCCgotLS0KCiMjIDAuIOiDjOaZr+S4jumavueCuQoKfCDpobkgfCDmg4XlhrUgfAp8LS0tfC0tLXwKfCDlrpjmlrkgQXBwIHwgYGNvbS55c2NvY28ueWlucGFnZWDvvIx2MS40LjI077yI5bCP57Gz5bqU55So5ZWG5bqXIC8g5bqU55So5a6d5Zyo5p6277yJIHwKfCDlhazlvIDotYTmlpkgfCAqKuaXoOS7u+S9leaKk+WMheOAgeaWh+aho+aIluW8gOa6kOWunueOsCoqIHwKfCBGQ0Mg6LWE5paZIHwgYDJCTlQ3LVJFQUwxUFJPYCDnrYnmoaPmoYjnmoQgQmxvY2sgRGlhZ3JhbSAvIFNjaGVtYXRpY3MgLyBPcGVyYXRpb25hbCBEZXNjcmlwdGlvbiAqKueUs+ivt+S6humVv+acn+S/neWvhioqIHwKfCBDTUlJVCDmoLjlh4YgfCDlj6rliJfosIPliLbmlrnlvI/vvIzkuI3lkKvoiq/niYflnovlj7cgfAp8IOe7k+iuuiB8IOW/hemhu+iHquW3seS7juWumOaWuSBBcHAg6YCG5ZCRIHwKCiMjIDEuIOW3suehruivgee7k+iuugoK6YCG5ZCR5a+56LGh77ya5a6Y5pa5IEFQS++8iDEzMi44IE1C77yJ6Kej5YyF5ZCO55qEIGBjbGFzc2VzLmRleGAgLyBgY2xhc3NlczIuZGV4YCDlrZfnrKbkuLLmsaDjgIIKCiMjIyAxLjEg5Lyg6L6T6YCa6YGT77ya57uP5YW46JOd54mZIFJGQ09NTSAvIFNQUCDinIUKCuivgeaNru+8iGBjbGFzc2VzLmRleGAg5a2X56ym5Liy5rGg77yJ77yaCgpgYGAKMDAwMDExMDEtMDAwMC0xMDAwLTgwMDAtMDA4MDVGOUIzNEZCICAgICAg4oaQIOagh+WHhiBTZXJpYWwgUG9ydCBQcm9maWxlIFVVSUQKMDAwMDExMDEtMDAwMC0xMDAwLTgwMDAtMDA4MDVmOWIzNGZiCmNyZWF0ZVJmY29tbVNvY2tldFRvU2VydmljZVJlY29yZCAgICAgICAgICDihpAg5a6J5YWo6YCa6YGTCmNyZWF0ZUluc2VjdXJlUmZjb21tU29ja2V0VG9TZXJ2aWNlUmVjb3JkICDihpAg6Z2e5a6J5YWo6YCa6YGTCmBgYAoK57uT6K6677ya6ICz5py66LWwKirmoIflh4YgU1BQIFVVSUQg55qEIFJGQ09NTSDpgJrpgZMqKu+8jOS4juWPguiAg+mhueebriBQdWRkaW5nUG9kcyDnmoTlgZrms5XkuIDoh7TjgIIK5pys6aG555uuIGBSZmNvbW1UcmFuc3BvcnRgIOWboOatpOS7pSBgMDAwMDExMDEtLi4uYCDkuLrpppbpgIkgVVVJRO+8jOW5tuS/neeVmeiLpeW5suWOguWVhuiHquWumuS5iSBVVUlEIOS9nOS4uuWFnOW6leWAmemAieOAggoKIyMjIDEuMiDogLPmnLrkuLvmjqfmlrnmoYjvvJrkuK3np5Hok53orq8gQmx1ZXRydW0gQUIg57O75YiXIOKchQoK6K+B5o2u77yIYGNsYXNzZXMyLmRleGAg5a2X56ym5Liy5rGg5Lit55qE57G75o+P6L+w56ym77yJ77yaCgpgYGAKTGNvbS9ibHVldHJ1bS9kZXZpY2VtYW5hZ2VyL0RldmljZUNvbW1NYW5hZ2VyOwpMY29tL2JsdWV0cnVtL2RldmljZW1hbmFnZXIvRGVmYXVsdERldmljZUNvbW1NYW5hZ2VyOwpMY29tL2JsdWV0cnVtL2RldmljZW1hbmFnZXIvYmx1ZXRvb3RoL0JsdWV0b290aFNwcFNlcnZpY2U7ICAgICAg4oaQIFNQUCDmnI3liqHlrp7njrAKTGNvbS9ibHVldHJ1bS9kZXZpY2VtYW5hZ2VyL21vZGVscy9BQkRldmljZTsKTGNvbS9ibHVldHJ1bS9kZXZpY2VtYW5hZ2VyL21vZGVscy9EZXZpY2VQb3dlcjsKTGNvbS9ibHVldHJ1bS9kZXZpY2VtYW5hZ2VyL21vZGVscy9EZXZpY2VDb21wb25lbnRQb3dlcjsKTGNvbS9ibHVldHJ1bS9kZXZpY2VtYW5hZ2VyL2NtZC9SZXF1ZXN0OwpMY29tL2JsdWV0cnVtL2FiYXVkaW90b29sL0F1ZGlvVG9vbDsKYGBgCgrov5nmmK8qKuS4reenkeiTneiur+WumOaWuSBgZGV2aWNlbWFuYWdlcmAgU0RLKirvvIzkuI3mmK/ljoLllYboh6rnoJTljY/orq7moIjjgIIK5oSP5LmJ77ya5oyH5Luk6ZuG5pyJ5piO56Gu55qE5bel56iL6L6555WM77yM5Y+v5Y+C54Wn6K+lIFNESyDnmoTlhazlvIDlvaLmgIHmnaXnu4Tnu4flrp7njrDjgIIKCj4g5ZCM5LiA5LiqIEFQSyDph4zov5jmiZPljIXkuoYgYGNvbS5qaWVsaS5qbF9idF9vdGFg77yI5p2w55CGIFJDU1DvvInkuI4gYGNvbS5qaWVsaS5ibHVldG9vdGhg77yMCj4g6K+05piOIEFwcCDlkIzml7blhbzlrrnmnbDnkIbmlrnmoYjjgIIqKuS9huW4puWujOaVtCBBTkMgLyBFUSAvIOeUtemHj+ivreS5ieeahOaYryBibHVldHJ1bSDov5nlpZcqKu+8jAo+IOacrOmhueebruaMiSBBQiDns7vlrp7njrDjgIIKCiMjIyAxLjMg5oyH5Luk5a625peP77yIU0RLIOexu+WQjeWNs+ivreS5ie+8ieKchQoKYGNsYXNzZXMyLmRleGAg5LitIGBjb20uYmx1ZXRydW0uZGV2aWNlbWFuYWdlci5jbWQucmVxdWVzdC4qYCDnmoTlrozmlbTnsbvlkI3liJfooajvvJoKCnwg57G75ZCNIHwg6K+t5LmJIHwg5pys6aG555uu5a+55bqU6IO95YqbIHwKfC0tLXwtLS18LS0tfAp8IGBBbmNNb2RlUmVxdWVzdGAgfCDpmY3lmarmqKHlvI8gfCDwn46nIOWbm+ahoyBBTkMgfAp8IGBBbmNHYWluUmVxdWVzdGAgfCDpmY3lmarmt7Hluqblop7nm4ogfCDov5vpmLbvvIjmnKrlrp7njrDvvIkgfAp8IGBOb2lzZVJlcXVlc3RgIHwg5Zmq5aOw5o6n5Yi2IHwg8J+OpyDpmY3lmaogfAp8IGBFcVJlcXVlc3RgIHwgRVEg5Z2H6KGh5ZmoIHwg8J+OmiBFUSB8CnwgYEJhc3NCb29zdFJlcXVlc3RgIHwg5L2O6Z+z5aKe5by6IHwg5Y+v5pig5bCE5YiwIEVRIOaho+S9jSB8CnwgYFZvY2FsQm9vc3RSZXF1ZXN0YCB8IOS6uuWjsOWinuW8uiB8IOWPr+aYoOWwhOWIsCBFUSDmoaPkvY0gfAp8IGBTb3VuZEVmZmVjdDNkUmVxdWVzdGAgfCAzRCDpn7PmlYggfCDlj6/mmKDlsITliLAgRVEg5qGj5L2NIHwKfCBgRHluYW1pY0F1ZGlvUmVxdWVzdGAgfCDliqjmgIHpn7PpopEgfCDmnKrlrp7njrAgfAp8IGBXb3JrTW9kZVJlcXVlc3RgIHwg5bel5L2c5qih5byPIHwg4oCUIHwKfCBgRHVhbERldmljZVJlcXVlc3RgIHwg5Y+M6K6+5aSH6L+e5o6lIHwg8J+UlyDlj4zov54gfAp8IGBMREFDUmVxdWVzdGAgfCBMREFDIOe8luino+eggSB8IOeKtuaAgeWxleekuiB8CnwgYFZvbHVtZUdlYXJSZXF1ZXN0YCB8IOmfs+mHj+aho+S9jSB8IOacquWunueOsCB8CnwgYERldmljZUluZm9SZXF1ZXN0YCB8IOiuvuWkh+S/oeaBr++8iOWbuuS7ti/lnovlj7fvvIkgfCDlm7rku7bniYjmnKzlsZXnpLogfAp8IGBGaW5kRGV2aWNlUmVxdWVzdGAgfCDmn6Xmib7ogLPmnLogfCDmnKrlrp7njrAgfAp8IGBTaHV0ZG93bkRldmljZVJlcXVlc3RgIHwg5YWz5py6IHwg5pyq5a6e546wIHwKfCBgRmFjdG9yeVJlc2V0UmVxdWVzdGAgfCDmgaLlpI3lh7rljoIgfCDmnKrlrp7njrAgfAp8IGBNdXNpY0NvbnRyb2xSZXF1ZXN0YCB8IOWqkuS9k+aOp+WItiB8IOacquWunueOsCB8CnwgYEtleVJlcXVlc3RgIC8gYENsb3NlS2V5UmVxdWVzdGAgLyBgUmVzZXRLZXlSZXF1ZXN0YCAvIGBDYWxsU3RhdHVzS2V5UmVxdWVzdGAgfCDmjInplK7oh6rlrprkuYkgfCDmnKrlrp7njrAgfAoK5ZON5bqU5LiO6L296I235aSE55CG5Zmo77yaCgpgYGAKY21kL3BheWxvYWRoYW5kbGVyL0tleVBheWxvYWRIYW5kbGVyCmNtZC9wYXlsb2FkaGFuZGxlci9UbHZSZXNwb25zZVBheWxvYWRIYW5kbGVyICAgICDihpAgVExWIOe7k+aehO+8gQpjbWQvcGF5bG9hZGhhbmRsZXIvTXR1UGF5bG9hZEhhbmRsZXIKY21kL3BheWxvYWRoYW5kbGVyL0Jvb2xlYW5QYXlsb2FkSGFuZGxlcgpgYGAKCj4gYFRsdlJlc3BvbnNlUGF5bG9hZEhhbmRsZXJgIOeahOWtmOWcqOivtOaYjioq5ZON5bqU6L296I235pivIFRMVu+8iFR5cGUtTGVuZ3RoLVZhbHVl77yJ57yW56CBKirvvIwKPiDov5nop6Pph4rkuobkuLrku4DkuYjnlLXph4/jgIFBTkMg562J5LiN5ZCM5a2X5q615Y+v5Lul5aSN55So5ZCM5LiA5Liq5ZON5bqU5YyF44CCCgojIyMgMS40IOeKtuaAgemHj+ivreS5iSDinIUKCuivgeaNru+8iOiwg+ivleWtl+espuS4suS4juaVsOaNruaooeWei++8ie+8mgoKYGBgCmFuY01vZGUgPSAgICAgICAgICAgICAgICBkZWFsQW5jTGV2ZWwgCm5vdGlmeUJhdHRlcnlJbmZvMSA9ICAgICBub3RpZnlCYXR0ZXJ5SW5mbzIgPQpCYXR0ZXJ5SW5mb3tsZWZ0QmF0dGVyeT0gLCByaWdodEJhdHRlcnk9ICwgY2FzZUJhdHRlcnk9IH0KQU5DX1NXSVRDSCAgIEFVVE9fQU5DICAgTElHSFRfQU5DICAgTU9ERVJBVEVfQU5DICAgSEVBVllfQU5DCkdBTUVfTU9ERQpgYGAKCue7k+iuuu+8mgoKLSDnlLXph4/mnInkuInkuKrnu7TluqbvvJpgbGVmdEJhdHRlcnlgIC8gYHJpZ2h0QmF0dGVyeWAgLyBgY2FzZUJhdHRlcnlgIOKGkiDlr7nlupTmnKzpobnnm67nmoTkuInot6/nlLXph4/njq8g4pyFCi0gQU5DIOaho+S9jeaemuS4vu+8mmBBTkNfU1dJVENIYCAvIGBMSUdIVF9BTkNgIC8gYE1PREVSQVRFX0FOQ2AgLyBgSEVBVllfQU5DYCAoKyBgQVVUT19BTkNgKQogIOKGkiDkuI7ns7vnu5/lm5vmoaPmjqfku7bvvIjlhbPpl60gLyDpgJrpgI8gLyDmoIflh4YgLyDmt7HluqbvvInog73lpKnnhLblr7nlupQg4pyFCi0g5a2Y5ZyoIGBHQU1FX01PREVgIOKGkiDmuLjmiI/mqKHlvI8g4pyFCgojIyAyLiDluKfmoLzlvI/vvIjlt7Lnoa7or4HvvIninIUKCumAhuWQkeaWueW8j++8mmphZHgg5Y+N57yW6K+R5a6Y5pa5IEFQS++8jOaKiuWPkemAgei3r+W+hO+8iGBEZXZpY2VDb21tTWFuYWdlci5hKClAMzY5MjMzMmDvvInkuI7mjqXmlLbot6/lvoQK77yIYGNvbS5ibHVldHJ1bS5kZXZpY2VtYW5hZ2VyLmYuYigpQDM3MTEzNTJg77yJKirpgJDmjIfku6Tlr7npvZAqKuW+l+WHuuOAggoKYGBgCuWBj+enuyAgIOWtl+autSAgICAg5a695bqmICAg6K+05piOCi0tLS0gICAtLS0tLS0tICAtLS0tICAgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KIFswXSAgIHNlcSAgICAgIDFCICAgICBiaXRzMC0zID0g5Y+R6YCB5bqP5Y+3IDAuLjE177yM5Y+R6YCB5ZCOICh4KzEpIGFuZCAweDBG77yM5Yid5YC8IDAKIFsxXSAgIGNvbW1hbmQgIDFCICAgICDlkb3ku6TnoIHvvIjop4Egwqcz77yJCiBbMl0gICB0eXBlICAgICAxQiAgICAgMSA9IOivt+axgihSRVEpIC8gMiA9IOWTjeW6lChSRVNQKSAvIDMgPSDpgJrnn6UoTk9USUZZKQogWzNdICAgY2h1bmsgICAgMUIgICAgIOmrmCA0IOS9jSA9ICjmgLvljIXmlbAgLSAxKe+8m+S9jiA0IOS9jSA9IOW9k+WJjeWMheW6j+WPtwogWzRdICAgbGVuICAgICAgMUIgICAgIOacrOWMhSBwYXlsb2FkIOmVv+W6pu+8iDAuLjI1Ne+8iQogWzUuLl0gcGF5bG9hZCAgbGVuIEIgICDovb3ojbcKYGBgCgotICoq5pW05bin6ZW/5bqmID0gNSArIGxlbioqCi0gKirml6AgQ1JD44CB5peg5qCh6aqM44CB5peg6L2s5LmJKirvvIjlhaggYmx1ZXRydW0g5Y+N5rGH57yW5Lit5rKh5pyJ5Lu75L2VIENSQyDosIPnlKjvvIzku4UgT1RBIOeKtuaAgeeggeeUqOWIsO+8iQotICoq5YiG5YyFKirvvJrpu5jorqTmr4/ljIUgcGF5bG9hZCAxNSDlrZfoioLvvIjnsbsgYGUuYWAg5Yid5YC8IGBjb25zdC8xNiAjMTVg77yJ77yMCiAg5Y+v55SxIGBJTkZPX01BWF9QQUNLRVRfU0laRSgweEZGKWAg5p+l6K+i57uT5p6c6KaG55uWCi0gKirluo/lj7fmjIki5raI5oGvIumAkuWinuiAjOmdnuaMieW4pyoq77ya5LiA5p2h5raI5oGv5ouG5oiQIE4g5Liq54mp55CG5bin5pe25YWx55So5ZCM5LiA5bqP5Y+3Ci0g5o6l5pS256uv5qCh6aqM77yaYEZyYW1lIHNlcSBtaXNtYXRjaDogRXhwZWN0ZWQg4oCmIGJ1dCBnb3Qg4oCmYOOAgWBUaGUgbGVuZ3RoIG9mIHBheWxvYWQgbWlzbWF0Y2g6IEV4cGVjdGVkIOKApmDjgIEKICBgVGhlIGxlbmd0aCBvZiByZWNlaXZlZCBkYXRhIGlzIHRvbyBzaG9ydOKApmDvvIg8IDUg5a2X6IqC55u05o6l5Lii5byD77yJCgo+IOS4jummluasoeaOqOa1i+eahOW3ruW8gu+8muacgOWIneaMieWQjOexu+eZveeJjOaWueahiOaOqOa1i+S4uuOAjGAweDRFYCDprZTmlbAgKyDlsI/nq6/plb/luqbjgI3vvIwKPiAqKuivpeaOqOa1i+aYr+mUmeeahCoq4oCU4oCUQUIg57O75bin5aS05rKh5pyJ6a2U5pWw77yM6ICM5pivIGBzZXEvY29tbWFuZC90eXBlL2NodW5rL2xlbmAg5LqU5q615byP44CCCj4g5pys6aG555uu5bey5oyJ56Gu6K+B5qC85byP6YeN5YaZ5Y2P6K6u5bGC77yIYHByb3RvY29sL2JsdWV0cnVtL2DvvInvvIzml6fnmoTmjqjmtYvlrp7njrDlt7LliKDpmaTjgIIKCiMjIDMuIOaMh+S7pOihqO+8iOW3suehruivge+8ieKchQoK5p2l5rqQ77yaYGNvbS5ibHVldHJ1bS5kZXZpY2VtYW5hZ2VyLmNtZC5Db21tYW5kYCDnsbsgYHN0YXRpY192YWx1ZXNgIOWFqOmHj+WvvOWHuuOAggoKIyMjIDMuMSDor7fmsYLlkb3ku6TvvIh0eXBlID0gMe+8iQoKfCDlkb3ku6TnoIEgfCDluLjph48gfCDor63kuYkgfCBwYXlsb2FkIHwKfC0tLXwtLS18LS0tfC0tLXwKfCBgMHgyMGAgfCBgRVFgIHwgRVEg6K6+572uIHwgYFtiYW5kQ291bnQsIG1vZGUsIGdhaW5z4oCmXWDvvIgyIOWPguaehOmAoOWZqOWbuuWumiAxMCDmrrXvvIkgfAp8IGAweDIxYCB8IGBNVVNJQ19DT05UUk9MYCB8IOWqkuS9k+aOp+WItiB8IOingSDCpzMuMiB8CnwgYDB4MjJgIHwgYEtFWWAgfCDmjInplK7oh6rlrprkuYkgfCBrZXkg5YC8IHwKfCBgMHgyM2AgfCBgQVVUT19TSFVURE9XTmAgfCDoh6rliqjlhbPmnLogfCDmoaPkvY0gfAp8IGAweDI0YCB8IGBGQUNUT1JZX1JFU0VUYCB8IOaBouWkjeWHuuWOgiB8IOepuiB8CnwgYDB4MjVgIHwgYFdPUktfTU9ERWAgfCDlt6XkvZzmqKHlvI8gfCBgW21vZGVdYCB8CnwgYDB4MjZgIHwgYElOX0VBUl9ERVRFQ1RgIHwg5YWl6ICz5qOA5rWL5byA5YWzIHwgYFswXHwxXWAgfAp8IGAweDI3YCB8IGBERVZJQ0VfSU5GT2AgfCAqKuiuvuWkh+S/oeaBr+afpeivoioqIHwgYFtJTkZPX3gsIDB4MDBdYO+8iOWPr+mHjeWkjeaLvOaOpe+8iSB8CnwgYDB4MkFgIHwgYEZJTkRfREVWSUNFYCB8IOafpeaJvuiAs+acuiB8IOepuiB8CnwgYDB4MkJgIHwgYEFVVE9fQU5TV0VSYCB8IOiHquWKqOaOpeWQrCB8IGBbMFx8MV1gIHwKfCBgMHgyQ2AgfCBgQU5DX01PREVgIHwgKipBTkMg5qih5byP6K6+572uKiogfCBgW2FuY01vZGVdYCB8CnwgYDB4MkRgIHwgYEJMVUVUT09USF9OQU1FYCB8IOiTneeJmeWQjSB8IOWtl+espuS4siB8CnwgYDB4MkVgIHwgYExFRF9NT0RFYCB8IExFRCDlvIDlhbMgfCBgWzBcfDFdYCB8CnwgYDB4MkZgIHwgYENMRUFSX1BBSVJfUkVDT1JEYCB8IOa4hemZpOmFjeWvuSB8IOepuiB8CnwgYDB4MzBgIHwgYEFOQ19HQUlOYCB8IEFOQyDlop7nm4ogfCBgW2dhaW5dYCB8CnwgYDB4MzFgIHwgYFRSQU5TUEFSRU5DWV9HQUlOYCB8IOmAmumAj+WinuebiiB8IGBbZ2Fpbl1gIHwKfCBgMHgzMmAgfCBgU09VTkRfRUZGRUNUXzNEYCB8IDNEIOmfs+aViCB8IGBbbW9kZV1gIHwKfCBgMHgzM2AgfCBgT05FX0RSQUdfVFdPYCB8IOS4gOaLluS6jCB8IGBbMFx8MV1gIHwKfCBgMHgzOGAgfCBgQkFTU19CT09TVF9NT0RFYCB8IOS9jumfs+WinuW8uiB8IGBbbW9kZV1gIHwKfCBgMHgzOWAgfCBgVk9DQUxfQk9PU1RfTU9ERWAgfCDkurrlo7Dlop7lvLogfCBgW21vZGVdYCB8CnwgYDB4M0NgIHwgYFZPTFVNRV9HRUFSYCB8IOmfs+mHj+aho+S9jSB8IGBbZ2Vhcl1gIHwKfCBgMHgzRGAgfCBgRFVBTF9ERVZJQ0VgIHwgKirlj4zorr7lpIfov57mjqUqKiB8IGBbMFx8MV1gIHwKfCBgMHgzRmAgfCBgUkVTRVRfS0VZYCB8IOmHjee9ruaMiemUriB8IOepuiB8CnwgYDB4NDBgIHwgYENVU1RPTWAgfCDoh6rlrprkuYkgfCDpgI/kvKAgfAp8IGAweDQxYCB8IGBOT0lTRV9SRURVQ1RJT05gIC8gYFNIVVRET1dOYCB8IOmZjeWZquW8uuW6piAvIOWFs+acuiB8IGBbbGV2ZWxdYCAvIOepuiB8Cgo+IOKaoO+4jyBgMHgyQmDjgIFgMHgyQ2DjgIFgMHg0MGDjgIFgMHg0MWAgKirot6jmlrnlkJHlpI3nlKgqKu+8iOWQjOS4gOeggeWcqOivt+axgi/pgJrnn6XmlrnlkJHlkKvkuYnkuI3lkIzvvInvvIwKPiDlm6DmraTot6/nlLHlv4XpobvnlKggYCh0eXBlLCBjb21tYW5kKWAg5LqM5YWD57uE77yM5LiN6IO95Y+q55yLIGNvbW1hbmTjgIIKCiMjIyAzLjIg6K6+5aSH5L+h5oGv5a2Q56CB77yIYERFVklDRV9JTkZPKDB4MjcpYCDnmoQgcGF5bG9hZFswXe+8iQoKfCDlrZDnoIEgfCDluLjph48gfCDor63kuYkgfAp8LS0tfC0tLXwtLS18CnwgYDB4MDFgIHwgYERFVklDRV9QT1dFUmAgfCAqKueUtemHjyoq77ya5ZON5bqUIHBheWxvYWQgPSBgW+W3piwg5Y+zLCDnm5JdYCB8CnwgYDB4MDJgIHwgYEZJUk1XQVJFX1ZFUlNJT05gIHwg5Zu65Lu254mI5pysIHwKfCBgMHgwM2AgfCBgQkxVRVRPT1RIX05BTUVgIHwg6JOd54mZ5ZCNIHwKfCBgMHgwNGAgfCBgRVFfU0VUVElOR2AgfCDlvZPliY0gRVEgfAp8IGAweDA1YCB8IGBLRVlfU0VUVElOR1NgIHwg5oyJ6ZSu6K6+572uIHwKfCBgMHgwNmAgfCBgREVWSUNFX1ZPTFVNRWAgfCDpn7Pph48gfAp8IGAweDA3YCB8IGBQTEFZX1NUQVRFYCB8IOaSreaUvueKtuaAgSB8CnwgYDB4MDhgIHwgYFdPUktfTU9ERWAgfCDlt6XkvZzmqKHlvI8gfAp8IGAweDA5YCB8IGBJTl9FQVJfU1RBVFVTYCB8IOWFpeiAs+eKtuaAgSB8CnwgYDB4MEFgIHwgYExBTkdVQUdFX1NFVFRJTkdgIHwg6K+t6KiAIHwKfCBgMHgwQmAgfCBgQVVUT19BTlNXRVJgIHwg6Ieq5Yqo5o6l5ZCsIHwKfCBgMHgwQ2AgfCBgQU5DX01PREVgIHwg5b2T5YmNIEFOQyDmqKHlvI8gfAp8IGAweDBEYCB8IGBJU19UV1NgIHwg5piv5ZCmIFRXUyB8CnwgYDB4MEVgIHwgYFRXU19DT05ORUNURURgIHwg5Y+M6ICz5piv5ZCm5bey6L+eIHwKfCBgMHgwRmAgfCBgTEVEX1NXSVRDSGAgfCBMRUQg5byA5YWzIHwKfCBgMHgxMGAgfCBgRldfQ0hFQ0tTVU1gIHwg5Zu65Lu25qCh6aqMIHwKfCBgMHgxMWAgfCBgQU5DX0dBSU5gIHwgQU5DIOWinuebiiB8CnwgYDB4MTJgIHwgYFRSQU5TUEFSRU5DWV9HQUlOYCB8IOmAmumAj+WinuebiiB8CnwgYDB4MTNgIHwgYEFOQ19HQUlOX05VTWAgfCBBTkMg5aKe55uK5qGj5L2N5pWwIHwKfCBgMHgxNGAgfCBgVFJBTlNQQVJFTkNZX0dBSU5fTlVNYCB8IOmAmumAj+Winuebiuaho+S9jeaVsCB8CnwgYDB4MTVgIHwgYEFMTF9FUV9TRVRUSU5HU2AgfCDlhajpg6ggRVEg6K6+572uIHwKfCBgMHgxNmAgfCBgTUFJTl9TSURFYCB8IOS4u+iAs+S+pyB8CnwgYDB4MTdgIHwgYFBST0RVQ1RfQ09MT1JgIHwg5Lqn5ZOB6YWN6ImyIHwKfCBgMHgxOWAgfCBgT05FX0RSQUdfVFdPYCB8IOS4gOaLluS6jCB8CnwgYDB4MjZgIHwgYEJBU1NfQk9PU1RfTU9ERWAgfCDkvY7pn7Plop7lvLogfAp8IGAweDI3YCB8IGBWT0NBTF9CT09TVF9NT0RFYCB8IOS6uuWjsOWinuW8uiB8CnwgYDB4MjhgIHwgYENBTExfU1RBVFVTX1VJX0lORk9gIHwg6YCa6K+d54q25oCBIHwKfCBgMHgyOWAgfCBgT05FX0NMT1NFX0tFWWAgfCDkuIDplK7lhbPpl63mjInplK4gfAp8IGAweDMxYCB8IGBERVZJQ0VfU05gIHwg5bqP5YiX5Y+3IHwKfCBgMHgzMmAgfCBgTElTVEVOX1RJUGAgfCDmj5DnpLrpn7MgfAp8IGAweDMzYCB8IGBWT0xVTUVfTElNSVRgIHwg6Z+z6YeP5LiK6ZmQIHwKfCBgMHhGRWAgfCBgREVWSUNFX0NBUEFCSUxJVElFU2AgfCAqKuiDveWKm+S9jeWbvioqIHwKfCBgMHhGRmAgfCBgTUFYX1BBQ0tFVF9TSVpFYCB8IOWNleWMheacgOWkp+mVv+W6piB8CgojIyMgMy4zIOeKtuaAgeWtl+auteivreS5ie+8iOW3suehruivge+8ieKchQoKKirnlLXph48qKu+8iGBERVZJQ0VfUE9XRVJgIOWTjeW6lCBwYXlsb2FkID0gYFvlt6YsIOWPsywg55uSXWDvvIzmr4/lrZfoioLvvInvvJoKCmBgYApiaXQ3ICAgICAgPSDlhYXnlLXkuK3vvIgxID0g5q2j5Zyo5YWF55S177yJCmJpdDAuLjYgICA9IOeUtemHj+eZvuWIhuavlCAwLi4xMjcKYGBgCgoqKkFOQyDmqKHlvI8qKu+8iGBBTkNfTU9ERWAgcGF5bG9hZFswXe+8ie+8mgoKfCDlgLwgfCDor63kuYkgfCDmmKDlsITliLDmnKzpobnnm64gVUkg5Zub5qGjIHwKfC0tLXwtLS18LS0tfAp8IGAweDAwYCB8IGBPRkZgIOWFs+mXrSB8IOWFs+mXrSB8CnwgYDB4MDFgIHwgYE9OYCDpmY3lmarlvIAgfCDmoIflh4bpmY3lmaogLyDmt7HluqbpmY3lmaogfAp8IGAweDAyYCB8IGBUUkFOU1BBUkVOQ1lgIOmAmumAjyB8IOmAmumAj+aooeW8jyB8Cgo+IOiAs+acuuWPquacieS4ieaho++8jOiAjOezu+e7n+aOp+S7tuaYr+Wbm+aho+OAguacrOmhueebruaYoOWwhOetlueVpe+8mmBOT1JNQUxgIOS4jiBgREVFUGAg6YO95LiL5Y+RIGBPTmDvvIwKPiDpnIDopoHljLrliIblvLrluqbml7blho3nlKggYEFOQ19HQUlOKDB4MzApYCDosIPmlbTlop7nm4rjgIIKCioq6IO95Yqb5L2N5Zu+KirvvIhgREVWSUNFX0NBUEFCSUxJVElFU2AgPSBgMHhGRWDvvInvvJoKCmBgYApiaXQwID0gVFdTCmJpdDEgPSAzRCDpn7PmlYgKYml0MiA9IOWkmueCuei/nuaOpQpiaXQzID0gQU5DCmBgYAoKKipFUSoq77ya5YaZ5YWlIGBbYmFuZENvdW50LCBtb2RlLCBnYWluc+KApl1g77ybYG1vZGUgPj0gMHgyMGAg6KGo56S66Ieq5a6a5LmJIEVR77yMCmBjdXN0b21JbmRleCA9IG1vZGUgYW5kIDB4RTBg44CCCgojIyA0LiDku43mnKrnoa7or4HnmoTpg6jliIYg4pqg77iPCgp8IOmhuSB8IOeOsOeKtiB8IOWmguS9leehruivgSB8CnwtLS18LS0tfC0tLXwKfCBSRkNPTU0gY2hhbm5lbCDlj7cgfCDmnKrnn6UgfCDnnJ/mnLogYHNkcHRvb2wgYnJvd3NlIDxNQUM+YCDmiJYgU0RQIOafpeivoiB8Cnwg5piv5ZCm5L2/55So6Ieq5a6a5LmJIFNQUCBVVUlEIHwg5pyq55+l77yIQkxFIOW5v+aSremHjOaciSBgUE9TX0NVU1RPTV9TUFBfVVVJRGAg5a2X5q6177yM6K+05piOKirlj6/og70qKuiHquWumuS5ie+8iSB8IOaKk+WMhSAvIFNEUCB8CnwgRVEg5YiX6KGo57K+56Gu5a2X6IqC5bqPIHwg5Y2V5L6n6K+B5o2uIHwgZHVtcCBgSU5GT19BTExfRVFfU0VUVElOR1MoMHgxNSlgIOWOn+WniyBwYXlsb2FkIHwKfCDnlLXph4/lrZfoioIgYml0NyDnmoTovrnnlYzor63kuYkgfCDmjqjmlq3kuLrlhYXnlLXkuK0gfCDnnJ/mnLrlr7nnhafvvIjlhYXnlLXnm5LlhoXlpJblkITor7vkuIDmrKHvvIkgfAp8IOWFpeiAs+eKtuaAgeWPluWAvOivreS5iSB8IOaOqOaWremdnumbtuS4uuW8gCB8IOecn+acuuWvueeFpyB8Cgo+IOi/meS6m+mDveS4jeW9seWTjeS4u+a1geeoi++8mueUtemHj+OAgUFOQ+OAgUVR44CB5Y+M6L+e44CB5YWl6ICz5byA5YWz55qE5qC45b+D6Lev5b6E5bey57uP56Gu6K+B44CCCgo+IOWPguiAg++8muS4reenkeiTneiuryBBQiDns7vvvIhBQjUzeHgvQUI1Nnh4IOetie+8ieWcqOWQjOexu+S6p+WTgeS4reeahOW4uOingeW4p+W9ouaAgeaYrwo+IGAweEFCYCDlvIDlpLTnmoTlrprplb8v5Y+Y6ZW/5bin77yM5L2GKirmsqHmnInor4Hmja7ooajmmI4gRmVlbCAxIFBybyDkuIDlrprlpoLmraQqKu+8jAo+IOaJgOS7peacrOmhueebruayoeacieehrOe8lueggSAweEFC77yM6ICM5piv5oqK6a2U5pWw5YGa5oiQ5Y+v6YWN572u6aG544CCCgojIyAzLiDljY/orq7lsYLnmoTlt6XnqIvlupTlr7kKCuato+WboOS4uuacieWkp+mHj+acquehruivgemhue+8jOacrOmhueebruaKiuWNj+iuruWxguWBmuaIkOS4ieWxguWPr+abv+aNoue7k+aehO+8mgoKYGBgCkZyYW1lRm9ybWF077yI5pWw5o2u57G777yJICAgICAgICAg4oaQIOmtlOaVsC/plb/luqblrZfmrrUv5ZG95Luk56CB5a695bqmL+agoemqjOaWueW8j++8jOWFqOmDqOWPguaVsOWMlgogICAgICDihpMKWXNjb2NvRnJhbWVDb2RlYyAgICAgICAgICAgICDihpAg5LiO6K+t5LmJ5peg5YWz55qE44CM5binIDwtPiDlrZfoioLjgI0rIOa1geW8j+WIhuW4pwogICAgICDihpMKWXNjb2NvQ29kZWPvvIhQb2RDb2RlYyDlrp7njrDvvIkgIOKGkCDlkb3ku6TnoIHooaggKyDnirbmgIHop6PmnpDvvIzor63kuYnlsYIKYGBgCgrlpb3lpITvvJoKCjEuICoq5paw5aKe5LiA5Liq5Y+Y5L2T5Y+q6ZyA5Yqg5LiA5LiqIGBGcmFtZUZvcm1hdGAg5pWw5o2u5a+56LGhKirvvIzkuI3liqjku7vkvZXop6PmnpDpgLvovpHvvJsKMi4g6LCD6K+V6Z2i5p2/5pSv5oyB6L+Q6KGM5pe25YiH5o2i5Y+Y5L2T77yM5Y+v5Lul5Zyo55yf5py65LiK6YCQ5Liq6K+V77ybCjMuIOS4gOaXpuaLv+WIsOehruivgeeahOW4p+agvOW8j++8jOaUueS4gOWkhOWNs+WPr+WFqOe6v+eUn+aViOOAggoKYFlzY29jb1ZhcmlhbnRzYCDlhoXnva7nmoTlgJnpgInvvJoKCnwg5Y+Y5L2TIGlkIHwg6a2U5pWwIHwg6ZW/5bqmIHwg5ZG95Luk56CBIHwg5qCh6aqMIHwKfC0tLXwtLS18LS0tfC0tLXwtLS18CnwgYHlzY29jby00ZWAgfCBgMHg0RWAgfCAyIOWtl+iKguWwj+err++8iOWJqeS9memVv+W6pu+8iSB8IDIg5a2X6IqC5bCP56uvIHwg5pegIHwKfCBgeXNjb2NvLWFhNTVgIHwgYDB4QUEgMHg1NWAgfCAxIOWtl+iKgu+8iOaVtOW4p++8iSB8IDEg5a2X6IqCIHwg57Sv5Yqg5ZKMIHwKfCBgeXNjb2NvLTU1YCB8IGAweDU1YCB8IDEg5a2X6IqC77yI5pW05bin77yJIHwgMSDlrZfoioIgfCDml6AgfAp8IGB5c2NvY28tNWFgIHwgYDB4NUFgIHwgMSDlrZfoioLvvIjmlbTluKfvvIkgfCAxIOWtl+iKgiB8IOW8guaIliB8CgojIyA0LiDkuIvkuIDmraXnoa7or4Hot6/nur/vvIjmjInmgKfku7fmr5TmjpLluo/vvIkKCjEuICoqamFkeCDlj43nvJbor5EgYmx1ZXRydW0g5YyFKirvvIjmnIDpq5jkvJjlhYjvvIkKICAgYGBgYmFzaAogICBqYWR4IC1kIG91dF9qYWR4IC0tZGVvYmYgeWlucGFnZS5hcGsKICAgIyDph43ngrnnnIvvvJoKICAgIyAgIGNvbS9ibHVldHJ1bS9kZXZpY2VtYW5hZ2VyL2JsdWV0b290aC9CbHVldG9vdGhTcHBTZXJ2aWNlLmphdmEKICAgIyAgIGNvbS9ibHVldHJ1bS9kZXZpY2VtYW5hZ2VyL2NtZC9SZXF1ZXN0LmphdmEKICAgIyAgIGNvbS9ibHVldHJ1bS9kZXZpY2VtYW5hZ2VyL2NtZC9yZXF1ZXN0LyouamF2YSAgIOKGkCBnZXRDb21tYW5kKCkg6L+U5Zue5YC85bCx5piv5ZG95Luk56CBCiAgIGBgYAoyLiAqKkhDSSBzbm9vcCDmipPljIUqKu+8iOacgOebtOaOpe+8iQogICAtIOW8gOWPkeiAhemAiemhuSDihpIg5ZCv55So6JOd54mZIEhDSSDkv6Hmga/mlLbpm4bml6Xlv5cKICAgLSDnlKjlrpjmlrkgQXBwIOS+neasoeaTjeS9nO+8mui/nuaOpSDihpIg55yL55S16YePIOKGkiDliIcgQU5DIOWbm+ahoyDihpIg5YiHIEVRIOKGkiDlvIDmuLjmiI/mqKHlvI8KICAgLSAqKuavj+atpeWBnOmhvyA1IOenkioq77yM5L6/5LqO5ZyoIGJ0c25vb3Ag6YeM5YiH5YiGCiAgIC0g5a+85Ye6IGAvc2RjYXJkL2J0c25vb3BfaGNpLmxvZ2DvvIznlKggV2lyZXNoYXJrIOi/h+a7pCBgYnRyZmNvbW1gCjMuICoq55yf5py66YCa6YGT5o6i5rWLKioKICAgYGBgYmFzaAogICBhZGIgc2hlbGwgZHVtcHN5cyBibHVldG9vdGhfbWFuYWdlciB8IGdyZXAgLUE1IDzogLPmnLrlkI0+CiAgIGBgYAogICDnoa7orqQgU1BQIOi/nuaOpeeahOacjeWKoeiusOW9leS4jiBSRkNPTU0gY2hhbm5lbOOAggo0LiDnlKjmipPliLDnmoTnnJ/lrp7lrZfoioLmm7/mjaIgYFlzY29jb09wYCDnmoTlkb3ku6TnoIHooajkuI4gYHBhcnNlQmF0dGVyeSgpYCDnmoTlrZfmrrXluIPlsYDjgIIKCiMjIDUuIOWvueeUqOaIt+eahOaEj+S5iQoK5Y2z5L2/5Y2P6K6u5bCa5pyqIDEwMCUg56Gu6K+B77yM5pysIEFwcCDku43nhLbmmK/mnInnlKjnmoTvvJoKCi0g5bin5qGG5p6244CB5YiG5bin44CB5qCh6aqM44CB5Y+Y5L2T5YiH5o2i44CB5Lyg6L6T5bGC77yIUkZDT01NICsgQkxFIEdBVFTvvInjgIHov57mjqXnirbmgIHmnLrjgIEKICDlvILluLjnv7vor5HjgIHlv4Pot7Pova7or6LjgIFVSSDlhajpg6jmmK8qKuecn+WunuWPr+W3peS9nCoq55qE77ybCi0g5LiA5pem5Y2P6K6u56Gu6K+B77yM5Y+q6ZyA5pu/5o2i5LiA5byg5ZG95Luk56CB6KGo77ybCi0g6LCD6K+V6Z2i5p2/5Lya5oqK5pS25Yiw55qE5q+P5Liq5a2X6IqC5Lul5Y2B5YWt6L+b5Yi2ICsg5Y+v5omT5Y2w5a2X56ym5bGV56S677yMCiAgKirnlKjmiLflj6/ku6Xoh6rlt7HmipPljIXlkI7lr7nnhafosIPmlbQqKu+8jOaXoOmcgOmHjeaWsOe8luivke+8iOW4p+agvOW8j+WPr+WcqOiuvue9rumhteWIh+aNou+8ieOAggoKLS0tCgojIyDpmYTvvJror4Hmja7mlofku7bkvY3nva4KCumAhuWQkeS4remXtOS6p+eJqeS/neWtmOWcqCBgX3Jldi9vdXQvYO+8iOW3suWKoOWFpSBgLmdpdGlnbm9yZWDvvIzkuI3lhaXlupPvvInvvJoKCnwg5paH5Lu2IHwg5YaF5a65IHwKfC0tLXwtLS18CnwgYF9yZXYveWlucGFnZS5hcGtgIHwg5a6Y5pa5IEFwcCDlronoo4XljIXvvIgxMzIuOCBNQu+8iSB8CnwgYF9yZXYvb3V0L2NsYXNzZXMuZGV4LnN0cmluZ3MudHh0YCB8IGNsYXNzZXMuZGV4IOWtl+espuS4suaxoO+8iDExOTcgS0LvvIkgfAp8IGBfcmV2L291dC9jbGFzc2VzMi5kZXguc3RyaW5ncy50eHRgIHwgY2xhc3NlczIuZGV4IOWtl+espuS4suaxoO+8iDM4OCBLQu+8iSB8CnwgYF9yZXYvb3V0LyouYXNjaWkudHh0YCB8IOW4piBERVgg5YGP56e755qEIEFTQ0lJIOS4su+8iOeUqOS6juWumuS9jeWtl+iKgueggeW4uOmHj++8iSB8CnwgYF9yZXYvb3V0LyoudXRmOC50eHRgIHwg5Lit5paH5a2X56ym5Liy77yI5Z6L5Y+35ZCNIC8g5Yqf6IO95paH5qGI77yJIHwKfCBgX3Jldi9EZXhTY2FuLmphdmFgIHwg6Ieq5YaZ55qEIERFWCDlrZfnrKbkuLLmj5Dlj5blt6XlhbfvvIjml6AgamFkeCDml7bnmoTmm7/ku6PmlrnmoYjvvIkgfAo=
+# 耳机协议逆向记录（Feel 1 Pro）
+
+> 本文档记录 **YINPAGE 音贝奇 Feel 1 Pro** 私有协议的逆向过程与结论。
+> **严格区分「已确证」与「待验证」**——这是本项目的核心工程纪律：
+> 协议写错会让耳机不响应甚至进入异常状态，宁可标注不确定，也不能编造字节。
+
+---
+
+## 0. 背景与难点
+
+| 项 | 情况 |
+|---|---|
+| 官方 App | `com.yscoco.yinpage`，v1.4.24（小米应用商店 / 应用宝在架） |
+| 公开资料 | **无任何抓包、文档或开源实现** |
+| FCC 资料 | `2BNT7-REAL1PRO` 等档案的 Block Diagram / Schematics / Operational Description **申请了长期保密** |
+| CMIIT 核准 | 只列调制方式，不含芯片型号 |
+| 结论 | 必须自己从官方 App 逆向 |
+
+## 1. 已确证结论
+
+逆向对象：官方 APK（132.8 MB）解包后的 `classes.dex` / `classes2.dex` 字符串池。
+
+### 1.1 传输通道：经典蓝牙 RFCOMM / SPP ✅
+
+证据（`classes.dex` 字符串池）：
+
+```
+00001101-0000-1000-8000-00805F9B34FB      ← 标准 Serial Port Profile UUID
+00001101-0000-1000-8000-00805f9b34fb
+createRfcommSocketToServiceRecord          ← 安全通道
+createInsecureRfcommSocketToServiceRecord  ← 非安全通道
+```
+
+结论：耳机走**标准 SPP UUID 的 RFCOMM 通道**，与参考项目 PuddingPods 的做法一致。
+本项目 `RfcommTransport` 因此以 `00001101-...` 为首选 UUID，并保留若干厂商自定义 UUID 作为兜底候选。
+
+### 1.2 耳机主控方案：中科蓝讯 Bluetrum AB 系列 ✅
+
+证据（`classes2.dex` 字符串池中的类描述符）：
+
+```
+Lcom/bluetrum/devicemanager/DeviceCommManager;
+Lcom/bluetrum/devicemanager/DefaultDeviceCommManager;
+Lcom/bluetrum/devicemanager/bluetooth/BluetoothSppService;      ← SPP 服务实现
+Lcom/bluetrum/devicemanager/models/ABDevice;
+Lcom/bluetrum/devicemanager/models/DevicePower;
+Lcom/bluetrum/devicemanager/models/DeviceComponentPower;
+Lcom/bluetrum/devicemanager/cmd/Request;
+Lcom/bluetrum/abaudiotool/AudioTool;
+```
+
+这是**中科蓝讯官方 `devicemanager` SDK**，不是厂商自研协议栈。
+意义：指令集有明确的工程边界，可参照该 SDK 的公开形态来组织实现。
+
+> 同一个 APK 里还打包了 `com.jieli.jl_bt_ota`（杰理 RCSP）与 `com.jieli.bluetooth`，
+> 说明 App 同时兼容杰理方案。**但带完整 ANC / EQ / 电量语义的是 bluetrum 这套**，
+> 本项目按 AB 系实现。
+
+### 1.3 指令家族（SDK 类名即语义）✅
+
+`classes2.dex` 中 `com.bluetrum.devicemanager.cmd.request.*` 的完整类名列表：
+
+| 类名 | 语义 | 本项目对应能力 |
+|---|---|---|
+| `AncModeRequest` | 降噪模式 | 🎧 四档 ANC |
+| `AncGainRequest` | 降噪深度增益 | 进阶（未实现） |
+| `NoiseRequest` | 噪声控制 | 🎧 降噪 |
+| `EqRequest` | EQ 均衡器 | 🎚 EQ |
+| `BassBoostRequest` | 低音增强 | 可映射到 EQ 档位 |
+| `VocalBoostRequest` | 人声增强 | 可映射到 EQ 档位 |
+| `SoundEffect3dRequest` | 3D 音效 | 可映射到 EQ 档位 |
+| `DynamicAudioRequest` | 动态音频 | 未实现 |
+| `WorkModeRequest` | 工作模式 | — |
+| `DualDeviceRequest` | 双设备连接 | 🔗 双连 |
+| `LDACRequest` | LDAC 编解码 | 状态展示 |
+| `VolumeGearRequest` | 音量档位 | 未实现 |
+| `DeviceInfoRequest` | 设备信息（固件/型号） | 固件版本展示 |
+| `FindDeviceRequest` | 查找耳机 | 未实现 |
+| `ShutdownDeviceRequest` | 关机 | 未实现 |
+| `FactoryResetRequest` | 恢复出厂 | 未实现 |
+| `MusicControlRequest` | 媒体控制 | 未实现 |
+| `KeyRequest` / `CloseKeyRequest` / `ResetKeyRequest` / `CallStatusKeyRequest` | 按键自定义 | 未实现 |
+
+响应与载荷处理器：
+
+```
+cmd/payloadhandler/KeyPayloadHandler
+cmd/payloadhandler/TlvResponsePayloadHandler     ← TLV 结构！
+cmd/payloadhandler/MtuPayloadHandler
+cmd/payloadhandler/BooleanPayloadHandler
+```
+
+> `TlvResponsePayloadHandler` 的存在说明**响应载荷是 TLV（Type-Length-Value）编码**，
+> 这解释了为什么电量、ANC 等不同字段可以复用同一个响应包。
+
+### 1.4 状态量语义 ✅
+
+证据（调试字符串与数据模型）：
+
+```
+ancMode =                dealAncLevel 
+notifyBatteryInfo1 =     notifyBatteryInfo2 =
+BatteryInfo{leftBattery= , rightBattery= , caseBattery= }
+ANC_SWITCH   AUTO_ANC   LIGHT_ANC   MODERATE_ANC   HEAVY_ANC
+GAME_MODE
+```
+
+结论：
+
+- 电量有三个维度：`leftBattery` / `rightBattery` / `caseBattery` → 对应本项目的三路电量环 ✅
+- ANC 档位枚举：`ANC_SWITCH` / `LIGHT_ANC` / `MODERATE_ANC` / `HEAVY_ANC` (+ `AUTO_ANC`)
+  → 与系统四档控件（关闭 / 通透 / 标准 / 深度）能天然对应 ✅
+- 存在 `GAME_MODE` → 游戏模式 ✅
+
+## 2. 帧格式（已确证）✅
+
+逆向方式：jadx 反编译官方 APK，把发送路径（`DeviceCommManager.a()@3692332`）与接收路径
+（`com.bluetrum.devicemanager.f.b()@3711352`）**逐指令对齐**得出。
+
+```
+偏移   字段     宽度   说明
+----   -------  ----   --------------------------------------------------
+ [0]   seq      1B     bits0-3 = 发送序号 0..15，发送后 (x+1) and 0x0F，初值 0
+ [1]   command  1B     命令码（见 §3）
+ [2]   type     1B     1 = 请求(REQ) / 2 = 响应(RESP) / 3 = 通知(NOTIFY)
+ [3]   chunk    1B     高 4 位 = (总包数 - 1)；低 4 位 = 当前包序号
+ [4]   len      1B     本包 payload 长度（0..255）
+ [5..] payload  len B   载荷
+```
+
+- **整帧长度 = 5 + len**
+- **无 CRC、无校验、无转义**（全 bluetrum 反汇编中没有任何 CRC 调用，仅 OTA 状态码用到）
+- **分包**：默认每包 payload 15 字节（类 `e.a` 初值 `const/16 #15`），
+  可由 `INFO_MAX_PACKET_SIZE(0xFF)` 查询结果覆盖
+- **序号按"消息"递增而非按帧**：一条消息拆成 N 个物理帧时共用同一序号
+- 接收端校验：`Frame seq mismatch: Expected … but got …`、`The length of payload mismatch: Expected …`、
+  `The length of received data is too short…`（< 5 字节直接丢弃）
+
+> 与首次推测的差异：最初按同类白牌方案推测为「`0x4E` 魔数 + 小端长度」，
+> **该推测是错的**——AB 系帧头没有魔数，而是 `seq/command/type/chunk/len` 五段式。
+> 本项目已按确证格式重写协议层（`protocol/bluetrum/`），旧的推测实现已删除。
+
+## 3. 指令表（已确证）✅
+
+来源：`com.bluetrum.devicemanager.cmd.Command` 类 `static_values` 全量导出。
+
+### 3.1 请求命令（type = 1）
+
+| 命令码 | 常量 | 语义 | payload |
+|---|---|---|---|
+| `0x20` | `EQ` | EQ 设置 | `[bandCount, mode, gains…]`（2 参构造器固定 10 段） |
+| `0x21` | `MUSIC_CONTROL` | 媒体控制 | 见 §3.2 |
+| `0x22` | `KEY` | 按键自定义 | key 值 |
+| `0x23` | `AUTO_SHUTDOWN` | 自动关机 | 档位 |
+| `0x24` | `FACTORY_RESET` | 恢复出厂 | 空 |
+| `0x25` | `WORK_MODE` | 工作模式 | `[mode]` |
+| `0x26` | `IN_EAR_DETECT` | 入耳检测开关 | `[0\|1]` |
+| `0x27` | `DEVICE_INFO` | **设备信息查询** | `[INFO_x, 0x00]`（可重复拼接） |
+| `0x2A` | `FIND_DEVICE` | 查找耳机 | 空 |
+| `0x2B` | `AUTO_ANSWER` | 自动接听 | `[0\|1]` |
+| `0x2C` | `ANC_MODE` | **ANC 模式设置** | `[ancMode]` |
+| `0x2D` | `BLUETOOTH_NAME` | 蓝牙名 | 字符串 |
+| `0x2E` | `LED_MODE` | LED 开关 | `[0\|1]` |
+| `0x2F` | `CLEAR_PAIR_RECORD` | 清除配对 | 空 |
+| `0x30` | `ANC_GAIN` | ANC 增益 | `[gain]` |
+| `0x31` | `TRANSPARENCY_GAIN` | 通透增益 | `[gain]` |
+| `0x32` | `SOUND_EFFECT_3D` | 3D 音效 | `[mode]` |
+| `0x33` | `ONE_DRAG_TWO` | 一拖二 | `[0\|1]` |
+| `0x38` | `BASS_BOOST_MODE` | 低音增强 | `[mode]` |
+| `0x39` | `VOCAL_BOOST_MODE` | 人声增强 | `[mode]` |
+| `0x3C` | `VOLUME_GEAR` | 音量档位 | `[gear]` |
+| `0x3D` | `DUAL_DEVICE` | **双设备连接** | `[0\|1]` |
+| `0x3F` | `RESET_KEY` | 重置按键 | 空 |
+| `0x40` | `CUSTOM` | 自定义 | 透传 |
+| `0x41` | `NOISE_REDUCTION` / `SHUTDOWN` | 降噪强度 / 关机 | `[level]` / 空 |
+
+> ⚠️ `0x2B`、`0x2C`、`0x40`、`0x41` **跨方向复用**（同一码在请求/通知方向含义不同），
+> 因此路由必须用 `(type, command)` 二元组，不能只看 command。
+
+### 3.2 设备信息子码（`DEVICE_INFO(0x27)` 的 payload[0]）
+
+| 子码 | 常量 | 语义 |
+|---|---|---|
+| `0x01` | `DEVICE_POWER` | **电量**：响应 payload = `[左, 右, 盒]` |
+| `0x02` | `FIRMWARE_VERSION` | 固件版本 |
+| `0x03` | `BLUETOOTH_NAME` | 蓝牙名 |
+| `0x04` | `EQ_SETTING` | 当前 EQ |
+| `0x05` | `KEY_SETTINGS` | 按键设置 |
+| `0x06` | `DEVICE_VOLUME` | 音量 |
+| `0x07` | `PLAY_STATE` | 播放状态 |
+| `0x08` | `WORK_MODE` | 工作模式 |
+| `0x09` | `IN_EAR_STATUS` | 入耳状态 |
+| `0x0A` | `LANGUAGE_SETTING` | 语言 |
+| `0x0B` | `AUTO_ANSWER` | 自动接听 |
+| `0x0C` | `ANC_MODE` | 当前 ANC 模式 |
+| `0x0D` | `IS_TWS` | 是否 TWS |
+| `0x0E` | `TWS_CONNECTED` | 双耳是否已连 |
+| `0x0F` | `LED_SWITCH` | LED 开关 |
+| `0x10` | `FW_CHECKSUM` | 固件校验 |
+| `0x11` | `ANC_GAIN` | ANC 增益 |
+| `0x12` | `TRANSPARENCY_GAIN` | 通透增益 |
+| `0x13` | `ANC_GAIN_NUM` | ANC 增益档位数 |
+| `0x14` | `TRANSPARENCY_GAIN_NUM` | 通透增益档位数 |
+| `0x15` | `ALL_EQ_SETTINGS` | 全部 EQ 设置 |
+| `0x16` | `MAIN_SIDE` | 主耳侧 |
+| `0x17` | `PRODUCT_COLOR` | 产品配色 |
+| `0x19` | `ONE_DRAG_TWO` | 一拖二 |
+| `0x26` | `BASS_BOOST_MODE` | 低音增强 |
+| `0x27` | `VOCAL_BOOST_MODE` | 人声增强 |
+| `0x28` | `CALL_STATUS_UI_INFO` | 通话状态 |
+| `0x29` | `ONE_CLOSE_KEY` | 一键关闭按键 |
+| `0x31` | `DEVICE_SN` | 序列号 |
+| `0x32` | `LISTEN_TIP` | 提示音 |
+| `0x33` | `VOLUME_LIMIT` | 音量上限 |
+| `0xFE` | `DEVICE_CAPABILITIES` | **能力位图** |
+| `0xFF` | `MAX_PACKET_SIZE` | 单包最大长度 |
+
+### 3.3 状态字段语义（已确证）✅
+
+**电量**（`DEVICE_POWER` 响应 payload = `[左, 右, 盒]`，每字节）：
+
+```
+bit7      = 充电中（1 = 正在充电）
+bit0..6   = 电量百分比 0..127
+```
+
+**ANC 模式**（`ANC_MODE` payload[0]）：
+
+| 值 | 语义 | 映射到本项目 UI 四档 |
+|---|---|---|
+| `0x00` | `OFF` 关闭 | 关闭 |
+| `0x01` | `ON` 降噪开 | 标准降噪 / 深度降噪 |
+| `0x02` | `TRANSPARENCY` 通透 | 通透模式 |
+
+> 耳机只有三档，而系统控件是四档。本项目映射策略：`NORMAL` 与 `DEEP` 都下发 `ON`，
+> 需要区分强度时再用 `ANC_GAIN(0x30)` 调整增益。
+
+**能力位图**（`DEVICE_CAPABILITIES` = `0xFE`）：
+
+```
+bit0 = TWS
+bit1 = 3D 音效
+bit2 = 多点连接
+bit3 = ANC
+```
+
+**EQ**：写入 `[bandCount, mode, gains…]`；`mode >= 0x20` 表示自定义 EQ，
+`customIndex = mode and 0xE0`。
+
+## 4. 仍未确证的部分 ⚠️
+
+| 项 | 现状 | 如何确证 |
+|---|---|---|
+| RFCOMM channel 号 | 未知 | 真机 `sdptool browse <MAC>` 或 SDP 查询 |
+| 是否使用自定义 SPP UUID | 未知（BLE 广播里有 `POS_CUSTOM_SPP_UUID` 字段，说明**可能**自定义） | 抓包 / SDP |
+| EQ 列表精确字节序 | 单侧证据 | dump `INFO_ALL_EQ_SETTINGS(0x15)` 原始 payload |
+| 电量字节 bit7 的边界语义 | 推断为充电中 | 真机对照（充电盒内外各读一次） |
+| 入耳状态取值语义 | 推断非零为开 | 真机对照 |
+
+> 这些都不影响主流程：电量、ANC、EQ、双连、入耳开关的核心路径已经确证。
+
+> 参考：中科蓝讯 AB 系（AB53xx/AB56xx 等）在同类产品中的常见帧形态是
+> `0xAB` 开头的定长/变长帧，但**没有证据表明 Feel 1 Pro 一定如此**，
+> 所以本项目没有硬编码 0xAB，而是把魔数做成可配置项。
+
+## 3. 协议层的工程应对
+
+正因为有大量未确证项，本项目把协议层做成三层可替换结构：
+
+```
+FrameFormat（数据类）         ← 魔数/长度字段/命令码宽度/校验方式，全部参数化
+      ↓
+YscocoFrameCodec             ← 与语义无关的「帧 <-> 字节」+ 流式分帧
+      ↓
+YscocoCodec（PodCodec 实现）  ← 命令码表 + 状态解析，语义层
+```
+
+好处：
+
+1. **新增一个变体只需加一个 `FrameFormat` 数据对象**，不动任何解析逻辑；
+2. 调试面板支持运行时切换变体，可以在真机上逐个试；
+3. 一旦拿到确证的帧格式，改一处即可全线生效。
+
+`YscocoVariants` 内置的候选：
+
+| 变体 id | 魔数 | 长度 | 命令码 | 校验 |
+|---|---|---|---|---|
+| `yscoco-4e` | `0x4E` | 2 字节小端（剩余长度） | 2 字节小端 | 无 |
+| `yscoco-aa55` | `0xAA 0x55` | 1 字节（整帧） | 1 字节 | 累加和 |
+| `yscoco-55` | `0x55` | 1 字节（整帧） | 1 字节 | 无 |
+| `yscoco-5a` | `0x5A` | 1 字节（整帧） | 1 字节 | 异或 |
+
+## 4. 下一步确证路线（按性价比排序）
+
+1. **jadx 反编译 bluetrum 包**（最高优先）
+   ```bash
+   jadx -d out_jadx --deobf yinpage.apk
+   # 重点看：
+   #   com/bluetrum/devicemanager/bluetooth/BluetoothSppService.java
+   #   com/bluetrum/devicemanager/cmd/Request.java
+   #   com/bluetrum/devicemanager/cmd/request/*.java   ← getCommand() 返回值就是命令码
+   ```
+2. **HCI snoop 抓包**（最直接）
+   - 开发者选项 → 启用蓝牙 HCI 信息收集日志
+   - 用官方 App 依次操作：连接 → 看电量 → 切 ANC 四档 → 切 EQ → 开游戏模式
+   - **每步停顿 5 秒**，便于在 btsnoop 里切分
+   - 导出 `/sdcard/btsnoop_hci.log`，用 Wireshark 过滤 `btrfcomm`
+3. **真机通道探测**
+   ```bash
+   adb shell dumpsys bluetooth_manager | grep -A5 <耳机名>
+   ```
+   确认 SPP 连接的服务记录与 RFCOMM channel。
+4. 用抓到的真实字节替换 `YscocoOp` 的命令码表与 `parseBattery()` 的字段布局。
+
+## 5. 对用户的意义
+
+即使协议尚未 100% 确证，本 App 仍然是有用的：
+
+- 帧框架、分帧、校验、变体切换、传输层（RFCOMM + BLE GATT）、连接状态机、
+  异常翻译、心跳轮询、UI 全部是**真实可工作**的；
+- 一旦协议确证，只需替换一张命令码表；
+- 调试面板会把收到的每个字节以十六进制 + 可打印字符展示，
+  **用户可以自己抓包后对照调整**，无需重新编译（帧格式可在设置页切换）。
+
+---
+
+## 附：证据文件位置
+
+逆向中间产物保存在 `_rev/out/`（已加入 `.gitignore`，不入库）：
+
+| 文件 | 内容 |
+|---|---|
+| `_rev/yinpage.apk` | 官方 App 安装包（132.8 MB） |
+| `_rev/out/classes.dex.strings.txt` | classes.dex 字符串池（1197 KB） |
+| `_rev/out/classes2.dex.strings.txt` | classes2.dex 字符串池（388 KB） |
+| `_rev/out/*.ascii.txt` | 带 DEX 偏移的 ASCII 串（用于定位字节码常量） |
+| `_rev/out/*.utf8.txt` | 中文字符串（型号名 / 功能文案） |
+| `_rev/DexScan.java` | 自写的 DEX 字符串提取工具（无 jadx 时的替代方案） |

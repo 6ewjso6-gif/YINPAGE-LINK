@@ -1,1 +1,145 @@
-cGFja2FnZSBjb20ueWlucGFnZS5saW5rLnByb3RvY29sCgppbXBvcnQga290bGlueC5jb3JvdXRpbmVzLmZsb3cuU2hhcmVkRmxvdwppbXBvcnQga290bGlueC5jb3JvdXRpbmVzLmZsb3cuU3RhdGVGbG93CgovKioKICogPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQogKiAg5Lyg6L6T5bGC5oq96LGhICDigJTigJQgIOWGu+e7k+Wlkee6pu+8iHYx77yJCiAqID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KICogIOebruWJjeWunueOsOS4pOadoeeJqeeQhumAmumBk++8jOS6jOmAieS4gOaIluW5tuWtmO+8mgogKiAgIDEuIFtSZmNvbW1UcmFuc3BvcnRdICDigJTigJQg57uP5YW46JOd54mZIFNQUC9SRkNPTU3vvIjnmb3niYwgVFdTIOengeacieWNj+iuruacgOW4uOingeW9ouaAge+8iQogKiAgIDIuIFtCbGVHYXR0VHJhbnNwb3J0XSDigJTigJQgQkxFIEdBVFQg54m55b6B5YC86K+75YaZ77yI6YOo5YiG5pa55qGIIC8gT1RBIOmAmumBk++8iQogKgogKiAg5Lyg6L6T5bGC5Y+q6LSf6LSjIuaKiuWtl+iKgumAgeWIsOiAs+acuiAvIOS7juiAs+acuuaUtuWtl+iKgiLvvIzkuI3nkIbop6Pku7vkvZXljY/orq7or63kuYnjgIIKICogIOWboOatpOWug+WPr+S7peiiq+abv+aNouOAgeiiqyBtb2Nr77yM5Y2P6K6u5bGC5Y+v5Lul5ou/5Yiw57qv5a2X6IqC5rWB5YGa5Y2V5YWD5rWL6K+V44CCCiAqID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KICovCgovKiog5LiA5p2h5bey6Kej56CB55qE5o6l5pS25bin77yI5Lyg6L6T5bGC5Y+q5YGa5YiG5bin5LiO5qCh6aqM5Yml56a777yM5LiN5YGa6K+t5LmJ6Kej5p6Q77yJ44CCICovCmRhdGEgY2xhc3MgVHJhbnNwb3J0RnJhbWUoCiAgICB2YWwgYnl0ZXM6IEJ5dGVzLAogICAgLyoqIOaOpeaUtuaXtumXtOaIs++8iOavq+enku+8iSAqLwogICAgdmFsIGF0OiBMb25nID0gU3lzdGVtLmN1cnJlbnRUaW1lTWlsbGlzKCksCikKCmludGVyZmFjZSBUcmFuc3BvcnRMaXN0ZW5lciB7CiAgICAvKiog6YCa6YGT5bey5bCx57uq77yIUkZDT01NIHNvY2tldCBjb25uZWN0IOaIkOWKnyAvIEdBVFQg5pyN5Yqh5Y+R546w5a6M5oiQ77yJ44CCICovCiAgICBmdW4gb25UcmFuc3BvcnRSZWFkeSgpIHt9CiAgICAvKiog5pS25Yiw5LiA5bin5pWw5o2u44CCICovCiAgICBmdW4gb25GcmFtZShmcmFtZTogVHJhbnNwb3J0RnJhbWUpCiAgICAvKiog6YCa6YGT5pat5byA44CCICovCiAgICBmdW4gb25UcmFuc3BvcnRDbG9zZWQocmVhc29uOiBTdHJpbmcpCiAgICAvKiog5bqV5bGC5pel5b+X77yM5L6b6LCD6K+V6Z2i5p2/5pi+56S644CCICovCiAgICBmdW4gb25UcmFuc3BvcnRMb2cobWVzc2FnZTogU3RyaW5nKSB7fQp9CgppbnRlcmZhY2UgUG9kVHJhbnNwb3J0IHsKICAgIC8qKiDnlKjkuo4gVUkg5bGV56S655qE5pWw5o2u5rqQ5ZCN77yM5L6L5aaCICJSRkNPTU0iIC8gIkJMRSLjgIIgKi8KICAgIHZhbCBuYW1lOiBTdHJpbmcKCiAgICAvKiog5bu656uL6YCa6YGT44CC5oyC6LW355u05Yiw5bCx57uq5oiW5oqb5Ye6IFtQb2RUcmFuc3BvcnRFeGNlcHRpb25d44CCICovCiAgICBzdXNwZW5kIGZ1biBjb25uZWN0KGxpc3RlbmVyOiBUcmFuc3BvcnRMaXN0ZW5lcikKCiAgICAvKiog5Y+R6YCB5LiA5bin44CC5oyC6LW355u05Yiw5YaZ5YWl5a6M5oiQ44CCICovCiAgICBzdXNwZW5kIGZ1biB3cml0ZShieXRlczogQnl0ZXMpCgogICAgLyoqIOWFs+mXremAmumBk++8jOmHiuaUvui1hOa6kOOAguW/hemhu+WPr+mHjeWkjeiwg+eUqOOAgiAqLwogICAgZnVuIGNsb3NlKCkKCiAgICAvKiog6L+e5o6l5piv5ZCm5pyJ5pWI44CCICovCiAgICB2YWwgaXNDb25uZWN0ZWQ6IEJvb2xlYW4KCiAgICAvKiog6K+l6YCa6YGT6KaB5rGC55qEIE1UVSAvIOacgOWkp+W4p+mVv++8jOe8lueggeWZqOaNruatpOWIhueJh+OAgiAqLwogICAgdmFsIG1heEZyYW1lU2l6ZTogSW50Cn0KCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0g5byC5bi4IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCnNlYWxlZCBjbGFzcyBQb2RUcmFuc3BvcnRFeGNlcHRpb24obWVzc2FnZTogU3RyaW5nLCBjYXVzZTogVGhyb3dhYmxlPyA9IG51bGwpIDoKICAgIEV4Y2VwdGlvbihtZXNzYWdlLCBjYXVzZSkKCi8qKiDok53niZnmnKrlvIDlkK/jgIIgKi8KY2xhc3MgQmx1ZXRvb3RoT2ZmRXhjZXB0aW9uIDogUG9kVHJhbnNwb3J0RXhjZXB0aW9uKCLok53niZnmnKrlvIDlkK8iKQoKLyoqIOe8uuWwkei/kOihjOaXtuadg+mZkOOAgiAqLwpjbGFzcyBNaXNzaW5nUGVybWlzc2lvbkV4Y2VwdGlvbihkZXRhaWw6IFN0cmluZykgOiBQb2RUcmFuc3BvcnRFeGNlcHRpb24oIue8uuWwkeadg+mZkO+8miRkZXRhaWwiKQoKLyoqIOebruagh+iuvuWkh+acqumFjeWvuSAvIOacquWcqOiMg+WbtOWGheOAgiAqLwpjbGFzcyBEZXZpY2VVbmF2YWlsYWJsZUV4Y2VwdGlvbihkZXRhaWw6IFN0cmluZywgY2F1c2U6IFRocm93YWJsZT8gPSBudWxsKSA6CiAgICBQb2RUcmFuc3BvcnRFeGNlcHRpb24oIuiuvuWkh+S4jeWPr+eUqO+8miRkZXRhaWwiLCBjYXVzZSkKCi8qKiBTUFAgVVVJRCDkuI3lrZjlnKgg4oCU4oCUIOivtOaYjui/meWPsOiAs+acuuS4jei1sOe7j+WFuOiTneeJmeengeacieWNj+iuruOAgiAqLwpjbGFzcyBTZXJ2aWNlTm90Rm91bmRFeGNlcHRpb24oZGV0YWlsOiBTdHJpbmcpIDogUG9kVHJhbnNwb3J0RXhjZXB0aW9uKCLmnKrlj5HnjrDmnI3liqHpgJrpgZPvvJokZGV0YWlsIikKCi8qKiDov57mjqXotoXml7bjgIIgKi8KY2xhc3MgVHJhbnNwb3J0VGltZW91dEV4Y2VwdGlvbihkZXRhaWw6IFN0cmluZykgOiBQb2RUcmFuc3BvcnRFeGNlcHRpb24oIui2heaXtu+8miRkZXRhaWwiKQoKLyoqIOWGmeWFpeWksei0pSAvIOmAmumBk+W3suaWreOAgiAqLwpjbGFzcyBUcmFuc3BvcnRJb0V4Y2VwdGlvbihkZXRhaWw6IFN0cmluZywgY2F1c2U6IFRocm93YWJsZT8gPSBudWxsKSA6CiAgICBQb2RUcmFuc3BvcnRFeGNlcHRpb24oIumAmumBkyBJTyDlpLHotKXvvJokZGV0YWlsIiwgY2F1c2UpCgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0g5Y2P6K6u57yW6Kej56CB5aWR57qmIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKLyoqCiAqIOS4gOS4qiLogLPmnLrnp4HmnInljY/orq4i55qE5a6M5pW05a6e546w44CC5paw5aKe5Lu75L2V5ZOB54mML+aWueahiOWPqumcgOWunueOsOacrOaOpeWPo++8jAogKiDnhLblkI7ms6jlhozliLAgW1Byb3RvY29sUmVnaXN0cnld77yMQXBwIOS8muaMieaOoua1i+mhuuW6j+iHquWKqOmAieeUqOOAggogKi8KaW50ZXJmYWNlIFBvZENvZGVjIHsKICAgIC8qKiDljY/orq7moIfor4bvvIznlKjkuo7ml6Xlv5fkuI7nirbmgIHlsZXnpLrvvIzkvovlpoIgInlzY29jby12MSLjgIIgKi8KICAgIHZhbCBpZDogU3RyaW5nCgogICAgLyoqIOS6uuexu+WPr+ivu+WQjeensO+8jOS+i+WmgiAi6Z+z6LSd5aWHIFlTQ09DTyDpgJrnlKjljY/orq4i44CCICovCiAgICB2YWwgZGlzcGxheU5hbWU6IFN0cmluZwoKICAgIC8qKiDpgJrpgZPlsLHnu6rlkI7pnIDopoHnq4vliLvlj5HpgIHnmoTmj6HmiYsv5ZCM5q2l5bin77yb6L+U5Zue56m65YiX6KGo6KGo56S65peg6ZyA5o+h5omL44CCICovCiAgICBmdW4gaGFuZHNoYWtlKCk6IExpc3Q8Qnl0ZXM+CgogICAgLyoqIOaKiumrmOWxguWRveS7pOe8lueggeS4uuWtl+iKguW4p+OAgui/lOWbnuepuuWIl+ihqOihqOekuuacrOWNj+iuruS4jeaUr+aMgeivpeWRveS7pOOAgiAqLwogICAgZnVuIGVuY29kZShjb21tYW5kOiBQb2RDb21tYW5kKTogTGlzdDxCeXRlcz4KCiAgICAvKioKICAgICAqIOWtl+iKgua1geWWgue7meino+eggeWZqO+8jOi/lOWbnuino+aekOWHuueahOeKtuaAgeWinumHj+WSjCLmmK/lkKbpnIDopoHlm57ljIUi44CCCiAgICAgKiDliIbluKfpgLvovpHlnKjop6PnoIHlmajlhoXpg6jlrozmiJDvvIjkuI3lkIzljY/orq7nmoTluKflpLQv6ZW/5bqm5a2X5q615LiN5ZCM77yJ44CCCiAgICAgKi8KICAgIGZ1biBkZWNvZGUoY2h1bms6IEJ5dGVzLCBzaW5rOiAoUG9kVXBkYXRlKSAtPiBVbml0KQoKICAgIC8qKgogICAgICog5Yik5pat5LiA5q615o6l5pS25pWw5o2u5piv5ZCm5YOP5pys5Y2P6K6u55qE5binIOKAlOKAlCDnlKjkuo7lpJrljY/orq7oh6rliqjmjqLmtYvjgIIKICAgICAqIOi/lOWbniAwLjAg6KGo56S65a6M5YWo5LiN5YOP77yMMS4wIOihqOekuumrmOW6puehruWumuOAggogICAgICovCiAgICBmdW4gY29uZmlkZW5jZShjaHVuazogQnl0ZXMpOiBEb3VibGUgPSAwLjAKCiAgICAvKioKICAgICAqIOWIpOaWreafkOWPsOiTneeJmeiuvuWkh+aYr+WQpuWPr+iDveaYr+acrOWNj+iurueahOebruagh++8jOeUqOS6jui/nuaOpeWJjeeahOaOoua1i+OAggogICAgICog5Y+v5L6d5o2u6K6+5aSH5ZCN44CB5Y6C5ZWGIElE77yIU0lH77yJ44CB5pyN5YqhIFVVSUQg5YiX6KGo5Yik5pat44CCCiAgICAgKi8KICAgIGZ1biBtYXRjaGVzRGV2aWNlKGRldmljZU5hbWU6IFN0cmluZz8sIHNlcnZpY2VVdWlkczogTGlzdDxTdHJpbmc+KTogQm9vbGVhbiA9IHRydWUKfQoKLyoqIOWNj+iuruazqOWGjOihqO+8mkFwcCDlkK/liqjml7bms6jlhozmiYDmnInlt7Lnn6UgY29kZWPvvIzmjInkvJjlhYjnuqfmjqLmtYvjgIIgKi8Kb2JqZWN0IFByb3RvY29sUmVnaXN0cnkgewogICAgcHJpdmF0ZSB2YWwgY29kZWNzID0gbXV0YWJsZUxpc3RPZjxQb2RDb2RlYz4oKQogICAgcHJpdmF0ZSB2YWwgbG9jayA9IEFueSgpCgogICAgZnVuIHJlZ2lzdGVyKGNvZGVjOiBQb2RDb2RlYykgewogICAgICAgIHN5bmNocm9uaXplZChsb2NrKSB7CiAgICAgICAgICAgIGNvZGVjcy5yZW1vdmVBbGwgeyBpdC5pZCA9PSBjb2RlYy5pZCB9CiAgICAgICAgICAgIGNvZGVjcy5hZGQoY29kZWMpCiAgICAgICAgfQogICAgfQoKICAgIGZ1biBhbGwoKTogTGlzdDxQb2RDb2RlYz4gPSBzeW5jaHJvbml6ZWQobG9jaykgeyBjb2RlY3MudG9MaXN0KCkgfQoKICAgIGZ1biBieUlkKGlkOiBTdHJpbmcpOiBQb2RDb2RlYz8gPSBzeW5jaHJvbml6ZWQobG9jaykgeyBjb2RlY3MuZmlyc3RPck51bGwgeyBpdC5pZCA9PSBpZCB9IH0KCiAgICAvKioKICAgICAqIOaMieiuvuWkh+S/oeaBr+aMkemAiemmlumAieWNj+iuru+8muWFiOeUqCBtYXRjaGVzRGV2aWNlIOi/h+a7pO+8jOWGjeaMiSBjb25maWRlbmNlIOaOkuW6j+OAggogICAgICog6Iul6YO95LiN5Yy56YWN5YiZ6L+U5Zue5YWo6YOo77yI6K6p6L+Q6KGM5pe25oyJ5a6e6ZmF5pS25YyF6Ieq5Yqo5YiH5o2i77yJ44CCCiAgICAgKi8KICAgIGZ1biBjYW5kaWRhdGVzRm9yKGRldmljZU5hbWU6IFN0cmluZz8sIHNlcnZpY2VVdWlkczogTGlzdDxTdHJpbmc+KTogTGlzdDxQb2RDb2RlYz4gewogICAgICAgIHZhbCBsaXN0ID0gYWxsKCkKICAgICAgICB2YWwgbWF0Y2hlZCA9IGxpc3QuZmlsdGVyIHsgcnVuQ2F0Y2hpbmcgeyBpdC5tYXRjaGVzRGV2aWNlKGRldmljZU5hbWUsIHNlcnZpY2VVdWlkcykgfS5nZXRPckRlZmF1bHQoZmFsc2UpIH0KICAgICAgICByZXR1cm4gKG1hdGNoZWQuaWZFbXB0eSB7IGxpc3QgfSkuc29ydGVkQnlEZXNjZW5kaW5nIHsgaXQuaWQgfQogICAgfQp9Cg==
+package com.yinpage.link.protocol
+
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
+
+/**
+ * ============================================================================
+ *  传输层抽象  ——  冻结契约（v1）
+ * ============================================================================
+ *  目前实现两条物理通道，二选一或并存：
+ *   1. [RfcommTransport]  —— 经典蓝牙 SPP/RFCOMM（白牌 TWS 私有协议最常见形态）
+ *   2. [BleGattTransport] —— BLE GATT 特征值读写（部分方案 / OTA 通道）
+ *
+ *  传输层只负责"把字节送到耳机 / 从耳机收字节"，不理解任何协议语义。
+ *  因此它可以被替换、被 mock，协议层可以拿到纯字节流做单元测试。
+ * ============================================================================
+ */
+
+/** 一条已解码的接收帧（传输层只做分帧与校验剥离，不做语义解析）。 */
+data class TransportFrame(
+    val bytes: Bytes,
+    /** 接收时间戳（毫秒） */
+    val at: Long = System.currentTimeMillis(),
+)
+
+interface TransportListener {
+    /** 通道已就绪（RFCOMM socket connect 成功 / GATT 服务发现完成）。 */
+    fun onTransportReady() {}
+    /** 收到一帧数据。 */
+    fun onFrame(frame: TransportFrame)
+    /** 通道断开。 */
+    fun onTransportClosed(reason: String)
+    /** 底层日志，供调试面板显示。 */
+    fun onTransportLog(message: String) {}
+}
+
+interface PodTransport {
+    /** 用于 UI 展示的数据源名，例如 "RFCOMM" / "BLE"。 */
+    val name: String
+
+    /** 建立通道。挂起直到就绪或抛出 [PodTransportException]。 */
+    suspend fun connect(listener: TransportListener)
+
+    /** 发送一帧。挂起直到写入完成。 */
+    suspend fun write(bytes: Bytes)
+
+    /** 关闭通道，释放资源。必须可重复调用。 */
+    fun close()
+
+    /** 连接是否有效。 */
+    val isConnected: Boolean
+
+    /** 该通道要求的 MTU / 最大帧长，编码器据此分片。 */
+    val maxFrameSize: Int
+}
+
+// ------------------------------- 异常 -------------------------------
+
+sealed class PodTransportException(message: String, cause: Throwable? = null) :
+    Exception(message, cause)
+
+/** 蓝牙未开启。 */
+class BluetoothOffException : PodTransportException("蓝牙未开启")
+
+/** 缺少运行时权限。 */
+class MissingPermissionException(detail: String) : PodTransportException("缺少权限：$detail")
+
+/** 目标设备未配对 / 未在范围内。 */
+class DeviceUnavailableException(detail: String, cause: Throwable? = null) :
+    PodTransportException("设备不可用：$detail", cause)
+
+/** SPP UUID 不存在 —— 说明这台耳机不走经典蓝牙私有协议。 */
+class ServiceNotFoundException(detail: String) : PodTransportException("未发现服务通道：$detail")
+
+/** 连接超时。 */
+class TransportTimeoutException(detail: String) : PodTransportException("超时：$detail")
+
+/** 写入失败 / 通道已断。 */
+class TransportIoException(detail: String, cause: Throwable? = null) :
+    PodTransportException("通道 IO 失败：$detail", cause)
+
+// --------------------------- 协议编解码契约 ---------------------------
+
+/**
+ * 一个"耳机私有协议"的完整实现。新增任何品牌/方案只需实现本接口，
+ * 然后注册到 [ProtocolRegistry]，App 会按探测顺序自动选用。
+ */
+interface PodCodec {
+    /** 协议标识，用于日志与状态展示，例如 "yscoco-v1"。 */
+    val id: String
+
+    /** 人类可读名称，例如 "音贝奇 YSCOCO 通用协议"。 */
+    val displayName: String
+
+    /** 通道就绪后需要立刻发送的握手/同步帧；返回空列表表示无需握手。 */
+    fun handshake(): List<Bytes>
+
+    /** 把高层命令编码为字节帧。返回空列表表示本协议不支持该命令。 */
+    fun encode(command: PodCommand): List<Bytes>
+
+    /**
+     * 字节流喂给解码器，返回解析出的状态增量和"是否需要回包"。
+     * 分帧逻辑在解码器内部完成（不同协议的帧头/长度字段不同）。
+     */
+    fun decode(chunk: Bytes, sink: (PodUpdate) -> Unit)
+
+    /**
+     * 判断一段接收数据是否像本协议的帧 —— 用于多协议自动探测。
+     * 返回 0.0 表示完全不像，1.0 表示高度确定。
+     */
+    fun confidence(chunk: Bytes): Double = 0.0
+
+    /**
+     * 判断某台蓝牙设备是否可能是本协议的目标，用于连接前的探测。
+     * 可依据设备名、厂商 ID（SIG）、服务 UUID 列表判断。
+     */
+    fun matchesDevice(deviceName: String?, serviceUuids: List<String>): Boolean = true
+}
+
+/** 协议注册表：App 启动时注册所有已知 codec，按优先级探测。 */
+object ProtocolRegistry {
+    private val codecs = mutableListOf<PodCodec>()
+    private val lock = Any()
+
+    fun register(codec: PodCodec) {
+        synchronized(lock) {
+            codecs.removeAll { it.id == codec.id }
+            codecs.add(codec)
+        }
+    }
+
+    fun all(): List<PodCodec> = synchronized(lock) { codecs.toList() }
+
+    fun byId(id: String): PodCodec? = synchronized(lock) { codecs.firstOrNull { it.id == id } }
+
+    /**
+     * 按设备信息挑选首选协议：先用 matchesDevice 过滤，再按 confidence 排序。
+     * 若都不匹配则返回全部（让运行时按实际收包自动切换）。
+     */
+    fun candidatesFor(deviceName: String?, serviceUuids: List<String>): List<PodCodec> {
+        val list = all()
+        val matched = list.filter { runCatching { it.matchesDevice(deviceName, serviceUuids) }.getOrDefault(false) }
+        return (matched.ifEmpty { list }).sortedByDescending { it.id }
+    }
+}

@@ -1,1 +1,33 @@
-IyBHcmFkbGUKLmdyYWRsZS8KYnVpbGQvCmFwcC9idWlsZC8KZ3JhZGxlLWhvbWUvCgojIOacrOacuuaehOW7uueOr+Wig++8iOWQhOS6uuiHquihjOS4i+i9ve+8jOS4jeWFpeW6k++8iQpfdG9vbHMvCgojIOmAhuWQkeS4remXtOS6p+eJqe+8iOWQq+WumOaWuSBBUEvvvIzkvZPnp6/lpKfkuJTmtonlj4rniYjmnYPvvIzkuI3lhaXlupPvvIkKX3Jldi8KCiMgSURFCi5pZGVhLwoqLmltbAoudnNjb2RlLwpjYXB0dXJlcy8KCiMg5pys5Zyw6YWN572uCmxvY2FsLnByb3BlcnRpZXMKcHJvYmUudHh0CgojIOacrOacuuiHquWKqOeUn+aIkOeahCBkZWJ1ZyDnrb7lkI3vvIjnlLEgYXBwL2J1aWxkLmdyYWRsZS5rdHMg5oyH5ZCRIC5hbmRyb2lkL++8iQouYW5kcm9pZC8KCiMg562+5ZCN77yI57ud5LiN5YWl5bqT77yJCiouamtzCioua2V5c3RvcmUKa2V5c3RvcmUucHJvcGVydGllcwoKIyDns7vnu58KLkRTX1N0b3JlClRodW1icy5kYgo=
+# Gradle
+.gradle/
+build/
+app/build/
+gradle-home/
+
+# 本机构建环境（各人自行下载，不入库）
+_tools/
+
+# 逆向中间产物（含官方 APK，体积大且涉及版权，不入库）
+_rev/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+captures/
+
+# 本地配置
+local.properties
+probe.txt
+
+# 本机自动生成的 debug 签名（由 app/build.gradle.kts 指向 .android/）
+.android/
+
+# 签名（绝不入库）
+*.jks
+*.keystore
+keystore.properties
+
+# 系统
+.DS_Store
+Thumbs.db

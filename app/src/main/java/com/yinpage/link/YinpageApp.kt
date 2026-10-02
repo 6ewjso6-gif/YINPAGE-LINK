@@ -1,1 +1,73 @@
-cGFja2FnZSBjb20ueWlucGFnZS5saW5rCgppbXBvcnQgYW5kcm9pZC5hcHAuQXBwbGljYXRpb24KaW1wb3J0IGFuZHJvaWQuYXBwLk5vdGlmaWNhdGlvbkNoYW5uZWwKaW1wb3J0IGFuZHJvaWQuYXBwLk5vdGlmaWNhdGlvbk1hbmFnZXIKaW1wb3J0IGNvbS55aW5wYWdlLmxpbmsuY29uZmlnLkNvbmZpZ01hbmFnZXIKaW1wb3J0IGNvbS55aW5wYWdlLmxpbmsuY29yZS5BcHBTdGF0ZQppbXBvcnQgY29tLnlpbnBhZ2UubGluay5jb3JlLkV2ZW50TG9nCmltcG9ydCBjb20ueWlucGFnZS5saW5rLmNvcmUuU2Vzc2lvbkNvb3JkaW5hdG9yCmltcG9ydCBjb20ueWlucGFnZS5saW5rLnByb3RvY29sLlByb3RvY29sUmVnaXN0cnkKaW1wb3J0IGNvbS55aW5wYWdlLmxpbmsucHJvdG9jb2wuYmx1ZXRydW0uQmx1ZXRydW1Db2RlYwppbXBvcnQgY29tLnlpbnBhZ2UubGluay50cmFuc3BvcnQuVHJhbnNwb3J0RW52CmltcG9ydCBjb20ueWlucGFnZS5saW5rLnRyYW5zcG9ydC5UcmFuc3BvcnRGYWN0b3J5SW1wbAoKLyoqIOmAmuefpea4oOmBkyBpZO+8muWJjeWPsOS/nea0u+mAmuefpeS4juS9jueUtemHj+aPkOmGkuWFseeUqOOAgiAqLwpjb25zdCB2YWwgTk9USUZJQ0FUSU9OX0NIQU5ORUxfSUQgPSAieWlucGFnZV9saW5rIgoKLyoqCiAqID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KICogIEFwcGxpY2F0aW9uIOWFpeWPo++8muijhemFjeOAjOS8oOi+kyArIOWNj+iuriArIOS8muivneOAjeS4ieS7tuWllwogKiA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CiAqICDov5nph4zlj6rlgZroo4XphY3kuI7ovbvph4/liJ3lp4vljJbvvIzku7vkvZXogJfml7bmk43kvZzvvIjmiavmj4/jgIHov57mjqXjgIFJT++8iemDveS4jeWcqOatpOWPkeeUn+OAggogKiAg6aG65bqP5pyJ6K6y56m277yaCiAqICAgIDEuIFRyYW5zcG9ydEVudi5pbnN0YWxsICDigJTigJQgQkxFIGNvbm5lY3RHYXR0IOmcgOimgSBDb250ZXh077ybCiAqICAgIDIuIENvbmZpZ01hbmFnZXIuaW5pdCAgICDigJTigJQgQXBwU3RhdGUuaW5pdCDkvJror7vphY3nva7vvJsKICogICAgMy4gUHJvdG9jb2xSZWdpc3RyeSAgICAgIOKAlOKAlCBBcHBTdGF0ZS5jb25uZWN0IOmcgOimgeWAmemAieWNj+iuru+8mwogKiAgICA0LiBBcHBTdGF0ZS5pbnN0YWxsK2luaXQg4oCU4oCUIOazqOWFpeWNj+iwg+WZqOW5tuW7uueriyBVSSDnirbmgIHjgIIKICogPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQogKi8KY2xhc3MgWWlucGFnZUFwcCA6IEFwcGxpY2F0aW9uKCkgewoKICAgIG92ZXJyaWRlIGZ1biBvbkNyZWF0ZSgpIHsKICAgICAgICBzdXBlci5vbkNyZWF0ZSgpCiAgICAgICAgdHJ5IHsKICAgICAgICAgICAgVHJhbnNwb3J0RW52Lmluc3RhbGwodGhpcykKICAgICAgICAgICAgQ29uZmlnTWFuYWdlci5pbml0KHRoaXMpCgogICAgICAgICAgICAvLyDljY/orq7ms6jlhozvvJrmlrDlop7lk4HniYzlj6rpnIDlnKjmraTov73liqDkuIDooYzvvIjljY/orq7lrp7njrDkuI3kvp3otZYgVUkgLyDkvKDovpPlsYLvvInjgIIKICAgICAgICAgICAgLy8gYmx1ZXRydW0tYWIg5piv6YCG5ZCR5a6Y5pa5IEFwcCDlvpfliLDnmoTnnJ/lrp7ljY/orq7vvIjkuK3np5Hok53orq8gQUIg57O777yJ44CCCiAgICAgICAgICAgIFByb3RvY29sUmVnaXN0cnkucmVnaXN0ZXIoQmx1ZXRydW1Db2RlYygpKQoKICAgICAgICAgICAgLy8g5Lya6K+d5Y2P6LCD5Zmo77yaQVVUTyDlm57pgIDjgIHmj6HmiYvjgIHlvILluLjnv7vor5Hpg73lnKjlroPlhoXpg6jlrozmiJDjgIIKICAgICAgICAgICAgQXBwU3RhdGUuaW5zdGFsbChTZXNzaW9uQ29vcmRpbmF0b3IoVHJhbnNwb3J0RmFjdG9yeUltcGwoKSkpCiAgICAgICAgICAgIEFwcFN0YXRlLmluaXQoKQoKICAgICAgICAgICAgZW5zdXJlTm90aWZpY2F0aW9uQ2hhbm5lbCgpCiAgICAgICAgICAgIEV2ZW50TG9nLmluZm8oCiAgICAgICAgICAgICAgICAi5ZCv5YqoIiwKICAgICAgICAgICAgICAgICJBcHBsaWNhdGlvbiDoo4XphY3lrozmiJDvvIzlt7Lms6jlhozljY/orq49WyR7UHJvdG9jb2xSZWdpc3RyeS5hbGwoKS5qb2luVG9TdHJpbmcgeyBpdC5pZCB9fV0iLAogICAgICAgICAgICApCiAgICAgICAgfSBjYXRjaCAoZXJyb3I6IFRocm93YWJsZSkgewogICAgICAgICAgICAvLyBBcHBsaWNhdGlvbiDltKnmuoPkvJrorqnmlbTkuKogQXBwIOaXoOazleWQr+WKqO+8jOi/memHjOWFnOW6leiusOW9leWQjue7p+e7reOAggogICAgICAgICAgICBFdmVudExvZy5pbmZvKCLlkK/liqgiLCAi5Yid5aeL5YyW5byC5bi477yaJHtlcnJvci5tZXNzYWdlID86IGVycm9yLmphdmFDbGFzcy5zaW1wbGVOYW1lfSIpCiAgICAgICAgfQogICAgfQoKICAgIC8qKiDliJvlu7rliY3lj7DmnI3liqEgLyDkvY7nlLXph4/mj5DphpLlhbHnlKjnmoTpgJrnn6XmuKDpgZPvvIjluYLnrYnvvInjgIIgKi8KICAgIHByaXZhdGUgZnVuIGVuc3VyZU5vdGlmaWNhdGlvbkNoYW5uZWwoKSB7CiAgICAgICAgdmFsIG1hbmFnZXIgPSBnZXRTeXN0ZW1TZXJ2aWNlKE5vdGlmaWNhdGlvbk1hbmFnZXI6OmNsYXNzLmphdmEpID86IHJldHVybgogICAgICAgIGlmIChtYW5hZ2VyLmdldE5vdGlmaWNhdGlvbkNoYW5uZWwoTk9USUZJQ0FUSU9OX0NIQU5ORUxfSUQpICE9IG51bGwpIHJldHVybgogICAgICAgIHZhbCBjaGFubmVsID0gTm90aWZpY2F0aW9uQ2hhbm5lbCgKICAgICAgICAgICAgTk9USUZJQ0FUSU9OX0NIQU5ORUxfSUQsCiAgICAgICAgICAgICLogLPmnLrov57mjqXnirbmgIEiLAogICAgICAgICAgICBOb3RpZmljYXRpb25NYW5hZ2VyLklNUE9SVEFOQ0VfTE9XLAogICAgICAgICkuYXBwbHkgewogICAgICAgICAgICBkZXNjcmlwdGlvbiA9ICLov57mjqXkv53mtLvpgJrnn6XkuI7ogLPmnLrkvY7nlLXph4/mj5DphpIiCiAgICAgICAgICAgIHNldFNob3dCYWRnZShmYWxzZSkKICAgICAgICAgICAgZW5hYmxlVmlicmF0aW9uKGZhbHNlKQogICAgICAgIH0KICAgICAgICBtYW5hZ2VyLmNyZWF0ZU5vdGlmaWNhdGlvbkNoYW5uZWwoY2hhbm5lbCkKICAgICAgICBFdmVudExvZy5pbmZvKCLpgJrnn6UiLCAi5bey5Yib5bu66YCa55+l5rig6YGTICROT1RJRklDQVRJT05fQ0hBTk5FTF9JRCIpCiAgICB9Cn0K
+package com.yinpage.link
+
+import android.app.Application
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import com.yinpage.link.config.ConfigManager
+import com.yinpage.link.core.AppState
+import com.yinpage.link.core.EventLog
+import com.yinpage.link.core.SessionCoordinator
+import com.yinpage.link.protocol.ProtocolRegistry
+import com.yinpage.link.protocol.bluetrum.BluetrumCodec
+import com.yinpage.link.transport.TransportEnv
+import com.yinpage.link.transport.TransportFactoryImpl
+
+/** 通知渠道 id：前台保活通知与低电量提醒共用。 */
+const val NOTIFICATION_CHANNEL_ID = "yinpage_link"
+
+/**
+ * ============================================================================
+ *  Application 入口：装配「传输 + 协议 + 会话」三件套
+ * ============================================================================
+ *  这里只做装配与轻量初始化，任何耗时操作（扫描、连接、IO）都不在此发生。
+ *  顺序有讲究：
+ *    1. TransportEnv.install  —— BLE connectGatt 需要 Context；
+ *    2. ConfigManager.init    —— AppState.init 会读配置；
+ *    3. ProtocolRegistry      —— AppState.connect 需要候选协议；
+ *    4. AppState.install+init —— 注入协调器并建立 UI 状态。
+ * ============================================================================
+ */
+class YinpageApp : Application() {
+
+    override fun onCreate() {
+        super.onCreate()
+        try {
+            TransportEnv.install(this)
+            ConfigManager.init(this)
+
+            // 协议注册：新增品牌只需在此追加一行（协议实现不依赖 UI / 传输层）。
+            // bluetrum-ab 是逆向官方 App 得到的真实协议（中科蓝讯 AB 系）。
+            ProtocolRegistry.register(BluetrumCodec())
+
+            // 会话协调器：AUTO 回退、握手、异常翻译都在它内部完成。
+            AppState.install(SessionCoordinator(TransportFactoryImpl()))
+            AppState.init()
+
+            ensureNotificationChannel()
+            EventLog.info(
+                "启动",
+                "Application 装配完成，已注册协议=[${ProtocolRegistry.all().joinToString { it.id }}]",
+            )
+        } catch (error: Throwable) {
+            // Application 崩溃会让整个 App 无法启动，这里兜底记录后继续。
+            EventLog.info("启动", "初始化异常：${error.message ?: error.javaClass.simpleName}")
+        }
+    }
+
+    /** 创建前台服务 / 低电量提醒共用的通知渠道（幂等）。 */
+    private fun ensureNotificationChannel() {
+        val manager = getSystemService(NotificationManager::class.java) ?: return
+        if (manager.getNotificationChannel(NOTIFICATION_CHANNEL_ID) != null) return
+        val channel = NotificationChannel(
+            NOTIFICATION_CHANNEL_ID,
+            "耳机连接状态",
+            NotificationManager.IMPORTANCE_LOW,
+        ).apply {
+            description = "连接保活通知与耳机低电量提醒"
+            setShowBadge(false)
+            enableVibration(false)
+        }
+        manager.createNotificationChannel(channel)
+        EventLog.info("通知", "已创建通知渠道 $NOTIFICATION_CHANNEL_ID")
+    }
+}

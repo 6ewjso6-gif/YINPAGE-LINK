@@ -1,1 +1,51 @@
-PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLQogIOiHqumAguW6lOWbvuagh+WJjeaZr+Wxgu+8muiAs+acuuWJquW9sSArIOWjsOazouOAggogIDEwOHgxMDgg55S75biD77yM5YaF5a655YWo6YOo6JC95Zyo5Lit5b+DIDY2ZHAg5a6J5YWo5ZyG5YaF77yIeC95IOe6piAyMS4uODfvvInvvIwKICDlm6DmraTlnIblvaIv5pa55b2iL+WchuinkuefqeW9oumBrue9qemDveS4jeS8muWIh+WIsOS4u+S9k+OAggotLT4KPHZlY3RvciB4bWxuczphbmRyb2lkPSJodHRwOi8vc2NoZW1hcy5hbmRyb2lkLmNvbS9hcGsvcmVzL2FuZHJvaWQiCiAgICBhbmRyb2lkOndpZHRoPSIxMDhkcCIKICAgIGFuZHJvaWQ6aGVpZ2h0PSIxMDhkcCIKICAgIGFuZHJvaWQ6dmlld3BvcnRXaWR0aD0iMTA4IgogICAgYW5kcm9pZDp2aWV3cG9ydEhlaWdodD0iMTA4Ij4KCiAgICA8IS0tIOWktOaige+8muS7jiAoMzEsNjQpIOmhuuaXtumSiOaOoOi/h+mhtumDqOWIsCAoNzcsNjQp77yIc3dlZXAtZmxhZz0xIOWcqCB5IOWQkeS4i+eahOWdkOagh+ezu+mHjOaYr+mhuuaXtumSiO+8iSAtLT4KICAgIDxwYXRoCiAgICAgICAgYW5kcm9pZDpwYXRoRGF0YT0iTTMxLDY0IEEyMywyMyAwIDAgMSA3Nyw2NCIKICAgICAgICBhbmRyb2lkOnN0cm9rZUNvbG9yPSIjRkZGRkZGRkYiCiAgICAgICAgYW5kcm9pZDpzdHJva2VXaWR0aD0iNyIKICAgICAgICBhbmRyb2lkOnN0cm9rZUxpbmVDYXA9InJvdW5kIgogICAgICAgIGFuZHJvaWQ6c3Ryb2tlTGluZUpvaW49InJvdW5kIiAvPgoKICAgIDwhLS0g5bem6ICz572p77yI5ZyG6KeS55+p5b2iIDIzLi4zOSB4IDU4Li44Mu+8jOWchuinkiA377yJIC0tPgogICAgPHBhdGgKICAgICAgICBhbmRyb2lkOmZpbGxDb2xvcj0iI0ZGRkZGRkZGIgogICAgICAgIGFuZHJvaWQ6cGF0aERhdGE9Ik0zMCw1OCBoMiBhNyw3IDAgMCAxIDcsNyB2MTAgYTcsNyAwIDAgMSAtNyw3IGgtMiBhNyw3IDAgMCAxIC03LC03IHYtMTAgYTcsNyAwIDAgMSA3LC03IHoiIC8+CgogICAgPCEtLSDlj7PogLPnvanvvIjlnIbop5Lnn6nlvaIgNjkuLjg1IHggNTguLjgy77yM5ZyG6KeSIDfvvIkgLS0+CiAgICA8cGF0aAogICAgICAgIGFuZHJvaWQ6ZmlsbENvbG9yPSIjRkZGRkZGRkYiCiAgICAgICAgYW5kcm9pZDpwYXRoRGF0YT0iTTc2LDU4IGgyIGE3LDcgMCAwIDEgNyw3IHYxMCBhNyw3IDAgMCAxIC03LDcgaC0yIGE3LDcgMCAwIDEgLTcsLTcgdi0xMCBhNyw3IDAgMCAxIDcsLTcgeiIgLz4KCiAgICA8IS0tIOS4pOS+p+WPkeWjsOWNleWFg+aal+ekuu+8iOWNiumAj+aYjuWGheWciO+8iSAtLT4KICAgIDxwYXRoCiAgICAgICAgYW5kcm9pZDpmaWxsQ29sb3I9IiM0MDAwMDAwMCIKICAgICAgICBhbmRyb2lkOnBhdGhEYXRhPSJNMzEsNjcgbS0zLjUsMCBhMy41LDMuNSAwIDEsMCA3LDAgYTMuNSwzLjUgMCAxLDAgLTcsMCB6IiAvPgogICAgPHBhdGgKICAgICAgICBhbmRyb2lkOmZpbGxDb2xvcj0iIzQwMDAwMDAwIgogICAgICAgIGFuZHJvaWQ6cGF0aERhdGE9Ik03Nyw2NyBtLTMuNSwwIGEzLjUsMy41IDAgMSwwIDcsMCBhMy41LDMuNSAwIDEsMCAtNywwIHoiIC8+CgogICAgPCEtLSDkuK3pl7TkuKTpgZPlo7Dms6LvvJrlt6bjgIwo44CN5Y+z44CMKeOAjSAtLT4KICAgIDxwYXRoCiAgICAgICAgYW5kcm9pZDpwYXRoRGF0YT0iTTQ1LDcyIGExMCwxMCAwIDAgMSAwLC0xMiIKICAgICAgICBhbmRyb2lkOnN0cm9rZUNvbG9yPSIjOTlGRkZGRkYiCiAgICAgICAgYW5kcm9pZDpzdHJva2VXaWR0aD0iMy41IgogICAgICAgIGFuZHJvaWQ6c3Ryb2tlTGluZUNhcD0icm91bmQiIC8+CiAgICA8cGF0aAogICAgICAgIGFuZHJvaWQ6cGF0aERhdGE9Ik02Myw2MCBhMTAsMTAgMCAwIDEgMCwxMiIKICAgICAgICBhbmRyb2lkOnN0cm9rZUNvbG9yPSIjOTlGRkZGRkYiCiAgICAgICAgYW5kcm9pZDpzdHJva2VXaWR0aD0iMy41IgogICAgICAgIGFuZHJvaWQ6c3Ryb2tlTGluZUNhcD0icm91bmQiIC8+Cgo8L3ZlY3Rvcj4K
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  自适应图标前景层：耳机剪影 + 声波。
+  108x108 画布，内容全部落在中心 66dp 安全圆内（x/y 约 21..87），
+  因此圆形/方形/圆角矩形遮罩都不会切到主体。
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- 头梁：从 (31,64) 顺时针掠过顶部到 (77,64)（sweep-flag=1 在 y 向下的坐标系里是顺时针） -->
+    <path
+        android:pathData="M31,64 A23,23 0 0 1 77,64"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="7"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+
+    <!-- 左耳罩（圆角矩形 23..39 x 58..82，圆角 7） -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M30,58 h2 a7,7 0 0 1 7,7 v10 a7,7 0 0 1 -7,7 h-2 a7,7 0 0 1 -7,-7 v-10 a7,7 0 0 1 7,-7 z" />
+
+    <!-- 右耳罩（圆角矩形 69..85 x 58..82，圆角 7） -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M76,58 h2 a7,7 0 0 1 7,7 v10 a7,7 0 0 1 -7,7 h-2 a7,7 0 0 1 -7,-7 v-10 a7,7 0 0 1 7,-7 z" />
+
+    <!-- 两侧发声单元暗示（半透明内圈） -->
+    <path
+        android:fillColor="#40000000"
+        android:pathData="M31,67 m-3.5,0 a3.5,3.5 0 1,0 7,0 a3.5,3.5 0 1,0 -7,0 z" />
+    <path
+        android:fillColor="#40000000"
+        android:pathData="M77,67 m-3.5,0 a3.5,3.5 0 1,0 7,0 a3.5,3.5 0 1,0 -7,0 z" />
+
+    <!-- 中间两道声波：左「(」右「)」 -->
+    <path
+        android:pathData="M45,72 a10,10 0 0 1 0,-12"
+        android:strokeColor="#99FFFFFF"
+        android:strokeWidth="3.5"
+        android:strokeLineCap="round" />
+    <path
+        android:pathData="M63,60 a10,10 0 0 1 0,12"
+        android:strokeColor="#99FFFFFF"
+        android:strokeWidth="3.5"
+        android:strokeLineCap="round" />
+
+</vector>

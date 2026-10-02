@@ -1,1 +1,187 @@
-IyBZSU5QQUdFLUxJTksKCj4g5Li6ICoqWUlOUEFHRSDpn7PotJ3lpYcgRmVlbCAxIFBybyoqIOiTneeJmeiAs+acuuaJk+mAoOeahCBBbmRyb2lkIOaOp+WItuW6lOeUqAo+IOKAlOKAlCDlhY0gcm9vdOOAgeWFjSBMU1Bvc2Vk77yM55u06L+e6ICz5py66K+75YaZ54q25oCB5LiO5o6n5Yi25oyH5Luk44CCCgo8cCBhbGlnbj0ibGVmdCI+CiAgPGltZyBhbHQ9Im1pblNkayIgc3JjPSJodHRwczovL2ltZy5zaGllbGRzLmlvL2JhZGdlL21pblNkay0yNy1icmlnaHRncmVlbiI+CiAgPGltZyBhbHQ9InRhcmdldFNkayIgc3JjPSJodHRwczovL2ltZy5zaGllbGRzLmlvL2JhZGdlL3RhcmdldFNkay0zNS1ncmVlbiI+CiAgPGltZyBhbHQ9IktvdGxpbiIgc3JjPSJodHRwczovL2ltZy5zaGllbGRzLmlvL2JhZGdlL0tvdGxpbi0yLjAuMjEtYmx1ZSI+CiAgPGltZyBhbHQ9InJvb3QiIHNyYz0iaHR0cHM6Ly9pbWcuc2hpZWxkcy5pby9iYWRnZS9yb290LW5vdCUyMHJlcXVpcmVkLXN1Y2Nlc3MiPgo8L3A+CgotLS0KCiMjIOi/meaYr+S7gOS5iAoK6Z+z6LSd5aWH77yIWUlOUEFHRe+8ieeahOWumOaWuSBBcHAg5Y+q6IO95YGa5Z+656GA5o6n5Yi277yM6ICM5ZCE5a625omL5py65Y6C5ZWG55qE44CM6J6N5ZCI5Lit5b+DIC8g6ICz5py65Y2h54mH44CN55Sf5oCB5Y+q6K6k6Ieq5a626ICz5py644CCCuacrOmhueebruaKiiBGZWVsIDEgUHJvIOeahOiDveWKmyoq5LuO5a6Y5pa5IEFwcCDph4zop6PmlL7lh7rmnaUqKu+8jOWBmuaIkOS4gOS4quWujOWFqOeLrOeri+OAgeWPqueUqCBBbmRyb2lkIOWFrOW8gCBBUEkg55qE5o6n5Yi25bqU55So77yaCgp8IOWKn+iDvSB8IOivtOaYjiB8CnwtLS18LS0tfAp8IPCflIsg5LiJ6Lev55S16YePIHwg5bem6ICzIC8g5Y+z6ICzIC8g5YWF55S155uS77yM54us56uL55S16YeP546vICsg5YWF55S154q25oCB6KeS5qCHIHwKfCDwn46nIOWbm+aho+mZjeWZqiB8IOWFs+mXrSAvIOmAmumAjyAvIOagh+WHhumZjeWZqiAvIOa3seW6pumZjeWZqu+8jOS4juezu+e7n+iAs+acuuWNoeeJh+aho+S9jeivreS5ieS4gOiHtCB8Cnwg8J+OmiBFUSDpn7PmlYggfCDlnYfooaEgLyDph43kvY7pn7MgLyDkurrlo7AgLyDpq5jpn7Plop7lvLogLyDnjrDlnLogLyDmuLjmiI/lop7lvLogfAp8IPCfjq4g5ri45oiP5qih5byPIHwg5L2O5bu26L+f5byA5YWzIHwKfCDwn5GCIOS9qeaItOajgOa1iyB8IOWFpeiAs+ajgOa1i+W8gOWFsyB8Cnwg8J+UlyDlj4zorr7lpIfov57mjqUgfCDlpJrngrnov57mjqXlvIDlhbMgfAp8IPCfjKwg5oqX6aOO5ZmqIHwg54us56uL5byA5YWzIHwKfCDwn5OKIOiwg+ivlemdouadvyB8IOaUtuWPkeWtl+iKgua1geWunuaXtuWNgeWFrei/m+WItuaYvuekuu+8jOWNj+iuruagvOW8j+WPr+i/kOihjOaXtuWIh+aNoiB8CgojIyDkuLrku4DkuYjkuI3pnIDopoEgcm9vdAoK5pys6aG555uuKirlj6rkvb/nlKggQW5kcm9pZCDlhazlvIAgQVBJKirvvJoKCi0g6L+Q6KGM5pe25p2D6ZmQ77yaYEJMVUVUT09USF9TQ0FOYO+8iGBuZXZlckZvckxvY2F0aW9uYO+8ieOAgWBCTFVFVE9PVEhfQ09OTkVDVGAKLSDnu4/lhbjok53niZkgUkZDT01NL1NQUO+8mmBCbHVldG9vdGhBZGFwdGVyYCArIGBCbHVldG9vdGhTb2NrZXRgCi0gQkxFIEdBVFTvvJpgQmx1ZXRvb3RoR2F0dGAgKyBgQmx1ZXRvb3RoTGVTY2FubmVyYAotIOWJjeWPsOacjeWKoeS/nea0u++8mmBmb3JlZ3JvdW5kU2VydmljZVR5cGU9ImNvbm5lY3RlZERldmljZSJgCgrmsqHmnIkgWHBvc2Vk44CB5rKh5pyJ6ZqQ6JePIEFQSSDlj43lsITjgIHmsqHmnInns7vnu5/nrb7lkI3jgIHmsqHmnIkgU2hpenVrdSDlvLrkvp3otZbjgIIKCj4gKirog73lipvovrnnlYzvvIjor5rlrp7or7TmmI7vvIkqKu+8muato+WboOS4uuS4jSByb29077yM5pys5bqU55SoKirml6Dms5UqKuaKiuiAs+acuuWNoeeJh+azqOWFpeWIsOa+jua5gyBPUyDnmoQKPiDorr7nva7pobUgLyDmjqfliLbkuK3lv4MgLyDngbXliqjlspvph4zigJTigJTpgqPpnIDopoHlvoAgYGNvbS5hbmRyb2lkLnNldHRpbmdzYOOAgWBjb20uYW5kcm9pZC5zeXN0ZW11aWAKPiDnrYnns7vnu5/ov5vnqIvms6jlhaXku6PnoIHvvIzlj6rmnIkgcm9vdCArIExTUG9zZWQg5omN6IO95YGa5Yiw44CCCj4g5pys6aG555uu55qE5a6a5L2N5piv77yaKirnlKjni6znq4sgQXBwIOaPkOS+m+etieS7t+eUmuiHs+abtOWujOaVtOeahOWKn+iDveaOp+WItioq44CCCj4KPiBTaGl6dWt177yI5Y+v6YCJ77yJ6IO95o+Q5L6bIHNoZWxsIOe6p+adg+mZkO+8jOeUqOS6juivu+WPluezu+e7n+iTneeJmeeuoeeQhuWZqOmHjOeahOiuvuWkh+S/oeaBr+S9nOS4uuihpeWFhe+8jAo+IOS9huWug+WQjOagt+aXoOazleazqOWFpeezu+e7nyBVSeOAggoKIyMg5oqA5pyv6Lev57q/CgpgYGAKICAgICAgICDilIzilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilJAKICAgICAgICDilIIgIFVJIOWxgu+8iEpldHBhY2sgQ29tcG9zZSArIE1hdGVyaWFsIDPvvIkgICAgICAgIOKUggogICAgICAgIOKUgiAgSG9tZVBhZ2UgLyBEZXZpY2VQYWdlIC8gU2V0dGluZ3NQYWdlIC8gRGVidWcg4pSCCiAgICAgICAg4pSU4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSs4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSYCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg4pSCIOWPquS+nei1liBBcHBTdGF0ZQogICAgICAgIOKUjOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKWvOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUkAogICAgICAgIOKUgiAgY29yZe+8mkFwcFN0YXRl77yI54q25oCB5Y2P6LCD5Zmo77yJICAgICAgICAgICAgICAgICAg4pSCCiAgICAgICAg4pSCICDmiavmj48gLyDov57mjqUgLyDlv4Pot7Pova7or6IgLyDkuZDop4Lmm7TmlrAgLyDkuovku7bml6Xlv5cgICAg4pSCCiAgICAgICAg4pSU4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSs4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSYCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg4pSCIFBvZENvb3JkaW5hdG9yIOWlkee6pgogICAgICAgIOKUjOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKWvOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUkAogICAgICAgIOKUgiAgU2Vzc2lvbkNvb3JkaW5hdG9y77yI6L+e5o6l54q25oCB5py677yJICAgICAgICAgICAgICDilIIKICAgICAgICDilIIgIOaPoeaJiyDCtyDor7vlvqrnjq8gwrcg5byC5bi457+76K+RIMK3IEFVVE8g6YCa6YGT5Zue6YCAICAgICAgIOKUggogICAgICAgIOKUlOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUrOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUrOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUmAogICAgICAgICAgICAgICAgICAg4pSCIFBvZFRyYW5zcG9ydCAgICAgICAgICDilIIgUG9kQ29kZWMKICAgICAgICDilIzilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilrzilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilJAgIOKUjOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKWvOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUkAogICAgICAgIOKUgiBSZmNvbW1UcmFuc3BvcnQgICAgIOKUgiAg4pSCIEJsdWV0cnVtQ29kZWMgICAgICAg4pSCCiAgICAgICAg4pSCIEJsZUdhdHRUcmFuc3BvcnQgICAg4pSCICDilIIg77yI5Lit56eR6JOd6K6vIEFCIOezu++8jOW3suehruivge+8ieKUggogICAgICAgIOKUlOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUmCAg4pSU4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSYCmBgYAoK6K6+6K6h6KaB54K577yaCgotICoq5Y2P6K6u5Y+v5o+S5ouUKirvvJpgUG9kQ29kZWNgIOaYr+aOpeWPo++8jOaWsOWinuWTgeeJjOWPqumcgOWunueOsOS4gOS4quexu+W5tiBgUHJvdG9jb2xSZWdpc3RyeS5yZWdpc3RlciguLi4pYOOAggotICoq5bin5qC85byP54us56uLKirvvJpgQnRGcmFtZUNvZGVjYCDlj6rotJ/otKPjgIzluKcg4oaUIOWtl+iKguOAjeS4jua1geW8j+WIhuW4p++8iOeymOWMhS/ljYrljIUv5aSa5YyF6YeN57uE77yJ77yMCiAg5LiN5o665Lu75L2V5Lia5Yqh6K+t5LmJ77ybYEJsdWV0cnVtQ29kZWNgIOWPqui0n+i0o+WRveS7pOihqOS4jueKtuaAgeino+aekOOAguaNouWTgeeJjOaXtuWJjeiAheWPr+WujOWFqOWkjeeUqOOAggotICoq5Lyg6L6T5Y+v5pu/5o2iKirvvJpgUG9kVHJhbnNwb3J0YCDmir3osaHkuoYgU1BQIOS4jiBCTEXvvIzkvJror53lsYLkuI3lhbPlv4PniannkIbpgJrpgZPjgIIKLSAqKuS5kOinguabtOaWsCoq77ya5o6n5Yi25oyH5Luk5YWI5pys5Zyw55Sf5pWI57uZ5Y2z5pe25Y+N6aaI77yM6ICz5py65Zue5YyF5ZCO5YaN5Lul55yf5a6e54q25oCB57qg5q2j44CCCi0gKipgKHR5cGUsIGNvbW1hbmQpYCDot6/nlLEqKu+8mkFCIOezu+WtmOWcqOWQjOeggei3qOaWueWQkeWkjeeUqO+8iOWmgiBgMHgyQ2Ag5pei5pivIEFOQyDorr7nva7kuZ/mmK8gQU5DIOafpeivou+8ie+8jAogIOWPqueciyBjb21tYW5kIOS8muS4suWPsO+8jOacrOmhueebruaJgOacieWIhuaUr+mDveaMieS6jOWFg+e7hOi3r+eUseOAggoKIyMg5p6E5bu6CgojIyMg546v5aKD6KaB5rGCCgotIEpESyAxNwotIEFuZHJvaWQgU0RL77yaYHBsYXRmb3JtczthbmRyb2lkLTM1YOOAgWBidWlsZC10b29sczszNS4wLjBgCi0gR3JhZGxlIDguOe+8iOS7k+W6k+WGheaPkOS+myB3cmFwcGVy77yM5Lmf5Y+v55So57O757ufIEdyYWRsZe+8iQoKIyMjIOWRveS7pOihjAoKYGBgYmFzaAojIGRlYnVnIEFQSwouL2dyYWRsZXcgOmFwcDphc3NlbWJsZURlYnVnCgojIHJlbGVhc2XvvIjmnKrnrb7lkI3vvIzpnIDoh6rooYzphY3nva7nrb7lkI3vvIkKLi9ncmFkbGV3IDphcHA6YXNzZW1ibGVSZWxlYXNlCgojIOWPque8luivkSBLb3RsaW7vvIjlrprkvY3plJnor6/mnIDlv6vvvIkKLi9ncmFkbGV3IDphcHA6Y29tcGlsZURlYnVnS290bGluCmBgYAoK5Lqn54mp77yaYGFwcC9idWlsZC9vdXRwdXRzL2Fway9kZWJ1Zy9hcHAtZGVidWcuYXBrYAoKIyMjIEFuZHJvaWQgU3R1ZGlvCgrnm7TmjqUgYEZpbGUg4oaSIE9wZW5gIOacrOS7k+W6k+agueebruW9le+8jOetieW+hSBHcmFkbGUgU3luYyDlrozmiJDlkI7ov5DooYzljbPlj6/jgIIKCiMjIOmhueebrue7k+aehAoKYGBgCmFwcC9zcmMvbWFpbi9qYXZhL2NvbS95aW5wYWdlL2xpbmsvCuKUnOKUgOKUgCBZaW5wYWdlQXBwLmt0ICAgICAgICAgICAgICAgICBBcHBsaWNhdGlvbu+8muijhemFjeS8oOi+kyArIOWNj+iuriArIOS8muivnQrilJzilIDilIAgY29uZmlnLwrilIIgICDilJTilIDilIAgQ29uZmlnTWFuYWdlci5rdCAgICAgICAgICDphY3nva7mjIHkuYXljJbvvIhTaGFyZWRQcmVmZXJlbmNlcyArIFN0YXRlRmxvd++8iQrilJzilIDilIAgY29yZS8K4pSCICAg4pSc4pSA4pSAIEFwcFN0YXRlLmt0ICAgICAgICAgICAgICAg4piFIFVJIOWUr+S4gOS+nei1lueahOeKtuaAgeWNj+iwg+WZqArilIIgICDilJzilIDilIAgU2Vzc2lvbkNvb3JkaW5hdG9yLmt0ICAgICDov57mjqXnirbmgIHmnLrjgIHmj6HmiYvjgIHor7vlvqrnjq/jgIFBVVRPIOWbnumAgArilIIgICDilJzilIDilIAgQ29udHJhY3RzLmt0ICAgICAgICAgICAgICBQb2RDb29yZGluYXRvciAvIFRyYW5zcG9ydEtpbmQgLyBDb25uZWN0UmVzdWx0CuKUgiAgIOKUnOKUgOKUgCBNb2RlbHMua3QgICAgICAgICAgICAgICAgIEJsdWV0b290aERldmljZUl0ZW0gLyBQb2RVaVN0YXRlCuKUgiAgIOKUlOKUgOKUgCBFdmVudExvZy5rdCAgICAgICAgICAgICAgIOeOr+W9oue8k+WGsuaXpeW/lyArIOWNgeWFrei/m+WItuaUtuWPkeiusOW9lQrilJzilIDilIAgcHJvdG9jb2wvCuKUgiAgIOKUnOKUgOKUgCBTdGF0ZS5rdCAgICAgICAgICAgICAgICAgIOKYhSDlhajpg6jmlbDmja7mqKHlnovvvIjnlLXph48v6ZmN5ZmqL0VRL+i/nuaOpeeKtuaAge+8iQrilIIgICDilJzilIDilIAgVHJhbnNwb3J0Lmt0ICAgICAgICAgICAgICDimIUgUG9kVHJhbnNwb3J0IC8gUG9kQ29kZWMgLyBQcm90b2NvbFJlZ2lzdHJ5CuKUgiAgIOKUlOKUgOKUgCB5c2NvY28vCuKUgiAgICAgICDilJzilIDilIAgRnJhbWVGb3JtYXQua3QgICAgICAgIOW4p+agvOW8j+WPguaVsOWMliArIOWRveS7pOeggeihqCArIOWAmemAieWPmOS9kwrilIIgICAgICAg4pSc4pSA4pSAIFlzY29jb0ZyYW1lQ29kZWMua3QgICDmtYHlvI/liIbluKfvvIjnspjljIUv5Y2K5YyF77yJKyDlm5vnp43moKHpqowK4pSCICAgICAgIOKUnOKUgOKUgCBZc2NvY29Db2RlYy5rdCAgICAgICAg54q25oCB6Kej5p6Q5LiO5o6n5Yi25oyH5Luk57yW56CBCuKUgiAgICAgICDilJTilIDilIAgQnl0ZVV0aWwua3QgICAgICAgICAgIOWtl+iKgiAvIOagoemqjOW3peWFtwrilJzilIDilIAgdHJhbnNwb3J0LwrilIIgICDilJzilIDilIAgUmZjb21tVHJhbnNwb3J0Lmt0ICAgICAgICDnu4/lhbjok53niZkgU1BQCuKUgiAgIOKUnOKUgOKUgCBCbGVHYXR0VHJhbnNwb3J0Lmt0ICAgICAgIEJMRSBHQVRUCuKUgiAgIOKUlOKUgOKUgCBUcmFuc3BvcnRGYWN0b3J5SW1wbC5rdCAgIOmAmumBk+W3peWOggrilJzilIDilIAgc2VydmljZS8K4pSCICAg4pSc4pSA4pSAIFBvZENvbm5lY3Rpb25TZXJ2aWNlLmt0ICAg5YmN5Y+w5pyN5Yqh5L+d5rS7CuKUgiAgIOKUlOKUgOKUgCBCbHVldG9vdGhTdGF0ZVJlY2VpdmVyLmt0IOiTneeJmeeKtuaAgeW5v+aSrQrilJzilIDilIAgZW5oYW5jZS8K4pSCICAg4pSU4pSA4pSAIFNoaXp1a3VFbmhhbmNlci5rdCAgICAgICAgU2hpenVrdSDlj6/pgInlop7lvLrvvIjlj43lsITosIPnlKjvvIzpm7bkvp3otZbvvIkK4pSU4pSA4pSAIHVpLyAgICAgICAgICAgICAgICAgICAgICAgICAgIENvbXBvc2Ug6aG16Z2iIC8g57uE5Lu2IC8g5Li76aKYCmBgYAoKIyMg6ICz5py65Y2P6K6uCgpGZWVsIDEgUHJvIOeahOengeacieWNj+iurioq5rKh5pyJ5Lu75L2V5YWs5byA5paH5qGjKirvvIjljoLllYbnlJroh7PmioogRkNDIOeahOWOn+eQhuWbvueUs+ivt+S6humVv+acn+S/neWvhu+8ie+8jArmiYDku6XljY/orq7pg6jliIbmmK/mnKzpobnnm67mipXlhaXmnIDlpJrnsr7lipvnmoTlnLDmlrnjgILor6bop4EgKipbZG9jL1BST1RPQ09MLm1kXShkb2MvUFJPVE9DT0wubWQpKirjgIIKCioq6YCG5ZCR57uT6K6677yI5bey56Gu6K+B77yM6Z2e5o6o5rWL77yJKirigJTigJTpgJrov4flr7nlrpjmlrkgQXBwIGBjb20ueXNjb2NvLnlpbnBhZ2VgIHYxLjQuMjcg55qE5a6M5pW05Y+N57yW6K+R77yaCgp8IOmhuSB8IOe7k+iuuiB8CnwtLS18LS0tfAp8IOS8oOi+k+mAmumBkyB8ICoq57uP5YW46JOd54mZIFNQUC9SRkNPTU0qKu+8jFVVSUQgYDAwMDAxMTAxLTAwMDAtMTAwMC04MDAwLTAwODA1RjlCMzRGQmAgfAp8IOiAs+acuuS4u+aOpyB8ICoq5Lit56eR6JOd6K6vIEJsdWV0cnVtIEFCIOezu+WIlyoq77yIYGNvbS5ibHVldHJ1bS5kZXZpY2VtYW5hZ2VyYCBTREvvvIwxNTcg5Liq57G777yJIHwKfCDluKfmoLzlvI8gfCA1IOWtl+iKguWktCArIHBheWxvYWTvvIwqKuaXoCBDUkMqKu+8mmBbc2VxXVtjb21tYW5kXVt0eXBlXVtjaHVua11bbGVuXVtwYXlsb2Fk4oCmXWAgfAp8IOWIhuWMhSB8IOm7mOiupOavj+WMhSBwYXlsb2FkIDE1IOWtl+iKgu+8jGBjaHVua2Ag5a2X6IqC6auYIDQg5L2NID0g5oC75YyF5pWwLTHjgIHkvY4gNCDkvY0gPSDlvZPliY3ljIXluo/lj7cgfAp8IOW6j+WPtyB8IGJpdHMwLTPvvIwwLi4xNSDlvqrnjq/vvIzmjIki5raI5oGvIumAkuWinuiAjOmdnuaMieW4pyB8Cnwg55S16YePIHwgcGF5bG9hZCA9IGBb5bemLCDlj7MsIOebkl1g77yM5q+P5a2X6IqCIGBiaXQ3PeWFheeUteS4rWDjgIFgYml0MC4uNj3nlLXph49gIHwKfCBBTkMgfCBgMHgwMGAg5YWz6ZetIC8gYDB4MDFgIOmZjeWZquW8gCAvIGAweDAyYCDpgJrpgI/vvIhgQU5DX01PREUgPSAweDJDYO+8iSB8CnwgRVEgfCBgMHgyMGDvvIxwYXlsb2FkID0gYFtiYW5kQ291bnQsIG1vZGUsIGdhaW5z4oCmXWDvvIxgbW9kZSDiiaUgMHgyMGAg5Li66Ieq5a6a5LmJIHwKfCDmn6Xor6IgfCDnu5/kuIDotbAgYERFVklDRV9JTkZPKDB4MjcpYO+8jHBheWxvYWQgPSBgW0lORk9feCwgMHgwMF1g77yM5YWxIDMzIOS4quWtkOeggSB8Cnwg6IO95Yqb5L2N5Zu+IHwgYDB4RkVg77yaYml0MD1UV1PjgIFiaXQxPTNE44CBYml0Mj3lpJrngrnjgIFiaXQzPUFOQyB8Cnwg6Leo5pa55ZCR5aSN55SoIHwgYDB4MkIvMHgyQy8weDQwLzB4NDFgIOivt+axguS4jumAmuefpeWQjOegge+8jCoq6Lev55Sx5b+F6aG755SoIGAodHlwZSwgY29tbWFuZClgKiogfAoKPiDlrozmlbTlkb3ku6TooajvvIgyNCDmnaHor7fmsYLlkb3ku6QgKyAzMyDmnaEgYElORk9fKmAg5a2Q56CB77yJ5LiO6K+B5o2u6KeBIFtkb2MvUFJPVE9DT0wubWRdKGRvYy9QUk9UT0NPTC5tZCnjgIIKPgo+IOKaoO+4jyDku43lvoXnnJ/mnLrnoa7orqTnmoTpobnvvJpSRkNPTU0gY2hhbm5lbCDlj7fjgIHmmK/lkKbkvb/nlKjoh6rlrprkuYkgU1BQIFVVSUTjgIEKPiBFUSDliJfooajnsr7noa7lrZfoioLluo/jgIHnlLXph48gYml0NyDnmoTovrnnlYzor63kuYnjgILov5nkupvkuI3lvbHlk43kuLvmtYHnqIvjgIIKCiMjIOmakOengQoKLSDkuI3ogZTnvZHjgIHkuI3kuIrkvKDku7vkvZXmlbDmja7jgIHml6DnrKzkuInmlrnnu5/orqEgU0RLCi0g5omA5pyJ6YWN572u5LuF5a2Y5pys5py65bqU55So56eB5pyJ55uu5b2VCi0g6JOd54mZ5omr5o+P57uT5p6c5Y+q5Zyo5pys5Zyw5YaF5a2Y5Lit5L2/55SoCgojIyDoh7TosKIKCuacrOmhueebruWcqOaetuaehOiuvuiuoeS4iuWPguiAg+S6huS7peS4i+S8mOengOW8gOa6kOmhueebru+8mgoKLSBbSHlwZXJPcmlHXShodHRwczovL2dpdGh1Yi5jb20vS2lyaUNoZW4tV2luZC9IeXBlck9yaUcpIOKAlCDljp/pgZMgT3JpRyBpbiDmjqXlhaXmvo7muYMgT1PvvIjliIblsYLkuI7ljY/orq7nu4Tnu4fmlrnlvI/nmoTkuLvopoHlj4LogIPvvIkKLSBbT3Bwb1BvZHNdKGh0dHBzOi8vZ2l0aHViLmNvbS8xODEyei9PcHBvUG9kcykgLyBbT3Bwb1BvZHMtRW5oYW5jZWRdKGh0dHBzOi8vZ2l0aHViLmNvbS9MZWFmLWxzZ3RreS9PcHBvUG9kcykKLSBbSHlwZXJQb2RzXShodHRwczovL2dpdGh1Yi5jb20vQXJ0LUNoZW4vSHlwZXJQb2RzKQotIFtQdWRkaW5nUG9kc10oaHR0cHM6Ly9naXRodWIuY29tL1hwb3NlZC1Nb2R1bGVzLVJlcG8vcm9uZ3lpLnB1ZGRpbmdwb2RzKSDigJQgU1BQIOaOpeWFpee7huiKggoKIyMg6K645Y+vCgrop4EgW0xJQ0VOU0VdKExJQ0VOU0Up44CCCg==
+# YINPAGE-LINK
+
+> 为 **YINPAGE 音贝奇 Feel 1 Pro** 蓝牙耳机打造的 Android 控制应用
+> —— 免 root、免 LSPosed，直连耳机读写状态与控制指令。
+
+<p align="left">
+  <img alt="minSdk" src="https://img.shields.io/badge/minSdk-27-brightgreen">
+  <img alt="targetSdk" src="https://img.shields.io/badge/targetSdk-35-green">
+  <img alt="Kotlin" src="https://img.shields.io/badge/Kotlin-2.0.21-blue">
+  <img alt="root" src="https://img.shields.io/badge/root-not%20required-success">
+</p>
+
+---
+
+## 这是什么
+
+音贝奇（YINPAGE）的官方 App 只能做基础控制，而各家手机厂商的「融合中心 / 耳机卡片」生态只认自家耳机。
+本项目把 Feel 1 Pro 的能力**从官方 App 里解放出来**，做成一个完全独立、只用 Android 公开 API 的控制应用：
+
+| 功能 | 说明 |
+|---|---|
+| 🔋 三路电量 | 左耳 / 右耳 / 充电盒，独立电量环 + 充电状态角标 |
+| 🎧 四档降噪 | 关闭 / 通透 / 标准降噪 / 深度降噪，与系统耳机卡片档位语义一致 |
+| 🎚 EQ 音效 | 均衡 / 重低音 / 人声 / 高音增强 / 现场 / 游戏增强 |
+| 🎮 游戏模式 | 低延迟开关 |
+| 👂 佩戴检测 | 入耳检测开关 |
+| 🔗 双设备连接 | 多点连接开关 |
+| 🌬 抗风噪 | 独立开关 |
+| 📊 调试面板 | 收发字节流实时十六进制显示，协议格式可运行时切换 |
+
+## 为什么不需要 root
+
+本项目**只使用 Android 公开 API**：
+
+- 运行时权限：`BLUETOOTH_SCAN`（`neverForLocation`）、`BLUETOOTH_CONNECT`
+- 经典蓝牙 RFCOMM/SPP：`BluetoothAdapter` + `BluetoothSocket`
+- BLE GATT：`BluetoothGatt` + `BluetoothLeScanner`
+- 前台服务保活：`foregroundServiceType="connectedDevice"`
+
+没有 Xposed、没有隐藏 API 反射、没有系统签名、没有 Shizuku 强依赖。
+
+> **能力边界（诚实说明）**：正因为不 root，本应用**无法**把耳机卡片注入到澎湃 OS 的
+> 设置页 / 控制中心 / 灵动岛里——那需要往 `com.android.settings`、`com.android.systemui`
+> 等系统进程注入代码，只有 root + LSPosed 才能做到。
+> 本项目的定位是：**用独立 App 提供等价甚至更完整的功能控制**。
+>
+> Shizuku（可选）能提供 shell 级权限，用于读取系统蓝牙管理器里的设备信息作为补充，
+> 但它同样无法注入系统 UI。
+
+## 技术路线
+
+```
+        ┌──────────────────────────────────────────────┐
+        │  UI 层（Jetpack Compose + Material 3）        │
+        │  HomePage / DevicePage / SettingsPage / Debug │
+        └───────────────────────┬──────────────────────┘
+                                │ 只依赖 AppState
+        ┌───────────────────────▼──────────────────────┐
+        │  core：AppState（状态协调器）                  │
+        │  扫描 / 连接 / 心跳轮询 / 乐观更新 / 事件日志    │
+        └───────────────────────┬──────────────────────┘
+                                │ PodCoordinator 契约
+        ┌───────────────────────▼──────────────────────┐
+        │  SessionCoordinator（连接状态机）              │
+        │  握手 · 读循环 · 异常翻译 · AUTO 通道回退       │
+        └──────────┬───────────────────────┬───────────┘
+                   │ PodTransport          │ PodCodec
+        ┌──────────▼──────────┐  ┌─────────▼───────────┐
+        │ RfcommTransport     │  │ BluetrumCodec       │
+        │ BleGattTransport    │  │ （中科蓝讯 AB 系，已确证）│
+        └─────────────────────┘  └─────────────────────┘
+```
+
+设计要点：
+
+- **协议可插拔**：`PodCodec` 是接口，新增品牌只需实现一个类并 `ProtocolRegistry.register(...)`。
+- **帧格式独立**：`BtFrameCodec` 只负责「帧 ↔ 字节」与流式分帧（粘包/半包/多包重组），
+  不掺任何业务语义；`BluetrumCodec` 只负责命令表与状态解析。换品牌时前者可完全复用。
+- **传输可替换**：`PodTransport` 抽象了 SPP 与 BLE，会话层不关心物理通道。
+- **乐观更新**：控制指令先本地生效给即时反馈，耳机回包后再以真实状态纠正。
+- **`(type, command)` 路由**：AB 系存在同码跨方向复用（如 `0x2C` 既是 ANC 设置也是 ANC 查询），
+  只看 command 会串台，本项目所有分支都按二元组路由。
+
+## 构建
+
+### 环境要求
+
+- JDK 17
+- Android SDK：`platforms;android-35`、`build-tools;35.0.0`
+- Gradle 8.9（仓库内提供 wrapper，也可用系统 Gradle）
+
+### 命令行
+
+```bash
+# debug APK
+./gradlew :app:assembleDebug
+
+# release（未签名，需自行配置签名）
+./gradlew :app:assembleRelease
+
+# 只编译 Kotlin（定位错误最快）
+./gradlew :app:compileDebugKotlin
+```
+
+产物：`app/build/outputs/apk/debug/app-debug.apk`
+
+### Android Studio
+
+直接 `File → Open` 本仓库根目录，等待 Gradle Sync 完成后运行即可。
+
+## 项目结构
+
+```
+app/src/main/java/com/yinpage/link/
+├── YinpageApp.kt                 Application：装配传输 + 协议 + 会话
+├── config/
+│   └── ConfigManager.kt          配置持久化（SharedPreferences + StateFlow）
+├── core/
+│   ├── AppState.kt               ★ UI 唯一依赖的状态协调器
+│   ├── SessionCoordinator.kt     连接状态机、握手、读循环、AUTO 回退
+│   ├── Contracts.kt              PodCoordinator / TransportKind / ConnectResult
+│   ├── Models.kt                 BluetoothDeviceItem / PodUiState
+│   └── EventLog.kt               环形缓冲日志 + 十六进制收发记录
+├── protocol/
+│   ├── State.kt                  ★ 全部数据模型（电量/降噪/EQ/连接状态）
+│   ├── Transport.kt              ★ PodTransport / PodCodec / ProtocolRegistry
+│   └── yscoco/
+│       ├── FrameFormat.kt        帧格式参数化 + 命令码表 + 候选变体
+│       ├── YscocoFrameCodec.kt   流式分帧（粘包/半包）+ 四种校验
+│       ├── YscocoCodec.kt        状态解析与控制指令编码
+│       └── ByteUtil.kt           字节 / 校验工具
+├── transport/
+│   ├── RfcommTransport.kt        经典蓝牙 SPP
+│   ├── BleGattTransport.kt       BLE GATT
+│   └── TransportFactoryImpl.kt   通道工厂
+├── service/
+│   ├── PodConnectionService.kt   前台服务保活
+│   └── BluetoothStateReceiver.kt 蓝牙状态广播
+├── enhance/
+│   └── ShizukuEnhancer.kt        Shizuku 可选增强（反射调用，零依赖）
+└── ui/                           Compose 页面 / 组件 / 主题
+```
+
+## 耳机协议
+
+Feel 1 Pro 的私有协议**没有任何公开文档**（厂商甚至把 FCC 的原理图申请了长期保密），
+所以协议部分是本项目投入最多精力的地方。详见 **[doc/PROTOCOL.md](doc/PROTOCOL.md)**。
+
+**逆向结论（已确证，非推测）**——通过对官方 App `com.yscoco.yinpage` v1.4.27 的完整反编译：
+
+| 项 | 结论 |
+|---|---|
+| 传输通道 | **经典蓝牙 SPP/RFCOMM**，UUID `00001101-0000-1000-8000-00805F9B34FB` |
+| 耳机主控 | **中科蓝讯 Bluetrum AB 系列**（`com.bluetrum.devicemanager` SDK，157 个类） |
+| 帧格式 | 5 字节头 + payload，**无 CRC**：`[seq][command][type][chunk][len][payload…]` |
+| 分包 | 默认每包 payload 15 字节，`chunk` 字节高 4 位 = 总包数-1、低 4 位 = 当前包序号 |
+| 序号 | bits0-3，0..15 循环，按"消息"递增而非按帧 |
+| 电量 | payload = `[左, 右, 盒]`，每字节 `bit7=充电中`、`bit0..6=电量` |
+| ANC | `0x00` 关闭 / `0x01` 降噪开 / `0x02` 通透（`ANC_MODE = 0x2C`） |
+| EQ | `0x20`，payload = `[bandCount, mode, gains…]`，`mode ≥ 0x20` 为自定义 |
+| 查询 | 统一走 `DEVICE_INFO(0x27)`，payload = `[INFO_x, 0x00]`，共 33 个子码 |
+| 能力位图 | `0xFE`：bit0=TWS、bit1=3D、bit2=多点、bit3=ANC |
+| 跨方向复用 | `0x2B/0x2C/0x40/0x41` 请求与通知同码，**路由必须用 `(type, command)`** |
+
+> 完整命令表（24 条请求命令 + 33 条 `INFO_*` 子码）与证据见 [doc/PROTOCOL.md](doc/PROTOCOL.md)。
+>
+> ⚠️ 仍待真机确认的项：RFCOMM channel 号、是否使用自定义 SPP UUID、
+> EQ 列表精确字节序、电量 bit7 的边界语义。这些不影响主流程。
+
+## 隐私
+
+- 不联网、不上传任何数据、无第三方统计 SDK
+- 所有配置仅存本机应用私有目录
+- 蓝牙扫描结果只在本地内存中使用
+
+## 致谢
+
+本项目在架构设计上参考了以下优秀开源项目：
+
+- [HyperOriG](https://github.com/KiriChen-Wind/HyperOriG) — 原道 OriG in 接入澎湃 OS（分层与协议组织方式的主要参考）
+- [OppoPods](https://github.com/1812z/OppoPods) / [OppoPods-Enhanced](https://github.com/Leaf-lsgtky/OppoPods)
+- [HyperPods](https://github.com/Art-Chen/HyperPods)
+- [PuddingPods](https://github.com/Xposed-Modules-Repo/rongyi.puddingpods) — SPP 接入细节
+
+## 许可
+
+见 [LICENSE](LICENSE)。

@@ -1,1 +1,54 @@
-cGFja2FnZSBjb20ueWlucGFnZS5saW5rLnVpLnRoZW1lCgppbXBvcnQgYW5kcm9pZC5vcy5CdWlsZAppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5mb3VuZGF0aW9uLmlzU3lzdGVtSW5EYXJrVGhlbWUKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UuZm91bmRhdGlvbi5zaGFwZS5Sb3VuZGVkQ29ybmVyU2hhcGUKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UubWF0ZXJpYWwzLk1hdGVyaWFsVGhlbWUKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UubWF0ZXJpYWwzLlNoYXBlcwppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5tYXRlcmlhbDMuZHluYW1pY0RhcmtDb2xvclNjaGVtZQppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5tYXRlcmlhbDMuZHluYW1pY0xpZ2h0Q29sb3JTY2hlbWUKaW1wb3J0IGFuZHJvaWR4LmNvbXBvc2UucnVudGltZS5Db21wb3NhYmxlCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLnVpLnBsYXRmb3JtLkxvY2FsQ29udGV4dAppbXBvcnQgYW5kcm9pZHguY29tcG9zZS51aS51bml0LmRwCgovKioKICog44CM5r6O5rmD44CN6KeC5oSf55qE5YWz6ZSu5LmL5LiA5piv5aSn5ZyG6KeS44CC6L+Z6YeM5pW05L2T5oqKIE1hdGVyaWFsMyDnmoTlnIbop5LmoaPkvY3osIPlpKfvvIwKICog5Y2h54mH6buY6K6kIDI0fjI4ZHDvvIzmjInpkq4v6IO25ZuKIDE2ZHAg5Lul5LiK44CCCiAqLwp2YWwgWWlucGFnZVNoYXBlcyA9IFNoYXBlcygKICAgIGV4dHJhU21hbGwgPSBSb3VuZGVkQ29ybmVyU2hhcGUoOC5kcCksCiAgICBzbWFsbCA9IFJvdW5kZWRDb3JuZXJTaGFwZSgxMi5kcCksCiAgICBtZWRpdW0gPSBSb3VuZGVkQ29ybmVyU2hhcGUoMTguZHApLAogICAgbGFyZ2UgPSBSb3VuZGVkQ29ybmVyU2hhcGUoMjQuZHApLAogICAgZXh0cmFMYXJnZSA9IFJvdW5kZWRDb3JuZXJTaGFwZSgzMC5kcCksCikKCi8qKgogKiDlupTnlKjkuLvpopjjgIIKICoKICogQHBhcmFtIGRhcmtUaGVtZSAgIOaYr+WQpua3seiJsu+8jOm7mOiupOi3n+maj+ezu+e7n+OAggogKiBAcGFyYW0gZHluYW1pY0NvbG9yIE1hdGVyaWFsIFlvdSDliqjmgIHlj5boibLvvIhBbmRyb2lkIDEyK++8ieOAguWPluiJsuWksei0pS/niYjmnKzkuI3otrPml7YKICogICAgICAgICAgICAgICAgICAgICDoh6rliqjlm57okL3liLAgW0xpZ2h0Q29sb3JTY2hlbWVdIC8gW0RhcmtDb2xvclNjaGVtZV3jgIIKICovCkBDb21wb3NhYmxlCmZ1biBZaW5wYWdlTGlua1RoZW1lKAogICAgZGFya1RoZW1lOiBCb29sZWFuID0gaXNTeXN0ZW1JbkRhcmtUaGVtZSgpLAogICAgZHluYW1pY0NvbG9yOiBCb29sZWFuID0gdHJ1ZSwKICAgIGNvbnRlbnQ6IEBDb21wb3NhYmxlICgpIC0+IFVuaXQsCikgewogICAgdmFsIGNvbnRleHQgPSBMb2NhbENvbnRleHQuY3VycmVudAogICAgdmFsIGNvbG9yU2NoZW1lID0gd2hlbiB7CiAgICAgICAgZHluYW1pY0NvbG9yICYmIEJ1aWxkLlZFUlNJT04uU0RLX0lOVCA+PSBCdWlsZC5WRVJTSU9OX0NPREVTLlMgLT4KICAgICAgICAgICAgaWYgKGRhcmtUaGVtZSkgZHluYW1pY0RhcmtDb2xvclNjaGVtZShjb250ZXh0KSBlbHNlIGR5bmFtaWNMaWdodENvbG9yU2NoZW1lKGNvbnRleHQpCgogICAgICAgIGRhcmtUaGVtZSAtPiBEYXJrQ29sb3JTY2hlbWUKICAgICAgICBlbHNlIC0+IExpZ2h0Q29sb3JTY2hlbWUKICAgIH0KCiAgICBNYXRlcmlhbFRoZW1lKAogICAgICAgIGNvbG9yU2NoZW1lID0gY29sb3JTY2hlbWUsCiAgICAgICAgdHlwb2dyYXBoeSA9IFlpbnBhZ2VUeXBvZ3JhcGh5LAogICAgICAgIHNoYXBlcyA9IFlpbnBhZ2VTaGFwZXMsCiAgICAgICAgY29udGVudCA9IGNvbnRlbnQsCiAgICApCn0K
+package com.yinpage.link.ui.theme
+
+import android.os.Build
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Shapes
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
+
+/**
+ * 「澎湃」观感的关键之一是大圆角。这里整体把 Material3 的圆角档位调大，
+ * 卡片默认 24~28dp，按钮/胶囊 16dp 以上。
+ */
+val YinpageShapes = Shapes(
+    extraSmall = RoundedCornerShape(8.dp),
+    small = RoundedCornerShape(12.dp),
+    medium = RoundedCornerShape(18.dp),
+    large = RoundedCornerShape(24.dp),
+    extraLarge = RoundedCornerShape(30.dp),
+)
+
+/**
+ * 应用主题。
+ *
+ * @param darkTheme   是否深色，默认跟随系统。
+ * @param dynamicColor Material You 动态取色（Android 12+）。取色失败/版本不足时
+ *                     自动回落到 [LightColorScheme] / [DarkColorScheme]。
+ */
+@Composable
+fun YinpageLinkTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    dynamicColor: Boolean = true,
+    content: @Composable () -> Unit,
+) {
+    val context = LocalContext.current
+    val colorScheme = when {
+        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ->
+            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+
+        darkTheme -> DarkColorScheme
+        else -> LightColorScheme
+    }
+
+    MaterialTheme(
+        colorScheme = colorScheme,
+        typography = YinpageTypography,
+        shapes = YinpageShapes,
+        content = content,
+    )
+}

@@ -1,1 +1,340 @@
-cGFja2FnZSBjb20ueWlucGFnZS5saW5rLmNvcmUKCmltcG9ydCBjb20ueWlucGFnZS5saW5rLnByb3RvY29sLkJsdWV0b290aE9mZkV4Y2VwdGlvbgppbXBvcnQgY29tLnlpbnBhZ2UubGluay5wcm90b2NvbC5EZXZpY2VVbmF2YWlsYWJsZUV4Y2VwdGlvbgppbXBvcnQgY29tLnlpbnBhZ2UubGluay5wcm90b2NvbC5NaXNzaW5nUGVybWlzc2lvbkV4Y2VwdGlvbgppbXBvcnQgY29tLnlpbnBhZ2UubGluay5wcm90b2NvbC5Qb2RDb2RlYwppbXBvcnQgY29tLnlpbnBhZ2UubGluay5wcm90b2NvbC5Qb2RDb21tYW5kCmltcG9ydCBjb20ueWlucGFnZS5saW5rLnByb3RvY29sLlBvZFRyYW5zcG9ydAppbXBvcnQgY29tLnlpbnBhZ2UubGluay5wcm90b2NvbC5Qb2RUcmFuc3BvcnRFeGNlcHRpb24KaW1wb3J0IGNvbS55aW5wYWdlLmxpbmsucHJvdG9jb2wuUG9kVXBkYXRlCmltcG9ydCBjb20ueWlucGFnZS5saW5rLnByb3RvY29sLlNlcnZpY2VOb3RGb3VuZEV4Y2VwdGlvbgppbXBvcnQgY29tLnlpbnBhZ2UubGluay5wcm90b2NvbC5UcmFuc3BvcnRGcmFtZQppbXBvcnQgY29tLnlpbnBhZ2UubGluay5wcm90b2NvbC5UcmFuc3BvcnRJb0V4Y2VwdGlvbgppbXBvcnQgY29tLnlpbnBhZ2UubGluay5wcm90b2NvbC5UcmFuc3BvcnRMaXN0ZW5lcgppbXBvcnQgY29tLnlpbnBhZ2UubGluay5wcm90b2NvbC5UcmFuc3BvcnRUaW1lb3V0RXhjZXB0aW9uCmltcG9ydCBrb3RsaW54LmNvcm91dGluZXMuQ2FuY2VsbGF0aW9uRXhjZXB0aW9uCmltcG9ydCBrb3RsaW54LmNvcm91dGluZXMuVGltZW91dENhbmNlbGxhdGlvbkV4Y2VwdGlvbgppbXBvcnQga290bGlueC5jb3JvdXRpbmVzLnN5bmMuTXV0ZXgKaW1wb3J0IGtvdGxpbnguY29yb3V0aW5lcy5zeW5jLndpdGhMb2NrCmltcG9ydCBrb3RsaW54LmNvcm91dGluZXMud2l0aFRpbWVvdXQKaW1wb3J0IGphdmEuaW8uSU9FeGNlcHRpb24KaW1wb3J0IGphdmEudXRpbC5jb25jdXJyZW50LmF0b21pYy5BdG9taWNMb25nCgovKioKICogPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQogKiAg5Lya6K+d5Y2P6LCD5ZmoIOKAlOKAlCBbUG9kQ29vcmRpbmF0b3JdIOeahOm7mOiupOWunueOsAogKiA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CiAqICDogYzotKPovrnnlYzvvJoKICogICAtIOS8oOi+k+Wxgu+8iFtQb2RUcmFuc3BvcnRd77yJ5Y+q6LSf6LSj44CM5oqK5a2X6IqC5pCs6L+H5Y67IC8g5pCs5Zue5p2l44CN77yb6K+75b6q546v55Sx5Lyg6L6TCiAqICAgICDlrp7njrDoh6rlt7HmjIHmnInvvIhbUG9kVHJhbnNwb3J0XSDlpZHnuqbph4zmsqHmnIkgcmVhZCgp77yM5Y+q5pyJIGxpc3RlbmVyLm9uRnJhbWXvvInvvIwKICogICAgIOavj+ivu+WIsOS4gOauteWtl+iKguWwsemAmui/hyBbVHJhbnNwb3J0TGlzdGVuZXIub25GcmFtZV0g5o6o5LiK5p2l77ybCiAqICAgLSDmnKznsbvotJ/otKPpgInmi6npgJrpgZPjgIHpqbHliqjmj6HmiYvjgIHmiormlLbliLDnmoTlrZfoioLlloLnu5kgW1BvZENvZGVjXe+8jAogKiAgICAg5bm25oqK5omA5pyJ5bqV5bGC5byC5bi457+76K+R5oiQ5Lq66K+d55qEIFtDb25uZWN0UmVzdWx0LkZhaWx1cmVd77yM57ud5LiN5aSW5oqb44CCCiAqCiAqICDnur/nqIvmqKHlnovvvJoKICogICAtIGNvbm5lY3QgLyBzZW5kIOWFseeUqOS4gOaKiiBbTXV0ZXhdIOS4suihjOWMlu+8jOmBv+WFjeOAjOi+uei/nui+ueWPkeOAje+8mwogKiAgIC0gZGlzY29ubmVjdCDkuI3mjILotbfjgIHlj6/lnKjku7vmhI/nur/nqIvosIPnlKjjgIHlj6/ph43lpI3osIPnlKjvvJsKICogICAtIOavj+asoeS8muivneacieeLrOeri+S7o+asoeWPtyBnZW5lcmF0aW9u77yM5pen5Lya6K+d55qE6L+f5Yiw5Zue6LCD5LiA5b6L5Lii5byD44CCCiAqID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KICovCmNsYXNzIFNlc3Npb25Db29yZGluYXRvcigKICAgIHByaXZhdGUgdmFsIGZhY3Rvcnk6IFRyYW5zcG9ydEZhY3RvcnksCikgOiBQb2RDb29yZGluYXRvciB7CgogICAgLyoqIGNvbm5lY3QgLyBzZW5kIOeahOS4suihjOmXuOmXqOOAgiAqLwogICAgcHJpdmF0ZSB2YWwgZ2F0ZSA9IE11dGV4KCkKCiAgICAvKiog5Lya6K+d5Luj5qyh77ya5Lu75L2V5LiA5qyhIHRlYXJkb3duIC8g5paw6L+e5o6l6YO95LyaICsx77yM5L2/5pen5Zue6LCD5aSx5pWI44CCICovCiAgICBwcml2YXRlIHZhbCBnZW5lcmF0aW9uID0gQXRvbWljTG9uZygwKQoKICAgIEBWb2xhdGlsZQogICAgcHJpdmF0ZSB2YXIgYWN0aXZlVHJhbnNwb3J0OiBQb2RUcmFuc3BvcnQ/ID0gbnVsbAoKICAgIEBWb2xhdGlsZQogICAgcHJpdmF0ZSB2YXIgYWN0aXZlQ29kZWM6IFBvZENvZGVjPyA9IG51bGwKCiAgICBAVm9sYXRpbGUKICAgIHByaXZhdGUgdmFyIHJlYWR5OiBCb29sZWFuID0gZmFsc2UKCiAgICBvdmVycmlkZSB2YWwgYWN0aXZlVHJhbnNwb3J0TmFtZTogU3RyaW5nPwogICAgICAgIGdldCgpID0gYWN0aXZlVHJhbnNwb3J0Py5uYW1lCgogICAgb3ZlcnJpZGUgdmFsIGFjdGl2ZUNvZGVjSWQ6IFN0cmluZz8KICAgICAgICBnZXQoKSA9IGFjdGl2ZUNvZGVjPy5pZAoKICAgIC8qKiDlsLHnu6ogPSDpgJrpgZPlt7Llu7rnq4vkuJTmj6HmiYvluKflt7Llhajpg6jlhpnlh7rvvJvpgJrpgZPmlq3lvIDml7bnlLEgW1RyYW5zcG9ydExpc3RlbmVyLm9uVHJhbnNwb3J0Q2xvc2VkXSDlpI3kvY3jgIIgKi8KICAgIG92ZXJyaWRlIHZhbCBpc1JlYWR5OiBCb29sZWFuCiAgICAgICAgZ2V0KCkgPSByZWFkeQoKICAgIC8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSDov57mjqUKCiAgICBvdmVycmlkZSBzdXNwZW5kIGZ1biBjb25uZWN0KAogICAgICAgIGFkZHJlc3M6IFN0cmluZywKICAgICAgICBkZXZpY2VOYW1lOiBTdHJpbmc/LAogICAgICAgIGtpbmQ6IFRyYW5zcG9ydEtpbmQsCiAgICAgICAgY29kZWM6IFBvZENvZGVjLAogICAgICAgIG9uVXBkYXRlOiAoUG9kVXBkYXRlKSAtPiBVbml0LAogICAgICAgIG9uTG9nOiAoU3RyaW5nKSAtPiBVbml0LAogICAgKTogQ29ubmVjdFJlc3VsdCA9IGdhdGUud2l0aExvY2sgewogICAgICAgIGNvbm5lY3RMb2NrZWQoYWRkcmVzcywgZGV2aWNlTmFtZSwga2luZCwgY29kZWMsIG9uVXBkYXRlLCBvbkxvZykKICAgIH0KCiAgICBwcml2YXRlIHN1c3BlbmQgZnVuIGNvbm5lY3RMb2NrZWQoCiAgICAgICAgYWRkcmVzczogU3RyaW5nLAogICAgICAgIGRldmljZU5hbWU6IFN0cmluZz8sCiAgICAgICAga2luZDogVHJhbnNwb3J0S2luZCwKICAgICAgICBjb2RlYzogUG9kQ29kZWMsCiAgICAgICAgb25VcGRhdGU6IChQb2RVcGRhdGUpIC0+IFVuaXQsCiAgICAgICAgb25Mb2c6IChTdHJpbmcpIC0+IFVuaXQsCiAgICApOiBDb25uZWN0UmVzdWx0IHsKICAgICAgICB2YWwgcGxhbiA9IGNvbm5lY3Rpb25QbGFuKGtpbmQpCiAgICAgICAgdmFsIHRhcmdldCA9IGRldmljZU5hbWU/LnRha2VJZiB7IGl0LmlzTm90QmxhbmsoKSB9ID86IGFkZHJlc3MKICAgICAgICBvbkxvZygi6L+e5o6l6K6h5YiS77yaJHtwbGFuLmpvaW5Ub1N0cmluZygiIOKGkiAiKSB7IGl0LmxhYmVsIH1977yM55uu5qCHPSR0YXJnZXTvvIzljY/orq49JHtjb2RlYy5pZH0iKQogICAgICAgIEV2ZW50TG9nLmluZm8oCiAgICAgICAgICAgIFRBRywKICAgICAgICAgICAgIuW8gOWni+i/nuaOpe+8mmFkZHI9JGFkZHJlc3MgbmFtZT0ke2RldmljZU5hbWUgPzogIi0ifSAiICsKICAgICAgICAgICAgICAgICLorqHliJI9JHtwbGFuLmpvaW5Ub1N0cmluZygiLyIpIHsgaXQubmFtZSB9fSDljY/orq49JHtjb2RlYy5pZH0iLAogICAgICAgICkKCiAgICAgICAgdmFsIGZhaWx1cmVzID0gbXV0YWJsZUxpc3RPZjxTdHJpbmc+KCkKICAgICAgICB2YXIgbGFzdENhdXNlOiBQb2RUcmFuc3BvcnRFeGNlcHRpb24/ID0gbnVsbAoKICAgICAgICBmb3IgKGNhbmRpZGF0ZSBpbiBwbGFuKSB7CiAgICAgICAgICAgIHdoZW4gKHZhbCByZXN1bHQgPSBhdHRlbXB0KGNhbmRpZGF0ZSwgYWRkcmVzcywgY29kZWMsIG9uVXBkYXRlLCBvbkxvZykpIHsKICAgICAgICAgICAgICAgIGlzIENvbm5lY3RSZXN1bHQuU3VjY2VzcyAtPiByZXR1cm4gcmVzdWx0CiAgICAgICAgICAgICAgICBpcyBDb25uZWN0UmVzdWx0LkZhaWx1cmUgLT4gewogICAgICAgICAgICAgICAgICAgIGZhaWx1cmVzICs9ICIke2NhbmRpZGF0ZS5sYWJlbH3vvJoke3Jlc3VsdC5yZWFzb259IgogICAgICAgICAgICAgICAgICAgIHJlc3VsdC5jYXVzZT8ubGV0IHsgbGFzdENhdXNlID0gaXQgfQogICAgICAgICAgICAgICAgICAgIG9uTG9nKCIke2NhbmRpZGF0ZS5sYWJlbH0g5aSx6LSl77yaJHtyZXN1bHQucmVhc29ufSIpCiAgICAgICAgICAgICAgICAgICAgRXZlbnRMb2cuaW5mbyhUQUcsICIke2NhbmRpZGF0ZS5sYWJlbH0g5aSx6LSl77yaJHtyZXN1bHQucmVhc29ufSIpCiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgIH0KICAgICAgICB9CgogICAgICAgIHZhbCByZWFzb24gPSB3aGVuIChmYWlsdXJlcy5zaXplKSB7CiAgICAgICAgICAgIDAgLT4gIuayoeacieWPr+eUqOeahOS8oOi+k+mAmumBkyIKICAgICAgICAgICAgMSAtPiBmYWlsdXJlcy5maXJzdCgpCiAgICAgICAgICAgIGVsc2UgLT4gIuaJgOaciemAmumBk+Wdh+Wksei0pe+8iCR7ZmFpbHVyZXMuam9pblRvU3RyaW5nKCLvvJsiKX3vvIkiCiAgICAgICAgfQogICAgICAgIHJldHVybiBDb25uZWN0UmVzdWx0LkZhaWx1cmUocmVhc29uLCBsYXN0Q2F1c2UpCiAgICB9CgogICAgLyoqIEFVVE8g5pe25YWI57uP5YW46JOd54mZIFNQUO+8jOWksei0peWGjemAgOWbniBCTEXvvJvmjIflrprpgJrpgZPml7blj6ror5XkuIDmrKHjgIIgKi8KICAgIHByaXZhdGUgZnVuIGNvbm5lY3Rpb25QbGFuKGtpbmQ6IFRyYW5zcG9ydEtpbmQpOiBMaXN0PFRyYW5zcG9ydEtpbmQ+ID0gd2hlbiAoa2luZCkgewogICAgICAgIFRyYW5zcG9ydEtpbmQuUkZDT01NIC0+IGxpc3RPZihUcmFuc3BvcnRLaW5kLlJGQ09NTSkKICAgICAgICBUcmFuc3BvcnRLaW5kLkJMRSAtPiBsaXN0T2YoVHJhbnNwb3J0S2luZC5CTEUpCiAgICAgICAgVHJhbnNwb3J0S2luZC5BVVRPIC0+IGxpc3RPZihUcmFuc3BvcnRLaW5kLlJGQ09NTSwgVHJhbnNwb3J0S2luZC5CTEUpCiAgICB9CgogICAgLyoqCiAgICAgKiDkuIDmrKHlrozmlbTnmoTpgJrpgZPlsJ3or5XvvJrlu7rpgJrpgZMg4oaSIOWPkeaPoeaJiyDihpIg5qCH6K6w5bCx57uq44CCCiAgICAgKiDmiYDmnInlvILluLjlnKjov5nph4znv7vor5HmiJAgW0Nvbm5lY3RSZXN1bHQuRmFpbHVyZV0g6L+U5Zue77yb5Y+q5pyJ5Y2P56iL5Y+W5raICiAgICAgKiBbQ2FuY2VsbGF0aW9uRXhjZXB0aW9uXSDkvJrnu6fnu63lkJHkuIrmipvvvIjnu5PmnoTljJblubblj5HnmoTnoaznuqbmnZ/vvIxBcHBTdGF0ZSDkuZ/lt7IKICAgICAqIOeUqCBydW5DYXRjaGluZyDlhZzkvY/vvInjgIIKICAgICAqLwogICAgcHJpdmF0ZSBzdXNwZW5kIGZ1biBhdHRlbXB0KAogICAgICAgIGtpbmQ6IFRyYW5zcG9ydEtpbmQsCiAgICAgICAgYWRkcmVzczogU3RyaW5nLAogICAgICAgIGNvZGVjOiBQb2RDb2RlYywKICAgICAgICBvblVwZGF0ZTogKFBvZFVwZGF0ZSkgLT4gVW5pdCwKICAgICAgICBvbkxvZzogKFN0cmluZykgLT4gVW5pdCwKICAgICk6IENvbm5lY3RSZXN1bHQgewogICAgICAgIHRlYXJkb3duKCLlh4blpIfmlrDov57mjqUiKQogICAgICAgIHZhbCBteUdlbmVyYXRpb24gPSBnZW5lcmF0aW9uLmluY3JlbWVudEFuZEdldCgpCgogICAgICAgIHZhbCBjaGFubmVsID0gdHJ5IHsKICAgICAgICAgICAgZmFjdG9yeS5jcmVhdGUoa2luZCwgYWRkcmVzcykKICAgICAgICB9IGNhdGNoIChlcnJvcjogVGhyb3dhYmxlKSB7CiAgICAgICAgICAgIGlmIChlcnJvciBpcyBDYW5jZWxsYXRpb25FeGNlcHRpb24pIHRocm93IGVycm9yCiAgICAgICAgICAgIHZhbCBtYXBwZWQgPSBUcmFuc3BvcnRJb0V4Y2VwdGlvbigi5peg5rOV5Yib5bu6ICR7a2luZC5sYWJlbH0g6YCa6YGT77yaJHtkZXNjcmliZShlcnJvcil9IiwgZXJyb3IpCiAgICAgICAgICAgIHJldHVybiBDb25uZWN0UmVzdWx0LkZhaWx1cmUoaHVtYW4obWFwcGVkLCBraW5kKSwgbWFwcGVkKQogICAgICAgIH0KCiAgICAgICAgdmFsIGxpc3RlbmVyID0gb2JqZWN0IDogVHJhbnNwb3J0TGlzdGVuZXIgewogICAgICAgICAgICBvdmVycmlkZSBmdW4gb25UcmFuc3BvcnRSZWFkeSgpIHsKICAgICAgICAgICAgICAgIGlmIChnZW5lcmF0aW9uLmdldCgpICE9IG15R2VuZXJhdGlvbikgcmV0dXJuCiAgICAgICAgICAgICAgICBFdmVudExvZy5pbmZvKFRBRywgIiR7Y2hhbm5lbC5uYW1lfSDpgJrpgZPlsLHnu6oiKQogICAgICAgICAgICB9CgogICAgICAgICAgICBvdmVycmlkZSBmdW4gb25GcmFtZShmcmFtZTogVHJhbnNwb3J0RnJhbWUpIHsKICAgICAgICAgICAgICAgIGlmIChnZW5lcmF0aW9uLmdldCgpICE9IG15R2VuZXJhdGlvbikgcmV0dXJuCiAgICAgICAgICAgICAgICB2YWwgZGVjb2RlciA9IHRoaXNAU2Vzc2lvbkNvb3JkaW5hdG9yLmFjdGl2ZUNvZGVjID86IHJldHVybgogICAgICAgICAgICAgICAgdHJ5IHsKICAgICAgICAgICAgICAgICAgICAvLyDpobrluo/mlY/mhJ/vvJpSRkNPTU0g5ZyoIElPIOivu+e6v+eoi+S4iuaKlemAku+8jEJMRSDlnKjkuLvnur/nqIvkuIrmipXpgJLvvIwKICAgICAgICAgICAgICAgICAgICAvLyDkuKTogIXpg73mmK/ljZXnur/nqIvkuLLooYzliLDovr7vvIzlm6DmraTov5nph4znm7TmjqXop6PnoIHlj6/kv53or4HmtYHlvI/liIbluKfpobrluo/jgIIKICAgICAgICAgICAgICAgICAgICBkZWNvZGVyLmRlY29kZShmcmFtZS5ieXRlcykgeyB1cGRhdGUgLT4gb25VcGRhdGUodXBkYXRlKSB9CiAgICAgICAgICAgICAgICB9IGNhdGNoIChlcnJvcjogVGhyb3dhYmxlKSB7CiAgICAgICAgICAgICAgICAgICAgRXZlbnRMb2cuaW5mbyhUQUcsICLop6PnoIHlpLHotKXvvJoke2Rlc2NyaWJlKGVycm9yKX0iKQogICAgICAgICAgICAgICAgICAgIG9uTG9nKCLop6PnoIHlpLHotKXvvJoke2Rlc2NyaWJlKGVycm9yKX0iKQogICAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CgogICAgICAgICAgICBvdmVycmlkZSBmdW4gb25UcmFuc3BvcnRDbG9zZWQocmVhc29uOiBTdHJpbmcpIHsKICAgICAgICAgICAgICAgIGlmIChnZW5lcmF0aW9uLmdldCgpICE9IG15R2VuZXJhdGlvbikgcmV0dXJuCiAgICAgICAgICAgICAgICByZWFkeSA9IGZhbHNlCiAgICAgICAgICAgICAgICBFdmVudExvZy5pbmZvKFRBRywgIiR7Y2hhbm5lbC5uYW1lfSDpgJrpgZPmlq3lvIDvvJokcmVhc29uIikKICAgICAgICAgICAgICAgIG9uTG9nKCIke2NoYW5uZWwubmFtZX0g6YCa6YGT5pat5byA77yaJHJlYXNvbiIpCiAgICAgICAgICAgIH0KCiAgICAgICAgICAgIG92ZXJyaWRlIGZ1biBvblRyYW5zcG9ydExvZyhtZXNzYWdlOiBTdHJpbmcpIHsKICAgICAgICAgICAgICAgIGlmIChnZW5lcmF0aW9uLmdldCgpICE9IG15R2VuZXJhdGlvbikgcmV0dXJuCiAgICAgICAgICAgICAgICBFdmVudExvZy5kZWJ1ZyhUQUcsIG1lc3NhZ2UpCiAgICAgICAgICAgIH0KICAgICAgICB9CgogICAgICAgIHRoaXMuYWN0aXZlQ29kZWMgPSBjb2RlYwogICAgICAgIHRoaXMuYWN0aXZlVHJhbnNwb3J0ID0gY2hhbm5lbAogICAgICAgIHRoaXMucmVhZHkgPSBmYWxzZQoKICAgICAgICAvLyAtLS0tIDEuIOW7uueri+mAmumBkyAtLS0tCiAgICAgICAgdHJ5IHsKICAgICAgICAgICAgd2l0aFRpbWVvdXQoQ09OTkVDVF9XQVRDSERPR19NUykgeyBjaGFubmVsLmNvbm5lY3QobGlzdGVuZXIpIH0KICAgICAgICB9IGNhdGNoICh0aW1lb3V0OiBUaW1lb3V0Q2FuY2VsbGF0aW9uRXhjZXB0aW9uKSB7CiAgICAgICAgICAgIHRlYXJkb3duKCLov57mjqXotoXml7YiKQogICAgICAgICAgICB2YWwgbWFwcGVkID0gVHJhbnNwb3J0VGltZW91dEV4Y2VwdGlvbigiJHtraW5kLmxhYmVsfSDov57mjqXotoXov4cgJHtDT05ORUNUX1dBVENIRE9HX01TIC8gMTAwMH0g56eS5pyq5a6M5oiQIikKICAgICAgICAgICAgcmV0dXJuIENvbm5lY3RSZXN1bHQuRmFpbHVyZShodW1hbihtYXBwZWQsIGtpbmQpLCBtYXBwZWQpCiAgICAgICAgfSBjYXRjaCAoY2FuY2VsOiBDYW5jZWxsYXRpb25FeGNlcHRpb24pIHsKICAgICAgICAgICAgdGVhcmRvd24oIui/nuaOpeiiq+WPlua2iCIpCiAgICAgICAgICAgIHRocm93IGNhbmNlbAogICAgICAgIH0gY2F0Y2ggKGVycm9yOiBUaHJvd2FibGUpIHsKICAgICAgICAgICAgdmFsIG1hcHBlZCA9IG1hcEVycm9yKGVycm9yLCBraW5kKQogICAgICAgICAgICB0ZWFyZG93bigi6L+e5o6l5aSx6LSlIikKICAgICAgICAgICAgcmV0dXJuIENvbm5lY3RSZXN1bHQuRmFpbHVyZShodW1hbihtYXBwZWQsIGtpbmQpLCBtYXBwZWQpCiAgICAgICAgfQoKICAgICAgICBpZiAoZ2VuZXJhdGlvbi5nZXQoKSAhPSBteUdlbmVyYXRpb24pIHsKICAgICAgICAgICAgdGVhcmRvd24oIui/nuaOpeW3suiiq+aWsOivt+axguWPluS7oyIpCiAgICAgICAgICAgIHJldHVybiBDb25uZWN0UmVzdWx0LkZhaWx1cmUoIui/nuaOpeW3suiiq+aWsOeahOi/nuaOpeivt+axguWPluS7oyIpCiAgICAgICAgfQoKICAgICAgICAvLyAtLS0tIDIuIOWPkemAgeaPoeaJi+W4pyAtLS0tCiAgICAgICAgdmFsIGhhbmRzaGFrZSA9IHRyeSB7CiAgICAgICAgICAgIGNvZGVjLmhhbmRzaGFrZSgpCiAgICAgICAgfSBjYXRjaCAoZXJyb3I6IFRocm93YWJsZSkgewogICAgICAgICAgICBpZiAoZXJyb3IgaXMgQ2FuY2VsbGF0aW9uRXhjZXB0aW9uKSB0aHJvdyBlcnJvcgogICAgICAgICAgICB0ZWFyZG93bigi5o+h5omL5bin5p6E6YCg5aSx6LSlIikKICAgICAgICAgICAgcmV0dXJuIENvbm5lY3RSZXN1bHQuRmFpbHVyZSgi5Y2P6K6u5o+h5omL5bin5p6E6YCg5aSx6LSl77yaJHtkZXNjcmliZShlcnJvcil9IikKICAgICAgICB9CgogICAgICAgIGZvciAoKGluZGV4LCBmcmFtZSkgaW4gaGFuZHNoYWtlLndpdGhJbmRleCgpKSB7CiAgICAgICAgICAgIGlmIChmcmFtZS5pc0VtcHR5KCkpIGNvbnRpbnVlCiAgICAgICAgICAgIHRyeSB7CiAgICAgICAgICAgICAgICBjaGFubmVsLndyaXRlKGZyYW1lKQogICAgICAgICAgICB9IGNhdGNoIChlcnJvcjogVGhyb3dhYmxlKSB7CiAgICAgICAgICAgICAgICBpZiAoZXJyb3IgaXMgQ2FuY2VsbGF0aW9uRXhjZXB0aW9uKSB0aHJvdyBlcnJvcgogICAgICAgICAgICAgICAgdmFsIG1hcHBlZCA9IG1hcEVycm9yKGVycm9yLCBraW5kKQogICAgICAgICAgICAgICAgdGVhcmRvd24oIuaPoeaJi+WPkemAgeWksei0pSIpCiAgICAgICAgICAgICAgICB2YWwgcmVhc29uID0gIuaPoeaJi+esrCAke2luZGV4ICsgMX0vJHtoYW5kc2hha2Uuc2l6ZX0g5bin5Y+R6YCB5aSx6LSl77yIJHtodW1hbihtYXBwZWQsIGtpbmQpfe+8iSIKICAgICAgICAgICAgICAgIHJldHVybiBDb25uZWN0UmVzdWx0LkZhaWx1cmUocmVhc29uLCBtYXBwZWQpCiAgICAgICAgICAgIH0KICAgICAgICB9CgogICAgICAgIGlmIChnZW5lcmF0aW9uLmdldCgpICE9IG15R2VuZXJhdGlvbikgewogICAgICAgICAgICB0ZWFyZG93bigi6L+e5o6l5bey6KKr5paw6K+35rGC5Y+W5LujIikKICAgICAgICAgICAgcmV0dXJuIENvbm5lY3RSZXN1bHQuRmFpbHVyZSgi6L+e5o6l5bey6KKr5paw55qE6L+e5o6l6K+35rGC5Y+W5LujIikKICAgICAgICB9CgogICAgICAgIC8vIC0tLS0gMy4g5qCH6K6w5bCx57uqIC0tLS0KICAgICAgICByZWFkeSA9IHRydWUKICAgICAgICBFdmVudExvZy5pbmZvKFRBRywgIuS8muivneWwsee7qu+8mumAmumBkz0ke2NoYW5uZWwubmFtZX0g5Y2P6K6uPSR7Y29kZWMuaWR9IOaPoeaJi+W4pz0ke2hhbmRzaGFrZS5zaXplfSIpCiAgICAgICAgb25Mb2coIuS8muivneWwsee7qu+8miR7Y2hhbm5lbC5uYW1lfSArICR7Y29kZWMuaWR9IikKICAgICAgICByZXR1cm4gQ29ubmVjdFJlc3VsdC5TdWNjZXNzCiAgICB9CgogICAgLy8gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIOWPkemAgQoKICAgIG92ZXJyaWRlIHN1c3BlbmQgZnVuIHNlbmQoY29tbWFuZDogUG9kQ29tbWFuZCk6IEJvb2xlYW4gPSBnYXRlLndpdGhMb2NrIHsKICAgICAgICB2YWwgdHJhbnNwb3J0ID0gYWN0aXZlVHJhbnNwb3J0ID86IHJldHVybkB3aXRoTG9jayBmYWxzZQogICAgICAgIHZhbCBlbmNvZGVyID0gYWN0aXZlQ29kZWMgPzogcmV0dXJuQHdpdGhMb2NrIGZhbHNlCiAgICAgICAgaWYgKCFyZWFkeSB8fCAhdHJhbnNwb3J0LmlzQ29ubmVjdGVkKSB7CiAgICAgICAgICAgIEV2ZW50TG9nLmRlYnVnKFRBRywgIuacquWwsee7qu+8jOS4ouW8g+WRveS7pCAkY29tbWFuZCIpCiAgICAgICAgICAgIHJldHVybkB3aXRoTG9jayBmYWxzZQogICAgICAgIH0KCiAgICAgICAgdmFsIGZyYW1lcyA9IHRyeSB7CiAgICAgICAgICAgIGVuY29kZXIuZW5jb2RlKGNvbW1hbmQpCiAgICAgICAgfSBjYXRjaCAoZXJyb3I6IFRocm93YWJsZSkgewogICAgICAgICAgICBFdmVudExvZy5pbmZvKFRBRywgIuWRveS7pOe8lueggeWksei0pe+8miR7ZGVzY3JpYmUoZXJyb3IpfSIpCiAgICAgICAgICAgIHJldHVybkB3aXRoTG9jayBmYWxzZQogICAgICAgIH0KICAgICAgICBpZiAoZnJhbWVzLmlzRW1wdHkoKSkgewogICAgICAgICAgICBFdmVudExvZy5kZWJ1ZyhUQUcsICLljY/orq4gJHtlbmNvZGVyLmlkfSDkuI3mlK/mjIEgJGNvbW1hbmQiKQogICAgICAgICAgICByZXR1cm5Ad2l0aExvY2sgZmFsc2UKICAgICAgICB9CgogICAgICAgIGZvciAoZnJhbWUgaW4gZnJhbWVzKSB7CiAgICAgICAgICAgIGlmIChmcmFtZS5pc0VtcHR5KCkpIGNvbnRpbnVlCiAgICAgICAgICAgIHRyeSB7CiAgICAgICAgICAgICAgICB0cmFuc3BvcnQud3JpdGUoZnJhbWUpCiAgICAgICAgICAgIH0gY2F0Y2ggKGVycm9yOiBUaHJvd2FibGUpIHsKICAgICAgICAgICAgICAgIGlmIChlcnJvciBpcyBDYW5jZWxsYXRpb25FeGNlcHRpb24pIHRocm93IGVycm9yCiAgICAgICAgICAgICAgICBFdmVudExvZy5pbmZvKFRBRywgIuWPkemAgeWksei0pe+8iCR7dHJhbnNwb3J0Lm5hbWV977yJ77yaJHtkZXNjcmliZShlcnJvcil9IikKICAgICAgICAgICAgICAgIHJldHVybkB3aXRoTG9jayBmYWxzZQogICAgICAgICAgICB9CiAgICAgICAgfQogICAgICAgIEV2ZW50TG9nLmRlYnVnKFRBRywgIiRjb21tYW5kIOKGkiAke2ZyYW1lcy5zaXplfSDluKflt7Llhpnlh7rvvIgke3RyYW5zcG9ydC5uYW1lfe+8iSIpCiAgICAgICAgdHJ1ZQogICAgfQoKICAgIC8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSDmlq3lvIAKCiAgICBvdmVycmlkZSBmdW4gZGlzY29ubmVjdCgpIHsKICAgICAgICB2YWwgcHJldmlvdXMgPSBhY3RpdmVUcmFuc3BvcnQ/Lm5hbWUKICAgICAgICB0ZWFyZG93bigi5Li75Yqo5pat5byAIikKICAgICAgICBpZiAocHJldmlvdXMgIT0gbnVsbCkgewogICAgICAgICAgICBFdmVudExvZy5pbmZvKFRBRywgIuW3suaWreW8gOW5tumHiuaUvumAmumBk++8miRwcmV2aW91cyIpCiAgICAgICAgfSBlbHNlIHsKICAgICAgICAgICAgRXZlbnRMb2cuZGVidWcoVEFHLCAiZGlzY29ubmVjdCgp77ya5b2T5YmN5rKh5pyJ5rS75Yqo6YCa6YGTIikKICAgICAgICB9CiAgICB9CgogICAgLyoqCiAgICAgKiDph4rmlL7kvJror53vvJrlhYjorqnml6flm57osIPlpLHmlYjvvIzlho3lhbPpl63pgJrpgZPvvIzmnIDlkI7muIXnqbrnirbmgIHjgIIKICAgICAqIOmhuuW6j+W+iOmHjeimgSDigJTigJQg5YWIIGJ1bXAg5Luj5qyh77yM6L+f5Yiw55qEIG9uVHJhbnNwb3J0Q2xvc2VkIOWwseS4jeS8muWGjeaJk+WbniBVSeOAggogICAgICog5Y+v6YeN5aSN6LCD55So77yI5peg6YCa6YGT5pe25piv56m65pON5L2c77yJ44CCCiAgICAgKi8KICAgIHByaXZhdGUgZnVuIHRlYXJkb3duKHJlYXNvbjogU3RyaW5nKSB7CiAgICAgICAgZ2VuZXJhdGlvbi5pbmNyZW1lbnRBbmRHZXQoKQogICAgICAgIHJlYWR5ID0gZmFsc2UKICAgICAgICB2YWwgcHJldmlvdXMgPSBhY3RpdmVUcmFuc3BvcnQKICAgICAgICBhY3RpdmVUcmFuc3BvcnQgPSBudWxsCiAgICAgICAgYWN0aXZlQ29kZWMgPSBudWxsCiAgICAgICAgaWYgKHByZXZpb3VzICE9IG51bGwpIHsKICAgICAgICAgICAgdHJ5IHsKICAgICAgICAgICAgICAgIHByZXZpb3VzLmNsb3NlKCkKICAgICAgICAgICAgfSBjYXRjaCAoZXJyb3I6IFRocm93YWJsZSkgewogICAgICAgICAgICAgICAgRXZlbnRMb2cuaW5mbyhUQUcsICLlhbPpl63pgJrpgZPml7blh7rplJnvvIgkcmVhc29u77yJ77yaJHtkZXNjcmliZShlcnJvcil9IikKICAgICAgICAgICAgfQogICAgICAgIH0KICAgIH0KCiAgICAvLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0g6ZSZ6K+v5pig5bCECgogICAgcHJpdmF0ZSBmdW4gbWFwRXJyb3IoZXJyb3I6IFRocm93YWJsZSwga2luZDogVHJhbnNwb3J0S2luZCk6IFBvZFRyYW5zcG9ydEV4Y2VwdGlvbiA9IHdoZW4gKGVycm9yKSB7CiAgICAgICAgaXMgUG9kVHJhbnNwb3J0RXhjZXB0aW9uIC0+IGVycm9yCiAgICAgICAgaXMgU2VjdXJpdHlFeGNlcHRpb24gLT4gTWlzc2luZ1Blcm1pc3Npb25FeGNlcHRpb24oZXJyb3IubWVzc2FnZSA/OiAiQkxVRVRPT1RIX0NPTk5FQ1QiKQogICAgICAgIGlzIElPRXhjZXB0aW9uIC0+IFRyYW5zcG9ydElvRXhjZXB0aW9uKCIke2tpbmQubGFiZWx9IElPIOWksei0pe+8miR7ZGVzY3JpYmUoZXJyb3IpfSIsIGVycm9yKQogICAgICAgIGVsc2UgLT4gVHJhbnNwb3J0SW9FeGNlcHRpb24oIiR7a2luZC5sYWJlbH0g6L+e5o6l5byC5bi477yaJHtkZXNjcmliZShlcnJvcil9IiwgZXJyb3IpCiAgICB9CgogICAgLyoqIOaKiuW6leWxguW8guW4uOe/u+ivkeaIkCBVSSDog73nm7TmjqXlsZXnpLrnmoTkuIDlj6Xor53jgIIgKi8KICAgIHByaXZhdGUgZnVuIGh1bWFuKGVycm9yOiBQb2RUcmFuc3BvcnRFeGNlcHRpb24sIGtpbmQ6IFRyYW5zcG9ydEtpbmQpOiBTdHJpbmcgPSB3aGVuIChlcnJvcikgewogICAgICAgIGlzIEJsdWV0b290aE9mZkV4Y2VwdGlvbiAtPiAi6JOd54mZ5pyq5byA5ZCv77yM6K+35YWI5omT5byA57O757uf6JOd54mZIgogICAgICAgIGlzIE1pc3NpbmdQZXJtaXNzaW9uRXhjZXB0aW9uIC0+ICIke2Vycm9yLm1lc3NhZ2Uub3JFbXB0eSgpfe+8iOivt+WcqOezu+e7n+iuvue9ruS4reaOiOS6iOOAjOmZhOi/keeahOiuvuWkh+OAjeadg+mZkO+8iSIKICAgICAgICBpcyBEZXZpY2VVbmF2YWlsYWJsZUV4Y2VwdGlvbiAtPiBlcnJvci5tZXNzYWdlLm9yRW1wdHkoKQogICAgICAgIGlzIFNlcnZpY2VOb3RGb3VuZEV4Y2VwdGlvbiAtPiAiJHtraW5kLmxhYmVsfe+8miR7ZXJyb3IubWVzc2FnZS5vckVtcHR5KCl9IgogICAgICAgIGlzIFRyYW5zcG9ydFRpbWVvdXRFeGNlcHRpb24gLT4gIiR7a2luZC5sYWJlbH3vvJoke2Vycm9yLm1lc3NhZ2Uub3JFbXB0eSgpfSIKICAgICAgICBpcyBUcmFuc3BvcnRJb0V4Y2VwdGlvbiAtPiAiJHtraW5kLmxhYmVsfe+8miR7ZXJyb3IubWVzc2FnZS5vckVtcHR5KCl9IgogICAgfQoKICAgIHByaXZhdGUgZnVuIGRlc2NyaWJlKGVycm9yOiBUaHJvd2FibGUpOiBTdHJpbmcgPQogICAgICAgIGVycm9yLm1lc3NhZ2U/LnRha2VJZiB7IGl0LmlzTm90QmxhbmsoKSB9ID86IGVycm9yLmphdmFDbGFzcy5zaW1wbGVOYW1lCgogICAgcHJpdmF0ZSBjb21wYW5pb24gb2JqZWN0IHsKICAgICAgICBjb25zdCB2YWwgVEFHID0gIuS8muivnSIKCiAgICAgICAgLyoqIOWNj+iwg+WZqOe6p+eci+mXqOeLl++8muavlOS8oOi+k+WxguiHqui6q+eahCAxNSDnp5LotoXml7bmm7Tlrr3mnb7vvIzlj6rlhZzlupXjgIzlrozlhajkuI3ov5Tlm57jgI3nmoTlrp7njrDjgIIgKi8KICAgICAgICBjb25zdCB2YWwgQ09OTkVDVF9XQVRDSERPR19NUyA9IDIwXzAwMEwKICAgIH0KfQo=
+package com.yinpage.link.core
+
+import com.yinpage.link.protocol.BluetoothOffException
+import com.yinpage.link.protocol.DeviceUnavailableException
+import com.yinpage.link.protocol.MissingPermissionException
+import com.yinpage.link.protocol.PodCodec
+import com.yinpage.link.protocol.PodCommand
+import com.yinpage.link.protocol.PodTransport
+import com.yinpage.link.protocol.PodTransportException
+import com.yinpage.link.protocol.PodUpdate
+import com.yinpage.link.protocol.ServiceNotFoundException
+import com.yinpage.link.protocol.TransportFrame
+import com.yinpage.link.protocol.TransportIoException
+import com.yinpage.link.protocol.TransportListener
+import com.yinpage.link.protocol.TransportTimeoutException
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.TimeoutCancellationException
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.withTimeout
+import java.io.IOException
+import java.util.concurrent.atomic.AtomicLong
+
+/**
+ * ============================================================================
+ *  会话协调器 —— [PodCoordinator] 的默认实现
+ * ============================================================================
+ *  职责边界：
+ *   - 传输层（[PodTransport]）只负责「把字节搬过去 / 搬回来」；读循环由传输
+ *     实现自己持有（[PodTransport] 契约里没有 read()，只有 listener.onFrame），
+ *     每读到一段字节就通过 [TransportListener.onFrame] 推上来；
+ *   - 本类负责选择通道、驱动握手、把收到的字节喂给 [PodCodec]，
+ *     并把所有底层异常翻译成人话的 [ConnectResult.Failure]，绝不外抛。
+ *
+ *  线程模型：
+ *   - connect / send 共用一把 [Mutex] 串行化，避免「边连边发」；
+ *   - disconnect 不挂起、可在任意线程调用、可重复调用；
+ *   - 每次会话有独立代次号 generation，旧会话的迟到回调一律丢弃。
+ * ============================================================================
+ */
+class SessionCoordinator(
+    private val factory: TransportFactory,
+) : PodCoordinator {
+
+    /** connect / send 的串行闸门。 */
+    private val gate = Mutex()
+
+    /** 会话代次：任何一次 teardown / 新连接都会 +1，使旧回调失效。 */
+    private val generation = AtomicLong(0)
+
+    @Volatile
+    private var activeTransport: PodTransport? = null
+
+    @Volatile
+    private var activeCodec: PodCodec? = null
+
+    @Volatile
+    private var ready: Boolean = false
+
+    override val activeTransportName: String?
+        get() = activeTransport?.name
+
+    override val activeCodecId: String?
+        get() = activeCodec?.id
+
+    /** 就绪 = 通道已建立且握手帧已全部写出；通道断开时由 [TransportListener.onTransportClosed] 复位。 */
+    override val isReady: Boolean
+        get() = ready
+
+    // ------------------------------------------------------------------ 连接
+
+    override suspend fun connect(
+        address: String,
+        deviceName: String?,
+        kind: TransportKind,
+        codec: PodCodec,
+        onUpdate: (PodUpdate) -> Unit,
+        onLog: (String) -> Unit,
+    ): ConnectResult = gate.withLock {
+        connectLocked(address, deviceName, kind, codec, onUpdate, onLog)
+    }
+
+    private suspend fun connectLocked(
+        address: String,
+        deviceName: String?,
+        kind: TransportKind,
+        codec: PodCodec,
+        onUpdate: (PodUpdate) -> Unit,
+        onLog: (String) -> Unit,
+    ): ConnectResult {
+        val plan = connectionPlan(kind)
+        val target = deviceName?.takeIf { it.isNotBlank() } ?: address
+        onLog("连接计划：${plan.joinToString(" → ") { it.label }}，目标=$target，协议=${codec.id}")
+        EventLog.info(
+            TAG,
+            "开始连接：addr=$address name=${deviceName ?: "-"} " +
+                "计划=${plan.joinToString("/") { it.name }} 协议=${codec.id}",
+        )
+
+        val failures = mutableListOf<String>()
+        var lastCause: PodTransportException? = null
+
+        for (candidate in plan) {
+            when (val result = attempt(candidate, address, codec, onUpdate, onLog)) {
+                is ConnectResult.Success -> return result
+                is ConnectResult.Failure -> {
+                    failures += "${candidate.label}：${result.reason}"
+                    result.cause?.let { lastCause = it }
+                    onLog("${candidate.label} 失败：${result.reason}")
+                    EventLog.info(TAG, "${candidate.label} 失败：${result.reason}")
+                }
+            }
+        }
+
+        val reason = when (failures.size) {
+            0 -> "没有可用的传输通道"
+            1 -> failures.first()
+            else -> "所有通道均失败（${failures.joinToString("；")}）"
+        }
+        return ConnectResult.Failure(reason, lastCause)
+    }
+
+    /** AUTO 时先经典蓝牙 SPP，失败再退回 BLE；指定通道时只试一次。 */
+    private fun connectionPlan(kind: TransportKind): List<TransportKind> = when (kind) {
+        TransportKind.RFCOMM -> listOf(TransportKind.RFCOMM)
+        TransportKind.BLE -> listOf(TransportKind.BLE)
+        TransportKind.AUTO -> listOf(TransportKind.RFCOMM, TransportKind.BLE)
+    }
+
+    /**
+     * 一次完整的通道尝试：建通道 → 发握手 → 标记就绪。
+     * 所有异常在这里翻译成 [ConnectResult.Failure] 返回；只有协程取消
+     * [CancellationException] 会继续向上抛（结构化并发的硬约束，AppState 也已
+     * 用 runCatching 兜住）。
+     */
+    private suspend fun attempt(
+        kind: TransportKind,
+        address: String,
+        codec: PodCodec,
+        onUpdate: (PodUpdate) -> Unit,
+        onLog: (String) -> Unit,
+    ): ConnectResult {
+        teardown("准备新连接")
+        val myGeneration = generation.incrementAndGet()
+
+        val channel = try {
+            factory.create(kind, address)
+        } catch (error: Throwable) {
+            if (error is CancellationException) throw error
+            val mapped = TransportIoException("无法创建 ${kind.label} 通道：${describe(error)}", error)
+            return ConnectResult.Failure(human(mapped, kind), mapped)
+        }
+
+        val listener = object : TransportListener {
+            override fun onTransportReady() {
+                if (generation.get() != myGeneration) return
+                EventLog.info(TAG, "${channel.name} 通道就绪")
+            }
+
+            override fun onFrame(frame: TransportFrame) {
+                if (generation.get() != myGeneration) return
+                val decoder = this@SessionCoordinator.activeCodec ?: return
+                try {
+                    // 顺序敏感：RFCOMM 在 IO 读线程上投递，BLE 在主线程上投递，
+                    // 两者都是单线程串行到达，因此这里直接解码可保证流式分帧顺序。
+                    decoder.decode(frame.bytes) { update -> onUpdate(update) }
+                } catch (error: Throwable) {
+                    EventLog.info(TAG, "解码失败：${describe(error)}")
+                    onLog("解码失败：${describe(error)}")
+                }
+            }
+
+            override fun onTransportClosed(reason: String) {
+                if (generation.get() != myGeneration) return
+                ready = false
+                EventLog.info(TAG, "${channel.name} 通道断开：$reason")
+                onLog("${channel.name} 通道断开：$reason")
+            }
+
+            override fun onTransportLog(message: String) {
+                if (generation.get() != myGeneration) return
+                EventLog.debug(TAG, message)
+            }
+        }
+
+        this.activeCodec = codec
+        this.activeTransport = channel
+        this.ready = false
+
+        // ---- 1. 建立通道 ----
+        try {
+            withTimeout(CONNECT_WATCHDOG_MS) { channel.connect(listener) }
+        } catch (timeout: TimeoutCancellationException) {
+            teardown("连接超时")
+            val mapped = TransportTimeoutException("${kind.label} 连接超过 ${CONNECT_WATCHDOG_MS / 1000} 秒未完成")
+            return ConnectResult.Failure(human(mapped, kind), mapped)
+        } catch (cancel: CancellationException) {
+            teardown("连接被取消")
+            throw cancel
+        } catch (error: Throwable) {
+            val mapped = mapError(error, kind)
+            teardown("连接失败")
+            return ConnectResult.Failure(human(mapped, kind), mapped)
+        }
+
+        if (generation.get() != myGeneration) {
+            teardown("连接已被新请求取代")
+            return ConnectResult.Failure("连接已被新的连接请求取代")
+        }
+
+        // ---- 2. 发送握手帧 ----
+        val handshake = try {
+            codec.handshake()
+        } catch (error: Throwable) {
+            if (error is CancellationException) throw error
+            teardown("握手帧构造失败")
+            return ConnectResult.Failure("协议握手帧构造失败：${describe(error)}")
+        }
+
+        for ((index, frame) in handshake.withIndex()) {
+            if (frame.isEmpty()) continue
+            try {
+                channel.write(frame)
+            } catch (error: Throwable) {
+                if (error is CancellationException) throw error
+                val mapped = mapError(error, kind)
+                teardown("握手发送失败")
+                val reason = "握手第 ${index + 1}/${handshake.size} 帧发送失败（${human(mapped, kind)}）"
+                return ConnectResult.Failure(reason, mapped)
+            }
+        }
+
+        if (generation.get() != myGeneration) {
+            teardown("连接已被新请求取代")
+            return ConnectResult.Failure("连接已被新的连接请求取代")
+        }
+
+        // ---- 3. 标记就绪 ----
+        ready = true
+        EventLog.info(TAG, "会话就绪：通道=${channel.name} 协议=${codec.id} 握手帧=${handshake.size}")
+        onLog("会话就绪：${channel.name} + ${codec.id}")
+        return ConnectResult.Success
+    }
+
+    // ------------------------------------------------------------------ 发送
+
+    override suspend fun send(command: PodCommand): Boolean = gate.withLock {
+        val transport = activeTransport ?: return@withLock false
+        val encoder = activeCodec ?: return@withLock false
+        if (!ready || !transport.isConnected) {
+            EventLog.debug(TAG, "未就绪，丢弃命令 $command")
+            return@withLock false
+        }
+
+        val frames = try {
+            encoder.encode(command)
+        } catch (error: Throwable) {
+            EventLog.info(TAG, "命令编码失败：${describe(error)}")
+            return@withLock false
+        }
+        if (frames.isEmpty()) {
+            EventLog.debug(TAG, "协议 ${encoder.id} 不支持 $command")
+            return@withLock false
+        }
+
+        for (frame in frames) {
+            if (frame.isEmpty()) continue
+            try {
+                transport.write(frame)
+            } catch (error: Throwable) {
+                if (error is CancellationException) throw error
+                EventLog.info(TAG, "发送失败（${transport.name}）：${describe(error)}")
+                return@withLock false
+            }
+        }
+        EventLog.debug(TAG, "$command → ${frames.size} 帧已写出（${transport.name}）")
+        true
+    }
+
+    // ------------------------------------------------------------------ 断开
+
+    override fun disconnect() {
+        val previous = activeTransport?.name
+        teardown("主动断开")
+        if (previous != null) {
+            EventLog.info(TAG, "已断开并释放通道：$previous")
+        } else {
+            EventLog.debug(TAG, "disconnect()：当前没有活动通道")
+        }
+    }
+
+    /**
+     * 释放会话：先让旧回调失效，再关闭通道，最后清空状态。
+     * 顺序很重要 —— 先 bump 代次，迟到的 onTransportClosed 就不会再打回 UI。
+     * 可重复调用（无通道时是空操作）。
+     */
+    private fun teardown(reason: String) {
+        generation.incrementAndGet()
+        ready = false
+        val previous = activeTransport
+        activeTransport = null
+        activeCodec = null
+        if (previous != null) {
+            try {
+                previous.close()
+            } catch (error: Throwable) {
+                EventLog.info(TAG, "关闭通道时出错（$reason）：${describe(error)}")
+            }
+        }
+    }
+
+    // ------------------------------------------------------------------ 错误映射
+
+    private fun mapError(error: Throwable, kind: TransportKind): PodTransportException = when (error) {
+        is PodTransportException -> error
+        is SecurityException -> MissingPermissionException(error.message ?: "BLUETOOTH_CONNECT")
+        is IOException -> TransportIoException("${kind.label} IO 失败：${describe(error)}", error)
+        else -> TransportIoException("${kind.label} 连接异常：${describe(error)}", error)
+    }
+
+    /** 把底层异常翻译成 UI 能直接展示的一句话。 */
+    private fun human(error: PodTransportException, kind: TransportKind): String = when (error) {
+        is BluetoothOffException -> "蓝牙未开启，请先打开系统蓝牙"
+        is MissingPermissionException -> "${error.message.orEmpty()}（请在系统设置中授予「附近的设备」权限）"
+        is DeviceUnavailableException -> error.message.orEmpty()
+        is ServiceNotFoundException -> "${kind.label}：${error.message.orEmpty()}"
+        is TransportTimeoutException -> "${kind.label}：${error.message.orEmpty()}"
+        is TransportIoException -> "${kind.label}：${error.message.orEmpty()}"
+    }
+
+    private fun describe(error: Throwable): String =
+        error.message?.takeIf { it.isNotBlank() } ?: error.javaClass.simpleName
+
+    private companion object {
+        const val TAG = "会话"
+
+        /** 协调器级看门狗：比传输层自身的 15 秒超时更宽松，只兜底「完全不返回」的实现。 */
+        const val CONNECT_WATCHDOG_MS = 20_000L
+    }
+}

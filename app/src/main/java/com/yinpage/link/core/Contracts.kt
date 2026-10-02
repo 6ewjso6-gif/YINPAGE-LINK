@@ -1,1 +1,77 @@
-cGFja2FnZSBjb20ueWlucGFnZS5saW5rLmNvcmUKCmltcG9ydCBjb20ueWlucGFnZS5saW5rLnByb3RvY29sLkVxTW9kZQppbXBvcnQgY29tLnlpbnBhZ2UubGluay5wcm90b2NvbC5Ob2lzZU1vZGUKaW1wb3J0IGNvbS55aW5wYWdlLmxpbmsucHJvdG9jb2wuUG9kQ29kZWMKaW1wb3J0IGNvbS55aW5wYWdlLmxpbmsucHJvdG9jb2wuUG9kQ29tbWFuZAppbXBvcnQgY29tLnlpbnBhZ2UubGluay5wcm90b2NvbC5Qb2RUcmFuc3BvcnQKaW1wb3J0IGNvbS55aW5wYWdlLmxpbmsucHJvdG9jb2wuUG9kVHJhbnNwb3J0RXhjZXB0aW9uCmltcG9ydCBjb20ueWlucGFnZS5saW5rLnByb3RvY29sLlBvZFVwZGF0ZQoKLyoqIOS8oOi+k+mAmumBk+exu+Wei+OAgiAqLwplbnVtIGNsYXNzIFRyYW5zcG9ydEtpbmQodmFsIGxhYmVsOiBTdHJpbmcpIHsKICAgIFJGQ09NTSgi57uP5YW46JOd54mZIFNQUCIpLAogICAgQkxFKCLkvY7lip/ogJcgQkxFIiksCiAgICBBVVRPKCLoh6rliqjmjqLmtYsiKTsKCiAgICBjb21wYW5pb24gb2JqZWN0IHsKICAgICAgICBmdW4gZnJvbU5hbWUobmFtZTogU3RyaW5nPyk6IFRyYW5zcG9ydEtpbmQgPQogICAgICAgICAgICBlbnRyaWVzLmZpcnN0T3JOdWxsIHsgaXQubmFtZS5lcXVhbHMobmFtZSwgaWdub3JlQ2FzZSA9IHRydWUpIH0gPzogQVVUTwogICAgfQp9CgovKiog6L+e5o6l55qE5rOo5YWl5bel5Y6CIOKAlOKAlCDorqkgQXBwU3RhdGUg5Y+v5Lul5Zyo5rWL6K+V5Lit5pu/5o2i5Li65YGH5a6e546w44CCICovCmZ1biBpbnRlcmZhY2UgVHJhbnNwb3J0RmFjdG9yeSB7CiAgICBmdW4gY3JlYXRlKGtpbmQ6IFRyYW5zcG9ydEtpbmQsIGFkZHJlc3M6IFN0cmluZyk6IFBvZFRyYW5zcG9ydAp9CgovKioKICogPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQogKiAg6L+e5o6l5Y2P6LCD5Zmo5aWR57qmICDigJTigJQgIOWGu+e7k+Wlkee6pu+8iHYx77yJCiAqID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KICogIEFwcFN0YXRlIOWPquS+nei1luacrOaOpeWPo++8muS4jeWFs+W/g+W6leWxguaYryBSRkNPTU0g6L+Y5pivIEJMRe+8jOS5n+S4jeWFs+W/g+WTgeeJjOWNj+iuruOAggogKiAg5Lyg6L6T5a6e546w6ICF5a6e546wIFtQb2RUcmFuc3BvcnRd77yM5Y2P6K6u5a6e546w6ICF5a6e546wIFtQb2RDb2RlY13vvIwKICogIOWNj+iwg+WZqOWunueOsOi0n+i0o+aKiuS4pOiAheS4sui1t+adpeW5tue7tOaKpOi/nuaOpeeKtuaAgeacuuOAggogKiA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CiAqLwppbnRlcmZhY2UgUG9kQ29vcmRpbmF0b3IgewogICAgLyoqIOW9k+WJjea0u+WKqOmAmumBk+WQje+8iCJSRkNPTU0iLyJCTEUi77yJ77yM5pyq6L+e5o6l5Li6IG51bGzjgIIgKi8KICAgIHZhbCBhY3RpdmVUcmFuc3BvcnROYW1lOiBTdHJpbmc/CgogICAgLyoqIOW9k+WJjea0u+WKqOWNj+iuriBpZO+8jOacqui/nuaOpeS4uiBudWxs44CCICovCiAgICB2YWwgYWN0aXZlQ29kZWNJZDogU3RyaW5nPwoKICAgIC8qKiDpgJrpgZPmmK/lkKblt7LlsLHnu6rkuJTmj6HmiYvlrozmiJDjgIIgKi8KICAgIHZhbCBpc1JlYWR5OiBCb29sZWFuCgogICAgLyoqCiAgICAgKiDov57mjqXlubblrozmiJDmj6HmiYvjgILlrp7njrDmlrnlv4XpobvmiormiYDmnInlvILluLjovazmjaLmiJAgW0Nvbm5lY3RSZXN1bHQuRmFpbHVyZV3vvIwKICAgICAqIOS4jeWFgeiuuOaKiuW8guW4uOaKm+e7mSBVSeOAggogICAgICovCiAgICBzdXNwZW5kIGZ1biBjb25uZWN0KAogICAgICAgIGFkZHJlc3M6IFN0cmluZywKICAgICAgICBkZXZpY2VOYW1lOiBTdHJpbmc/LAogICAgICAgIGtpbmQ6IFRyYW5zcG9ydEtpbmQsCiAgICAgICAgY29kZWM6IFBvZENvZGVjLAogICAgICAgIG9uVXBkYXRlOiAoUG9kVXBkYXRlKSAtPiBVbml0LAogICAgICAgIG9uTG9nOiAoU3RyaW5nKSAtPiBVbml0LAogICAgKTogQ29ubmVjdFJlc3VsdAoKICAgIC8qKiDmlq3lvIDlubbph4rmlL7otYTmupDvvIzlj6/ph43lpI3osIPnlKjjgIIgKi8KICAgIGZ1biBkaXNjb25uZWN0KCkKCiAgICAvKiog5Y+R6YCB5LiA5p2h6auY5bGC5ZG95Luk77yb5pyq5bCx57uq5pe26L+U5ZueIGZhbHNl44CCICovCiAgICBzdXNwZW5kIGZ1biBzZW5kKGNvbW1hbmQ6IFBvZENvbW1hbmQpOiBCb29sZWFuCn0KCi8qKiDov57mjqXnu5PmnpzvvIxVSSDmja7mraTnu5nlh7rkurror53mj5DnpLrjgIIgKi8Kc2VhbGVkIGludGVyZmFjZSBDb25uZWN0UmVzdWx0IHsKICAgIGRhdGEgb2JqZWN0IFN1Y2Nlc3MgOiBDb25uZWN0UmVzdWx0CiAgICBkYXRhIGNsYXNzIEZhaWx1cmUodmFsIHJlYXNvbjogU3RyaW5nLCB2YWwgY2F1c2U6IFBvZFRyYW5zcG9ydEV4Y2VwdGlvbj8gPSBudWxsKSA6IENvbm5lY3RSZXN1bHQKfQoKLyoqIOS+v+aNt+agh+etvuOAgiAqLwpvYmplY3QgTGFiZWxzIHsKICAgIGZ1biBub2lzZShtb2RlOiBOb2lzZU1vZGUpOiBTdHJpbmcgPSBtb2RlLmxhYmVsWmgKICAgIGZ1biBlcShtb2RlOiBFcU1vZGUpOiBTdHJpbmcgPSBtb2RlLmxhYmVsCn0K
+package com.yinpage.link.core
+
+import com.yinpage.link.protocol.EqMode
+import com.yinpage.link.protocol.NoiseMode
+import com.yinpage.link.protocol.PodCodec
+import com.yinpage.link.protocol.PodCommand
+import com.yinpage.link.protocol.PodTransport
+import com.yinpage.link.protocol.PodTransportException
+import com.yinpage.link.protocol.PodUpdate
+
+/** 传输通道类型。 */
+enum class TransportKind(val label: String) {
+    RFCOMM("经典蓝牙 SPP"),
+    BLE("低功耗 BLE"),
+    AUTO("自动探测");
+
+    companion object {
+        fun fromName(name: String?): TransportKind =
+            entries.firstOrNull { it.name.equals(name, ignoreCase = true) } ?: AUTO
+    }
+}
+
+/** 连接的注入工厂 —— 让 AppState 可以在测试中替换为假实现。 */
+fun interface TransportFactory {
+    fun create(kind: TransportKind, address: String): PodTransport
+}
+
+/**
+ * ============================================================================
+ *  连接协调器契约  ——  冻结契约（v1）
+ * ============================================================================
+ *  AppState 只依赖本接口：不关心底层是 RFCOMM 还是 BLE，也不关心品牌协议。
+ *  传输实现者实现 [PodTransport]，协议实现者实现 [PodCodec]，
+ *  协调器实现负责把两者串起来并维护连接状态机。
+ * ============================================================================
+ */
+interface PodCoordinator {
+    /** 当前活动通道名（"RFCOMM"/"BLE"），未连接为 null。 */
+    val activeTransportName: String?
+
+    /** 当前活动协议 id，未连接为 null。 */
+    val activeCodecId: String?
+
+    /** 通道是否已就绪且握手完成。 */
+    val isReady: Boolean
+
+    /**
+     * 连接并完成握手。实现方必须把所有异常转换成 [ConnectResult.Failure]，
+     * 不允许把异常抛给 UI。
+     */
+    suspend fun connect(
+        address: String,
+        deviceName: String?,
+        kind: TransportKind,
+        codec: PodCodec,
+        onUpdate: (PodUpdate) -> Unit,
+        onLog: (String) -> Unit,
+    ): ConnectResult
+
+    /** 断开并释放资源，可重复调用。 */
+    fun disconnect()
+
+    /** 发送一条高层命令；未就绪时返回 false。 */
+    suspend fun send(command: PodCommand): Boolean
+}
+
+/** 连接结果，UI 据此给出人话提示。 */
+sealed interface ConnectResult {
+    data object Success : ConnectResult
+    data class Failure(val reason: String, val cause: PodTransportException? = null) : ConnectResult
+}
+
+/** 便捷标签。 */
+object Labels {
+    fun noise(mode: NoiseMode): String = mode.labelZh
+    fun eq(mode: EqMode): String = mode.label
+}

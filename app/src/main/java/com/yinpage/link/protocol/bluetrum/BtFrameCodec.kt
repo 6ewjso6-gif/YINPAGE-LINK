@@ -1,1 +1,197 @@
-cGFja2FnZSBjb20ueWlucGFnZS5saW5rLnByb3RvY29sLmJsdWV0cnVtCgppbXBvcnQgY29tLnlpbnBhZ2UubGluay5wcm90b2NvbC5CeXRlcwoKLyoqCiAqID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KICogIOS4reenkeiTneiuryBBQiDns7sgU1BQIOW4p+e8luino+eggeWZqO+8iOW3suehruivgeagvOW8j++8iQogKiA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CiAqICDluKfnu5PmnoTvvIjlj5HpgIHmlrnlkJHkuI7mjqXmlLbmlrnlkJHpgJDmjIfku6Tlr7npvZDnoa7or4HvvInvvJoKICoKICogICDlgY/np7sgIOWtl+autSAgICAg6K+05piOCiAqICAgLS0tLSAgLS0tLS0tLSAgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KICogICAgWzBdICBzZXEgICAgICBiaXRzMC0zIOWPkemAgeW6j+WPtyAwLi4xNe+8jOWPkemAgeWQjiAoeCsxKSBhbmQgMHgwRu+8jOWIneWAvCAwCiAqICAgIFsxXSAgY29tbWFuZCAg5ZG95Luk56CB77yI6KeBIFtCdENvbW1hbmRd77yJCiAqICAgIFsyXSAgdHlwZSAgICAgMT3or7fmsYIgMj3lk43lupQgMz3pgJrnn6UKICogICAgWzNdICBjaHVuayAgICDpq5ggNCDkvY0gPSAo5oC75YyF5pWwIC0gMSnvvIzkvY4gNCDkvY0gPSDlvZPliY3ljIXluo/lj7cKICogICAgWzRdICBsZW4gICAgICDmnKzljIUgcGF5bG9hZCDplb/luqbvvIgwLi4yNTXvvIkKICogICBbNS4uXSBwYXlsb2FkICDovb3ojbcKICoKICogIC0g5pW05bin6ZW/5bqmID0gNSArIGxlbgogKiAgLSAqKuaXoCBDUkMgLyDml6DmoKHpqowgLyDml6DovazkuYkqKgogKiAgLSDlpKfmlbDmja7liIbljIXvvJrpu5jorqTmr4/ljIUgcGF5bG9hZCAxNSDlrZfoioLvvIjnsbsgYGUuYWAg5Yid5YC877yJ77yMCiAqICAgIOWunumZheWAvOWPr+eUsSBgSU5GT19NQVhfUEFDS0VUX1NJWkUoMHhGRilgIOafpeivouimhueblgogKiA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CiAqLwpjbGFzcyBCdEZyYW1lQ29kZWMoCiAgICAvKiog5q+P5YyFIHBheWxvYWQg5LiK6ZmQ77yb6buY6K6kIDE1IOWtl+iKgu+8iFNESyDliJ3lgLzvvInjgIIgKi8KICAgIHZhciBtYXhDaHVua1NpemU6IEludCA9IERFRkFVTFRfQ0hVTktfU0laRSwKKSB7CgogICAgLyoqIOWPkemAgeW6j+WPt++8jDAuLjE1IOW+queOr+OAgiAqLwogICAgcHJpdmF0ZSB2YXIgc2VxOiBJbnQgPSAwCgogICAgLyoqIOino+eggeW+l+WIsOeahOS4gOW4p+OAgiAqLwogICAgZGF0YSBjbGFzcyBGcmFtZSgKICAgICAgICB2YWwgc2VxOiBJbnQsCiAgICAgICAgdmFsIGNvbW1hbmQ6IEludCwKICAgICAgICB2YWwgdHlwZTogSW50LAogICAgICAgIC8qKiDmgLvljIXmlbDvvIjnlLEgY2h1bmsg6auYIDQg5L2NICsgMSDmjqjlh7rvvIkgKi8KICAgICAgICB2YWwgdG90YWxDaHVua3M6IEludCwKICAgICAgICAvKiog5b2T5YmN5YyF5bqP5Y+377yIMCDotbfvvIkgKi8KICAgICAgICB2YWwgY2h1bmtJbmRleDogSW50LAogICAgICAgIHZhbCBwYXlsb2FkOiBCeXRlcywKICAgICkgewogICAgICAgIHZhbCBpc1JlcXVlc3Q6IEJvb2xlYW4gZ2V0KCkgPSB0eXBlID09IEJ0Q29tbWFuZC5UWVBFX1JFUVVFU1QKICAgICAgICB2YWwgaXNSZXNwb25zZTogQm9vbGVhbiBnZXQoKSA9IHR5cGUgPT0gQnRDb21tYW5kLlRZUEVfUkVTUE9OU0UKICAgICAgICB2YWwgaXNOb3RpZnk6IEJvb2xlYW4gZ2V0KCkgPSB0eXBlID09IEJ0Q29tbWFuZC5UWVBFX05PVElGWQogICAgfQoKICAgIC8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSDnvJbnoIEKCiAgICAvKioKICAgICAqIOaKiuS4gOadoemAu+i+kea2iOaBr+e8lueggeS4uuiLpeW5sueJqeeQhuW4p++8iOmVv+W6pui2hei/hyBtYXhDaHVua1NpemUg5pe26Ieq5Yqo5YiG5YyF77yJ44CCCiAgICAgKiDliIbljIXml7bmiYDmnInluKflhbHnlKjlkIzkuIDluo/lj7fvvIhTREsg6KGM5Li677ya5bqP5Y+35oyJIua2iOaBryLpgJLlop7ogIzpnZ7mjInluKfvvInjgIIKICAgICAqLwogICAgZnVuIGVuY29kZShjb21tYW5kOiBJbnQsIHR5cGU6IEludCwgcGF5bG9hZDogQnl0ZXMpOiBMaXN0PEJ5dGVzPiB7CiAgICAgICAgdmFsIHNhZmVQYXlsb2FkID0gaWYgKHBheWxvYWQuaXNFbXB0eSgpKSBJbnRBcnJheSgwKSBlbHNlIHBheWxvYWQKICAgICAgICB2YWwgY2h1bmtTaXplID0gbWF4Q2h1bmtTaXplLmNvZXJjZUluKDEsIDI1NSkKICAgICAgICB2YWwgdG90YWxDaHVua3MgPSBpZiAoc2FmZVBheWxvYWQuaXNFbXB0eSgpKSAxCiAgICAgICAgZWxzZSAoKHNhZmVQYXlsb2FkLnNpemUgKyBjaHVua1NpemUgLSAxKSAvIGNodW5rU2l6ZSkKCiAgICAgICAgdmFsIGN1cnJlbnRTZXEgPSBzZXEKICAgICAgICAvLyDluo/lj7fmjInmtojmga/mjqjov5sKICAgICAgICBzZXEgPSAoc2VxICsgMSkgYW5kIDB4MEYKCiAgICAgICAgdmFsIGZyYW1lcyA9IEFycmF5TGlzdDxCeXRlcz4odG90YWxDaHVua3MpCiAgICAgICAgZm9yIChpIGluIDAgdW50aWwgdG90YWxDaHVua3MpIHsKICAgICAgICAgICAgdmFsIHN0YXJ0ID0gaSAqIGNodW5rU2l6ZQogICAgICAgICAgICB2YWwgZW5kID0gbWluT2Yoc3RhcnQgKyBjaHVua1NpemUsIHNhZmVQYXlsb2FkLnNpemUpCiAgICAgICAgICAgIHZhbCBzbGljZSA9IGlmIChlbmQgPiBzdGFydCkgc2FmZVBheWxvYWQuY29weU9mUmFuZ2Uoc3RhcnQsIGVuZCkgZWxzZSBJbnRBcnJheSgwKQogICAgICAgICAgICBmcmFtZXMuYWRkKGJ1aWxkRnJhbWUoY3VycmVudFNlcSwgY29tbWFuZCwgdHlwZSwgdG90YWxDaHVua3MsIGksIHNsaWNlKSkKICAgICAgICB9CiAgICAgICAgcmV0dXJuIGZyYW1lcwogICAgfQoKICAgIC8qKiDmnoTpgKDljZXluKfvvIjkuI3lgZrliIbljIXvvInjgIIgKi8KICAgIGZ1biBidWlsZEZyYW1lKAogICAgICAgIHNlcTogSW50LAogICAgICAgIGNvbW1hbmQ6IEludCwKICAgICAgICB0eXBlOiBJbnQsCiAgICAgICAgdG90YWxDaHVua3M6IEludCwKICAgICAgICBjaHVua0luZGV4OiBJbnQsCiAgICAgICAgcGF5bG9hZDogQnl0ZXMsCiAgICApOiBCeXRlcyB7CiAgICAgICAgdmFsIGxlbiA9IHBheWxvYWQuc2l6ZS5jb2VyY2VBdE1vc3QoMjU1KQogICAgICAgIHZhbCBvdXQgPSBJbnRBcnJheSg1ICsgbGVuKQogICAgICAgIG91dFswXSA9IHNlcSBhbmQgMHgwRgogICAgICAgIG91dFsxXSA9IGNvbW1hbmQgYW5kIDB4RkYKICAgICAgICBvdXRbMl0gPSB0eXBlIGFuZCAweEZGCiAgICAgICAgLy8g6auYIDQg5L2NID0g5oC75YyF5pWwLTHvvJvkvY4gNCDkvY0gPSDlvZPliY3ljIXluo/lj7cKICAgICAgICBvdXRbM10gPSAoKCgodG90YWxDaHVua3MgLSAxKSBhbmQgMHgwRikgc2hsIDQpIG9yIChjaHVua0luZGV4IGFuZCAweDBGKSkgYW5kIDB4RkYKICAgICAgICBvdXRbNF0gPSBsZW4gYW5kIDB4RkYKICAgICAgICBmb3IgKGkgaW4gMCB1bnRpbCBsZW4pIG91dFs1ICsgaV0gPSBwYXlsb2FkW2ldIGFuZCAweEZGCiAgICAgICAgcmV0dXJuIG91dAogICAgfQoKICAgIC8qKiDph43nva7lj5HpgIHluo/lj7fvvIjph43ov57lkI7lv4XpobvosIPnlKjvvInjgIIgKi8KICAgIGZ1biByZXNldFNlcXVlbmNlKCkgewogICAgICAgIHNlcSA9IDAKICAgIH0KCiAgICB2YWwgY3VycmVudFNlcXVlbmNlOiBJbnQgZ2V0KCkgPSBzZXEKCiAgICAvLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0g6Kej56CBCgogICAgLyoqIOWIhueJh+mHjee7hOe8k+WGsu+8mmtleSA9IGNvbW1hbmTvvIx2YWx1ZSA9IOW3suaUtuWIsOeahCBwYXlsb2FkIOeJh+auteOAgiAqLwogICAgcHJpdmF0ZSB2YWwgcGFydGlhbCA9IEhhc2hNYXA8SW50LCBNdXRhYmxlTGlzdDxCeXRlcz4+KCkKICAgIHByaXZhdGUgdmFyIGJ1ZmZlciA9IEludEFycmF5KDApCgogICAgLyoqCiAgICAgKiDmtYHlvI/op6PnoIHvvJrlloLlhaXku7vmhI/plb/luqblrZfoioLvvIzkuqflh7rmiYDmnInlt7LlrozmlbTph43nu4TnmoTpgLvovpHmtojmga/jgIIKICAgICAqIOi/lOWbnueahCBGcmFtZSDph4wgcGF5bG9hZCDmmK8qKumHjee7hOWQjueahOWujOaVtOi9veiNtyoq44CCCiAgICAgKi8KICAgIGZ1biBkZWNvZGVDaHVuayhjaHVuazogQnl0ZXMpOiBMaXN0PEZyYW1lPiB7CiAgICAgICAgaWYgKGNodW5rLmlzRW1wdHkoKSkgcmV0dXJuIGVtcHR5TGlzdCgpCiAgICAgICAgYnVmZmVyID0gYnVmZmVyICsgY2h1bmsKICAgICAgICB2YWwgZG9uZSA9IEFycmF5TGlzdDxGcmFtZT4oKQoKICAgICAgICB3aGlsZSAodHJ1ZSkgewogICAgICAgICAgICBpZiAoYnVmZmVyLnNpemUgPCA1KSBicmVhawogICAgICAgICAgICB2YWwgbGVuID0gYnVmZmVyWzRdIGFuZCAweEZGCiAgICAgICAgICAgIHZhbCB0b3RhbCA9IDUgKyBsZW4KICAgICAgICAgICAgaWYgKGJ1ZmZlci5zaXplIDwgdG90YWwpIGJyZWFrCgogICAgICAgICAgICB2YWwgZnJhbWUgPSBidWZmZXIuY29weU9mUmFuZ2UoMCwgdG90YWwpCiAgICAgICAgICAgIGJ1ZmZlciA9IGJ1ZmZlci5jb3B5T2ZSYW5nZSh0b3RhbCwgYnVmZmVyLnNpemUpCgogICAgICAgICAgICB2YWwgZiA9IHBhcnNlU2luZ2xlKGZyYW1lKSA/OiBjb250aW51ZQogICAgICAgICAgICB2YWwgcmVhc3NlbWJsZWQgPSByZWFzc2VtYmxlKGYpCiAgICAgICAgICAgIGlmIChyZWFzc2VtYmxlZCAhPSBudWxsKSBkb25lLmFkZChyZWFzc2VtYmxlZCkKICAgICAgICB9CgogICAgICAgIC8vIOmYsuW+oe+8muW8guW4uOaVsOaNruWvvOiHtOe8k+WGsuaXoOmZkOWinumVvwogICAgICAgIGlmIChidWZmZXIuc2l6ZSA+IE1BWF9CVUZGRVIpIHsKICAgICAgICAgICAgYnVmZmVyID0gYnVmZmVyLmNvcHlPZlJhbmdlKGJ1ZmZlci5zaXplIC0gTUFYX0JVRkZFUiwgYnVmZmVyLnNpemUpCiAgICAgICAgfQogICAgICAgIHJldHVybiBkb25lCiAgICB9CgogICAgcHJpdmF0ZSBmdW4gcGFyc2VTaW5nbGUoZnJhbWU6IEJ5dGVzKTogRnJhbWU/IHsKICAgICAgICBpZiAoZnJhbWUuc2l6ZSA8IDUpIHJldHVybiBudWxsCiAgICAgICAgdmFsIGxlbiA9IGZyYW1lWzRdIGFuZCAweEZGCiAgICAgICAgaWYgKGZyYW1lLnNpemUgPCA1ICsgbGVuKSByZXR1cm4gbnVsbAogICAgICAgIHZhbCBjaHVua0J5dGUgPSBmcmFtZVszXSBhbmQgMHhGRgogICAgICAgIHZhbCBwYXlsb2FkID0gaWYgKGxlbiA+IDApIGZyYW1lLmNvcHlPZlJhbmdlKDUsIDUgKyBsZW4pIGVsc2UgSW50QXJyYXkoMCkKICAgICAgICByZXR1cm4gRnJhbWUoCiAgICAgICAgICAgIHNlcSA9IGZyYW1lWzBdIGFuZCAweDBGLAogICAgICAgICAgICBjb21tYW5kID0gZnJhbWVbMV0gYW5kIDB4RkYsCiAgICAgICAgICAgIHR5cGUgPSBmcmFtZVsyXSBhbmQgMHhGRiwKICAgICAgICAgICAgdG90YWxDaHVua3MgPSAoKGNodW5rQnl0ZSBzaHIgNCkgYW5kIDB4MEYpICsgMSwKICAgICAgICAgICAgY2h1bmtJbmRleCA9IGNodW5rQnl0ZSBhbmQgMHgwRiwKICAgICAgICAgICAgcGF5bG9hZCA9IHBheWxvYWQsCiAgICAgICAgKQogICAgfQoKICAgIC8qKgogICAgICog5YiG54mH6YeN57uE44CC5Y2V5YyF5raI5oGv55u05o6l6L+U5Zue77ybCiAgICAgKiDlpJrljIXmtojmga/mjIkgY29tbWFuZCDntK/np6/vvIzmlLbpvZDlkI7mi7zmjqXlubblm57osIPjgIIKICAgICAqLwogICAgcHJpdmF0ZSBmdW4gcmVhc3NlbWJsZShmcmFtZTogRnJhbWUpOiBGcmFtZT8gewogICAgICAgIGlmIChmcmFtZS50b3RhbENodW5rcyA8PSAxKSByZXR1cm4gZnJhbWUKICAgICAgICBpZiAoZnJhbWUuY2h1bmtJbmRleCA+PSBmcmFtZS50b3RhbENodW5rcykgcmV0dXJuIG51bGwKCiAgICAgICAgdmFsIHBhcnRzID0gcGFydGlhbC5nZXRPclB1dChmcmFtZS5jb21tYW5kKSB7IE11dGFibGVMaXN0KGZyYW1lLnRvdGFsQ2h1bmtzKSB7IEludEFycmF5KDApIH0gfQogICAgICAgIC8vIOWuuemHj+S4jei2s+aXtuaJqeWuue+8iOmYsuW+oeW8guW4uCB0b3RhbENodW5rc++8iQogICAgICAgIHdoaWxlIChwYXJ0cy5zaXplIDwgZnJhbWUudG90YWxDaHVua3MpIHBhcnRzLmFkZChJbnRBcnJheSgwKSkKICAgICAgICBwYXJ0c1tmcmFtZS5jaHVua0luZGV4XSA9IGZyYW1lLnBheWxvYWQKCiAgICAgICAgdmFsIGNvbXBsZXRlID0gKDAgdW50aWwgZnJhbWUudG90YWxDaHVua3MpLmFsbCB7IHBhcnRzW2l0XS5pc05vdEVtcHR5KCkgfSB8fAogICAgICAgICAgICAoZnJhbWUudG90YWxDaHVua3MgPT0gMSkKICAgICAgICBpZiAoIWNvbXBsZXRlKSByZXR1cm4gbnVsbAoKICAgICAgICB2YXIgbWVyZ2VkID0gSW50QXJyYXkoMCkKICAgICAgICBmb3IgKGkgaW4gMCB1bnRpbCBmcmFtZS50b3RhbENodW5rcykgbWVyZ2VkID0gbWVyZ2VkICsgcGFydHNbaV0KICAgICAgICBwYXJ0aWFsLnJlbW92ZShmcmFtZS5jb21tYW5kKQogICAgICAgIHJldHVybiBmcmFtZS5jb3B5KGNodW5rSW5kZXggPSAwLCB0b3RhbENodW5rcyA9IDEsIHBheWxvYWQgPSBtZXJnZWQpCiAgICB9CgogICAgZnVuIHJlc2V0KCkgewogICAgICAgIGJ1ZmZlciA9IEludEFycmF5KDApCiAgICAgICAgcGFydGlhbC5jbGVhcigpCiAgICAgICAgc2VxID0gMAogICAgfQoKICAgIC8qKiDnvJPlhrLkuK3mnKrop6PmnpDlrZfoioLmlbDvvIjosIPor5XnlKjvvInjgIIgKi8KICAgIHZhbCBidWZmZXJlZEJ5dGVzOiBJbnQgZ2V0KCkgPSBidWZmZXIuc2l6ZQoKICAgIGNvbXBhbmlvbiBvYmplY3QgewogICAgICAgIC8qKiBTREsg6buY6K6k5YiG5YyF5aSn5bCP77yI57G7IGBlLmFgIOWIneWAvO+8ieOAgiAqLwogICAgICAgIGNvbnN0IHZhbCBERUZBVUxUX0NIVU5LX1NJWkUgPSAxNQoKICAgICAgICAvKiog5bin5aS05Zu65a6a6ZW/5bqm44CCICovCiAgICAgICAgY29uc3QgdmFsIEhFQURFUl9TSVpFID0gNQoKICAgICAgICBwcml2YXRlIGNvbnN0IHZhbCBNQVhfQlVGRkVSID0gNDA5NgogICAgfQp9Cg==
+package com.yinpage.link.protocol.bluetrum
+
+import com.yinpage.link.protocol.Bytes
+
+/**
+ * ============================================================================
+ *  中科蓝讯 AB 系 SPP 帧编解码器（已确证格式）
+ * ============================================================================
+ *  帧结构（发送方向与接收方向逐指令对齐确证）：
+ *
+ *   偏移  字段     说明
+ *   ----  -------  --------------------------------------------------
+ *    [0]  seq      bits0-3 发送序号 0..15，发送后 (x+1) and 0x0F，初值 0
+ *    [1]  command  命令码（见 [BtCommand]）
+ *    [2]  type     1=请求 2=响应 3=通知
+ *    [3]  chunk    高 4 位 = (总包数 - 1)，低 4 位 = 当前包序号
+ *    [4]  len      本包 payload 长度（0..255）
+ *   [5..] payload  载荷
+ *
+ *  - 整帧长度 = 5 + len
+ *  - **无 CRC / 无校验 / 无转义**
+ *  - 大数据分包：默认每包 payload 15 字节（类 `e.a` 初值），
+ *    实际值可由 `INFO_MAX_PACKET_SIZE(0xFF)` 查询覆盖
+ * ============================================================================
+ */
+class BtFrameCodec(
+    /** 每包 payload 上限；默认 15 字节（SDK 初值）。 */
+    var maxChunkSize: Int = DEFAULT_CHUNK_SIZE,
+) {
+
+    /** 发送序号，0..15 循环。 */
+    private var seq: Int = 0
+
+    /** 解码得到的一帧。 */
+    data class Frame(
+        val seq: Int,
+        val command: Int,
+        val type: Int,
+        /** 总包数（由 chunk 高 4 位 + 1 推出） */
+        val totalChunks: Int,
+        /** 当前包序号（0 起） */
+        val chunkIndex: Int,
+        val payload: Bytes,
+    ) {
+        val isRequest: Boolean get() = type == BtCommand.TYPE_REQUEST
+        val isResponse: Boolean get() = type == BtCommand.TYPE_RESPONSE
+        val isNotify: Boolean get() = type == BtCommand.TYPE_NOTIFY
+    }
+
+    // ------------------------------------------------------------------ 编码
+
+    /**
+     * 把一条逻辑消息编码为若干物理帧（长度超过 maxChunkSize 时自动分包）。
+     * 分包时所有帧共用同一序号（SDK 行为：序号按"消息"递增而非按帧）。
+     */
+    fun encode(command: Int, type: Int, payload: Bytes): List<Bytes> {
+        val safePayload = if (payload.isEmpty()) IntArray(0) else payload
+        val chunkSize = maxChunkSize.coerceIn(1, 255)
+        val totalChunks = if (safePayload.isEmpty()) 1
+        else ((safePayload.size + chunkSize - 1) / chunkSize)
+
+        val currentSeq = seq
+        // 序号按消息推进
+        seq = (seq + 1) and 0x0F
+
+        val frames = ArrayList<Bytes>(totalChunks)
+        for (i in 0 until totalChunks) {
+            val start = i * chunkSize
+            val end = minOf(start + chunkSize, safePayload.size)
+            val slice = if (end > start) safePayload.copyOfRange(start, end) else IntArray(0)
+            frames.add(buildFrame(currentSeq, command, type, totalChunks, i, slice))
+        }
+        return frames
+    }
+
+    /** 构造单帧（不做分包）。 */
+    fun buildFrame(
+        seq: Int,
+        command: Int,
+        type: Int,
+        totalChunks: Int,
+        chunkIndex: Int,
+        payload: Bytes,
+    ): Bytes {
+        val len = payload.size.coerceAtMost(255)
+        val out = IntArray(5 + len)
+        out[0] = seq and 0x0F
+        out[1] = command and 0xFF
+        out[2] = type and 0xFF
+        // 高 4 位 = 总包数-1；低 4 位 = 当前包序号
+        out[3] = ((((totalChunks - 1) and 0x0F) shl 4) or (chunkIndex and 0x0F)) and 0xFF
+        out[4] = len and 0xFF
+        for (i in 0 until len) out[5 + i] = payload[i] and 0xFF
+        return out
+    }
+
+    /** 重置发送序号（重连后必须调用）。 */
+    fun resetSequence() {
+        seq = 0
+    }
+
+    val currentSequence: Int get() = seq
+
+    // ------------------------------------------------------------------ 解码
+
+    /** 分片重组缓冲：key = command，value = 已收到的 payload 片段。 */
+    private val partial = HashMap<Int, MutableList<Bytes>>()
+    private var buffer = IntArray(0)
+
+    /**
+     * 流式解码：喂入任意长度字节，产出所有已完整重组的逻辑消息。
+     * 返回的 Frame 里 payload 是**重组后的完整载荷**。
+     */
+    fun decodeChunk(chunk: Bytes): List<Frame> {
+        if (chunk.isEmpty()) return emptyList()
+        buffer = buffer + chunk
+        val done = ArrayList<Frame>()
+
+        while (true) {
+            if (buffer.size < 5) break
+            val len = buffer[4] and 0xFF
+            val total = 5 + len
+            if (buffer.size < total) break
+
+            val frame = buffer.copyOfRange(0, total)
+            buffer = buffer.copyOfRange(total, buffer.size)
+
+            val f = parseSingle(frame) ?: continue
+            val reassembled = reassemble(f)
+            if (reassembled != null) done.add(reassembled)
+        }
+
+        // 防御：异常数据导致缓冲无限增长
+        if (buffer.size > MAX_BUFFER) {
+            buffer = buffer.copyOfRange(buffer.size - MAX_BUFFER, buffer.size)
+        }
+        return done
+    }
+
+    private fun parseSingle(frame: Bytes): Frame? {
+        if (frame.size < 5) return null
+        val len = frame[4] and 0xFF
+        if (frame.size < 5 + len) return null
+        val chunkByte = frame[3] and 0xFF
+        val payload = if (len > 0) frame.copyOfRange(5, 5 + len) else IntArray(0)
+        return Frame(
+            seq = frame[0] and 0x0F,
+            command = frame[1] and 0xFF,
+            type = frame[2] and 0xFF,
+            totalChunks = ((chunkByte shr 4) and 0x0F) + 1,
+            chunkIndex = chunkByte and 0x0F,
+            payload = payload,
+        )
+    }
+
+    /**
+     * 分片重组。单包消息直接返回；
+     * 多包消息按 command 累积，收齐后拼接并回调。
+     */
+    private fun reassemble(frame: Frame): Frame? {
+        if (frame.totalChunks <= 1) return frame
+        if (frame.chunkIndex >= frame.totalChunks) return null
+
+        val parts = partial.getOrPut(frame.command) { MutableList(frame.totalChunks) { IntArray(0) } }
+        // 容量不足时扩容（防御异常 totalChunks）
+        while (parts.size < frame.totalChunks) parts.add(IntArray(0))
+        parts[frame.chunkIndex] = frame.payload
+
+        val complete = (0 until frame.totalChunks).all { parts[it].isNotEmpty() } ||
+            (frame.totalChunks == 1)
+        if (!complete) return null
+
+        var merged = IntArray(0)
+        for (i in 0 until frame.totalChunks) merged = merged + parts[i]
+        partial.remove(frame.command)
+        return frame.copy(chunkIndex = 0, totalChunks = 1, payload = merged)
+    }
+
+    fun reset() {
+        buffer = IntArray(0)
+        partial.clear()
+        seq = 0
+    }
+
+    /** 缓冲中未解析字节数（调试用）。 */
+    val bufferedBytes: Int get() = buffer.size
+
+    companion object {
+        /** SDK 默认分包大小（类 `e.a` 初值）。 */
+        const val DEFAULT_CHUNK_SIZE = 15
+
+        /** 帧头固定长度。 */
+        const val HEADER_SIZE = 5
+
+        private const val MAX_BUFFER = 4096
+    }
+}

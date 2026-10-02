@@ -1,1 +1,213 @@
-cGFja2FnZSBjb20ueWlucGFnZS5saW5rLmVuaGFuY2UKCmltcG9ydCBhbmRyb2lkLmNvbnRlbnQucG0uUGFja2FnZU1hbmFnZXIKaW1wb3J0IGFuZHJvaWQub3MuQnVpbGQKaW1wb3J0IGNvbS55aW5wYWdlLmxpbmsuY29yZS5FdmVudExvZwppbXBvcnQgY29tLnlpbnBhZ2UubGluay50cmFuc3BvcnQuVHJhbnNwb3J0RW52CmltcG9ydCBqYXZhLmlvLklucHV0U3RyZWFtCmltcG9ydCBqYXZhLmxhbmcucmVmbGVjdC5NZXRob2QKaW1wb3J0IGphdmEubGFuZy5yZWZsZWN0Lk1vZGlmaWVyCgovKioKICogPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQogKiAgU2hpenVrdSDlj6/pgInlop7lvLrvvIjlsL3lipvogIzkuLrvvIzkuI3mmK/kuLvpk77ot6/vvIkKICogPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQogKiAgIyMg6IO95Yqb6L6555WM77yI5b+F6aG76K+05riF5qWa77yM6YG/5YWN6K+v5pyf5b6F77yJCiAqICAgU2hpenVrdSDmnKzotKjkuIrmmK/jgIzlhY0gcm9vdCDmi7/liLAgc2hlbGwodWlkIDIwMDApIOadg+mZkOOAjeeahOmAmumBk++8jAogKiAgIOWugyoq5LiN6IO9KirvvJoKICogICAgLSDlvoAgU3lzdGVtVUkgLyDns7vnu5/ok53niZnorr7nva7pobXms6jlhaXogLPmnLrljaHniYfmiJboh6rlrprkuYnmjqfku7YKICogICAgICDvvIjpgqPmmK8gTFNQb3NlZC9YcG9zZWQg5qih5Z2X55qE6IO95Yqb6L6555WM77yM5pysIEFwcCDmmI7noa7kuI3lgZrvvInvvJsKICogICAgLSDnu5Xov4cgQW5kcm9pZCDnmoTok53niZkgQUNMIC8gR0FUVCDorr/pl67op4TliJnvvIzkuZ/kuI3og73mm78gQXBwIOW7uueriyBTUFAg6L+e5o6l77ybCiAqICAgIC0g5L+u5pS557O757uf5qGG5p626KGM5Li644CBSG9vayDku7vmhI/ov5vnqIvjgIIKICogICDlroMqKuiDvSoq77yaCiAqICAgIC0g5LulIHNoZWxsIOi6q+S7veaJp+ihjOWRveS7pO+8iOS+i+WmgiBgZHVtcHN5cyBibHVldG9vdGhfbWFuYWdlcmDvvInvvIwKICogICAgICDor7vlj5bns7vnu5/ok53niZnnrqHnkIblmajph4zmm7TlhajnmoTlt7Lov57mjqUv5bey6YWN5a+56K6+5aSH5L+h5oGv77yM55So5LqO6K+K5pat5LiO6YCG5ZCR5Y+W6K+B44CCCiAqCiAqICAjIyDlrp7njrDnuqbmnZ/vvIjku7vliqHnoazmgKfopoHmsYLvvIkKICogICAtICoq5LiN5paw5aKe5Lu75L2VIEdyYWRsZSDkvp3otZYqKu+8jOWboOatpOi/memHjOWFqOmDqOeUqOWPjeWwhOiwg+eUqAogKiAgICAgYHJpa2thLnNoaXp1a3UuU2hpenVrdWAg55qE6Z2Z5oCB5pa55rOV77yacGluZ0JpbmRlcigpIC8gZ2V0VmVyc2lvbigpIC8KICogICAgIGNoZWNrU2VsZlBlcm1pc3Npb24oKSAvIHJlcXVlc3RQZXJtaXNzaW9uKGludCkgLyBuZXdQcm9jZXNzKC4uLinjgIIKICogICAtIFNoaXp1a3Ug5LiN5a2Y5Zyo44CB54mI5pys5LiN5Yy56YWN44CB5Y+N5bCE5aSx6LSl44CB5ZG95Luk5omn6KGM5aSx6LSlIOKAlOKAlCDkuIDlvovpnZnpu5jpmY3nuqfvvIwKICogICAgIOe7neS4jeaKm+W8guW4uO+8jOe7neS4jemYu+WhniBVSeOAggogKgogKiAgIyMg5bey55+l6ZmQ5Yi277yI6K+a5a6e5aOw5piO77yM6ZyA6KaBIExlYWQg55+l5pmT77yJCiAqICAg5a6Y5pa5IFNoaXp1a3UgQVBJIOaYr+e8luivkeacn+S+nei1lu+8iGBkZXYucmlra2Euc2hpenVrdTphcGlg77yJ44CC5pys5bel56iL5rKh5pyJ5byV5YWl5a6D77yMCiAqICAg5LiU5pmu6YCaIEFwcCDnmoQgQ2xhc3NMb2FkZXIg6YeM5LiN5Lya5pyJIGByaWtrYS5zaGl6dWt1LlNoaXp1a3Vg77yMCiAqICAg5Zug5q2kKirlnKjnnJ/mnLrkuIogW2lzQXZhaWxhYmxlXSAvIFtoYXNQZXJtaXNzaW9uXSDkvJrov5Tlm54gZmFsc2XvvIwKICogICBbcXVlcnlTeXN0ZW1CbHVldG9vdGhJbmZvXSDkvJrov5Tlm54gbnVsbCoq77ybW2lzU3VwcG9ydGVkXSDpgJrov4cKICogICDjgIzmmK/lkKblronoo4XkuoYgU2hpenVrdSBBcHDvvIhtb2Uuc2hpenVrdS5wcml2aWxlZ2VkLmFwae+8ieOAjeWIpOaWre+8jOS7jeeEtuWPr+eUqOOAggogKiAgIOS4gOaXpuWwhuadpeWFgeiuuOWKoOWFpeivpeS+nei1lu+8iOaIluaPkOS+m+S4gOS4quiHquW4pueahCBBUEkg5qGp57G777yJ77yM5pys5paH5Lu25peg6ZyA5pS55Yqo5Y2z5Y+v55Sf5pWI44CCCiAqID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KICovCm9iamVjdCBTaGl6dWt1RW5oYW5jZXIgewoKICAgIHByaXZhdGUgY29uc3QgdmFsIFRBRyA9ICJTaGl6dWt1IgoKICAgIC8qKiBTaGl6dWt1IEFQSSDlhaXlj6PnsbvvvIjnvJbor5HmnJ/kuI3lrZjlnKjvvIzlj6rog73lj43lsITvvInjgIIgKi8KICAgIHByaXZhdGUgY29uc3QgdmFsIFNISVpVS1VfQ0xBU1MgPSAicmlra2Euc2hpenVrdS5TaGl6dWt1IgoKICAgIC8qKiBTaGl6dWt1IOeuoeeQhuWZqCBBcHAg55qE5YyF5ZCN77yM55So5LqO5Yik5pat44CM5pys5py65piv5ZCm6KOF5LqGIFNoaXp1a3XjgI3jgIIgKi8KICAgIHByaXZhdGUgY29uc3QgdmFsIFNISVpVS1VfUEFDS0FHRSA9ICJtb2Uuc2hpenVrdS5wcml2aWxlZ2VkLmFwaSIKCiAgICBwcml2YXRlIGNvbnN0IHZhbCBNQVhfRFVNUF9DSEFSUyA9IDIwMF8wMDAKICAgIHByaXZhdGUgY29uc3QgdmFsIFJFQURfVElNRU9VVF9NUyA9IDVfMDAwTAoKICAgIEBWb2xhdGlsZQogICAgcHJpdmF0ZSB2YXIgcmVzb2x2ZWRDbGFzczogQ2xhc3M8Kj4/ID0gbnVsbAoKICAgIEBWb2xhdGlsZQogICAgcHJpdmF0ZSB2YXIgY2xhc3NSZXNvbHZlZCA9IGZhbHNlCgogICAgQFZvbGF0aWxlCiAgICBwcml2YXRlIHZhciBjYWNoZWRWZXJzaW9uID0gLTEKCiAgICAvLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0g54q25oCB5p+l6K+iCgogICAgLyoqIOacrOacuuaYr+WQpuijheS6hiBTaGl6dWt177yI6KOF5LqG566h55CG5ZmoIEFwcCDljbPop4bkuLrmlK/mjIHvvInjgIIgKi8KICAgIGZ1biBpc1N1cHBvcnRlZCgpOiBCb29sZWFuIHsKICAgICAgICBpZiAocmVzb2x2ZUNsYXNzKCkgIT0gbnVsbCkgcmV0dXJuIHRydWUKICAgICAgICByZXR1cm4gcnVuQ2F0Y2hpbmcgewogICAgICAgICAgICB2YWwgY29udGV4dCA9IFRyYW5zcG9ydEVudi5jb250ZXh0KCkgPzogcmV0dXJuIGZhbHNlCiAgICAgICAgICAgIEBTdXBwcmVzcygiREVQUkVDQVRJT04iKQogICAgICAgICAgICBjb250ZXh0LnBhY2thZ2VNYW5hZ2VyLmdldFBhY2thZ2VJbmZvKFNISVpVS1VfUEFDS0FHRSwgMCkKICAgICAgICAgICAgdHJ1ZQogICAgICAgIH0uZ2V0T3JEZWZhdWx0KGZhbHNlKQogICAgfQoKICAgIC8qKiBTaGl6dWt1IOacjeWKoeaYr+WQpuWcqOi/kOihjO+8iHBpbmdCaW5kZXIg6L+U5ZueIHRydWXvvInjgIIgKi8KICAgIGZ1biBpc0F2YWlsYWJsZSgpOiBCb29sZWFuIHsKICAgICAgICB2YWwgY2xhenogPSByZXNvbHZlQ2xhc3MoKSA/OiByZXR1cm4gZmFsc2UKICAgICAgICB2YWwgYWxpdmUgPSBydW5DYXRjaGluZyB7IGludm9rZVN0YXRpY05vQXJnKGNsYXp6LCAicGluZ0JpbmRlciIpIGFzPyBCb29sZWFuID86IGZhbHNlIH0KICAgICAgICAgICAgLmdldE9yRGVmYXVsdChmYWxzZSkKICAgICAgICBpZiAoYWxpdmUgJiYgY2FjaGVkVmVyc2lvbiA8IDApIHsKICAgICAgICAgICAgY2FjaGVkVmVyc2lvbiA9IHJ1bkNhdGNoaW5nIHsgaW52b2tlU3RhdGljTm9BcmcoY2xhenosICJnZXRWZXJzaW9uIikgYXM/IEludCA/OiAtMSB9CiAgICAgICAgICAgICAgICAuZ2V0T3JEZWZhdWx0KC0xKQogICAgICAgICAgICBFdmVudExvZy5pbmZvKFRBRywgIlNoaXp1a3Ug5pyN5Yqh5Y+v55So77yMQVBJIOeJiOacrD0kY2FjaGVkVmVyc2lvbiIpCiAgICAgICAgfQogICAgICAgIHJldHVybiBhbGl2ZQogICAgfQoKICAgIC8qKiDmnKwgQXBwIOaYr+WQpuW3suiOt+W+lyBTaGl6dWt1IOaOiOadg+OAgiAqLwogICAgZnVuIGhhc1Blcm1pc3Npb24oKTogQm9vbGVhbiB7CiAgICAgICAgdmFsIGNsYXp6ID0gcmVzb2x2ZUNsYXNzKCkgPzogcmV0dXJuIGZhbHNlCiAgICAgICAgcmV0dXJuIHJ1bkNhdGNoaW5nIHsKICAgICAgICAgICAgKGludm9rZVN0YXRpY05vQXJnKGNsYXp6LCAiY2hlY2tTZWxmUGVybWlzc2lvbiIpIGFzPyBJbnQpID09IFBhY2thZ2VNYW5hZ2VyLlBFUk1JU1NJT05fR1JBTlRFRAogICAgICAgIH0uZ2V0T3JEZWZhdWx0KGZhbHNlKQogICAgfQoKICAgIC8qKiDor7fmsYIgU2hpenVrdSDmjojmnYPvvIjpnIDopoHlnKjmnInliY3lj7AgQWN0aXZpdHkg5pe26LCD55So5omN5Lya5by556qX77yJ44CCICovCiAgICBmdW4gcmVxdWVzdFBlcm1pc3Npb24ocmVxdWVzdENvZGU6IEludCkgewogICAgICAgIHZhbCBjbGF6eiA9IHJlc29sdmVDbGFzcygpID86IHJldHVybgogICAgICAgIHJ1bkNhdGNoaW5nIHsKICAgICAgICAgICAgdmFsIG1ldGhvZCA9IGNsYXp6Lm1ldGhvZHMuZmlyc3RPck51bGwgewogICAgICAgICAgICAgICAgaXQubmFtZSA9PSAicmVxdWVzdFBlcm1pc3Npb24iICYmCiAgICAgICAgICAgICAgICAgICAgaXQucGFyYW1ldGVyQ291bnQgPT0gMSAmJgogICAgICAgICAgICAgICAgICAgIE1vZGlmaWVyLmlzU3RhdGljKGl0Lm1vZGlmaWVycykKICAgICAgICAgICAgfSA/OiByZXR1cm4KICAgICAgICAgICAgbWV0aG9kLmludm9rZShudWxsLCByZXF1ZXN0Q29kZSkKICAgICAgICAgICAgRXZlbnRMb2cuaW5mbyhUQUcsICLlt7Lor7fmsYIgU2hpenVrdSDmjojmnYPvvIxyZXF1ZXN0Q29kZT0kcmVxdWVzdENvZGUiKQogICAgICAgIH0ub25GYWlsdXJlIHsgRXZlbnRMb2cuaW5mbyhUQUcsICLor7fmsYIgU2hpenVrdSDmjojmnYPlpLHotKXvvJoke2l0Lm1lc3NhZ2V9IikgfQogICAgfQoKICAgIC8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSDlop7lvLrog73lipsKCiAgICAvKioKICAgICAqIOeUqCBzaGVsbCDmnYPpmZDmiafooYwgYGR1bXBzeXMgYmx1ZXRvb3RoX21hbmFnZXJg77yM6L+U5ZueIHN0ZG91dCDmlofmnKzjgIIKICAgICAqIOWksei0pe+8iOacquWuieijhS/mnKrmjojmnYMv5pa55rOV5LiN5a2Y5ZyoL+i2heaXtu+8ieS4gOW+i+i/lOWbniBudWxs44CCCiAgICAgKi8KICAgIGZ1biBxdWVyeVN5c3RlbUJsdWV0b290aEluZm8oKTogU3RyaW5nPyB7CiAgICAgICAgaWYgKCFpc0F2YWlsYWJsZSgpKSByZXR1cm4gbnVsbAogICAgICAgIHZhbCBjbGF6eiA9IHJlc29sdmVDbGFzcygpID86IHJldHVybiBudWxsCiAgICAgICAgcmV0dXJuIHJ1bkNhdGNoaW5nIHsKICAgICAgICAgICAgdmFsIHByb2Nlc3MgPSBpbnZva2VOZXdQcm9jZXNzKAogICAgICAgICAgICAgICAgY2xhenosCiAgICAgICAgICAgICAgICBhcnJheU9mKCJzaCIsICItYyIsICJkdW1wc3lzIGJsdWV0b290aF9tYW5hZ2VyIiksCiAgICAgICAgICAgICkgPzogcmV0dXJuIG51bGwKICAgICAgICAgICAgcmVhZFByb2Nlc3NPdXRwdXQocHJvY2VzcykKICAgICAgICB9LmdldE9yTnVsbCgpCiAgICB9CgogICAgLyoqCiAgICAgKiDor7vmn5Dorr7lpIflnKjns7vnu5/ok53niZnnrqHnkIblmajph4znmoTnlLXph4/vvIhBbmRyb2lkIDE0KyDlhazlvIAgQVBJCiAgICAgKiBgQmx1ZXRvb3RoRGV2aWNlLmdldEJhdHRlcnlMZXZlbCgpYO+8ieOAguWksei0pei/lOWbniBudWxs44CCCiAgICAgKgogICAgICog6L+Z6YeM5LuN6LWw5Y+N5bCE77ya5LiA5piv6K+l5pa55rOV5Zyo5penIFNESyDkuIrkuI3lrZjlnKjvvIzkuozmmK/pgb/lhY3kuLrkuIDlpITosIPnlKgKICAgICAqIOaPkOmrmCBtaW5TZGsg57qm5p2f44CCCiAgICAgKi8KICAgIGZ1biBzeXN0ZW1CYXR0ZXJ5TGV2ZWwoYWRkcmVzczogU3RyaW5nKTogSW50PyB7CiAgICAgICAgaWYgKEJ1aWxkLlZFUlNJT04uU0RLX0lOVCA8IEJ1aWxkLlZFUlNJT05fQ09ERVMuVVBTSURFX0RPV05fQ0FLRSkgcmV0dXJuIG51bGwKICAgICAgICByZXR1cm4gcnVuQ2F0Y2hpbmcgewogICAgICAgICAgICB2YWwgYWRhcHRlciA9IFRyYW5zcG9ydEVudi5hZGFwdGVyKCkgPzogcmV0dXJuIG51bGwKICAgICAgICAgICAgdmFsIGRldmljZSA9IGFkYXB0ZXIuZ2V0UmVtb3RlRGV2aWNlKGFkZHJlc3MpID86IHJldHVybiBudWxsCiAgICAgICAgICAgIHZhbCBtZXRob2QgPSBkZXZpY2UuamF2YUNsYXNzLmdldE1ldGhvZCgiZ2V0QmF0dGVyeUxldmVsIikKICAgICAgICAgICAgdmFsIHZhbHVlID0gbWV0aG9kLmludm9rZShkZXZpY2UpIGFzPyBJbnQgPzogcmV0dXJuIG51bGwKICAgICAgICAgICAgdmFsdWUudGFrZUlmIHsgaXQgaW4gMC4uMTAwIH0KICAgICAgICB9LmdldE9yTnVsbCgpCiAgICB9CgogICAgLy8gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIOWPjeWwhOW3peWFtwoKICAgIHByaXZhdGUgZnVuIHJlc29sdmVDbGFzcygpOiBDbGFzczwqPj8gewogICAgICAgIGlmIChjbGFzc1Jlc29sdmVkKSByZXR1cm4gcmVzb2x2ZWRDbGFzcwogICAgICAgIHN5bmNocm9uaXplZCh0aGlzKSB7CiAgICAgICAgICAgIGlmIChjbGFzc1Jlc29sdmVkKSByZXR1cm4gcmVzb2x2ZWRDbGFzcwogICAgICAgICAgICByZXNvbHZlZENsYXNzID0gcnVuQ2F0Y2hpbmcgeyBDbGFzcy5mb3JOYW1lKFNISVpVS1VfQ0xBU1MpIH0uZ2V0T3JOdWxsKCkKICAgICAgICAgICAgY2xhc3NSZXNvbHZlZCA9IHRydWUKICAgICAgICAgICAgcmV0dXJuIHJlc29sdmVkQ2xhc3MKICAgICAgICB9CiAgICB9CgogICAgcHJpdmF0ZSBmdW4gaW52b2tlU3RhdGljTm9BcmcoY2xheno6IENsYXNzPCo+LCBuYW1lOiBTdHJpbmcpOiBBbnk/IHsKICAgICAgICB2YWwgbWV0aG9kID0gY2xhenoubWV0aG9kcy5maXJzdE9yTnVsbCB7CiAgICAgICAgICAgIGl0Lm5hbWUgPT0gbmFtZSAmJiBpdC5wYXJhbWV0ZXJDb3VudCA9PSAwICYmIE1vZGlmaWVyLmlzU3RhdGljKGl0Lm1vZGlmaWVycykKICAgICAgICB9ID86IHJldHVybiBudWxsCiAgICAgICAgcmV0dXJuIG1ldGhvZC5pbnZva2UobnVsbCkKICAgIH0KCiAgICAvKioKICAgICAqIGBTaGl6dWt1Lm5ld1Byb2Nlc3MoU3RyaW5nW10gY21kLCBTdHJpbmdbXSBlbnYsIFN0cmluZyBkaXIpYOOAggogICAgICog5om+5LiN5Yiw5pa55rOV5pe26L+U5ZueIG51bGzvvIjkuI3lkIwgU2hpenVrdSDniYjmnKzlj6/og73msqHmnInov5nkuKrmlrnms5XvvInjgIIKICAgICAqLwogICAgcHJpdmF0ZSBmdW4gaW52b2tlTmV3UHJvY2VzcyhjbGF6ejogQ2xhc3M8Kj4sIGNvbW1hbmQ6IEFycmF5PFN0cmluZz4pOiBBbnk/IHsKICAgICAgICB2YWwgbWV0aG9kOiBNZXRob2QgPSBjbGF6ei5tZXRob2RzLmZpcnN0T3JOdWxsIHsKICAgICAgICAgICAgaXQubmFtZSA9PSAibmV3UHJvY2VzcyIgJiYgaXQucGFyYW1ldGVyQ291bnQgPT0gMyAmJiBNb2RpZmllci5pc1N0YXRpYyhpdC5tb2RpZmllcnMpCiAgICAgICAgfSA/OiByZXR1cm4gbnVsbAogICAgICAgIHJldHVybiBtZXRob2QuaW52b2tlKG51bGwsIGNvbW1hbmQsIG51bGwsIG51bGwpCiAgICB9CgogICAgLyoqIOW4pueci+mXqOeLl+WcsOivu+WPlui/m+eoiyBzdGRvdXTvvIzpgb/lhY0gZHVtcHN5cyDljaHmrbvmi5bkvY/osIPnlKjmlrnjgIIgKi8KICAgIHByaXZhdGUgZnVuIHJlYWRQcm9jZXNzT3V0cHV0KHByb2Nlc3M6IEFueSk6IFN0cmluZz8gewogICAgICAgIHZhbCBzdHJlYW0gPSBydW5DYXRjaGluZyB7CiAgICAgICAgICAgIHByb2Nlc3MuamF2YUNsYXNzLmdldE1ldGhvZCgiZ2V0SW5wdXRTdHJlYW0iKS5pbnZva2UocHJvY2VzcykgYXM/IElucHV0U3RyZWFtCiAgICAgICAgfS5nZXRPck51bGwoKSA/OiByZXR1cm4gbnVsbAoKICAgICAgICB2YWwgYnVmZmVyID0gU3RyaW5nQnVpbGRlcigpCiAgICAgICAgdmFsIHJlYWRlciA9IFRocmVhZCB7CiAgICAgICAgICAgIHJ1bkNhdGNoaW5nIHsKICAgICAgICAgICAgICAgIHN0cmVhbS5idWZmZXJlZFJlYWRlcigpLnVzZSB7IHNvdXJjZSAtPgogICAgICAgICAgICAgICAgICAgIHZhbCBjaHVuayA9IENoYXJBcnJheSg4MTkyKQogICAgICAgICAgICAgICAgICAgIHdoaWxlICh0cnVlKSB7CiAgICAgICAgICAgICAgICAgICAgICAgIHZhbCByZWFkID0gc291cmNlLnJlYWQoY2h1bmspCiAgICAgICAgICAgICAgICAgICAgICAgIGlmIChyZWFkIDwgMCkgYnJlYWsKICAgICAgICAgICAgICAgICAgICAgICAgc3luY2hyb25pemVkKGJ1ZmZlcikgeyBidWZmZXIuYXBwZW5kKGNodW5rLCAwLCByZWFkKSB9CiAgICAgICAgICAgICAgICAgICAgICAgIGlmIChidWZmZXIubGVuZ3RoID49IE1BWF9EVU1QX0NIQVJTKSBicmVhawogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgfQogICAgICAgIH0KICAgICAgICByZWFkZXIuaXNEYWVtb24gPSB0cnVlCiAgICAgICAgcmVhZGVyLnN0YXJ0KCkKICAgICAgICBydW5DYXRjaGluZyB7IHJlYWRlci5qb2luKFJFQURfVElNRU9VVF9NUykgfQoKICAgICAgICBydW5DYXRjaGluZyB7IHByb2Nlc3MuamF2YUNsYXNzLmdldE1ldGhvZCgiZGVzdHJveSIpLmludm9rZShwcm9jZXNzKSB9CiAgICAgICAgcnVuQ2F0Y2hpbmcgeyBwcm9jZXNzLmphdmFDbGFzcy5nZXRNZXRob2QoIndhaXRGb3IiKS5pbnZva2UocHJvY2VzcykgfQoKICAgICAgICB2YWwgdGV4dCA9IHN5bmNocm9uaXplZChidWZmZXIpIHsgYnVmZmVyLnRvU3RyaW5nKCkgfQogICAgICAgIGlmICh0ZXh0LmlzQmxhbmsoKSkgewogICAgICAgICAgICBFdmVudExvZy5pbmZvKFRBRywgImR1bXBzeXMgYmx1ZXRvb3RoX21hbmFnZXIg5peg6L6T5Ye677yI5Y+v6IO95pyq5o6I5p2D5oiW5ZG95Luk5LiN5Y+v55So77yJIikKICAgICAgICAgICAgcmV0dXJuIG51bGwKICAgICAgICB9CiAgICAgICAgRXZlbnRMb2cuaW5mbyhUQUcsICLlt7Lor7vlj5YgZHVtcHN5cyBibHVldG9vdGhfbWFuYWdlcu+8jOWFsSAke3RleHQubGVuZ3RofSDlrZfnrKYiKQogICAgICAgIHJldHVybiB0ZXh0CiAgICB9Cn0K
+package com.yinpage.link.enhance
+
+import android.content.pm.PackageManager
+import android.os.Build
+import com.yinpage.link.core.EventLog
+import com.yinpage.link.transport.TransportEnv
+import java.io.InputStream
+import java.lang.reflect.Method
+import java.lang.reflect.Modifier
+
+/**
+ * ============================================================================
+ *  Shizuku 可选增强（尽力而为，不是主链路）
+ * ============================================================================
+ *  ## 能力边界（必须说清楚，避免误期待）
+ *   Shizuku 本质上是「免 root 拿到 shell(uid 2000) 权限」的通道，
+ *   它**不能**：
+ *    - 往 SystemUI / 系统蓝牙设置页注入耳机卡片或自定义控件
+ *      （那是 LSPosed/Xposed 模块的能力边界，本 App 明确不做）；
+ *    - 绕过 Android 的蓝牙 ACL / GATT 访问规则，也不能替 App 建立 SPP 连接；
+ *    - 修改系统框架行为、Hook 任意进程。
+ *   它**能**：
+ *    - 以 shell 身份执行命令（例如 `dumpsys bluetooth_manager`），
+ *      读取系统蓝牙管理器里更全的已连接/已配对设备信息，用于诊断与逆向取证。
+ *
+ *  ## 实现约束（任务硬性要求）
+ *   - **不新增任何 Gradle 依赖**，因此这里全部用反射调用
+ *     `rikka.shizuku.Shizuku` 的静态方法：pingBinder() / getVersion() /
+ *     checkSelfPermission() / requestPermission(int) / newProcess(...)。
+ *   - Shizuku 不存在、版本不匹配、反射失败、命令执行失败 —— 一律静默降级，
+ *     绝不抛异常，绝不阻塞 UI。
+ *
+ *  ## 已知限制（诚实声明，需要 Lead 知晓）
+ *   官方 Shizuku API 是编译期依赖（`dev.rikka.shizuku:api`）。本工程没有引入它，
+ *   且普通 App 的 ClassLoader 里不会有 `rikka.shizuku.Shizuku`，
+ *   因此**在真机上 [isAvailable] / [hasPermission] 会返回 false，
+ *   [querySystemBluetoothInfo] 会返回 null**；[isSupported] 通过
+ *   「是否安装了 Shizuku App（moe.shizuku.privileged.api）」判断，仍然可用。
+ *   一旦将来允许加入该依赖（或提供一个自带的 API 桩类），本文件无需改动即可生效。
+ * ============================================================================
+ */
+object ShizukuEnhancer {
+
+    private const val TAG = "Shizuku"
+
+    /** Shizuku API 入口类（编译期不存在，只能反射）。 */
+    private const val SHIZUKU_CLASS = "rikka.shizuku.Shizuku"
+
+    /** Shizuku 管理器 App 的包名，用于判断「本机是否装了 Shizuku」。 */
+    private const val SHIZUKU_PACKAGE = "moe.shizuku.privileged.api"
+
+    private const val MAX_DUMP_CHARS = 200_000
+    private const val READ_TIMEOUT_MS = 5_000L
+
+    @Volatile
+    private var resolvedClass: Class<*>? = null
+
+    @Volatile
+    private var classResolved = false
+
+    @Volatile
+    private var cachedVersion = -1
+
+    // ------------------------------------------------------------------ 状态查询
+
+    /** 本机是否装了 Shizuku（装了管理器 App 即视为支持）。 */
+    fun isSupported(): Boolean {
+        if (resolveClass() != null) return true
+        return runCatching {
+            val context = TransportEnv.context() ?: return false
+            @Suppress("DEPRECATION")
+            context.packageManager.getPackageInfo(SHIZUKU_PACKAGE, 0)
+            true
+        }.getOrDefault(false)
+    }
+
+    /** Shizuku 服务是否在运行（pingBinder 返回 true）。 */
+    fun isAvailable(): Boolean {
+        val clazz = resolveClass() ?: return false
+        val alive = runCatching { invokeStaticNoArg(clazz, "pingBinder") as? Boolean ?: false }
+            .getOrDefault(false)
+        if (alive && cachedVersion < 0) {
+            cachedVersion = runCatching { invokeStaticNoArg(clazz, "getVersion") as? Int ?: -1 }
+                .getOrDefault(-1)
+            EventLog.info(TAG, "Shizuku 服务可用，API 版本=$cachedVersion")
+        }
+        return alive
+    }
+
+    /** 本 App 是否已获得 Shizuku 授权。 */
+    fun hasPermission(): Boolean {
+        val clazz = resolveClass() ?: return false
+        return runCatching {
+            (invokeStaticNoArg(clazz, "checkSelfPermission") as? Int) == PackageManager.PERMISSION_GRANTED
+        }.getOrDefault(false)
+    }
+
+    /** 请求 Shizuku 授权（需要在有前台 Activity 时调用才会弹窗）。 */
+    fun requestPermission(requestCode: Int) {
+        val clazz = resolveClass() ?: return
+        runCatching {
+            val method = clazz.methods.firstOrNull {
+                it.name == "requestPermission" &&
+                    it.parameterCount == 1 &&
+                    Modifier.isStatic(it.modifiers)
+            } ?: return
+            method.invoke(null, requestCode)
+            EventLog.info(TAG, "已请求 Shizuku 授权，requestCode=$requestCode")
+        }.onFailure { EventLog.info(TAG, "请求 Shizuku 授权失败：${it.message}") }
+    }
+
+    // ------------------------------------------------------------------ 增强能力
+
+    /**
+     * 用 shell 权限执行 `dumpsys bluetooth_manager`，返回 stdout 文本。
+     * 失败（未安装/未授权/方法不存在/超时）一律返回 null。
+     */
+    fun querySystemBluetoothInfo(): String? {
+        if (!isAvailable()) return null
+        val clazz = resolveClass() ?: return null
+        return runCatching {
+            val process = invokeNewProcess(
+                clazz,
+                arrayOf("sh", "-c", "dumpsys bluetooth_manager"),
+            ) ?: return null
+            readProcessOutput(process)
+        }.getOrNull()
+    }
+
+    /**
+     * 读某设备在系统蓝牙管理器里的电量（Android 14+ 公开 API
+     * `BluetoothDevice.getBatteryLevel()`）。失败返回 null。
+     *
+     * 这里仍走反射：一是该方法在旧 SDK 上不存在，二是避免为一处调用
+     * 提高 minSdk 约束。
+     */
+    fun systemBatteryLevel(address: String): Int? {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE) return null
+        return runCatching {
+            val adapter = TransportEnv.adapter() ?: return null
+            val device = adapter.getRemoteDevice(address) ?: return null
+            val method = device.javaClass.getMethod("getBatteryLevel")
+            val value = method.invoke(device) as? Int ?: return null
+            value.takeIf { it in 0..100 }
+        }.getOrNull()
+    }
+
+    // ------------------------------------------------------------------ 反射工具
+
+    private fun resolveClass(): Class<*>? {
+        if (classResolved) return resolvedClass
+        synchronized(this) {
+            if (classResolved) return resolvedClass
+            resolvedClass = runCatching { Class.forName(SHIZUKU_CLASS) }.getOrNull()
+            classResolved = true
+            return resolvedClass
+        }
+    }
+
+    private fun invokeStaticNoArg(clazz: Class<*>, name: String): Any? {
+        val method = clazz.methods.firstOrNull {
+            it.name == name && it.parameterCount == 0 && Modifier.isStatic(it.modifiers)
+        } ?: return null
+        return method.invoke(null)
+    }
+
+    /**
+     * `Shizuku.newProcess(String[] cmd, String[] env, String dir)`。
+     * 找不到方法时返回 null（不同 Shizuku 版本可能没有这个方法）。
+     */
+    private fun invokeNewProcess(clazz: Class<*>, command: Array<String>): Any? {
+        val method: Method = clazz.methods.firstOrNull {
+            it.name == "newProcess" && it.parameterCount == 3 && Modifier.isStatic(it.modifiers)
+        } ?: return null
+        return method.invoke(null, command, null, null)
+    }
+
+    /** 带看门狗地读取进程 stdout，避免 dumpsys 卡死拖住调用方。 */
+    private fun readProcessOutput(process: Any): String? {
+        val stream = runCatching {
+            process.javaClass.getMethod("getInputStream").invoke(process) as? InputStream
+        }.getOrNull() ?: return null
+
+        val buffer = StringBuilder()
+        val reader = Thread {
+            runCatching {
+                stream.bufferedReader().use { source ->
+                    val chunk = CharArray(8192)
+                    while (true) {
+                        val read = source.read(chunk)
+                        if (read < 0) break
+                        synchronized(buffer) { buffer.append(chunk, 0, read) }
+                        if (buffer.length >= MAX_DUMP_CHARS) break
+                    }
+                }
+            }
+        }
+        reader.isDaemon = true
+        reader.start()
+        runCatching { reader.join(READ_TIMEOUT_MS) }
+
+        runCatching { process.javaClass.getMethod("destroy").invoke(process) }
+        runCatching { process.javaClass.getMethod("waitFor").invoke(process) }
+
+        val text = synchronized(buffer) { buffer.toString() }
+        if (text.isBlank()) {
+            EventLog.info(TAG, "dumpsys bluetooth_manager 无输出（可能未授权或命令不可用）")
+            return null
+        }
+        EventLog.info(TAG, "已读取 dumpsys bluetooth_manager，共 ${text.length} 字符")
+        return text
+    }
+}

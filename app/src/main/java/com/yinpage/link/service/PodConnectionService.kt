@@ -1,1 +1,98 @@
-cGFja2FnZSBjb20ueWlucGFnZS5saW5rLnNlcnZpY2UKCmltcG9ydCBhbmRyb2lkLmFwcC5Ob3RpZmljYXRpb24KaW1wb3J0IGFuZHJvaWQuYXBwLlBlbmRpbmdJbnRlbnQKaW1wb3J0IGFuZHJvaWQuYXBwLlNlcnZpY2UKaW1wb3J0IGFuZHJvaWQuY29udGVudC5JbnRlbnQKaW1wb3J0IGFuZHJvaWQub3MuSUJpbmRlcgppbXBvcnQgY29tLnlpbnBhZ2UubGluay5OT1RJRklDQVRJT05fQ0hBTk5FTF9JRAppbXBvcnQgY29tLnlpbnBhZ2UubGluay5jb3JlLkFwcFN0YXRlCmltcG9ydCBjb20ueWlucGFnZS5saW5rLmNvcmUuRXZlbnRMb2cKaW1wb3J0IGNvbS55aW5wYWdlLmxpbmsucHJvdG9jb2wuQmF0dGVyeVN0YXRlCmltcG9ydCBjb20ueWlucGFnZS5saW5rLnByb3RvY29sLlBvZFN0YXRlCgovKioKICogPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQogKiAg6L+e5o6l5L+d5rS75YmN5Y+w5pyN5Yqh77yIZm9yZWdyb3VuZFNlcnZpY2VUeXBlPWNvbm5lY3RlZERldmljZe+8iQogKiA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CiAqICDkvZznlKjlj6rmnInkuIDkuKrvvJrov57mjqXmnJ/pl7Torqnov5vnqIvkuI3ooqvns7vnu5/lm57mlLbvvIzkv53or4EgU1BQL0JMRSDplb/ov57mjqXkuI7ova7or6LkuI3mlq3jgIIKICoKICogIC0gQW5kcm9pZCAxNCsg55qEIGNvbm5lY3RlZERldmljZSDnsbvlnovpnIDopoHlnKggTWFuaWZlc3Qg5aOw5piOCiAqICAgIEZPUkVHUk9VTkRfU0VSVklDRV9DT05ORUNURURfREVWSUNF77yI5bey5aOw5piO77yJ77yM5bm25LiU6LCD55So5pa56ZyA5bey5oyB5pyJCiAqICAgIEJMVUVUT09USF9DT05ORUNUIOadg+mZkO+8jOWQpuWImSBzdGFydEZvcmVncm91bmQg5Lya5aSx6LSl44CCCiAqICAtIOmAmuefpeWGheWuuSA9IOiAs+acuuWQjSArIOeUtemHj+aRmOimge+8jOebtOaOpeivuyBbQXBwU3RhdGUucG9kXe+8iOWNleS4gOaVsOaNrua6kO+8ieOAggogKiAgLSBvbkRlc3Ryb3kgKirkuI3kuLvliqjmlq3lvIAqKui/nuaOpe+8muaWrei/nueUsSBVSSDlhrPlrprvvIzmnI3liqHlj6rotJ/otKPkv53mtLvjgIIKICogPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQogKi8KY2xhc3MgUG9kQ29ubmVjdGlvblNlcnZpY2UgOiBTZXJ2aWNlKCkgewoKICAgIG92ZXJyaWRlIGZ1biBvbkJpbmQoaW50ZW50OiBJbnRlbnQ/KTogSUJpbmRlcj8gPSBudWxsCgogICAgb3ZlcnJpZGUgZnVuIG9uU3RhcnRDb21tYW5kKGludGVudDogSW50ZW50PywgZmxhZ3M6IEludCwgc3RhcnRJZDogSW50KTogSW50IHsKICAgICAgICByZXR1cm4gdHJ5IHsKICAgICAgICAgICAgc3RhcnRGb3JlZ3JvdW5kKE5PVElGSUNBVElPTl9JRCwgYnVpbGROb3RpZmljYXRpb24oKSkKICAgICAgICAgICAgRXZlbnRMb2cuaW5mbyhUQUcsICLliY3lj7DmnI3liqHlt7LlkK/liqjvvIjkv53mtLvkuK3vvIkiKQogICAgICAgICAgICBTVEFSVF9TVElDS1kKICAgICAgICB9IGNhdGNoIChlcnJvcjogVGhyb3dhYmxlKSB7CiAgICAgICAgICAgIC8vIOWFuOWei+WOn+WboO+8muayoeaciSBCTFVFVE9PVEhfQ09OTkVDVCDmnYPpmZAgLyDns7vnu5/pmZDliLblkI7lj7DlkK/liqjliY3lj7DmnI3liqHjgIIKICAgICAgICAgICAgRXZlbnRMb2cuaW5mbyhUQUcsICLliY3lj7DmnI3liqHlkK/liqjlpLHotKXvvJoke2Vycm9yLm1lc3NhZ2UgPzogZXJyb3IuamF2YUNsYXNzLnNpbXBsZU5hbWV9IikKICAgICAgICAgICAgc3RvcFNlbGYoKQogICAgICAgICAgICBTVEFSVF9OT1RfU1RJQ0tZCiAgICAgICAgfQogICAgfQoKICAgIG92ZXJyaWRlIGZ1biBvbkRlc3Ryb3koKSB7CiAgICAgICAgRXZlbnRMb2cuaW5mbyhUQUcsICLliY3lj7DmnI3liqHplIDmr4HvvIjkuI3kuLvliqjmlq3lvIDov57mjqXvvIkiKQogICAgICAgIHN1cGVyLm9uRGVzdHJveSgpCiAgICB9CgogICAgcHJpdmF0ZSBmdW4gYnVpbGROb3RpZmljYXRpb24oKTogTm90aWZpY2F0aW9uIHsKICAgICAgICB2YWwgcG9kID0gQXBwU3RhdGUucG9kLnZhbHVlCiAgICAgICAgdmFsIHRpdGxlID0gcG9kLmRldmljZT8ubmFtZT8udGFrZUlmIHsgaXQuaXNOb3RCbGFuaygpIH0gPzogIllJTlBBR0UtTElOSyIKICAgICAgICB2YWwgdGV4dCA9IGJhdHRlcnlTdW1tYXJ5KHBvZCkKCiAgICAgICAgdmFsIGJ1aWxkZXIgPSBOb3RpZmljYXRpb24uQnVpbGRlcih0aGlzLCBOT1RJRklDQVRJT05fQ0hBTk5FTF9JRCkKICAgICAgICAgICAgLy8g5L2/55So5qGG5p625YaF572uIGRyYXdhYmxl77yM5L+d6K+B5LiN5L6d6LWWIHJlcy8g5LiL55SxIFVJIOaooeWdl+e7tOaKpOeahOWbvuagh+i1hOa6kO+8mwogICAgICAgICAgICAvLyDlkI7nu63oi6XopoHmjaLmiJDkuJPnlKjogLPmnLrlm77moIfvvIzmm7/mjaLmiJAgUi5kcmF3YWJsZS54eHgg5Y2z5Y+v44CCCiAgICAgICAgICAgIC5zZXRTbWFsbEljb24oYW5kcm9pZC5SLmRyYXdhYmxlLmljX2RpYWxvZ19pbmZvKQogICAgICAgICAgICAuc2V0Q29udGVudFRpdGxlKHRpdGxlKQogICAgICAgICAgICAuc2V0Q29udGVudFRleHQodGV4dCkKICAgICAgICAgICAgLnNldE9uZ29pbmcodHJ1ZSkKICAgICAgICAgICAgLnNldFNob3dXaGVuKGZhbHNlKQogICAgICAgICAgICAuc2V0Q2F0ZWdvcnkoTm90aWZpY2F0aW9uLkNBVEVHT1JZX1NFUlZJQ0UpCgogICAgICAgIC8vIOeUqOWQr+WKqOWZqCBJbnRlbnTvvIzpgb/lhY0gc2VydmljZSDlsYLlj43lkJHkvp3otZYgdWkuTWFpbkFjdGl2aXR544CCCiAgICAgICAgcGFja2FnZU1hbmFnZXIuZ2V0TGF1bmNoSW50ZW50Rm9yUGFja2FnZShwYWNrYWdlTmFtZSk/LmxldCB7IGxhdW5jaCAtPgogICAgICAgICAgICBsYXVuY2guYWRkRmxhZ3MoSW50ZW50LkZMQUdfQUNUSVZJVFlfTkVXX1RBU0sgb3IgSW50ZW50LkZMQUdfQUNUSVZJVFlfQ0xFQVJfVE9QKQogICAgICAgICAgICBidWlsZGVyLnNldENvbnRlbnRJbnRlbnQoCiAgICAgICAgICAgICAgICBQZW5kaW5nSW50ZW50LmdldEFjdGl2aXR5KAogICAgICAgICAgICAgICAgICAgIHRoaXMsCiAgICAgICAgICAgICAgICAgICAgMCwKICAgICAgICAgICAgICAgICAgICBsYXVuY2gsCiAgICAgICAgICAgICAgICAgICAgUGVuZGluZ0ludGVudC5GTEFHX0lNTVVUQUJMRSBvciBQZW5kaW5nSW50ZW50LkZMQUdfVVBEQVRFX0NVUlJFTlQsCiAgICAgICAgICAgICAgICApLAogICAgICAgICAgICApCiAgICAgICAgfQogICAgICAgIHJldHVybiBidWlsZGVyLmJ1aWxkKCkKICAgIH0KCiAgICAvKiog5L6L77yaYOW3sui/nuaOpSDCtyDlt6YgODIlIMK3IOWPsyA4MCUgwrcg55uSIDU1JWDjgIIgKi8KICAgIHByaXZhdGUgZnVuIGJhdHRlcnlTdW1tYXJ5KHBvZDogUG9kU3RhdGUpOiBTdHJpbmcgewogICAgICAgIHZhbCBiYXR0ZXJ5OiBCYXR0ZXJ5U3RhdGUgPSBwb2QuYmF0dGVyeQogICAgICAgIHZhbCBwYXJ0cyA9IGJ1aWxkTGlzdCB7CiAgICAgICAgICAgIGJhdHRlcnkubGVmdC5wZXJjZW50Py5sZXQgeyBhZGQoIuW3piAkaXQlJHtpZiAoYmF0dGVyeS5sZWZ0LmNoYXJnaW5nKSAi4pqhIiBlbHNlICIifSIpIH0KICAgICAgICAgICAgYmF0dGVyeS5yaWdodC5wZXJjZW50Py5sZXQgeyBhZGQoIuWPsyAkaXQlJHtpZiAoYmF0dGVyeS5yaWdodC5jaGFyZ2luZykgIuKaoSIgZWxzZSAiIn0iKSB9CiAgICAgICAgICAgIGJhdHRlcnkuY2FzZS5wZXJjZW50Py5sZXQgeyBhZGQoIuebkiAkaXQlJHtpZiAoYmF0dGVyeS5jYXNlLmNoYXJnaW5nKSAi4pqhIiBlbHNlICIifSIpIH0KICAgICAgICB9CiAgICAgICAgcmV0dXJuIGlmIChwYXJ0cy5pc0VtcHR5KCkpIHsKICAgICAgICAgICAgaWYgKHBvZC5jb25uZWN0ZWQpICLlt7Lov57mjqUgwrcg55S16YeP5b6F5LiK5oqlIiBlbHNlICLmnKrov57mjqUiCiAgICAgICAgfSBlbHNlIHsKICAgICAgICAgICAgcGFydHMuam9pblRvU3RyaW5nKCIgwrcgIikKICAgICAgICB9CiAgICB9CgogICAgcHJpdmF0ZSBjb21wYW5pb24gb2JqZWN0IHsKICAgICAgICBjb25zdCB2YWwgVEFHID0gIuS/nea0u+acjeWKoSIKICAgICAgICBjb25zdCB2YWwgTk9USUZJQ0FUSU9OX0lEID0gMQogICAgfQp9Cg==
+package com.yinpage.link.service
+
+import android.app.Notification
+import android.app.PendingIntent
+import android.app.Service
+import android.content.Intent
+import android.os.IBinder
+import com.yinpage.link.NOTIFICATION_CHANNEL_ID
+import com.yinpage.link.core.AppState
+import com.yinpage.link.core.EventLog
+import com.yinpage.link.protocol.BatteryState
+import com.yinpage.link.protocol.PodState
+
+/**
+ * ============================================================================
+ *  连接保活前台服务（foregroundServiceType=connectedDevice）
+ * ============================================================================
+ *  作用只有一个：连接期间让进程不被系统回收，保证 SPP/BLE 长连接与轮询不断。
+ *
+ *  - Android 14+ 的 connectedDevice 类型需要在 Manifest 声明
+ *    FOREGROUND_SERVICE_CONNECTED_DEVICE（已声明），并且调用方需已持有
+ *    BLUETOOTH_CONNECT 权限，否则 startForeground 会失败。
+ *  - 通知内容 = 耳机名 + 电量摘要，直接读 [AppState.pod]（单一数据源）。
+ *  - onDestroy **不主动断开**连接：断连由 UI 决定，服务只负责保活。
+ * ============================================================================
+ */
+class PodConnectionService : Service() {
+
+    override fun onBind(intent: Intent?): IBinder? = null
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        return try {
+            startForeground(NOTIFICATION_ID, buildNotification())
+            EventLog.info(TAG, "前台服务已启动（保活中）")
+            START_STICKY
+        } catch (error: Throwable) {
+            // 典型原因：没有 BLUETOOTH_CONNECT 权限 / 系统限制后台启动前台服务。
+            EventLog.info(TAG, "前台服务启动失败：${error.message ?: error.javaClass.simpleName}")
+            stopSelf()
+            START_NOT_STICKY
+        }
+    }
+
+    override fun onDestroy() {
+        EventLog.info(TAG, "前台服务销毁（不主动断开连接）")
+        super.onDestroy()
+    }
+
+    private fun buildNotification(): Notification {
+        val pod = AppState.pod.value
+        val title = pod.device?.name?.takeIf { it.isNotBlank() } ?: "YINPAGE-LINK"
+        val text = batterySummary(pod)
+
+        val builder = Notification.Builder(this, NOTIFICATION_CHANNEL_ID)
+            // 使用框架内置 drawable，保证不依赖 res/ 下由 UI 模块维护的图标资源；
+            // 后续若要换成专用耳机图标，替换成 R.drawable.xxx 即可。
+            .setSmallIcon(android.R.drawable.ic_dialog_info)
+            .setContentTitle(title)
+            .setContentText(text)
+            .setOngoing(true)
+            .setShowWhen(false)
+            .setCategory(Notification.CATEGORY_SERVICE)
+
+        // 用启动器 Intent，避免 service 层反向依赖 ui.MainActivity。
+        packageManager.getLaunchIntentForPackage(packageName)?.let { launch ->
+            launch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            builder.setContentIntent(
+                PendingIntent.getActivity(
+                    this,
+                    0,
+                    launch,
+                    PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
+                ),
+            )
+        }
+        return builder.build()
+    }
+
+    /** 例：`已连接 · 左 82% · 右 80% · 盒 55%`。 */
+    private fun batterySummary(pod: PodState): String {
+        val battery: BatteryState = pod.battery
+        val parts = buildList {
+            battery.left.percent?.let { add("左 $it%${if (battery.left.charging) "⚡" else ""}") }
+            battery.right.percent?.let { add("右 $it%${if (battery.right.charging) "⚡" else ""}") }
+            battery.case.percent?.let { add("盒 $it%${if (battery.case.charging) "⚡" else ""}") }
+        }
+        return if (parts.isEmpty()) {
+            if (pod.connected) "已连接 · 电量待上报" else "未连接"
+        } else {
+            parts.joinToString(" · ")
+        }
+    }
+
+    private companion object {
+        const val TAG = "保活服务"
+        const val NOTIFICATION_ID = 1
+    }
+}

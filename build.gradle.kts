@@ -1,1 +1,10 @@
-cGx1Z2lucyB7CiAgICBhbGlhcyhsaWJzLnBsdWdpbnMuYW5kcm9pZC5hcHBsaWNhdGlvbikgYXBwbHkgZmFsc2UKICAgIGFsaWFzKGxpYnMucGx1Z2lucy5rb3RsaW4uYW5kcm9pZCkgYXBwbHkgZmFsc2UKICAgIGFsaWFzKGxpYnMucGx1Z2lucy5rb3RsaW4uY29tcG9zZSkgYXBwbHkgZmFsc2UKICAgIGFsaWFzKGxpYnMucGx1Z2lucy5rb3RsaW4uc2VyaWFsaXphdGlvbikgYXBwbHkgZmFsc2UKfQoKdGFza3MucmVnaXN0ZXI8RGVsZXRlPigiY2xlYW4iKSB7CiAgICBkZWxldGUocm9vdFByb2plY3QubGF5b3V0LmJ1aWxkRGlyZWN0b3J5KQp9Cg==
+plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.compose) apply false
+    alias(libs.plugins.kotlin.serialization) apply false
+}
+
+tasks.register<Delete>("clean") {
+    delete(rootProject.layout.buildDirectory)
+}

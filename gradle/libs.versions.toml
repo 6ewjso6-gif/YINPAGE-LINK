@@ -1,1 +1,41 @@
-W3ZlcnNpb25zXQphZ3AgPSAiOC43LjMiCmtvdGxpbiA9ICIyLjAuMjEiCmNvcmVLdHggPSAiMS4xNS4wIgphY3Rpdml0eUNvbXBvc2UgPSAiMS45LjMiCmxpZmVjeWNsZSA9ICIyLjguNyIKY29tcG9zZUJvbSA9ICIyMDI0LjEyLjAxIgpjb3JvdXRpbmVzID0gIjEuOS4wIgpzZXJpYWxpemF0aW9uID0gIjEuNy4zIgpqdW5pdCA9ICI0LjEzLjIiCmFuZHJvaWR4VGVzdEp1bml0ID0gIjEuMi4xIgplc3ByZXNzbyA9ICIzLjYuMSIKCltsaWJyYXJpZXNdCmFuZHJvaWR4LWNvcmUta3R4ID0geyBncm91cCA9ICJhbmRyb2lkeC5jb3JlIiwgbmFtZSA9ICJjb3JlLWt0eCIsIHZlcnNpb24ucmVmID0gImNvcmVLdHgiIH0KYW5kcm9pZHgtYWN0aXZpdHktY29tcG9zZSA9IHsgZ3JvdXAgPSAiYW5kcm9pZHguYWN0aXZpdHkiLCBuYW1lID0gImFjdGl2aXR5LWNvbXBvc2UiLCB2ZXJzaW9uLnJlZiA9ICJhY3Rpdml0eUNvbXBvc2UiIH0KYW5kcm9pZHgtbGlmZWN5Y2xlLXJ1bnRpbWUta3R4ID0geyBncm91cCA9ICJhbmRyb2lkeC5saWZlY3ljbGUiLCBuYW1lID0gImxpZmVjeWNsZS1ydW50aW1lLWt0eCIsIHZlcnNpb24ucmVmID0gImxpZmVjeWNsZSIgfQphbmRyb2lkeC1saWZlY3ljbGUtcnVudGltZS1jb21wb3NlID0geyBncm91cCA9ICJhbmRyb2lkeC5saWZlY3ljbGUiLCBuYW1lID0gImxpZmVjeWNsZS1ydW50aW1lLWNvbXBvc2UiLCB2ZXJzaW9uLnJlZiA9ICJsaWZlY3ljbGUiIH0KCmFuZHJvaWR4LWNvbXBvc2UtYm9tID0geyBncm91cCA9ICJhbmRyb2lkeC5jb21wb3NlIiwgbmFtZSA9ICJjb21wb3NlLWJvbSIsIHZlcnNpb24ucmVmID0gImNvbXBvc2VCb20iIH0KYW5kcm9pZHgtY29tcG9zZS11aSA9IHsgZ3JvdXAgPSAiYW5kcm9pZHguY29tcG9zZS51aSIsIG5hbWUgPSAidWkiIH0KYW5kcm9pZHgtY29tcG9zZS11aS1ncmFwaGljcyA9IHsgZ3JvdXAgPSAiYW5kcm9pZHguY29tcG9zZS51aSIsIG5hbWUgPSAidWktZ3JhcGhpY3MiIH0KYW5kcm9pZHgtY29tcG9zZS11aS10b29saW5nID0geyBncm91cCA9ICJhbmRyb2lkeC5jb21wb3NlLnVpIiwgbmFtZSA9ICJ1aS10b29saW5nIiB9CmFuZHJvaWR4LWNvbXBvc2UtdWktdG9vbGluZy1wcmV2aWV3ID0geyBncm91cCA9ICJhbmRyb2lkeC5jb21wb3NlLnVpIiwgbmFtZSA9ICJ1aS10b29saW5nLXByZXZpZXciIH0KYW5kcm9pZHgtY29tcG9zZS1mb3VuZGF0aW9uID0geyBncm91cCA9ICJhbmRyb2lkeC5jb21wb3NlLmZvdW5kYXRpb24iLCBuYW1lID0gImZvdW5kYXRpb24iIH0KYW5kcm9pZHgtY29tcG9zZS1tYXRlcmlhbDMgPSB7IGdyb3VwID0gImFuZHJvaWR4LmNvbXBvc2UubWF0ZXJpYWwzIiwgbmFtZSA9ICJtYXRlcmlhbDMiIH0KYW5kcm9pZHgtY29tcG9zZS1tYXRlcmlhbC1pY29ucy1leHRlbmRlZCA9IHsgZ3JvdXAgPSAiYW5kcm9pZHguY29tcG9zZS5tYXRlcmlhbCIsIG5hbWUgPSAibWF0ZXJpYWwtaWNvbnMtZXh0ZW5kZWQiIH0KCmtvdGxpbngtY29yb3V0aW5lcy1jb3JlID0geyBncm91cCA9ICJvcmcuamV0YnJhaW5zLmtvdGxpbngiLCBuYW1lID0gImtvdGxpbngtY29yb3V0aW5lcy1jb3JlIiwgdmVyc2lvbi5yZWYgPSAiY29yb3V0aW5lcyIgfQprb3RsaW54LWNvcm91dGluZXMtYW5kcm9pZCA9IHsgZ3JvdXAgPSAib3JnLmpldGJyYWlucy5rb3RsaW54IiwgbmFtZSA9ICJrb3RsaW54LWNvcm91dGluZXMtYW5kcm9pZCIsIHZlcnNpb24ucmVmID0gImNvcm91dGluZXMiIH0Ka290bGlueC1zZXJpYWxpemF0aW9uLWpzb24gPSB7IGdyb3VwID0gIm9yZy5qZXRicmFpbnMua290bGlueCIsIG5hbWUgPSAia290bGlueC1zZXJpYWxpemF0aW9uLWpzb24iLCB2ZXJzaW9uLnJlZiA9ICJzZXJpYWxpemF0aW9uIiB9CgpqdW5pdCA9IHsgZ3JvdXAgPSAianVuaXQiLCBuYW1lID0gImp1bml0IiwgdmVyc2lvbi5yZWYgPSAianVuaXQiIH0KYW5kcm9pZHgtdGVzdC1qdW5pdCA9IHsgZ3JvdXAgPSAiYW5kcm9pZHgudGVzdC5leHQiLCBuYW1lID0gImp1bml0IiwgdmVyc2lvbi5yZWYgPSAiYW5kcm9pZHhUZXN0SnVuaXQiIH0KYW5kcm9pZHgtZXNwcmVzc28tY29yZSA9IHsgZ3JvdXAgPSAiYW5kcm9pZHgudGVzdC5lc3ByZXNzbyIsIG5hbWUgPSAiZXNwcmVzc28tY29yZSIsIHZlcnNpb24ucmVmID0gImVzcHJlc3NvIiB9CgpbcGx1Z2luc10KYW5kcm9pZC1hcHBsaWNhdGlvbiA9IHsgaWQgPSAiY29tLmFuZHJvaWQuYXBwbGljYXRpb24iLCB2ZXJzaW9uLnJlZiA9ICJhZ3AiIH0Ka290bGluLWFuZHJvaWQgPSB7IGlkID0gIm9yZy5qZXRicmFpbnMua290bGluLmFuZHJvaWQiLCB2ZXJzaW9uLnJlZiA9ICJrb3RsaW4iIH0Ka290bGluLWNvbXBvc2UgPSB7IGlkID0gIm9yZy5qZXRicmFpbnMua290bGluLnBsdWdpbi5jb21wb3NlIiwgdmVyc2lvbi5yZWYgPSAia290bGluIiB9CmtvdGxpbi1zZXJpYWxpemF0aW9uID0geyBpZCA9ICJvcmcuamV0YnJhaW5zLmtvdGxpbi5wbHVnaW4uc2VyaWFsaXphdGlvbiIsIHZlcnNpb24ucmVmID0gImtvdGxpbiIgfQo=
+[versions]
+agp = "8.7.3"
+kotlin = "2.0.21"
+coreKtx = "1.15.0"
+activityCompose = "1.9.3"
+lifecycle = "2.8.7"
+composeBom = "2024.12.01"
+coroutines = "1.9.0"
+serialization = "1.7.3"
+junit = "4.13.2"
+androidxTestJunit = "1.2.1"
+espresso = "3.6.1"
+
+[libraries]
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle" }
+androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
+
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
+
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serialization" }
+
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-test-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxTestJunit" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

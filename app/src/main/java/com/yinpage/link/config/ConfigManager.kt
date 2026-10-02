@@ -1,1 +1,114 @@
-cGFja2FnZSBjb20ueWlucGFnZS5saW5rLmNvbmZpZwoKaW1wb3J0IGFuZHJvaWQuY29udGVudC5Db250ZXh0CmltcG9ydCBhbmRyb2lkeC5jb3JlLmNvbnRlbnQuZWRpdAppbXBvcnQga290bGlueC5jb3JvdXRpbmVzLmZsb3cuTXV0YWJsZVN0YXRlRmxvdwppbXBvcnQga290bGlueC5jb3JvdXRpbmVzLmZsb3cuU3RhdGVGbG93CmltcG9ydCBrb3RsaW54LmNvcm91dGluZXMuZmxvdy5hc1N0YXRlRmxvdwoKLyoqCiAqIOeUqOaIt+WPr+mFjee9rumhueOAguaMgeS5heWMluWIsCBTaGFyZWRQcmVmZXJlbmNlc++8iOaXoCByb29077yM57qv5bqU55So56eB5pyJ5a2Y5YKo77yJ44CCCiAqLwpkYXRhIGNsYXNzIEFwcENvbmZpZygKICAgIC8qKiDoh6rliqjorrDkvY/lubbph43ov57mnIDlkI7kuIDmrKHkvb/nlKjnmoTorr7lpIcgKi8KICAgIHZhbCBhdXRvUmVjb25uZWN0OiBCb29sZWFuID0gdHJ1ZSwKICAgIC8qKiDpppbpgInpgJrpgZPnsbvlnosgKi8KICAgIHZhbCB0cmFuc3BvcnQ6IFN0cmluZyA9ICJBVVRPIiwKICAgIC8qKiDpppbpgInljY/orq4gaWTvvIxudWxsIOihqOekuuiHquWKqOaOoua1iyAqLwogICAgdmFsIHByZWZlcnJlZENvZGVjSWQ6IFN0cmluZz8gPSBudWxsLAogICAgLyoqIOaYr+WQpuWcqOi/nuaOpeWQjueri+WNs+afpeivouWFqOmHj+eKtuaAgSAqLwogICAgdmFsIHF1ZXJ5T25Db25uZWN0OiBCb29sZWFuID0gdHJ1ZSwKICAgIC8qKiDosIPor5XpnaLmnb/lvIDlhbPvvIjmmL7npLrmlLblj5HlrZfoioLmtYHvvIkgKi8KICAgIHZhbCBkZWJ1Z1BhbmVsOiBCb29sZWFuID0gZmFsc2UsCiAgICAvKiog5pel5b+X57qn5Yir77yaMCDlhbMgLyAxIOWfuuacrCAvIDIg6K+m57uGICovCiAgICB2YWwgbG9nTGV2ZWw6IEludCA9IDEsCiAgICAvKiog5piv5ZCm5Y+R6YCB5pys5Zyw6YCa55+l77yI55S16YeP5L2O5o+Q6YaS562J77yJICovCiAgICB2YWwgbm90aWZpY2F0aW9uczogQm9vbGVhbiA9IHRydWUsCiAgICAvKiog5L2O55S16YeP6ZiI5YC877yIJe+8iSAqLwogICAgdmFsIGxvd0JhdHRlcnlUaHJlc2hvbGQ6IEludCA9IDIwLAogICAgLyoqIOiusOS9j+eahOacgOWQjui/nuaOpeiuvuWkhyAqLwogICAgdmFsIGxhc3REZXZpY2VBZGRyZXNzOiBTdHJpbmc/ID0gbnVsbCwKICAgIHZhbCBsYXN0RGV2aWNlTmFtZTogU3RyaW5nPyA9IG51bGwsCikgewogICAgY29tcGFuaW9uIG9iamVjdCB7CiAgICAgICAgY29uc3QgdmFsIExPR19PRkYgPSAwCiAgICAgICAgY29uc3QgdmFsIExPR19CQVNJQyA9IDEKICAgICAgICBjb25zdCB2YWwgTE9HX0RFQlVHID0gMgogICAgfQp9CgovKioKICog6YWN572u5Lit5b+D44CC5Y2V5L6L77yM6L+b56iL5YaF5YWx5Lqr77ybVUkg5LiOIGNvcmUg6YO96YCa6L+HIFN0YXRlRmxvdyDop4Llr5/jgIIKICog5rOo5oSP77ya5Y2P6K6u5bGC5LiN55u05o6l5L6d6LWW5pys57G777yM6YG/5YWN5b6q546v5L6d6LWW77yI5Y2P6K6u5a6e546w5Y+q5o6l5pS25Y+C5pWw77yJ44CCCiAqLwpjbGFzcyBDb25maWdNYW5hZ2VyIHByaXZhdGUgY29uc3RydWN0b3IoY29udGV4dDogQ29udGV4dCkgewoKICAgIHByaXZhdGUgdmFsIHByZWZzID0gY29udGV4dC5hcHBsaWNhdGlvbkNvbnRleHQKICAgICAgICAuZ2V0U2hhcmVkUHJlZmVyZW5jZXMoUFJFRlNfTkFNRSwgQ29udGV4dC5NT0RFX1BSSVZBVEUpCgogICAgcHJpdmF0ZSB2YWwgX2NvbmZpZyA9IE11dGFibGVTdGF0ZUZsb3cocmVhZCgpKQogICAgdmFsIGNvbmZpZzogU3RhdGVGbG93PEFwcENvbmZpZz4gPSBfY29uZmlnLmFzU3RhdGVGbG93KCkKCiAgICB2YWwgY3VycmVudDogQXBwQ29uZmlnIGdldCgpID0gX2NvbmZpZy52YWx1ZQoKICAgIHByaXZhdGUgZnVuIHJlYWQoKTogQXBwQ29uZmlnID0gQXBwQ29uZmlnKAogICAgICAgIGF1dG9SZWNvbm5lY3QgPSBwcmVmcy5nZXRCb29sZWFuKEtfQVVUT19SRUNPTk5FQ1QsIHRydWUpLAogICAgICAgIHRyYW5zcG9ydCA9IHByZWZzLmdldFN0cmluZyhLX1RSQU5TUE9SVCwgIkFVVE8iKSA/OiAiQVVUTyIsCiAgICAgICAgcHJlZmVycmVkQ29kZWNJZCA9IHByZWZzLmdldFN0cmluZyhLX0NPREVDLCBudWxsKSwKICAgICAgICBxdWVyeU9uQ29ubmVjdCA9IHByZWZzLmdldEJvb2xlYW4oS19RVUVSWV9PTl9DT05ORUNULCB0cnVlKSwKICAgICAgICBkZWJ1Z1BhbmVsID0gcHJlZnMuZ2V0Qm9vbGVhbihLX0RFQlVHX1BBTkVMLCBmYWxzZSksCiAgICAgICAgbG9nTGV2ZWwgPSBwcmVmcy5nZXRJbnQoS19MT0dfTEVWRUwsIEFwcENvbmZpZy5MT0dfQkFTSUMpLmNvZXJjZUluKDAsIDIpLAogICAgICAgIG5vdGlmaWNhdGlvbnMgPSBwcmVmcy5nZXRCb29sZWFuKEtfTk9USUZJQ0FUSU9OUywgdHJ1ZSksCiAgICAgICAgbG93QmF0dGVyeVRocmVzaG9sZCA9IHByZWZzLmdldEludChLX0xPV19CQVRURVJZLCAyMCkuY29lcmNlSW4oNSwgNTApLAogICAgICAgIGxhc3REZXZpY2VBZGRyZXNzID0gcHJlZnMuZ2V0U3RyaW5nKEtfTEFTVF9BRERSLCBudWxsKSwKICAgICAgICBsYXN0RGV2aWNlTmFtZSA9IHByZWZzLmdldFN0cmluZyhLX0xBU1RfTkFNRSwgbnVsbCksCiAgICApCgogICAgcHJpdmF0ZSBmdW4gd3JpdGUoY2ZnOiBBcHBDb25maWcpIHsKICAgICAgICBwcmVmcy5lZGl0IHsKICAgICAgICAgICAgcHV0Qm9vbGVhbihLX0FVVE9fUkVDT05ORUNULCBjZmcuYXV0b1JlY29ubmVjdCkKICAgICAgICAgICAgcHV0U3RyaW5nKEtfVFJBTlNQT1JULCBjZmcudHJhbnNwb3J0KQogICAgICAgICAgICBwdXRTdHJpbmcoS19DT0RFQywgY2ZnLnByZWZlcnJlZENvZGVjSWQpCiAgICAgICAgICAgIHB1dEJvb2xlYW4oS19RVUVSWV9PTl9DT05ORUNULCBjZmcucXVlcnlPbkNvbm5lY3QpCiAgICAgICAgICAgIHB1dEJvb2xlYW4oS19ERUJVR19QQU5FTCwgY2ZnLmRlYnVnUGFuZWwpCiAgICAgICAgICAgIHB1dEludChLX0xPR19MRVZFTCwgY2ZnLmxvZ0xldmVsKQogICAgICAgICAgICBwdXRCb29sZWFuKEtfTk9USUZJQ0FUSU9OUywgY2ZnLm5vdGlmaWNhdGlvbnMpCiAgICAgICAgICAgIHB1dEludChLX0xPV19CQVRURVJZLCBjZmcubG93QmF0dGVyeVRocmVzaG9sZCkKICAgICAgICAgICAgcHV0U3RyaW5nKEtfTEFTVF9BRERSLCBjZmcubGFzdERldmljZUFkZHJlc3MpCiAgICAgICAgICAgIHB1dFN0cmluZyhLX0xBU1RfTkFNRSwgY2ZnLmxhc3REZXZpY2VOYW1lKQogICAgICAgIH0KICAgICAgICBfY29uZmlnLnZhbHVlID0gY2ZnCiAgICB9CgogICAgZnVuIHVwZGF0ZShibG9jazogKEFwcENvbmZpZykgLT4gQXBwQ29uZmlnKSA9IHdyaXRlKGJsb2NrKGN1cnJlbnQpKQoKICAgIGZ1biByZW1lbWJlckRldmljZShhZGRyZXNzOiBTdHJpbmc/LCBuYW1lOiBTdHJpbmc/KSA9CiAgICAgICAgdXBkYXRlIHsgaXQuY29weShsYXN0RGV2aWNlQWRkcmVzcyA9IGFkZHJlc3MsIGxhc3REZXZpY2VOYW1lID0gbmFtZSkgfQoKICAgIGNvbXBhbmlvbiBvYmplY3QgewogICAgICAgIGNvbnN0IHZhbCBQUkVGU19OQU1FID0gInlpbnBhZ2VfbGlua19zZXR0aW5ncyIKICAgICAgICBwcml2YXRlIGNvbnN0IHZhbCBLX0FVVE9fUkVDT05ORUNUID0gImF1dG9fcmVjb25uZWN0IgogICAgICAgIHByaXZhdGUgY29uc3QgdmFsIEtfVFJBTlNQT1JUID0gInRyYW5zcG9ydCIKICAgICAgICBwcml2YXRlIGNvbnN0IHZhbCBLX0NPREVDID0gInByZWZlcnJlZF9jb2RlYyIKICAgICAgICBwcml2YXRlIGNvbnN0IHZhbCBLX1FVRVJZX09OX0NPTk5FQ1QgPSAicXVlcnlfb25fY29ubmVjdCIKICAgICAgICBwcml2YXRlIGNvbnN0IHZhbCBLX0RFQlVHX1BBTkVMID0gImRlYnVnX3BhbmVsIgogICAgICAgIHByaXZhdGUgY29uc3QgdmFsIEtfTE9HX0xFVkVMID0gImxvZ19sZXZlbCIKICAgICAgICBwcml2YXRlIGNvbnN0IHZhbCBLX05PVElGSUNBVElPTlMgPSAibm90aWZpY2F0aW9ucyIKICAgICAgICBwcml2YXRlIGNvbnN0IHZhbCBLX0xPV19CQVRURVJZID0gImxvd19iYXR0ZXJ5IgogICAgICAgIHByaXZhdGUgY29uc3QgdmFsIEtfTEFTVF9BRERSID0gImxhc3RfYWRkciIKICAgICAgICBwcml2YXRlIGNvbnN0IHZhbCBLX0xBU1RfTkFNRSA9ICJsYXN0X25hbWUiCgogICAgICAgIEBWb2xhdGlsZQogICAgICAgIHByaXZhdGUgdmFyIGluc3RhbmNlOiBDb25maWdNYW5hZ2VyPyA9IG51bGwKCiAgICAgICAgZnVuIGluaXQoY29udGV4dDogQ29udGV4dCk6IENvbmZpZ01hbmFnZXIgPQogICAgICAgICAgICBpbnN0YW5jZSA/OiBzeW5jaHJvbml6ZWQodGhpcykgewogICAgICAgICAgICAgICAgaW5zdGFuY2UgPzogQ29uZmlnTWFuYWdlcihjb250ZXh0KS5hbHNvIHsgaW5zdGFuY2UgPSBpdCB9CiAgICAgICAgICAgIH0KCiAgICAgICAgZnVuIGdldCgpOiBDb25maWdNYW5hZ2VyID0gaW5zdGFuY2UKICAgICAgICAgICAgPzogZXJyb3IoIkNvbmZpZ01hbmFnZXIg5pyq5Yid5aeL5YyW77ya6K+35ZyoIEFwcGxpY2F0aW9uLm9uQ3JlYXRlIOS4reiwg+eUqCBDb25maWdNYW5hZ2VyLmluaXQoY29udGV4dCkiKQoKICAgICAgICB2YWwgaW5pdGlhbGl6ZWQ6IEJvb2xlYW4gZ2V0KCkgPSBpbnN0YW5jZSAhPSBudWxsCiAgICB9Cn0K
+package com.yinpage.link.config
+
+import android.content.Context
+import androidx.core.content.edit
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+
+/**
+ * 用户可配置项。持久化到 SharedPreferences（无 root，纯应用私有存储）。
+ */
+data class AppConfig(
+    /** 自动记住并重连最后一次使用的设备 */
+    val autoReconnect: Boolean = true,
+    /** 首选通道类型 */
+    val transport: String = "AUTO",
+    /** 首选协议 id，null 表示自动探测 */
+    val preferredCodecId: String? = null,
+    /** 是否在连接后立即查询全量状态 */
+    val queryOnConnect: Boolean = true,
+    /** 调试面板开关（显示收发字节流） */
+    val debugPanel: Boolean = false,
+    /** 日志级别：0 关 / 1 基本 / 2 详细 */
+    val logLevel: Int = 1,
+    /** 是否发送本地通知（电量低提醒等） */
+    val notifications: Boolean = true,
+    /** 低电量阈值（%） */
+    val lowBatteryThreshold: Int = 20,
+    /** 记住的最后连接设备 */
+    val lastDeviceAddress: String? = null,
+    val lastDeviceName: String? = null,
+) {
+    companion object {
+        const val LOG_OFF = 0
+        const val LOG_BASIC = 1
+        const val LOG_DEBUG = 2
+    }
+}
+
+/**
+ * 配置中心。单例，进程内共享；UI 与 core 都通过 StateFlow 观察。
+ * 注意：协议层不直接依赖本类，避免循环依赖（协议实现只接收参数）。
+ */
+class ConfigManager private constructor(context: Context) {
+
+    private val prefs = context.applicationContext
+        .getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+
+    private val _config = MutableStateFlow(read())
+    val config: StateFlow<AppConfig> = _config.asStateFlow()
+
+    val current: AppConfig get() = _config.value
+
+    private fun read(): AppConfig = AppConfig(
+        autoReconnect = prefs.getBoolean(K_AUTO_RECONNECT, true),
+        transport = prefs.getString(K_TRANSPORT, "AUTO") ?: "AUTO",
+        preferredCodecId = prefs.getString(K_CODEC, null),
+        queryOnConnect = prefs.getBoolean(K_QUERY_ON_CONNECT, true),
+        debugPanel = prefs.getBoolean(K_DEBUG_PANEL, false),
+        logLevel = prefs.getInt(K_LOG_LEVEL, AppConfig.LOG_BASIC).coerceIn(0, 2),
+        notifications = prefs.getBoolean(K_NOTIFICATIONS, true),
+        lowBatteryThreshold = prefs.getInt(K_LOW_BATTERY, 20).coerceIn(5, 50),
+        lastDeviceAddress = prefs.getString(K_LAST_ADDR, null),
+        lastDeviceName = prefs.getString(K_LAST_NAME, null),
+    )
+
+    private fun write(cfg: AppConfig) {
+        prefs.edit {
+            putBoolean(K_AUTO_RECONNECT, cfg.autoReconnect)
+            putString(K_TRANSPORT, cfg.transport)
+            putString(K_CODEC, cfg.preferredCodecId)
+            putBoolean(K_QUERY_ON_CONNECT, cfg.queryOnConnect)
+            putBoolean(K_DEBUG_PANEL, cfg.debugPanel)
+            putInt(K_LOG_LEVEL, cfg.logLevel)
+            putBoolean(K_NOTIFICATIONS, cfg.notifications)
+            putInt(K_LOW_BATTERY, cfg.lowBatteryThreshold)
+            putString(K_LAST_ADDR, cfg.lastDeviceAddress)
+            putString(K_LAST_NAME, cfg.lastDeviceName)
+        }
+        _config.value = cfg
+    }
+
+    fun update(block: (AppConfig) -> AppConfig) = write(block(current))
+
+    fun rememberDevice(address: String?, name: String?) =
+        update { it.copy(lastDeviceAddress = address, lastDeviceName = name) }
+
+    companion object {
+        const val PREFS_NAME = "yinpage_link_settings"
+        private const val K_AUTO_RECONNECT = "auto_reconnect"
+        private const val K_TRANSPORT = "transport"
+        private const val K_CODEC = "preferred_codec"
+        private const val K_QUERY_ON_CONNECT = "query_on_connect"
+        private const val K_DEBUG_PANEL = "debug_panel"
+        private const val K_LOG_LEVEL = "log_level"
+        private const val K_NOTIFICATIONS = "notifications"
+        private const val K_LOW_BATTERY = "low_battery"
+        private const val K_LAST_ADDR = "last_addr"
+        private const val K_LAST_NAME = "last_name"
+
+        @Volatile
+        private var instance: ConfigManager? = null
+
+        fun init(context: Context): ConfigManager =
+            instance ?: synchronized(this) {
+                instance ?: ConfigManager(context).also { instance = it }
+            }
+
+        fun get(): ConfigManager = instance
+            ?: error("ConfigManager 未初始化：请在 Application.onCreate 中调用 ConfigManager.init(context)")
+
+        val initialized: Boolean get() = instance != null
+    }
+}

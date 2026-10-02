@@ -1,1 +1,89 @@
-cGFja2FnZSBjb20ueWlucGFnZS5saW5rLnVpLnRoZW1lCgppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5tYXRlcmlhbDMuVHlwb2dyYXBoeQppbXBvcnQgYW5kcm9pZHguY29tcG9zZS51aS50ZXh0LlRleHRTdHlsZQppbXBvcnQgYW5kcm9pZHguY29tcG9zZS51aS50ZXh0LmZvbnQuRm9udEZhbWlseQppbXBvcnQgYW5kcm9pZHguY29tcG9zZS51aS50ZXh0LmZvbnQuRm9udFdlaWdodAppbXBvcnQgYW5kcm9pZHguY29tcG9zZS51aS51bml0LnNwCgovKioKICog5a2X5L2T5bGC57qn44CC5pW05L2T5q+UIE1hdGVyaWFsIOm7mOiupOeVpee0p+S4gOeCueOAgeagh+mimOeVpemHjeS4gOeCue+8jAogKiDmjqXov5Hmvo7muYMgT1PjgIzlpKfmoIfpopggKyDlsI/ms6jph4rjgI3nmoTkv6Hmga/lr4bluqbjgIIKICovCnZhbCBZaW5wYWdlVHlwb2dyYXBoeSA9IFR5cG9ncmFwaHkoCiAgICBoZWFkbGluZU1lZGl1bSA9IFRleHRTdHlsZSgKICAgICAgICBmb250RmFtaWx5ID0gRm9udEZhbWlseS5EZWZhdWx0LAogICAgICAgIGZvbnRXZWlnaHQgPSBGb250V2VpZ2h0LlNlbWlCb2xkLAogICAgICAgIGZvbnRTaXplID0gMjYuc3AsCiAgICAgICAgbGluZUhlaWdodCA9IDM0LnNwLAogICAgKSwKICAgIGhlYWRsaW5lU21hbGwgPSBUZXh0U3R5bGUoCiAgICAgICAgZm9udEZhbWlseSA9IEZvbnRGYW1pbHkuRGVmYXVsdCwKICAgICAgICBmb250V2VpZ2h0ID0gRm9udFdlaWdodC5TZW1pQm9sZCwKICAgICAgICBmb250U2l6ZSA9IDIyLnNwLAogICAgICAgIGxpbmVIZWlnaHQgPSAzMC5zcCwKICAgICksCiAgICB0aXRsZUxhcmdlID0gVGV4dFN0eWxlKAogICAgICAgIGZvbnRGYW1pbHkgPSBGb250RmFtaWx5LkRlZmF1bHQsCiAgICAgICAgZm9udFdlaWdodCA9IEZvbnRXZWlnaHQuU2VtaUJvbGQsCiAgICAgICAgZm9udFNpemUgPSAxOS5zcCwKICAgICAgICBsaW5lSGVpZ2h0ID0gMjYuc3AsCiAgICApLAogICAgdGl0bGVNZWRpdW0gPSBUZXh0U3R5bGUoCiAgICAgICAgZm9udEZhbWlseSA9IEZvbnRGYW1pbHkuRGVmYXVsdCwKICAgICAgICBmb250V2VpZ2h0ID0gRm9udFdlaWdodC5NZWRpdW0sCiAgICAgICAgZm9udFNpemUgPSAxNi5zcCwKICAgICAgICBsaW5lSGVpZ2h0ID0gMjMuc3AsCiAgICApLAogICAgdGl0bGVTbWFsbCA9IFRleHRTdHlsZSgKICAgICAgICBmb250RmFtaWx5ID0gRm9udEZhbWlseS5EZWZhdWx0LAogICAgICAgIGZvbnRXZWlnaHQgPSBGb250V2VpZ2h0Lk1lZGl1bSwKICAgICAgICBmb250U2l6ZSA9IDE0LnNwLAogICAgICAgIGxpbmVIZWlnaHQgPSAyMC5zcCwKICAgICksCiAgICBib2R5TGFyZ2UgPSBUZXh0U3R5bGUoCiAgICAgICAgZm9udEZhbWlseSA9IEZvbnRGYW1pbHkuRGVmYXVsdCwKICAgICAgICBmb250V2VpZ2h0ID0gRm9udFdlaWdodC5Ob3JtYWwsCiAgICAgICAgZm9udFNpemUgPSAxNS5zcCwKICAgICAgICBsaW5lSGVpZ2h0ID0gMjIuc3AsCiAgICApLAogICAgYm9keU1lZGl1bSA9IFRleHRTdHlsZSgKICAgICAgICBmb250RmFtaWx5ID0gRm9udEZhbWlseS5EZWZhdWx0LAogICAgICAgIGZvbnRXZWlnaHQgPSBGb250V2VpZ2h0Lk5vcm1hbCwKICAgICAgICBmb250U2l6ZSA9IDEzLjUuc3AsCiAgICAgICAgbGluZUhlaWdodCA9IDIwLnNwLAogICAgKSwKICAgIGJvZHlTbWFsbCA9IFRleHRTdHlsZSgKICAgICAgICBmb250RmFtaWx5ID0gRm9udEZhbWlseS5EZWZhdWx0LAogICAgICAgIGZvbnRXZWlnaHQgPSBGb250V2VpZ2h0Lk5vcm1hbCwKICAgICAgICBmb250U2l6ZSA9IDEyLnNwLAogICAgICAgIGxpbmVIZWlnaHQgPSAxNy5zcCwKICAgICksCiAgICBsYWJlbExhcmdlID0gVGV4dFN0eWxlKAogICAgICAgIGZvbnRGYW1pbHkgPSBGb250RmFtaWx5LkRlZmF1bHQsCiAgICAgICAgZm9udFdlaWdodCA9IEZvbnRXZWlnaHQuTWVkaXVtLAogICAgICAgIGZvbnRTaXplID0gMTMuc3AsCiAgICAgICAgbGluZUhlaWdodCA9IDE4LnNwLAogICAgKSwKICAgIGxhYmVsTWVkaXVtID0gVGV4dFN0eWxlKAogICAgICAgIGZvbnRGYW1pbHkgPSBGb250RmFtaWx5LkRlZmF1bHQsCiAgICAgICAgZm9udFdlaWdodCA9IEZvbnRXZWlnaHQuTWVkaXVtLAogICAgICAgIGZvbnRTaXplID0gMTEuNS5zcCwKICAgICAgICBsaW5lSGVpZ2h0ID0gMTYuc3AsCiAgICApLAogICAgbGFiZWxTbWFsbCA9IFRleHRTdHlsZSgKICAgICAgICBmb250RmFtaWx5ID0gRm9udEZhbWlseS5EZWZhdWx0LAogICAgICAgIGZvbnRXZWlnaHQgPSBGb250V2VpZ2h0Lk1lZGl1bSwKICAgICAgICBmb250U2l6ZSA9IDEwLjUuc3AsCiAgICAgICAgbGluZUhlaWdodCA9IDE0LnNwLAogICAgKSwKKQoKLyoqIOiwg+ivlemdouadv+eUqOeahOetieWuveagt+W8j++8iOWtl+iKgua1geWvuem9kO+8jOaWueS+v+iCieecvOavlOWvue+8ieOAgiAqLwp2YWwgTW9ub0xvZ1N0eWxlID0gVGV4dFN0eWxlKAogICAgZm9udEZhbWlseSA9IEZvbnRGYW1pbHkuTW9ub3NwYWNlLAogICAgZm9udFdlaWdodCA9IEZvbnRXZWlnaHQuTm9ybWFsLAogICAgZm9udFNpemUgPSAxMS5zcCwKICAgIGxpbmVIZWlnaHQgPSAxNi5zcCwKICAgIGxldHRlclNwYWNpbmcgPSAwLjIuc3AsCikK
+package com.yinpage.link.ui.theme
+
+import androidx.compose.material3.Typography
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
+
+/**
+ * 字体层级。整体比 Material 默认略紧一点、标题略重一点，
+ * 接近澎湃 OS「大标题 + 小注释」的信息密度。
+ */
+val YinpageTypography = Typography(
+    headlineMedium = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 26.sp,
+        lineHeight = 34.sp,
+    ),
+    headlineSmall = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 22.sp,
+        lineHeight = 30.sp,
+    ),
+    titleLarge = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 19.sp,
+        lineHeight = 26.sp,
+    ),
+    titleMedium = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Medium,
+        fontSize = 16.sp,
+        lineHeight = 23.sp,
+    ),
+    titleSmall = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Medium,
+        fontSize = 14.sp,
+        lineHeight = 20.sp,
+    ),
+    bodyLarge = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 15.sp,
+        lineHeight = 22.sp,
+    ),
+    bodyMedium = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 13.5.sp,
+        lineHeight = 20.sp,
+    ),
+    bodySmall = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp,
+        lineHeight = 17.sp,
+    ),
+    labelLarge = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Medium,
+        fontSize = 13.sp,
+        lineHeight = 18.sp,
+    ),
+    labelMedium = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Medium,
+        fontSize = 11.5.sp,
+        lineHeight = 16.sp,
+    ),
+    labelSmall = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Medium,
+        fontSize = 10.5.sp,
+        lineHeight = 14.sp,
+    ),
+)
+
+/** 调试面板用的等宽样式（字节流对齐，方便肉眼比对）。 */
+val MonoLogStyle = TextStyle(
+    fontFamily = FontFamily.Monospace,
+    fontWeight = FontWeight.Normal,
+    fontSize = 11.sp,
+    lineHeight = 16.sp,
+    letterSpacing = 0.2.sp,
+)

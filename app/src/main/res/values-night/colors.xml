@@ -1,1 +1,5 @@
-PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSDmt7HoibLmqKHlvI/kuIvnmoTnqpflj6Pog4zmma/vvJrpgb/lhY3mtYXoibLmqKHlvI/kuIvlkK/liqjnnqzpl7Tpl6rmt7HoibIgLS0+CjxyZXNvdXJjZXM+CiAgICA8Y29sb3IgbmFtZT0id2luZG93X2JhY2tncm91bmQiPiNGRjBGMTExNTwvY29sb3I+CjwvcmVzb3VyY2VzPgo=
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 深色模式下的窗口背景：避免浅色模式下启动瞬间闪深色 -->
+<resources>
+    <color name="window_background">#FF0F1115</color>
+</resources>

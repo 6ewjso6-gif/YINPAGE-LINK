@@ -1,1 +1,154 @@
-cGFja2FnZSBjb20ueWlucGFnZS5saW5rLnVpLnRoZW1lCgppbXBvcnQgYW5kcm9pZHguY29tcG9zZS5tYXRlcmlhbDMuZGFya0NvbG9yU2NoZW1lCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLm1hdGVyaWFsMy5saWdodENvbG9yU2NoZW1lCmltcG9ydCBhbmRyb2lkeC5jb21wb3NlLnVpLmdyYXBoaWNzLkNvbG9yCgovKioKICogPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQogKiAgWUlOUEFHRS1MSU5LIOmFjeiJsgogKiA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CiAqICDpo47moLzlj5blkJHvvJrmvo7muYMgT1Mg6YKj56eN44CM5aSn5ZyG6KeS5Y2h54mHICsg5L2O6aWx5ZKM44CN55qE6KeC5oSf44CCCiAqICAtIOS4u+iJsuWPluS9jumlseWSjOmdkuiTne+8jOmBv+WFjeWkp+mdouenr+mrmOS6ruWIuuecvO+8mwogKiAgLSDmt7HoibLmqKHlvI/mmK/kuLvlnLrmma/vvIjlpJzph4zmiLTogLPmnLrnnIvnlLXph4/vvInvvIzlm6DmraTmt7HoibLmoaPlgZrkuoblrozmlbTlrprkuYnvvJsKICogIC0g5Yqo5oCB5Y+W6Imy77yITWF0ZXJpYWwgWW9177yJ5Y+v55So5pe25LyY5YWI55So57O757uf6Imy77yM5Y+W5LiN5Yiw5YaN5Zue6JC95Yiw6L+Z6YeM55qE6Z2Z5oCB6YWN6Imy44CCCiAqID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KICovCgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0g5ZOB54mM5Z+66ImyIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKaW50ZXJuYWwgdmFsIEJsdWU4MCA9IENvbG9yKDB4RkZBRUMzRkYpCmludGVybmFsIHZhbCBCbHVlR3JleTgwID0gQ29sb3IoMHhGRkMzQzlEQykKaW50ZXJuYWwgdmFsIFRlYWw4MCA9IENvbG9yKDB4RkZBMkQyQzgpCmludGVybmFsIHZhbCBCbHVlNDAgPSBDb2xvcigweEZGM0Y2M0M4KQppbnRlcm5hbCB2YWwgQmx1ZUdyZXk0MCA9IENvbG9yKDB4RkY1QTZCODQpCmludGVybmFsIHZhbCBUZWFsNDAgPSBDb2xvcigweEZGNEU3QTcyKQoKLy8gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIOS6ruiJsuaWueahiCAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCmludGVybmFsIHZhbCBMaWdodENvbG9yU2NoZW1lID0gbGlnaHRDb2xvclNjaGVtZSgKICAgIHByaW1hcnkgPSBCbHVlNDAsCiAgICBvblByaW1hcnkgPSBDb2xvcigweEZGRkZGRkZGKSwKICAgIHByaW1hcnlDb250YWluZXIgPSBDb2xvcigweEZGRENFNEZBKSwKICAgIG9uUHJpbWFyeUNvbnRhaW5lciA9IENvbG9yKDB4RkYxMjIzNEYpLAogICAgaW52ZXJzZVByaW1hcnkgPSBCbHVlODAsCgogICAgc2Vjb25kYXJ5ID0gQmx1ZUdyZXk0MCwKICAgIG9uU2Vjb25kYXJ5ID0gQ29sb3IoMHhGRkZGRkZGRiksCiAgICBzZWNvbmRhcnlDb250YWluZXIgPSBDb2xvcigweEZGRTJFOEYyKSwKICAgIG9uU2Vjb25kYXJ5Q29udGFpbmVyID0gQ29sb3IoMHhGRjFCMjEzMCksCgogICAgdGVydGlhcnkgPSBUZWFsNDAsCiAgICBvblRlcnRpYXJ5ID0gQ29sb3IoMHhGRkZGRkZGRiksCiAgICB0ZXJ0aWFyeUNvbnRhaW5lciA9IENvbG9yKDB4RkZDRkU5RTIpLAogICAgb25UZXJ0aWFyeUNvbnRhaW5lciA9IENvbG9yKDB4RkYxMDJCMjYpLAoKICAgIGJhY2tncm91bmQgPSBDb2xvcigweEZGRjZGN0ZCKSwKICAgIG9uQmFja2dyb3VuZCA9IENvbG9yKDB4RkYxQTFDMjIpLAogICAgc3VyZmFjZSA9IENvbG9yKDB4RkZGNkY3RkIpLAogICAgb25TdXJmYWNlID0gQ29sb3IoMHhGRjFBMUMyMiksCiAgICBzdXJmYWNlVmFyaWFudCA9IENvbG9yKDB4RkZFNkU5RjEpLAogICAgb25TdXJmYWNlVmFyaWFudCA9IENvbG9yKDB4RkY0NTRBNTcpLAogICAgc3VyZmFjZUNvbnRhaW5lckxvd2VzdCA9IENvbG9yKDB4RkZGRkZGRkYpLAogICAgc3VyZmFjZUNvbnRhaW5lckxvdyA9IENvbG9yKDB4RkZGMUYzRjkpLAogICAgc3VyZmFjZUNvbnRhaW5lciA9IENvbG9yKDB4RkZFREVGRjYpLAogICAgc3VyZmFjZUNvbnRhaW5lckhpZ2ggPSBDb2xvcigweEZGRThFQkYzKSwKICAgIHN1cmZhY2VDb250YWluZXJIaWdoZXN0ID0gQ29sb3IoMHhGRkUzRTdGMCksCiAgICBzdXJmYWNlVGludCA9IEJsdWU0MCwKICAgIGludmVyc2VTdXJmYWNlID0gQ29sb3IoMHhGRjJFMzEzOCksCiAgICBpbnZlcnNlT25TdXJmYWNlID0gQ29sb3IoMHhGRkYxRjJGNiksCgogICAgb3V0bGluZSA9IENvbG9yKDB4RkY4QTkwQTApLAogICAgb3V0bGluZVZhcmlhbnQgPSBDb2xvcigweEZGQzlDRURCKSwKICAgIHNjcmltID0gQ29sb3IoMHhGRjAwMDAwMCksCgogICAgZXJyb3IgPSBDb2xvcigweEZGQjMyNjFFKSwKICAgIG9uRXJyb3IgPSBDb2xvcigweEZGRkZGRkZGKSwKICAgIGVycm9yQ29udGFpbmVyID0gQ29sb3IoMHhGRkY5REVEQyksCiAgICBvbkVycm9yQ29udGFpbmVyID0gQ29sb3IoMHhGRjQxMEUwQiksCikKCi8vIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSDmt7HoibLmlrnmoYggLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgppbnRlcm5hbCB2YWwgRGFya0NvbG9yU2NoZW1lID0gZGFya0NvbG9yU2NoZW1lKAogICAgcHJpbWFyeSA9IEJsdWU4MCwKICAgIG9uUHJpbWFyeSA9IENvbG9yKDB4RkYwQTFCNDUpLAogICAgcHJpbWFyeUNvbnRhaW5lciA9IENvbG9yKDB4RkYyQTQ0ODgpLAogICAgb25QcmltYXJ5Q29udGFpbmVyID0gQ29sb3IoMHhGRkRDRTRGQSksCiAgICBpbnZlcnNlUHJpbWFyeSA9IEJsdWU0MCwKCiAgICBzZWNvbmRhcnkgPSBCbHVlR3JleTgwLAogICAgb25TZWNvbmRhcnkgPSBDb2xvcigweEZGMjMyQTM4KSwKICAgIHNlY29uZGFyeUNvbnRhaW5lciA9IENvbG9yKDB4RkYzNDNCNEIpLAogICAgb25TZWNvbmRhcnlDb250YWluZXIgPSBDb2xvcigweEZGREVFM0YwKSwKCiAgICB0ZXJ0aWFyeSA9IFRlYWw4MCwKICAgIG9uVGVydGlhcnkgPSBDb2xvcigweEZGMEIyQzI3KSwKICAgIHRlcnRpYXJ5Q29udGFpbmVyID0gQ29sb3IoMHhGRjJBNEI0NSksCiAgICBvblRlcnRpYXJ5Q29udGFpbmVyID0gQ29sb3IoMHhGRkNGRTlFMiksCgogICAgYmFja2dyb3VuZCA9IENvbG9yKDB4RkYwRjExMTUpLAogICAgb25CYWNrZ3JvdW5kID0gQ29sb3IoMHhGRkU2RThFRiksCiAgICBzdXJmYWNlID0gQ29sb3IoMHhGRjBGMTExNSksCiAgICBvblN1cmZhY2UgPSBDb2xvcigweEZGRTZFOEVGKSwKICAgIHN1cmZhY2VWYXJpYW50ID0gQ29sb3IoMHhGRjJBMkUzOCksCiAgICBvblN1cmZhY2VWYXJpYW50ID0gQ29sb3IoMHhGRkI4QkRDQSksCiAgICBzdXJmYWNlQ29udGFpbmVyTG93ZXN0ID0gQ29sb3IoMHhGRjBBMEMxMCksCiAgICBzdXJmYWNlQ29udGFpbmVyTG93ID0gQ29sb3IoMHhGRjE0MTYxQiksCiAgICBzdXJmYWNlQ29udGFpbmVyID0gQ29sb3IoMHhGRjE5MUMyMiksCiAgICBzdXJmYWNlQ29udGFpbmVySGlnaCA9IENvbG9yKDB4RkYxRjIzMkEpLAogICAgc3VyZmFjZUNvbnRhaW5lckhpZ2hlc3QgPSBDb2xvcigweEZGMjYyQTMzKSwKICAgIHN1cmZhY2VUaW50ID0gQmx1ZTgwLAogICAgaW52ZXJzZVN1cmZhY2UgPSBDb2xvcigweEZGRTZFOEVGKSwKICAgIGludmVyc2VPblN1cmZhY2UgPSBDb2xvcigweEZGMkUzMTM4KSwKCiAgICBvdXRsaW5lID0gQ29sb3IoMHhGRjZBNzA4MCksCiAgICBvdXRsaW5lVmFyaWFudCA9IENvbG9yKDB4RkYzQTNGNEIpLAogICAgc2NyaW0gPSBDb2xvcigweEZGMDAwMDAwKSwKCiAgICBlcnJvciA9IENvbG9yKDB4RkZGMkI4QjUpLAogICAgb25FcnJvciA9IENvbG9yKDB4RkY2MDE0MTApLAogICAgZXJyb3JDb250YWluZXIgPSBDb2xvcigweEZGOEMxRDE4KSwKICAgIG9uRXJyb3JDb250YWluZXIgPSBDb2xvcigweEZGRjlERURDKSwKKQoKLy8gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIOivreS5ieiJsu+8iOeUtemHjyAvIOeKtuaAge+8iSAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLy8g6L+Z5Lik57uE6aKc6Imy5Zyo5Lqu6Imy5LiO5rex6Imy5LiL6YO95L+d5oyB5Y+v6K+75oCn77yM5Zug5q2k5LiN6Lef6ZqPIENvbG9yU2NoZW1lIOi1sOOAggoKLyoqIOeUtemHj+WFhei2syAqLwp2YWwgQmF0dGVyeUdvb2QgPSBDb2xvcigweEZGM0ZBNDZBKQoKLyoqIOeUtemHj+S4reetiSAqLwp2YWwgQmF0dGVyeU1pZCA9IENvbG9yKDB4RkZFMEE2NEIpCgovKiog55S16YeP5YGP5L2OICovCnZhbCBCYXR0ZXJ5TG93ID0gQ29sb3IoMHhGRkUwNjU1QSkKCi8qKiDlhYXnlLXkuK0gKi8KdmFsIENoYXJnaW5nR3JlZW4gPSBDb2xvcigweEZGNDNCNTgxKQoKLyoqIOW3sui/nuaOpSAqLwp2YWwgQ29ubmVjdGVkR3JlZW4gPSBDb2xvcigweEZGM0ZBNDZBKQoKLyoqIOi/m+ihjOS4rSAvIOitpuWRiiAqLwp2YWwgV2FybmluZ0FtYmVyID0gQ29sb3IoMHhGRkUwQTY0QikKCi8qKiDlpLHotKUgLyDlhbPpl60gKi8KdmFsIERhbmdlclJlZCA9IENvbG9yKDB4RkZFMDY1NUEpCgovKiog5Lit5oCn54Gw77yI5pyq6L+e5o6l44CB5pyq55+l5YC877yJICovCnZhbCBOZXV0cmFsR3JleSA9IENvbG9yKDB4RkY4QTkwQTApCgovKiog6ZmN5Zmq5by66LCD6ImyICovCnZhbCBOb2lzZUFjY2VudCA9IENvbG9yKDB4RkY0QzdERjApCgovKiog5ri45oiP5qih5byP5by66LCD6ImyICovCnZhbCBHYW1lQWNjZW50ID0gQ29sb3IoMHhGRjhBNkJGMCkKCi8qKiDmoLnmja7nlLXph4/nmb7liIbmr5Tlj5bor63kuYnoibLjgIJudWxsIOihqOekuuacquS4iuaKpeOAgiAqLwpmdW4gYmF0dGVyeUNvbG9yKHBlcmNlbnQ6IEludD8pOiBDb2xvciA9IHdoZW4gewogICAgcGVyY2VudCA9PSBudWxsIC0+IE5ldXRyYWxHcmV5CiAgICBwZXJjZW50ID49IDYwIC0+IEJhdHRlcnlHb29kCiAgICBwZXJjZW50ID49IDIwIC0+IEJhdHRlcnlNaWQKICAgIGVsc2UgLT4gQmF0dGVyeUxvdwp9Cg==
+package com.yinpage.link.ui.theme
+
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
+import androidx.compose.ui.graphics.Color
+
+/**
+ * ============================================================================
+ *  YINPAGE-LINK 配色
+ * ============================================================================
+ *  风格取向：澎湃 OS 那种「大圆角卡片 + 低饱和」的观感。
+ *  - 主色取低饱和青蓝，避免大面积高亮刺眼；
+ *  - 深色模式是主场景（夜里戴耳机看电量），因此深色档做了完整定义；
+ *  - 动态取色（Material You）可用时优先用系统色，取不到再回落到这里的静态配色。
+ * ============================================================================
+ */
+
+// ------------------------------ 品牌基色 ------------------------------
+
+internal val Blue80 = Color(0xFFAEC3FF)
+internal val BlueGrey80 = Color(0xFFC3C9DC)
+internal val Teal80 = Color(0xFFA2D2C8)
+internal val Blue40 = Color(0xFF3F63C8)
+internal val BlueGrey40 = Color(0xFF5A6B84)
+internal val Teal40 = Color(0xFF4E7A72)
+
+// ------------------------------ 亮色方案 ------------------------------
+
+internal val LightColorScheme = lightColorScheme(
+    primary = Blue40,
+    onPrimary = Color(0xFFFFFFFF),
+    primaryContainer = Color(0xFFDCE4FA),
+    onPrimaryContainer = Color(0xFF12234F),
+    inversePrimary = Blue80,
+
+    secondary = BlueGrey40,
+    onSecondary = Color(0xFFFFFFFF),
+    secondaryContainer = Color(0xFFE2E8F2),
+    onSecondaryContainer = Color(0xFF1B2130),
+
+    tertiary = Teal40,
+    onTertiary = Color(0xFFFFFFFF),
+    tertiaryContainer = Color(0xFFCFE9E2),
+    onTertiaryContainer = Color(0xFF102B26),
+
+    background = Color(0xFFF6F7FB),
+    onBackground = Color(0xFF1A1C22),
+    surface = Color(0xFFF6F7FB),
+    onSurface = Color(0xFF1A1C22),
+    surfaceVariant = Color(0xFFE6E9F1),
+    onSurfaceVariant = Color(0xFF454A57),
+    surfaceContainerLowest = Color(0xFFFFFFFF),
+    surfaceContainerLow = Color(0xFFF1F3F9),
+    surfaceContainer = Color(0xFFEDEFF6),
+    surfaceContainerHigh = Color(0xFFE8EBF3),
+    surfaceContainerHighest = Color(0xFFE3E7F0),
+    surfaceTint = Blue40,
+    inverseSurface = Color(0xFF2E3138),
+    inverseOnSurface = Color(0xFFF1F2F6),
+
+    outline = Color(0xFF8A90A0),
+    outlineVariant = Color(0xFFC9CEDB),
+    scrim = Color(0xFF000000),
+
+    error = Color(0xFFB3261E),
+    onError = Color(0xFFFFFFFF),
+    errorContainer = Color(0xFFF9DEDC),
+    onErrorContainer = Color(0xFF410E0B),
+)
+
+// ------------------------------ 深色方案 ------------------------------
+
+internal val DarkColorScheme = darkColorScheme(
+    primary = Blue80,
+    onPrimary = Color(0xFF0A1B45),
+    primaryContainer = Color(0xFF2A4488),
+    onPrimaryContainer = Color(0xFFDCE4FA),
+    inversePrimary = Blue40,
+
+    secondary = BlueGrey80,
+    onSecondary = Color(0xFF232A38),
+    secondaryContainer = Color(0xFF343B4B),
+    onSecondaryContainer = Color(0xFFDEE3F0),
+
+    tertiary = Teal80,
+    onTertiary = Color(0xFF0B2C27),
+    tertiaryContainer = Color(0xFF2A4B45),
+    onTertiaryContainer = Color(0xFFCFE9E2),
+
+    background = Color(0xFF0F1115),
+    onBackground = Color(0xFFE6E8EF),
+    surface = Color(0xFF0F1115),
+    onSurface = Color(0xFFE6E8EF),
+    surfaceVariant = Color(0xFF2A2E38),
+    onSurfaceVariant = Color(0xFFB8BDCA),
+    surfaceContainerLowest = Color(0xFF0A0C10),
+    surfaceContainerLow = Color(0xFF14161B),
+    surfaceContainer = Color(0xFF191C22),
+    surfaceContainerHigh = Color(0xFF1F232A),
+    surfaceContainerHighest = Color(0xFF262A33),
+    surfaceTint = Blue80,
+    inverseSurface = Color(0xFFE6E8EF),
+    inverseOnSurface = Color(0xFF2E3138),
+
+    outline = Color(0xFF6A7080),
+    outlineVariant = Color(0xFF3A3F4B),
+    scrim = Color(0xFF000000),
+
+    error = Color(0xFFF2B8B5),
+    onError = Color(0xFF601410),
+    errorContainer = Color(0xFF8C1D18),
+    onErrorContainer = Color(0xFFF9DEDC),
+)
+
+// ------------------------------ 语义色（电量 / 状态） ------------------------------
+// 这两组颜色在亮色与深色下都保持可读性，因此不跟随 ColorScheme 走。
+
+/** 电量充足 */
+val BatteryGood = Color(0xFF3FA46A)
+
+/** 电量中等 */
+val BatteryMid = Color(0xFFE0A64B)
+
+/** 电量偏低 */
+val BatteryLow = Color(0xFFE0655A)
+
+/** 充电中 */
+val ChargingGreen = Color(0xFF43B581)
+
+/** 已连接 */
+val ConnectedGreen = Color(0xFF3FA46A)
+
+/** 进行中 / 警告 */
+val WarningAmber = Color(0xFFE0A64B)
+
+/** 失败 / 关闭 */
+val DangerRed = Color(0xFFE0655A)
+
+/** 中性灰（未连接、未知值） */
+val NeutralGrey = Color(0xFF8A90A0)
+
+/** 降噪强调色 */
+val NoiseAccent = Color(0xFF4C7DF0)
+
+/** 游戏模式强调色 */
+val GameAccent = Color(0xFF8A6BF0)
+
+/** 根据电量百分比取语义色。null 表示未上报。 */
+fun batteryColor(percent: Int?): Color = when {
+    percent == null -> NeutralGrey
+    percent >= 60 -> BatteryGood
+    percent >= 20 -> BatteryMid
+    else -> BatteryLow
+}
