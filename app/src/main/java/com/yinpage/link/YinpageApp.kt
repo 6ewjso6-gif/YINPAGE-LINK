@@ -7,6 +7,7 @@ import com.yinpage.link.config.ConfigManager
 import com.yinpage.link.core.AppState
 import com.yinpage.link.core.EventLog
 import com.yinpage.link.core.SessionCoordinator
+import com.yinpage.link.protocol.PodLog
 import com.yinpage.link.protocol.ProtocolRegistry
 import com.yinpage.link.protocol.bluetrum.BluetrumCodec
 import com.yinpage.link.transport.TransportEnv
@@ -34,6 +35,12 @@ class YinpageApp : Application() {
         try {
             TransportEnv.install(this)
             ConfigManager.init(this)
+
+            // 协议层日志桥接到应用内的事件日志（调试面板可见）
+            PodLog.default = object : PodLog {
+                override fun debug(tag: String, message: String) = EventLog.debug(tag, message)
+                override fun info(tag: String, message: String) = EventLog.info(tag, message)
+            }
 
             // 协议注册：新增品牌只需在此追加一行（协议实现不依赖 UI / 传输层）。
             // bluetrum-ab 是逆向官方 App 得到的真实协议（中科蓝讯 AB 系）。

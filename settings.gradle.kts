@@ -30,3 +30,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "YINPAGE-LINK"
 include(":app")
+// LSPosed 模块形态：把耳机接入小米澎湃 OS 融合设备中心（需 root + LSPosed）
+include(":module")

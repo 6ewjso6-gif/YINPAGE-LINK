@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="module_name">YINPAGE-LINK</string>
+    <string name="module_desc">把音贝奇 Feel 1 Pro 接入小米澎湃 OS 融合设备中心</string>
+
+    <string name="status_title">模块状态</string>
+    <string name="status_active">模块运行中</string>
+    <string name="status_inactive">模块未激活</string>
+    <string name="status_hint">请到 LSPosed 管理器中勾选本模块，并勾选以下作用域后重启这五个进程：\ncom.android.bluetooth\ncom.milink.service\ncom.android.settings\ncom.android.systemui\ncom.xiaomi.bluetooth</string>
+
+    <string name="config_title">配置</string>
+    <string name="config_target">目标耳机</string>
+    <string name="config_target_desc">留空则自动接管非小米品牌的已配对耳机；填写蓝牙地址可精确指定</string>
+    <string name="config_target_hint">例如 AA:BB:CC:DD:EE:FF</string>
+    <string name="config_anc">接管 ANC 控件</string>
+    <string name="config_anc_desc">让系统四档 ANC 控件控制耳机降噪</string>
+    <string name="config_island">灵动岛状态</string>
+    <string name="config_island_desc">在焦点通知中显示电量</string>
+    <string name="config_native_page">使用系统原生耳机页</string>
+    <string name="config_native_page_desc">复用系统设置里的高级耳机界面（推荐）</string>
+    <string name="config_log_level">日志级别</string>
+    <string name="log_off">关闭</string>
+    <string name="log_basic">基本</string>
+    <string name="log_debug">详细</string>
+
+    <string name="about_title">关于</string>
+    <string name="about_body">本模块通过 Hook 小米系统蓝牙栈的运行时 API，把音贝奇耳机伪装成「受支持的高级耳机」，从而在澎湃 OS 的蓝牙设置页与控制中心出现耳机卡片。\n\n耳机通信使用逆向官方 App 得到的中科蓝讯 AB 系 SPP 协议。\n\n免 root 用户请使用仓库内的独立 App（YINPAGE-LINK）。</string>
+    <string name="about_apply">保存配置</string>
+    <string name="about_saved">已保存，重启作用域后生效</string>
+</resources>

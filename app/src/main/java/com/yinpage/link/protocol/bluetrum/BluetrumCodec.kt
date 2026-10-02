@@ -1,8 +1,8 @@
 package com.yinpage.link.protocol.bluetrum
 
-import com.yinpage.link.core.EventLog
 import com.yinpage.link.protocol.BatteryState
 import com.yinpage.link.protocol.EqMode
+import com.yinpage.link.protocol.Log
 import com.yinpage.link.protocol.NoiseMode
 import com.yinpage.link.protocol.PodCodec
 import com.yinpage.link.protocol.PodCommand
@@ -118,20 +118,20 @@ class BluetrumCodec : PodCodec {
         val decoded = try {
             frames.decodeChunk(chunk)
         } catch (error: Throwable) {
-            EventLog.info(TAG, "解码异常：${error.message}")
+            Log.i(TAG, "解码异常：${error.message}")
             return
         }
         for (frame in decoded) {
             try {
                 handleFrame(frame, sink)
             } catch (error: Throwable) {
-                EventLog.info(TAG, "处理帧失败 cmd=0x%02X：%s".format(frame.command, error.message))
+                Log.i(TAG, "处理帧失败 cmd=0x%02X：%s".format(frame.command, error.message))
             }
         }
     }
 
     private fun handleFrame(frame: BtFrameCodec.Frame, sink: (PodUpdate) -> Unit) {
-        EventLog.debug(
+        Log.d(
             TAG,
             "RX type=${frame.type} cmd=0x%02X seq=%d payload=%s".format(
                 frame.command, frame.seq, hex(frame.payload),
@@ -176,7 +176,7 @@ class BluetrumCodec : PodCodec {
             BtInfo.DEVICE_CAPABILITIES -> {
                 data.firstOrNull()?.let { raw ->
                     capabilities = raw and 0xFF
-                    EventLog.info(TAG, "设备能力：${BtCapability.describe(capabilities)}")
+                    Log.i(TAG, "设备能力：${BtCapability.describe(capabilities)}")
                     sink(PodUpdate.Raw("能力：${BtCapability.describe(capabilities)}"))
                 }
             }

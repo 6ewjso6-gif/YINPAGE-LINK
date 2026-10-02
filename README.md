@@ -1,13 +1,24 @@
 # YINPAGE-LINK
 
-> 为 **YINPAGE 音贝奇 Feel 1 Pro** 蓝牙耳机打造的 Android 控制应用
-> —— 免 root、免 LSPosed，直连耳机读写状态与控制指令。
+> 把 **YINPAGE 音贝奇 Feel 1 Pro** 蓝牙耳机接入**小米澎湃 OS 融合设备中心**
+> —— 蓝牙设置页耳机卡片、四档 ANC 控制、左右耳与充电盒电量、控制中心与灵动岛状态同步。
+
+本项目提供**两种形态**，按你的手机情况选一种：
+
+| 形态 | 模块 | 需要 root | 能做到什么 |
+|---|---|---|---|
+| 🎯 **融合中心接入**（推荐） | `:module` | ✅ 需要 root + LSPosed | 在**系统蓝牙设置页 / 控制中心 / 灵动岛**里出现耳机卡片与四档 ANC 控件 |
+| 🔓 **独立控制应用** | `:app` | ❌ 不需要 | 打开 App 直连耳机，控制降噪/EQ/游戏模式，查看电量 |
+
+> ⚠️ **能力边界（诚实说明）**：不 root 就**无法**把耳机卡片注入系统 UI
+> ——那需要往 `com.android.settings` / `com.android.systemui` 等系统进程注入代码，
+> 这是 Android 安全模型决定的，不是实现问题。所以想要"融合中心"就必须 root。
 
 <p align="left">
-  <img alt="minSdk" src="https://img.shields.io/badge/minSdk-27-brightgreen">
+  <img alt="minSdk" src="https://img.shields.io/badge/minSdk-27%20(app)%20%2F%2029%20(module)-brightgreen">
   <img alt="targetSdk" src="https://img.shields.io/badge/targetSdk-35-green">
   <img alt="Kotlin" src="https://img.shields.io/badge/Kotlin-2.0.21-blue">
-  <img alt="root" src="https://img.shields.io/badge/root-not%20required-success">
+  <img alt="root" src="https://img.shields.io/badge/module-root%20%2B%20LSPosed-orange">
 </p>
 
 ---
@@ -28,9 +39,44 @@
 | 🌬 抗风噪 | 独立开关 |
 | 📊 调试面板 | 收发字节流实时十六进制显示，协议格式可运行时切换 |
 
-## 为什么不需要 root
+## 形态一：融合设备中心接入（`:module`，需要 root）
 
-本项目**只使用 Android 公开 API**：
+这是让音贝奇耳机**真正进入澎湃 OS 生态**的形态。它通过 LSPosed
+Hook 小米系统蓝牙栈的**运行时 API**，让系统把 Feel 1 Pro 认成"受支持的高级耳机"：
+
+| 能力 | 说明 |
+|---|---|
+| 📱 蓝牙设置页耳机卡片 | 复用系统原生的高级耳机界面（免费获得四档 ANC UI） |
+| 🎧 四档 ANC | 系统控件 ↔ 耳机三档真实能力映射（关闭/通透/降噪） |
+| 🔋 三路电量 | 左右耳 + 充电盒，跟随系统卡片样式 |
+| 🎛 控制中心 / 灵动岛 | 状态同步（灵动岛构建待实现，见文档） |
+
+**原理一句话**：系统判定"这台耳机受支持吗"时，会跨进程调
+`checkSupport(BluetoothDevice)`；模块让它返回 `01010607,000000000000000010000000`
+——这是 HyperOS 通用的"高级耳机能力兼容位"（已确证，水月雨/原道/OPPO 三家都用同一个值）。
+
+**不需要改任何系统配置文件**，纯运行时返回值改写，风险面小。
+
+作用域（5 个，与参考项目逐条一致）：
+```
+com.android.bluetooth      核心：身份伪装 + SPP 通信
+com.milink.service         设备中心 / 电量 / ANC
+com.android.settings       蓝牙设置页
+com.android.systemui       设备中心卡片
+com.xiaomi.bluetooth       连接通知
+```
+
+完整 Hook 点清单、数据通路与真机验证步骤见 **[doc/FUSION-CENTER.md](doc/FUSION-CENTER.md)**。
+
+> ⚠️ **诚实声明**：本模块的 Hook 点来自对参考项目（HyperOriG / OppoPods / PuddingPods）
+> 源码与官方适配文档的静态分析，**开发环境没有 HyperOS 真机与 root 环境，
+> 因此没有任何一个 Hook 在真机上验证过**。请按文档中的验证步骤实测。
+
+## 形态二：独立控制应用（`:app`，不需要 root）
+
+不 root 的替代方案：打开 App 通过经典蓝牙 SPP 直连耳机，提供完整控制能力。
+
+**只使用 Android 公开 API**：
 
 - 运行时权限：`BLUETOOTH_SCAN`（`neverForLocation`）、`BLUETOOTH_CONNECT`
 - 经典蓝牙 RFCOMM/SPP：`BluetoothAdapter` + `BluetoothSocket`
@@ -39,13 +85,8 @@
 
 没有 Xposed、没有隐藏 API 反射、没有系统签名、没有 Shizuku 强依赖。
 
-> **能力边界（诚实说明）**：正因为不 root，本应用**无法**把耳机卡片注入到澎湃 OS 的
-> 设置页 / 控制中心 / 灵动岛里——那需要往 `com.android.settings`、`com.android.systemui`
-> 等系统进程注入代码，只有 root + LSPosed 才能做到。
-> 本项目的定位是：**用独立 App 提供等价甚至更完整的功能控制**。
->
 > Shizuku（可选）能提供 shell 级权限，用于读取系统蓝牙管理器里的设备信息作为补充，
-> 但它同样无法注入系统 UI。
+> 但它同样**无法注入系统 UI**——所以它替代不了形态一。
 
 ## 技术路线
 
@@ -110,34 +151,45 @@
 
 ## 项目结构
 
+本仓库有两个 Gradle 模块：`:module`（融合中心接入）与 `:app`（独立控制应用），
+**共享同一份耳机协议代码**（`module/build.gradle.kts` 通过 `sourceSets` 直接引用
+`app/src/main/java/com/yinpage/link/protocol`，不复制文件）。
+
 ```
-app/src/main/java/com/yinpage/link/
+module/src/main/java/com/yinpage/link/module/     ← 形态一：LSPosed 模块
+├── YinpageModule.kt              入口：按包名分派到五个作用域
+├── ModuleConfig.kt               配置（remote preferences 跨进程共享）
+├── ModuleActivity.kt             配置界面
+├── ModuleStatusProvider.kt       供独立 App 查询模块是否生效
+├── hook/
+│   ├── HookContext.kt            反射工具层（全部查找可空 + 静默降级）
+│   ├── BluetoothUpstreamHeadsetHook.kt  ★ 核心：身份伪装 + SPP 通信 + 状态推送
+│   ├── MiLinkServiceHook.kt              设备中心 / 电量 / ANC 双向
+│   ├── SettingsHeadsetHook.kt            蓝牙设置页（复用系统原生页）
+│   └── SystemUIHook.kt                   设备中心卡片（含插件 ClassLoader 处理）
+├── ipc/ModuleIpc.kt              跨进程广播协议 + 状态快照
+└── pods/RfcommController.kt      SPP 控制器
+
+app/src/main/java/com/yinpage/link/               ← 形态二：独立控制应用
 ├── YinpageApp.kt                 Application：装配传输 + 协议 + 会话
-├── config/
-│   └── ConfigManager.kt          配置持久化（SharedPreferences + StateFlow）
+├── config/ConfigManager.kt       配置持久化（SharedPreferences + StateFlow）
 ├── core/
 │   ├── AppState.kt               ★ UI 唯一依赖的状态协调器
 │   ├── SessionCoordinator.kt     连接状态机、握手、读循环、AUTO 回退
 │   ├── Contracts.kt              PodCoordinator / TransportKind / ConnectResult
 │   ├── Models.kt                 BluetoothDeviceItem / PodUiState
 │   └── EventLog.kt               环形缓冲日志 + 十六进制收发记录
-├── protocol/
-│   ├── State.kt                  ★ 全部数据模型（电量/降噪/EQ/连接状态）
-│   ├── Transport.kt              ★ PodTransport / PodCodec / ProtocolRegistry
-│   └── yscoco/
-│       ├── FrameFormat.kt        帧格式参数化 + 命令码表 + 候选变体
-│       ├── YscocoFrameCodec.kt   流式分帧（粘包/半包）+ 四种校验
-│       ├── YscocoCodec.kt        状态解析与控制指令编码
-│       └── ByteUtil.kt           字节 / 校验工具
-├── transport/
-│   ├── RfcommTransport.kt        经典蓝牙 SPP
-│   ├── BleGattTransport.kt       BLE GATT
-│   └── TransportFactoryImpl.kt   通道工厂
-├── service/
-│   ├── PodConnectionService.kt   前台服务保活
-│   └── BluetoothStateReceiver.kt 蓝牙状态广播
-├── enhance/
-│   └── ShizukuEnhancer.kt        Shizuku 可选增强（反射调用，零依赖）
+├── protocol/                     ★ 两个模块共享的协议层
+│   ├── State.kt                  全部数据模型（电量/降噪/EQ/连接状态）
+│   ├── Transport.kt              PodTransport / PodCodec / ProtocolRegistry
+│   ├── PodLog.kt                 日志接口（解耦协议与宿主环境）
+│   └── bluetrum/
+│       ├── BtCommand.kt          命令码表（24 条请求 + 33 条 INFO 子码）
+│       ├── BtFrameCodec.kt       5 字节帧头编解码 + 流式分帧 + 多包重组
+│       └── BluetrumCodec.kt      握手 / 命令编码 / 状态解析
+├── transport/                    SPP 与 BLE GATT 两种通道
+├── service/                      前台服务与蓝牙状态广播
+├── enhance/ShizukuEnhancer.kt    Shizuku 可选增强（反射调用，零依赖）
 └── ui/                           Compose 页面 / 组件 / 主题
 ```
 

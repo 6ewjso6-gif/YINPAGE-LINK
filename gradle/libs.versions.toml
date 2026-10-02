@@ -10,6 +10,9 @@ serialization = "1.7.3"
 junit = "4.13.2"
 androidxTestJunit = "1.2.1"
 espresso = "3.6.1"
+libxposedApi = "102.0.0"
+libxposedService = "101.0.0"
+focusApi = "1.4"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -33,6 +36,12 @@ kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxTestJunit" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
+
+# LSPosed 模块所需（仅 :module 使用；api 为编译期依赖，运行时由框架提供）
+libxposed-api = { group = "io.github.libxposed", name = "api", version.ref = "libxposedApi" }
+libxposed-service = { group = "io.github.libxposed", name = "service", version.ref = "libxposedService" }
+# 小米焦点通知 / 灵动岛
+focus-api = { group = "com.xzakota.hyper.notification", name = "focus-api", version.ref = "focusApi" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

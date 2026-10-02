@@ -1,0 +1,6 @@
+id=yinpage_link
+name=YINPAGE-LINK
+version=v1.0.0
+versionCode=1
+author=YINPAGE-LINK contributors
+description=把音贝奇 Feel 1 Pro 接入小米澎湃 OS 融合设备中心：蓝牙设置页耳机卡片、四档 ANC、左右耳与充电盒电量、控制中心与灵动岛状态同步。基于逆向官方 App 得到的中科蓝讯 AB 系 SPP 协议。

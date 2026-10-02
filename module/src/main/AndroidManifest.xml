@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- ============================================================
+         YINPAGE-LINK LSPosed 模块
+         该 APK 本身只提供「配置界面 + 模块元数据」，真正的逻辑运行在
+         被 Hook 的系统进程里（com.android.bluetooth / com.milink.service
+         / com.android.systemui / com.android.settings / com.xiaomi.bluetooth）。
+         ============================================================ -->
+
+    <application
+        android:allowBackup="true"
+        android:icon="@android:drawable/ic_lock_silent_mode_off"
+        android:label="@string/module_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.YinpageModule">
+
+        <!-- 模块描述界面：LSPosed 管理器点「模块」后打开这里 -->
+        <activity
+            android:name=".ModuleActivity"
+            android:exported="true"
+            android:label="@string/module_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 供其它进程查询模块状态（例如独立 App 显示"模块已激活"） -->
+        <provider
+            android:name=".ModuleStatusProvider"
+            android:authorities="com.yinpage.link.module.status"
+            android:exported="true" />
+    </application>
+</manifest>

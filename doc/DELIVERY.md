@@ -2,7 +2,25 @@
 
 > YINPAGE-LINK v1.0.0 · 2026-10-03
 > 仓库：https://github.com/6ewjso6-gif/YINPAGE-LINK
-> Release：https://github.com/6ewjso6-gif/YINPAGE-LINK/releases/tag/v1.0.0
+
+---
+
+## 〇、双形态交付说明（先读这段）
+
+本项目按**两种使用场景**交付，两者共享同一份耳机协议代码：
+
+| 形态 | Gradle 模块 | 需要 root | 交付物 | 能达到的效果 |
+|---|---|---|---|---|
+| 🎯 **融合设备中心接入** | `:module` | ✅ root + LSPosed | `module-debug.apk`（约 7 MB） | 系统蓝牙设置页出现耳机卡片、四档 ANC 控件、电量显示 |
+| 🔓 **独立控制应用** | `:app` | ❌ 不需要 | `app-debug.apk`（约 16 MB） | 打开 App 直连耳机，控制降噪/EQ/游戏模式、看电量 |
+
+**为什么必须分两种**：不 root 就无法把界面注入系统进程，
+这是 Android 安全模型决定的。所以想要"融合设备中心"必须用 `:module`；
+如果手机没 root，则用 `:app` 获得等价的**控制能力**（但没有系统 UI 融合）。
+
+> ⚠️ **`:module` 未在真机验证**：开发环境没有 HyperOS 设备与 root，
+> 所有 Hook 点均来自参考项目源码与官方适配文档的静态分析。
+> 详见 [FUSION-CENTER.md §7](FUSION-CENTER.md)。
 
 ---
 
@@ -10,21 +28,27 @@
 
 | # | 交付物 | 位置 | 状态 |
 |---|---|---|---|
-| 1 | Android 工程源码 | 仓库 `main` 分支，55 个文件 / 342 KB | ✅ 已推送 |
-| 2 | 可安装 APK | [Release v1.0.0](https://github.com/6ewjso6-gif/YINPAGE-LINK/releases/tag/v1.0.0)，16.12 MB | ✅ 已上传 |
-| 3 | README | [README.md](../README.md) | ✅ |
-| 4 | 协议逆向文档 | [doc/PROTOCOL.md](PROTOCOL.md) | ✅ |
-| 5 | 开发说明（自主/引用/用户提供） | [doc/DEVELOPMENT.md](DEVELOPMENT.md) | ✅ |
-| 6 | 构建与验证记录 | [doc/BUILD-AND-VERIFICATION.md](BUILD-AND-VERIFICATION.md) | ✅ |
-| 7 | MIT 许可证 | [LICENSE](../LICENSE) | ✅ |
+| 1 | LSPosed 模块 APK | `module/build/outputs/apk/debug/module-debug.apk` | ✅ 已构建 |
+| 2 | 独立应用 APK | `app/build/outputs/apk/debug/app-debug.apk` | ✅ 已构建 |
+| 3 | 工程源码（双模块） | 仓库 `main` 分支 | ✅ 已推送 |
+| 4 | README | [README.md](../README.md) | ✅ |
+| 5 | 耳机协议逆向文档 | [doc/PROTOCOL.md](PROTOCOL.md) | ✅ |
+| 6 | **融合中心接入文档** | [doc/FUSION-CENTER.md](FUSION-CENTER.md) | ✅ |
+| 7 | 开发说明（自主/引用/用户提供） | [doc/DEVELOPMENT.md](DEVELOPMENT.md) | ✅ |
+| 8 | 构建与验证记录 | [doc/BUILD-AND-VERIFICATION.md](BUILD-AND-VERIFICATION.md) | ✅ |
+| 9 | MIT 许可证 | [LICENSE](../LICENSE) | ✅ |
 
 **APK 校验值**
 
 ```
-文件名   YINPAGE-LINK-v1.0.0-debug.apk
-大小     16.12 MB (16,903,739 bytes)
-SHA256   B0F0DB6D7CA7B9583FBF234284E94F1FB320094403AC7E5ABF3D004093A551EF
-包名     com.yinpage.link
+① module-debug.apk   （LSPosed 模块，需 root）
+   包名     com.yinpage.link.module
+   模块 ID  yinpage_link
+   作用域   com.android.bluetooth / com.milink.service / com.xiaomi.bluetooth
+            / com.android.systemui / com.android.settings
+
+② app-debug.apk      （独立控制应用，免 root）
+   包名     com.yinpage.link
 ```
 
 ## 二、工程规模
