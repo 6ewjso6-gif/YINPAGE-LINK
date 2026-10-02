@@ -169,7 +169,9 @@ class RfcommTransport(
                 } catch (error: IOException) {
                     lastError = describe(error)
                     attempts += "$label:建socket失败"
-                    EventLog.debug(TAG, "$label 创建 socket 失败：${describe(error)}")
+                    // 用 info 级别：这些是用户排查"功能不生效"的第一手信息，
+                    // 不应被 debug 开关隐藏
+                    EventLog.info(TAG, "$label 创建 socket 失败：${describe(error)}")
                     continue
                 }
 
@@ -188,7 +190,7 @@ class RfcommTransport(
                 } catch (error: IOException) {
                     lastError = describe(error)
                     attempts += "$label:连接失败"
-                    EventLog.debug(TAG, "$label 连接失败：${describe(error)}")
+                    EventLog.info(TAG, "$label 连接失败：${describe(error)}")
                     runCatching { candidate.close() }
                 }
             }
