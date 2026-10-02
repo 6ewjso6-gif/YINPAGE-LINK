@@ -189,6 +189,8 @@ object AppState {
             devices = _devices.value,
             toast = _toast.value,
         )
+        // 通知栏常驻卡片跟随状态刷新（无 root 下最接近"控制中心耳机控件"的体验）
+        runCatching { com.yinpage.link.service.PodConnectionService.refresh(context()) }
     }
 
     private fun updatePod(transform: (PodState) -> PodState) {
@@ -453,6 +455,8 @@ object AppState {
                         )
                     }
                     EventLog.info("连接", "成功：${item.displayName}")
+                    // 启动保活前台服务：连接期间不被系统回收，通知栏常驻电量与降噪按钮
+                    com.yinpage.link.service.PodConnectionService.start(context())
                     if (ConfigManager.initialized) {
                         ConfigManager.get().rememberDevice(item.address, item.name)
                     }
@@ -503,7 +507,11 @@ object AppState {
     private fun applyUpdate(update: PodUpdate) {
         updatePod { current -> listOf(update).applyAllTo(current).copy(lastSeenAt = System.currentTimeMillis()) }
         when (update) {
-            is PodUpdate.Battery -> EventLog.info("状态", "电量 左=${update.battery.left.percent}% 右=${update.battery.right.percent}% 盒=${update.battery.case.percent}%")
+            is PodUpdate.Battery -> {
+                val merged = mergeSystemBattery(update.battery)
+                if (merged !== update.battery) updatePod { it.copy(battery = merged) }
+                EventLog.info("状态", "电量 左=${merged.left.percent}% 右=${merged.right.percent}% 盒=${merged.case.percent}%")
+            }
             is PodUpdate.Noise -> EventLog.info("状态", "降噪=${update.mode.labelZh}")
             is PodUpdate.Eq -> EventLog.info("状态", "EQ=${update.mode.label}")
             is PodUpdate.GameMode -> EventLog.info("状态", "游戏模式=${update.enabled}")
@@ -514,6 +522,28 @@ object AppState {
     }
 
     // ------------------------------------------------------------------ 控制指令
+
+    /**
+     * 用系统侧电量补齐缺失项（免 root 兜底）。
+     *
+     * Android 14+ 提供了公开的 `BluetoothDevice.getBatteryLevel()`，
+     * 系统会从标准蓝牙电量服务（GATT 0x180F）解析电量。若我们的 SPP 协议
+     * 在某个固件上没有读到某一项，这里用系统值补上——两个来源互为备份。
+     *
+     * 注意：系统只给一个"整机"电量，因此只用于补齐**左右耳全未知**的场景，
+     * 不覆盖已读到的单项。
+     */
+    private fun mergeSystemBattery(state: BatteryState): BatteryState {
+        if (state.left.known || state.right.known) return state
+        val address = _pod.value.device?.address ?: return state
+        val device = runCatching { adapter?.getRemoteDevice(address) }.getOrNull() ?: return state
+        val level = com.yinpage.link.enhance.SystemBluetoothInfo.batteryLevel(device) ?: return state
+        EventLog.debug("电量", "SPP 未上报，使用系统电量兜底：$level%")
+        return state.copy(
+            left = com.yinpage.link.protocol.BatteryLevel.of(level),
+            right = com.yinpage.link.protocol.BatteryLevel.of(level),
+        )
+    }
 
     fun refresh() = send(PodCommand.QueryAll)
 
