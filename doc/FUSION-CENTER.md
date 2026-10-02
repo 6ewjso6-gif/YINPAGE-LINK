@@ -98,6 +98,8 @@ com.xiaomi.bluetooth       ← 连接通知（复用 MiLink Hook）
 | settings | `MiuiHeadsetFragment.refreshStatus` | 吞掉 `MMA_CONNECTION_FAILED` | 同上 |
 | systemui | `PluginFactory.createPluginContext` | 拿 `miui.systemui.plugin` 的 ClassLoader | `SystemUIHook` |
 | systemui | `DeviceInfoWrapper.performClicked` | 识别 `third_headset` 卡片 | 同上 |
+| systemui | `CentralSurfacesImpl.start()` | 接管状态栏 `wireless_headset` 图标槽位 | `SystemUIHeadsetIconHook` |
+| bluetooth / xiaomi.bluetooth | `MiuiBluetoothNotification.invokeStatusBar` | 改写系统耳机灵动岛电量文本（可关闭） | `FocusIslandPatcher` |
 
 ### 2.1 为什么必须区分 `(方法名, 参数类型)`
 
@@ -245,10 +247,36 @@ module/src/main/java/com/yinpage/link/module/
 
 | 功能 | 状态 | 说明 |
 |---|---|---|
-| 灵动岛 / 焦点通知 | **未实现** | 需要 `com.xzakota.hyper.notification:focus-api`，已声明依赖但未写构建代码 |
-| 状态栏耳机图标 | **未实现** | 需 Hook `CentralSurfacesImpl.start()` 接管 `wireless_headset` 槽位 |
+| 自建灵动岛（自定义图标/布局） | **未实现** | 需要 `com.xzakota.hyper.notification:focus-api`；该库 Kotlin metadata 为 2.2.0，与本项目 Kotlin 2.0.21 不兼容，故未引入 |
+| **系统灵动岛电量改写** | ✅ **已实现** | 见下：不引入第三方库，直接改写系统通知 |
 | 佩戴状态 | 降级 | 恒返回 `"0,0"`（参考项目同款取舍） |
 | 查找耳机 / 关机 / 按键自定义 | 未实现 | 协议命令码已确证，可随时补 |
+
+**灵动岛是怎么做到的**（`FocusIslandPatcher.kt`）：
+
+系统本来就会为"耳机佩戴"生成一条灵动岛通知，入口是
+`MiuiBluetoothNotification.invokeStatusBar(Context, String, Bundle)`，
+其中 `notifyId == "headset_wear_notification"`，岛内容 JSON 放在
+`param` 与 `island_param` 两个 key 里（均已确证）。
+
+本项目**接管这条系统通知**，而不是自建：
+
+- 关闭"灵动岛状态" → 吞掉系统通知（`result = null`）
+- 开启（默认） → 把左右耳文本改写成本项目从耳机读到的真实电量
+
+```kotlin
+// 改写岛 JSON 的 left / right 文本
+area.put("textParams", JSONObject().apply {
+    put("text", "80%")
+    put("textColor", -1)     // -1 = 跟随系统前景色
+    put("turnAnim", true)
+})
+```
+
+优点：零新增依赖、跟随系统主题与动效、不受第三方库版本漂移影响。
+代价：无法自定义岛的图标与布局。
+
+该逻辑同时安装在 `com.android.bluetooth` 与 `com.xiaomi.bluetooth` 两个作用域。
 
 ### 7.2 ⚠️ 本机无法验证的部分（最重要）
 

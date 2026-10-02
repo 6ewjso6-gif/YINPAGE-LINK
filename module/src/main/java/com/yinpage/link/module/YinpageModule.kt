@@ -9,6 +9,7 @@ import com.yinpage.link.module.hook.HookContext
 import com.yinpage.link.module.hook.MiLinkServiceHook
 import com.yinpage.link.module.hook.ModuleLog
 import com.yinpage.link.module.hook.SettingsHeadsetHook
+import com.yinpage.link.module.hook.SystemUIHeadsetIconHook
 import com.yinpage.link.module.hook.SystemUIHook
 import com.yinpage.link.protocol.PodLog
 
@@ -53,13 +54,22 @@ class YinpageModule : XposedModule() {
 
             ModuleLog.i(TAG, "模块加载：pkg=$pkg api=${getApiVersion()}")
 
-            // 3) 按包名分派
+            // 3) 按包名分派。
+            //    同一进程可能有多个 Hook，必须一次装完——install() 按包名去重，
+            //    分两次调用第二次会被跳过。
             when (pkg) {
-                "com.android.bluetooth" -> install(BluetoothUpstreamHeadsetHook(), loader, pkg)
-                "com.milink.service" -> install(MiLinkServiceHook(), loader, pkg)
-                "com.android.settings" -> install(SettingsHeadsetHook(), loader, pkg)
-                "com.android.systemui" -> install(SystemUIHook(), loader, pkg)
-                "com.xiaomi.bluetooth" -> install(MiLinkServiceHook(), loader, pkg)
+                "com.android.bluetooth" ->
+                    install(setOf(BluetoothUpstreamHeadsetHook()), loader, pkg)
+                "com.milink.service" ->
+                    install(setOf(MiLinkServiceHook()), loader, pkg)
+                "com.android.settings" ->
+                    install(setOf(SettingsHeadsetHook()), loader, pkg)
+                "com.android.systemui" ->
+                    install(setOf(SystemUIHook(), SystemUIHeadsetIconHook()), loader, pkg)
+                // xiaomi.bluetooth 负责连接通知与灵动岛，该进程没有 MiLink 的类，
+                // 因此用只做灵动岛接管的轻量上下文
+                "com.xiaomi.bluetooth" ->
+                    install(setOf(FocusIslandHook()), loader, pkg)
                 else -> ModuleLog.d(TAG, "非目标包，跳过：$pkg")
             }
         }.onFailure {
@@ -82,10 +92,12 @@ class YinpageModule : XposedModule() {
             val loader = runCatching { param.defaultClassLoader }.getOrNull() ?: return
             ModuleLog.i(TAG, "通过 onPackageLoaded 回退安装：$pkg")
             when (pkg) {
-                "com.android.bluetooth" -> install(BluetoothUpstreamHeadsetHook(), loader, pkg)
-                "com.milink.service", "com.xiaomi.bluetooth" -> install(MiLinkServiceHook(), loader, pkg)
-                "com.android.settings" -> install(SettingsHeadsetHook(), loader, pkg)
-                "com.android.systemui" -> install(SystemUIHook(), loader, pkg)
+                "com.android.bluetooth" -> install(setOf(BluetoothUpstreamHeadsetHook()), loader, pkg)
+                "com.milink.service" -> install(setOf(MiLinkServiceHook()), loader, pkg)
+                "com.xiaomi.bluetooth" -> install(setOf(FocusIslandHook()), loader, pkg)
+                "com.android.settings" -> install(setOf(SettingsHeadsetHook()), loader, pkg)
+                "com.android.systemui" ->
+                    install(setOf(SystemUIHook(), SystemUIHeadsetIconHook()), loader, pkg)
             }
         }.onFailure { runCatching { Log.e(TAG, "onPackageLoaded 回退失败", it) } }
     }
@@ -93,22 +105,34 @@ class YinpageModule : XposedModule() {
     /** 已安装的包，避免两个回调重复安装。 */
     private val initialized = java.util.Collections.synchronizedSet(mutableSetOf<String>())
 
-    /** 实例化 Hook 上下文并执行安装，全程 try-catch。 */
-    private fun install(hook: HookContext, classLoader: ClassLoader, pkg: String) {
+    /**
+     * 为一个包安装一个或多个 Hook。
+     *
+     * 关键点：**同一进程内的多个 Hook 必须在这一层合并成一次安装**。
+     * 早期版本按包名去重后只接受单个 Hook，导致 `com.android.systemui`
+     * 只能装 `SystemUIHook`、`SystemUIHeadsetIconHook` 被静默跳过。
+     * 现在每个 Hook 各自持有独立的 [HookContext] 实例，互不干扰。
+     */
+    private fun install(hooks: Set<HookContext>, classLoader: ClassLoader, pkg: String) {
         if (!initialized.add(pkg)) {
             ModuleLog.d(TAG, "$pkg 已安装过，跳过")
             return
         }
-        runCatching {
-            hook.module = this
-            hook.appClassLoader = classLoader
-            hook.packageName = pkg
-            hook.onHook()
-        }.onFailure {
-            ModuleLog.e(TAG, "$pkg 安装 Hook 失败：${it.message}", it)
-            // 安装失败允许后续回退路径重试
-            initialized.remove(pkg)
+        var okCount = 0
+        for (hook in hooks) {
+            runCatching {
+                hook.module = this
+                hook.appClassLoader = classLoader
+                hook.packageName = pkg
+                hook.onHook()
+                okCount++
+            }.onFailure {
+                ModuleLog.e(TAG, "$pkg 安装 ${hook.javaClass.simpleName} 失败：${it.message}", it)
+            }
         }
+        ModuleLog.i(TAG, "$pkg 安装完成：$okCount/${hooks.size} 个 Hook 生效")
+        // 一个都没装上 → 允许后续回退路径重试（例如 onPackageLoaded）
+        if (okCount == 0) initialized.remove(pkg)
     }
 
     private companion object {
@@ -121,5 +145,23 @@ class YinpageModule : XposedModule() {
             "com.android.systemui",
             "com.xiaomi.bluetooth",
         )
+    }
+}
+
+/**
+ * `com.xiaomi.bluetooth` 进程的轻量 Hook：只接管连接通知与灵动岛。
+ *
+ * 该进程里**没有** MiLink 的任何类（`com.miui.headset.runtime.*` 属于 device 互联），
+ * 因此不能复用 [MiLinkServiceHook]，否则会做一堆无用的类查找。
+ */
+private class FocusIslandHook : HookContext() {
+    override fun onHook() {
+        ModuleLog.i(TAG, "开始在 $packageName 安装灵动岛 Hook")
+        runCatching { com.yinpage.link.module.hook.FocusIslandPatcher.install(this) }
+            .onFailure { ModuleLog.w(TAG, "灵动岛 Hook 安装失败：${it.message}") }
+    }
+
+    private companion object {
+        const val TAG = "xiaomi.bt"
     }
 }

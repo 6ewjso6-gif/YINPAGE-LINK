@@ -53,6 +53,7 @@ class BluetoothUpstreamHeadsetHook : HookContext() {
         hookBinderImplementation()
         hookA2dpService()
         registerAncReceiver()
+        hookFocusIsland()
 
         ModuleLog.i(TAG, "蓝牙 Hook 安装完成")
     }
@@ -469,6 +470,16 @@ class BluetoothUpstreamHeadsetHook : HookContext() {
             }
             ModuleLog.i(TAG, "ANC/刷新广播接收器已注册")
         }.onFailure { ModuleLog.w(TAG, "注册广播接收器失败：${it.message}") }
+    }
+
+    /**
+     * 灵动岛同步。
+     * 系统生成"耳机佩戴"灵动岛通知的代码就在本进程，所以在这个作用域安装最直接
+     * （com.xiaomi.bluetooth 进程由 YinpageModule 另行安装同一套逻辑）。
+     */
+    private fun hookFocusIsland() {
+        runCatching { FocusIslandPatcher.install(this) }
+            .onFailure { ModuleLog.w(TAG, "安装灵动岛 Hook 失败：${it.message}") }
     }
 
     private fun requestRefresh(device: BluetoothDevice) {
