@@ -19,7 +19,24 @@
   <img alt="targetSdk" src="https://img.shields.io/badge/targetSdk-35-green">
   <img alt="Kotlin" src="https://img.shields.io/badge/Kotlin-2.0.21-blue">
   <img alt="root" src="https://img.shields.io/badge/module-root%20%2B%20LSPosed-orange">
+  <img alt="stage" src="https://img.shields.io/badge/stage-debug-yellow">
 </p>
+
+---
+
+## 📌 开发声明
+
+> **本项目由 DSH（DeepSeek Harness）自主开发完成。**
+>
+> 从耳机协议逆向、架构设计、全部源代码编写、构建调试到文档撰写，
+> 均由 DSH 自主完成；用户提供了目标设备（YINPAGE 音贝奇 Feel 1 Pro）、
+> 参考项目（HyperOriG）与需求方向。
+>
+> 具体分工、引用来源与数据出处见 **[doc/DEVELOPMENT.md](doc/DEVELOPMENT.md)**。
+
+> ⚠️ **当前处于 debug 阶段**（版本号形如 `app-debug-0.x`）。
+> 协议层基于对官方 App 的逆向确证，但**尚未在真机上完整验证**；
+> 若功能异常，请带上调试面板日志提 issue。
 
 ---
 

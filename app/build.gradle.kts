@@ -31,8 +31,9 @@ android {
         applicationId = "com.yinpage.link"
         minSdk = 27          // 蓝牙 5.x 私有协议 + BLE 扫描所需最低版本
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0.0"
+        // 调试阶段版本号：安装包与设置页都会显示成 app-debug-x.y.z
+        versionCode = 3
+        versionName = "0.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }

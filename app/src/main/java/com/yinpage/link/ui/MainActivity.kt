@@ -83,23 +83,42 @@ fun BluetoothPermissionGate(
 ) {
     val context = LocalContext.current
     val required = remember { requiredBluetoothPermissions() }
+    val notifications = remember { requiredNotificationPermissions() }
 
     var granted by remember { mutableStateOf(hasAllPermissions(context, required)) }
+    // 蓝牙权限的结果单独记录：通知权限的申请要等它落定，避免两个系统弹窗互相打断
+    var bluetoothSettled by remember { mutableStateOf(granted) }
     var asked by rememberSaveable { mutableStateOf(false) }
 
-    val launcher = rememberLauncherForActivityResult(
+    val bluetoothLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestMultiplePermissions(),
     ) { result ->
         granted = required.all { permission ->
             result[permission] == true ||
                 ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
         }
+        bluetoothSettled = true
     }
 
-    LaunchedEffect(required) {
+    val notificationLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestMultiplePermissions(),
+    ) { /* 通知权限被拒不影响蓝牙功能，只是收不到通知栏电量卡片 */ }
+
+    // 首次进入：先要蓝牙权限（核心），拿到结果后再要通知权限（附加）
+    LaunchedEffect(Unit) {
         if (!granted && !asked && required.isNotEmpty()) {
             asked = true
-            launcher.launch(required)
+            bluetoothLauncher.launch(required)
+        } else {
+            bluetoothSettled = true
+        }
+    }
+
+    LaunchedEffect(bluetoothSettled) {
+        if (bluetoothSettled && notifications.isNotEmpty() &&
+            !hasAllPermissions(context, notifications)
+        ) {
+            notificationLauncher.launch(notifications)
         }
     }
 
@@ -108,7 +127,7 @@ fun BluetoothPermissionGate(
 
         if (!granted) {
             PermissionCard(
-                onRequest = { if (required.isNotEmpty()) launcher.launch(required) },
+                onRequest = { if (required.isNotEmpty()) bluetoothLauncher.launch(required) },
                 modifier = Modifier.align(Alignment.TopCenter),
             )
         }
@@ -179,4 +198,15 @@ private fun requiredBluetoothPermissions(): Array<String> =
 private fun hasAllPermissions(context: Context, permissions: Array<String>): Boolean =
     permissions.isNotEmpty() && permissions.all { permission ->
         ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
+    }
+
+/**
+ * 通知权限（Android 13+ 才需要）。
+ * 用于通知栏的耳机电量卡片 —— 不给也能用 App，只是没有卡片，所以单独申请。
+ */
+private fun requiredNotificationPermissions(): Array<String> =
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        arrayOf(Manifest.permission.POST_NOTIFICATIONS)
+    } else {
+        emptyArray()
     }

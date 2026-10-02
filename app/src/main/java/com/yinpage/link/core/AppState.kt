@@ -616,6 +616,8 @@ object AppState {
     fun updateConfig(block: (com.yinpage.link.config.AppConfig) -> com.yinpage.link.config.AppConfig) {
         if (!ConfigManager.initialized) return
         ConfigManager.get().update(block)
+        // 打开"调试面板"时立即开启详细日志，否则用户会看到空白的调试面板
+        EventLog.setVerbose(ConfigManager.get().current.debugPanel)
         syncUi()
     }
 
