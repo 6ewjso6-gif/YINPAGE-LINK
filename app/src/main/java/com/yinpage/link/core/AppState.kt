@@ -335,10 +335,13 @@ object AppState {
     }.flowOn(Dispatchers.IO)
 
     private fun BluetoothDevice.toItem(bonded: Boolean, rssi: Int?): BluetoothDeviceItem {
+        // 读 name / address 需要 BLUETOOTH_CONNECT（Android 12+），
+        // 权限被撤销时会抛 SecurityException —— 必须兜住，否则扫描直接崩。
         val deviceName = runCatching { name }.getOrNull().orEmpty()
+        val deviceAddress = runCatching { address }.getOrNull().orEmpty()
         return BluetoothDeviceItem(
             name = deviceName,
-            address = address,
+            address = deviceAddress,
             bonded = bonded,
             rssi = rssi,
             suspectedTarget = isSuspectedYinpage(deviceName),
@@ -682,6 +685,18 @@ object AppState {
             FileWriter(file, false).use { it.write(EventLog.dump()) }
             file.absolutePath
         }.getOrNull()
+    }
+
+    /**
+     * 生成一键诊断报告（可复制）。
+     * 包含设备状态、权限、已配对设备、协议帧自检、以及**逐个 SPP UUID 的真实连接测试**。
+     */
+    fun buildDiagnostics(): String {
+        val ctx = context()
+        val address = _pod.value.device?.address
+        return runCatching {
+            Diagnostics.buildReport(ctx, address)
+        }.getOrElse { "诊断失败：${it.javaClass.simpleName} ${it.message}" }
     }
 
     fun clearLog() {

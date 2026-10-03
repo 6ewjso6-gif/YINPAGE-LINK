@@ -1,5 +1,6 @@
 package com.yinpage.link.ui
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -21,6 +22,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.yinpage.link.R
@@ -55,6 +57,7 @@ fun App(
     val ui by AppState.ui.collectAsStateWithLifecycle()
     val devices by AppState.devices.collectAsStateWithLifecycle()
 
+    val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
     // 配置对象由 core 初始化；万不得已（例如单元测试/预览）没有初始化时，
@@ -157,6 +160,21 @@ fun App(
                     pod = ui.pod,
                     onConfigChange = applyConfig,
                     onOpenDebug = { showDebug = true },
+                    onRunDiagnostics = {
+                        // 生成诊断报告 → 复制到剪贴板，用户可直接粘贴反馈
+                        val report = AppState.buildDiagnostics()
+                        runCatching {
+                            val clipboard = context.getSystemService(android.content.ClipboardManager::class.java)
+                            clipboard?.setPrimaryClip(
+                                android.content.ClipData.newPlainText("YINPAGE-LINK 诊断", report),
+                            )
+                        }
+                        Toast.makeText(
+                            context,
+                            "诊断报告已复制到剪贴板，粘贴发给开发者即可",
+                            Toast.LENGTH_LONG,
+                        ).show()
+                    },
                 )
             }
         }

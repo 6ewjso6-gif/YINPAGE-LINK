@@ -67,6 +67,7 @@ fun SettingsPage(
     modifier: Modifier = Modifier,
     onConfigChange: (AppConfig) -> Unit = {},
     onOpenDebug: () -> Unit = {},
+    onRunDiagnostics: () -> Unit = {},
 ) {
     var codecExpanded by rememberSaveable { mutableStateOf(false) }
 
@@ -190,6 +191,12 @@ fun SettingsPage(
                 icon = Icons.Rounded.Science,
                 enabled = config.debugPanel,
                 onClick = onOpenDebug,
+            )
+            SettingRow(
+                title = stringResource(R.string.settings_diagnostics),
+                subtitle = stringResource(R.string.settings_diagnostics_desc),
+                icon = Icons.Rounded.Science,
+                onClick = onRunDiagnostics,
             )
             SettingChipsRow(
                 title = stringResource(R.string.settings_log_level),

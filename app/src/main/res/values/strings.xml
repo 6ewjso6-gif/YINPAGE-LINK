@@ -125,6 +125,8 @@
     <string name="settings_debug_panel_desc">记录收发字节流与协议解析过程</string>
     <string name="settings_open_debug">打开调试面板</string>
     <string name="settings_open_debug_desc">查看原始收发数据</string>
+    <string name="settings_diagnostics">一键诊断（复制报告）</string>
+    <string name="settings_diagnostics_desc">检查权限、已配对设备、协议帧，并逐个测试 SPP 通道能否连通；结果自动复制到剪贴板</string>
     <string name="settings_log_level">日志级别</string>
     <string name="log_off">关闭</string>
     <string name="log_basic">基本</string>
