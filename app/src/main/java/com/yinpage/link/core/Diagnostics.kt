@@ -3,7 +3,10 @@ package com.yinpage.link.core
 import android.Manifest
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothGatt
+import android.bluetooth.BluetoothGattCallback
 import android.bluetooth.BluetoothManager
+import android.bluetooth.BluetoothProfile
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
@@ -55,9 +58,119 @@ object Diagnostics {
         appendPairedDevices(context, adapter, address, sb)
         appendProtocolFrames(context, sb)
         appendSppTest(context, adapter, address, sb)
+        appendBleTest(context, adapter, address, sb)
 
         sb.appendLine("===== 报告结束 =====")
         return sb.toString()
+    }
+
+    // ------------------------------------------------------------------ BLE 测试
+
+    /**
+     * BLE GATT 服务枚举。
+     *
+     * 为什么重要：如果目标设备是 **BLE 随机地址**（首字节最高两位为 01，如 `7A:...`），
+     * 它大概率**不走经典蓝牙 SPP**，而是通过 BLE GATT 特征值通信。
+     * 把它的服务/特征值全列出来，就能判断控制协议在哪。
+     */
+    private fun appendBleTest(
+        context: Context,
+        adapter: BluetoothAdapter?,
+        target: String?,
+        sb: StringBuilder,
+    ) {
+        sb.appendLine()
+        sb.appendLine("--- 7. BLE GATT 服务枚举（关键）---")
+        if (adapter == null || target.isNullOrBlank()) {
+            sb.appendLine("跳过：缺少适配器或目标地址")
+            return
+        }
+        sb.appendLine("目标地址类型：${addressTypeHint(target)}")
+
+        val device = runCatching { adapter.getRemoteDevice(target) }.getOrNull()
+        if (device == null) {
+            sb.appendLine("跳过：无法构造 BluetoothDevice")
+            return
+        }
+
+        val latch = java.util.concurrent.CountDownLatch(1)
+        var resultText = "未完成"
+        var gatt: android.bluetooth.BluetoothGatt? = null
+
+        val callback = object : android.bluetooth.BluetoothGattCallback() {
+            override fun onConnectionStateChange(g: android.bluetooth.BluetoothGatt?, status: Int, newState: Int) {
+                if (newState == android.bluetooth.BluetoothProfile.STATE_CONNECTED) {
+                    resultText = "已连接，正在发现服务…"
+                    runCatching { g?.discoverServices() }
+                } else {
+                    resultText = "连接失败或被断开（status=$status newState=$newState）"
+                    latch.countDown()
+                }
+            }
+
+            override fun onServicesDiscovered(g: android.bluetooth.BluetoothGatt?, status: Int) {
+                val text = StringBuilder()
+                if (status != android.bluetooth.BluetoothGatt.GATT_SUCCESS) {
+                    text.appendLine("服务发现失败：status=$status")
+                } else {
+                    val services = runCatching { g?.services }.getOrNull().orEmpty()
+                    text.appendLine("发现 ${services.size} 个服务：")
+                    services.forEach { svc ->
+                        text.appendLine("  SERVICE ${svc.uuid}")
+                        svc.characteristics?.forEach { ch ->
+                            text.appendLine("    CHAR ${ch.uuid}  props=0x${Integer.toHexString(ch.properties)}${propsText(ch.properties)}")
+                            ch.descriptors?.forEach { d ->
+                                text.appendLine("      DESC ${d.uuid}")
+                            }
+                        }
+                    }
+                }
+                resultText = text.toString().trimEnd()
+                latch.countDown()
+            }
+        }
+
+        runCatching {
+            gatt = device.connectGatt(context, false, callback, BluetoothDevice.TRANSPORT_LE)
+            if (gatt == null) {
+                sb.appendLine("❌ connectGatt 返回 null（设备不在范围内？）")
+                return
+            }
+            val finished = latch.await(BLE_TIMEOUT_SEC, java.util.concurrent.TimeUnit.SECONDS)
+            sb.appendLine(if (finished) resultText else "⏱ 超时（${BLE_TIMEOUT_SEC}s）：$resultText")
+        }.onFailure {
+            sb.appendLine("❌ BLE 测试异常：${it.javaClass.simpleName} ${it.message}")
+        }.also {
+            runCatching { gatt?.disconnect() }
+            runCatching { gatt?.close() }
+        }
+
+        sb.appendLine()
+        sb.appendLine("提示：若上面出现非标准 UUID（非 0000xxxx-0000-1000-8000-00805f9b34fb 形式），")
+        sb.appendLine("那很可能就是厂商私有的控制通道 —— 协议应基于它来逆向。")
+    }
+
+    /** 从地址推断是公共地址还是 BLE 随机地址。 */
+    private fun addressTypeHint(address: String): String {
+        val first = address.substringBefore(':').toIntOrNull(16) ?: return "无法解析"
+        val top2 = (first shr 6) and 0x03
+        return when (top2) {
+            0b00 -> "公共地址（经典蓝牙为主）"
+            0b01 -> "⚠️ BLE 随机静态地址 → 大概率是 BLE 设备，不走 SPP"
+            0b10 -> "保留"
+            else -> "BLE 随机私有地址（可解析）"
+        }
+    }
+
+    private fun propsText(props: Int): String {
+        val list = buildList {
+            if (props and 0x02 != 0) add("READ")
+            if (props and 0x08 != 0) add("WRITE")
+            if (props and 0x04 != 0) add("WRITE_NO_RESPONSE")
+            if (props and 0x10 != 0) add("NOTIFY")
+            if (props and 0x20 != 0) add("INDICATE")
+        }
+        return if (list.isEmpty()) "" else " [${list.joinToString("|")}]"
     }
 
     // ------------------------------------------------------------------ 环境
@@ -281,6 +394,9 @@ object Diagnostics {
     }
 
     private const val CONNECT_TIMEOUT_MS = 8_000L
+
+    /** BLE 服务发现超时（秒）。 */
+    private const val BLE_TIMEOUT_SEC = 15L
 
     private fun hex(data: IntArray): String = data.joinToString(" ") { "%02X".format(it and 0xFF) }
 
