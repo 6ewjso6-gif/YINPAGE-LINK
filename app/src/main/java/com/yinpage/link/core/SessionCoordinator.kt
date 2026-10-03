@@ -120,11 +120,27 @@ class SessionCoordinator(
         return ConnectResult.Failure(reason, lastCause)
     }
 
-    /** AUTO 时先经典蓝牙 SPP，失败再退回 BLE；指定通道时只试一次。 */
-    private fun connectionPlan(kind: TransportKind): List<TransportKind> = when (kind) {
-        TransportKind.RFCOMM -> listOf(TransportKind.RFCOMM)
-        TransportKind.BLE -> listOf(TransportKind.BLE)
-        TransportKind.AUTO -> listOf(TransportKind.RFCOMM, TransportKind.BLE)
+    /**
+     * 连接通道计划。
+     *
+     * ⚠️ **AUTO 默认只走经典蓝牙 SPP，不回退 BLE**。
+     * 原因：实测反馈"系统蓝牙与应用不能同时使用" —— 对已由系统连着的耳机
+     * 再调 `connectGatt` 会争用 GATT 客户端资源，导致系统侧连接异常。
+     * 这只耳机的控制通道本来就是 SPP，故不再自动回退；
+     * 用户确需 BLE 时可在设置里显式开启。
+     */
+    private fun connectionPlan(kind: TransportKind): List<TransportKind> {
+        val bleAllowed = runCatching {
+            com.yinpage.link.config.ConfigManager.initialized &&
+                com.yinpage.link.config.ConfigManager.get().current.bleTransport
+        }.getOrDefault(false)
+        return when (kind) {
+            TransportKind.RFCOMM -> listOf(TransportKind.RFCOMM)
+            TransportKind.BLE -> listOf(TransportKind.BLE)
+            TransportKind.AUTO ->
+                if (bleAllowed) listOf(TransportKind.RFCOMM, TransportKind.BLE)
+                else listOf(TransportKind.RFCOMM)
+        }
     }
 
     /**

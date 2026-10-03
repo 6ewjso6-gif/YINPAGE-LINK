@@ -464,6 +464,7 @@ object AppState {
                         send(PodCommand.QueryAll)
                     }
                     startHeartbeat()
+                    probeBleBattery(device)
                 }
                 is ConnectResult.Failure -> {
                     updatePod {
@@ -521,7 +522,59 @@ object AppState {
         }
     }
 
-    // ------------------------------------------------------------------ 控制指令
+    // ------------------------------------------------------------------ BLE 电量探测
+
+    /**
+     * 探测耳机是否在 BLE 侧暴露**标准电量服务（BAS, 0x180F）**。
+     *
+     * 为什么做这件事：免 root 前提下，若耳机暴露了标准 BAS，
+     * AOSP 蓝牙栈会自己把电量喂给系统，**系统蓝牙设置页就有机会显示电量**——
+     * 这是唯一不碰系统进程、不需要 root 就能让系统"知道"电量的路径。
+     *
+     * 探测放在 SPP 查询之后（延迟几秒），若 SPP 已经读到电量就不再打扰耳机。
+     */
+    private fun probeBleBattery(device: BluetoothDevice) {
+        // 默认关闭：探测要建第二条 GATT 连接，会与系统已建立的连接争用资源，
+        // 这是"系统蓝牙与应用不能同时使用"的已知诱因之一。用户可在设置里显式开启。
+        val cfg = if (ConfigManager.initialized) ConfigManager.get().current else null
+        if (cfg?.bleBatteryProbe != true) {
+            EventLog.debug("BLE", "BLE 电量探测已关闭（设置 → 高级 可开启）")
+            return
+        }
+        scope.launch {
+            delay(BLE_PROBE_DELAY_MS)
+            // SPP 协议已经读到左右耳电量 → 说明私有通道可用，不必再走 BLE
+            if (_pod.value.battery.left.known || _pod.value.battery.right.known) {
+                EventLog.debug("BLE", "SPP 已提供电量，跳过 BAS 探测")
+                return@launch
+            }
+            val ctx = context() ?: return@launch
+            EventLog.info("BLE", "SPP 未提供电量，开始探测标准电量服务（0x180F）…")
+            val result = runCatching {
+                com.yinpage.link.enhance.BleBatteryProbe.probe(ctx, device)
+            }.getOrNull()
+            when {
+                result == null -> EventLog.info("BLE", "BAS 探测失败（耳机可能不支持 BLE 连接）")
+                !result.hasBatteryService -> {
+                    EventLog.info("BLE", "耳机未暴露标准电量服务 0x180F（共发现 ${result.serviceUuids.size} 个服务）")
+                    result.serviceUuids.take(12).forEach { EventLog.debug("BLE", "  服务 $it") }
+                    EventLog.info("BLE", "结论：系统无法自行获知电量，只能由本应用通过 SPP 私有协议读取")
+                }
+                result.level == null -> EventLog.info("BLE", "发现 0x180F 但读取电量失败")
+                else -> {
+                    EventLog.info("BLE", "发现标准电量服务，电量=${result.level}%")
+                    updatePod { current ->
+                        current.copy(
+                            battery = current.battery.copy(
+                                left = com.yinpage.link.protocol.BatteryLevel.of(result.level),
+                                right = com.yinpage.link.protocol.BatteryLevel.of(result.level),
+                            ),
+                        )
+                    }
+                }
+            }
+        }
+    }
 
     /**
      * 用系统侧电量补齐缺失项（免 root 兜底）。
@@ -647,6 +700,9 @@ object AppState {
     }
 
     private const val HEARTBEAT_INTERVAL_MS = 30_000L
+
+    /** SPP 查询之后再等这么久才做 BLE 探测，避免和私有协议握手抢时间。 */
+    private const val BLE_PROBE_DELAY_MS = 6_000L
 
     /** SPP 服务 UUID 候选：标准串口 + 常见厂商自定义（供传输层遍历）。 */
     val SPP_UUID_CANDIDATES: List<String> = listOf(

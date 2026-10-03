@@ -29,6 +29,25 @@ data class AppConfig(
     /** 记住的最后连接设备 */
     val lastDeviceAddress: String? = null,
     val lastDeviceName: String? = null,
+
+    /**
+     * 是否允许使用 **BLE GATT** 作为控制通道。
+     *
+     * ⚠️ **默认关闭**，原因是实测反馈的"系统蓝牙与应用不能同时使用"：
+     * 本应用对耳机调用 `connectGatt` 会建立**第二条 GATT 连接**，
+     * 而耳机通常已由系统（A2DP/HFP/LE）连着，同一个 GATT 客户端资源被两方争用，
+     * 会导致系统侧连接异常。经典蓝牙 SPP 才是这只耳机的控制通道，
+     * 因此默认只走 SPP，不再额外建立 GATT。
+     */
+    val bleTransport: Boolean = false,
+
+    /**
+     * 连接后是否探测耳机是否支持 **标准 BLE 电量服务（BAS 0x180F）**。
+     *
+     * ⚠️ **默认关闭**，同上：探测需要建 GATT 连接，会干扰系统已建立的连接。
+     * 开启后可用于诊断"耳机是否暴露标准电量服务"，但可能影响系统蓝牙使用。
+     */
+    val bleBatteryProbe: Boolean = false,
 ) {
     companion object {
         const val LOG_OFF = 0
@@ -62,6 +81,8 @@ class ConfigManager private constructor(context: Context) {
         lowBatteryThreshold = prefs.getInt(K_LOW_BATTERY, 20).coerceIn(5, 50),
         lastDeviceAddress = prefs.getString(K_LAST_ADDR, null),
         lastDeviceName = prefs.getString(K_LAST_NAME, null),
+        bleTransport = prefs.getBoolean(K_BLE_TRANSPORT, false),
+        bleBatteryProbe = prefs.getBoolean(K_BLE_PROBE, false),
     )
 
     private fun write(cfg: AppConfig) {
@@ -76,6 +97,8 @@ class ConfigManager private constructor(context: Context) {
             putInt(K_LOW_BATTERY, cfg.lowBatteryThreshold)
             putString(K_LAST_ADDR, cfg.lastDeviceAddress)
             putString(K_LAST_NAME, cfg.lastDeviceName)
+            putBoolean(K_BLE_TRANSPORT, cfg.bleTransport)
+            putBoolean(K_BLE_PROBE, cfg.bleBatteryProbe)
         }
         _config.value = cfg
     }
@@ -97,6 +120,8 @@ class ConfigManager private constructor(context: Context) {
         private const val K_LOW_BATTERY = "low_battery"
         private const val K_LAST_ADDR = "last_addr"
         private const val K_LAST_NAME = "last_name"
+        private const val K_BLE_TRANSPORT = "ble_transport"
+        private const val K_BLE_PROBE = "ble_battery_probe"
 
         @Volatile
         private var instance: ConfigManager? = null

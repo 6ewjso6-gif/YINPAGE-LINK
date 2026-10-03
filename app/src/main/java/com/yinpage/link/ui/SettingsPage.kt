@@ -157,6 +157,21 @@ fun SettingsPage(
                 onCheckedChange = { onConfigChange(config.copy(queryOnConnect = it)) },
                 showDivider = false,
             )
+            SettingSwitchRow(
+                title = stringResource(R.string.settings_ble_transport),
+                subtitle = stringResource(R.string.settings_ble_transport_desc),
+                icon = Icons.Rounded.Bluetooth,
+                checked = config.bleTransport,
+                onCheckedChange = { onConfigChange(config.copy(bleTransport = it)) },
+            )
+            SettingSwitchRow(
+                title = stringResource(R.string.settings_ble_probe),
+                subtitle = stringResource(R.string.settings_ble_probe_desc),
+                icon = Icons.Rounded.Science,
+                checked = config.bleBatteryProbe,
+                onCheckedChange = { onConfigChange(config.copy(bleBatteryProbe = it)) },
+                showDivider = false,
+            )
         }
 
         // ---------------------------- 调试 ----------------------------

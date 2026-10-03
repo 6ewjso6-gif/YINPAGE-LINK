@@ -117,6 +117,10 @@
     <string name="settings_query_on_connect">连接后查询全量</string>
     <string name="settings_query_on_connect_desc">握手完成后立即拉取电量、降噪、EQ 等全部状态</string>
     <string name="settings_section_debug">调试</string>
+    <string name="settings_ble_transport">允许 BLE 控制通道</string>
+    <string name="settings_ble_transport_desc">默认关闭。开启后 SPP 失败会回退到 BLE GATT —— 但会对已连接系统的耳机建立第二条连接，可能导致系统蓝牙异常</string>
+    <string name="settings_ble_probe">探测标准 BLE 电量服务</string>
+    <string name="settings_ble_probe_desc">默认关闭。连接后探测耳机是否暴露标准电池服务（0x180F），用于诊断；会额外建立 GATT 连接</string>
     <string name="settings_debug_panel">调试面板</string>
     <string name="settings_debug_panel_desc">记录收发字节流与协议解析过程</string>
     <string name="settings_open_debug">打开调试面板</string>
