@@ -161,19 +161,26 @@ fun App(
                     onConfigChange = applyConfig,
                     onOpenDebug = { showDebug = true },
                     onRunDiagnostics = {
-                        // 生成诊断报告 → 复制到剪贴板，用户可直接粘贴反馈
-                        val report = AppState.buildDiagnostics()
-                        runCatching {
-                            val clipboard = context.getSystemService(android.content.ClipboardManager::class.java)
-                            clipboard?.setPrimaryClip(
-                                android.content.ClipData.newPlainText("YINPAGE-LINK 诊断", report),
-                            )
-                        }
+                        // 诊断含阻塞式蓝牙连接测试（最长可达数十秒），
+                        // 必须在后台线程执行，否则主线程卡死 → ANR → 崩溃。
                         Toast.makeText(
                             context,
-                            "诊断报告已复制到剪贴板，粘贴发给开发者即可",
-                            Toast.LENGTH_LONG,
+                            "正在诊断，请稍候（约 10~60 秒）…",
+                            Toast.LENGTH_SHORT,
                         ).show()
+                        AppState.buildDiagnosticsAsync { report ->
+                            runCatching {
+                                val clipboard = context.getSystemService(android.content.ClipboardManager::class.java)
+                                clipboard?.setPrimaryClip(
+                                    android.content.ClipData.newPlainText("YINPAGE-LINK 诊断", report),
+                                )
+                            }
+                            Toast.makeText(
+                                context,
+                                "诊断报告已复制到剪贴板，粘贴发给开发者即可",
+                                Toast.LENGTH_LONG,
+                            ).show()
+                        }
                     },
                 )
             }

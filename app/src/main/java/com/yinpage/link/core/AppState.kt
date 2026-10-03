@@ -35,6 +35,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
 import java.io.File
 import java.io.FileWriter
@@ -689,7 +690,9 @@ object AppState {
 
     /**
      * 生成一键诊断报告（可复制）。
-     * 包含设备状态、权限、已配对设备、协议帧自检、以及**逐个 SPP UUID 的真实连接测试**。
+     *
+     * ⚠️ **必须在 IO 线程调用**（内部含阻塞式蓝牙连接测试）。
+     * UI 侧请用 [buildDiagnosticsAsync]，不要直接在主线程调。
      */
     fun buildDiagnostics(): String {
         val ctx = context()
@@ -697,6 +700,20 @@ object AppState {
         return runCatching {
             Diagnostics.buildReport(ctx, address)
         }.getOrElse { "诊断失败：${it.javaClass.simpleName} ${it.message}" }
+    }
+
+    /**
+     * 异步版诊断：在 IO 线程执行后回调结果。
+     *
+     * 为什么必须异步：诊断里的 SPP 连接测试与 BLE 服务发现都是**阻塞**操作
+     * （单次最长 8~15 秒，累计可达 1 分钟）。早期版本在主线程直接调用，
+     * 导致界面卡死 → ANR → 进程被系统杀掉，表现为"一点诊断就崩溃"。
+     */
+    fun buildDiagnosticsAsync(onResult: (String) -> Unit) {
+        scope.launch {
+            val report = withContext(Dispatchers.IO) { buildDiagnostics() }
+            withContext(Dispatchers.Main) { onResult(report) }
+        }
     }
 
     fun clearLog() {

@@ -1,4 +1,7 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 plugins {
     alias(libs.plugins.android.application)
@@ -31,9 +34,19 @@ android {
         applicationId = "com.yinpage.link"
         minSdk = 27          // 蓝牙 5.x 私有协议 + BLE 扫描所需最低版本
         targetSdk = 35
-        // 调试阶段版本号：安装包与设置页都会显示成 app-debug-x.y.z
-        versionCode = 3
-        versionName = "0.3"
+
+        /**
+         * 版本号每次编译自动生成，保证可**直接覆盖安装**（不需要卸载）。
+         *
+         * versionCode 必须落在 Android 允许的范围（<= 2_100_000_000）。
+         * 用 Unix 时间戳的**秒数**：当前约 1.79e9，到 2038 年才接近上限，
+         * 且天然单调递增 —— 每次编译都不同，Android 就不会拒绝覆盖安装。
+         *
+         * （曾试过 `YYMMDD*10000+分钟`，但 261003*10000 = 26 亿直接溢出 toInt。）
+         */
+        val now = Date()
+        versionCode = (now.time / 1000L).toInt()
+        versionName = "0.4-${SimpleDateFormat("MMdd-HHmm", Locale.US).format(now)}"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
@@ -45,7 +58,8 @@ android {
     buildTypes {
         debug {
             isMinifyEnabled = false
-            applicationIdSuffix = ".debug"
+            // 不再加 .debug 后缀：包名与之前发布的版本保持一致，
+            // 用户可以直接覆盖安装，不需要卸载。
         }
         release {
             isMinifyEnabled = true

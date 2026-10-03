@@ -402,7 +402,6 @@ object Diagnostics {
 
         val uuids = listOf(
             "00001101-0000-1000-8000-00805F9B34FB",
-            "00001102-0000-1000-8000-00805F9B34FB",
             "0000A100-1000-8000-4E48-434B4354524C",
         )
         var anySuccess = false
@@ -462,10 +461,11 @@ object Diagnostics {
         }
     }
 
-    private const val CONNECT_TIMEOUT_MS = 8_000L
+    /** 单次 SPP 连接测试超时。诊断要跑多个组合，不宜过长。 */
+    private const val CONNECT_TIMEOUT_MS = 4_000L
 
     /** BLE 服务发现超时（秒）。 */
-    private const val BLE_TIMEOUT_SEC = 15L
+    private const val BLE_TIMEOUT_SEC = 10L
 
     private fun hex(data: IntArray): String = data.joinToString(" ") { "%02X".format(it and 0xFF) }
 
