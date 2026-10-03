@@ -115,15 +115,23 @@ object Diagnostics {
                 } else {
                     val services = runCatching { g?.services }.getOrNull().orEmpty()
                     text.appendLine("发现 ${services.size} 个服务：")
+                    val allUuids = mutableListOf<String>()
                     services.forEach { svc ->
-                        text.appendLine("  SERVICE ${svc.uuid}")
+                        val svcUuid = svc.uuid.toString().lowercase()
+                        allUuids += svcUuid
+                        text.appendLine("  SERVICE ${svc.uuid}${standardServiceName(svcUuid)}")
                         svc.characteristics?.forEach { ch ->
-                            text.appendLine("    CHAR ${ch.uuid}  props=0x${Integer.toHexString(ch.properties)}${propsText(ch.properties)}")
+                            val chUuid = ch.uuid.toString().lowercase()
+                            allUuids += chUuid
+                            text.appendLine("    CHAR ${ch.uuid}  props=0x${Integer.toHexString(ch.properties)}${propsText(ch.properties)}${standardCharName(chUuid)}")
                             ch.descriptors?.forEach { d ->
                                 text.appendLine("      DESC ${d.uuid}")
                             }
                         }
                     }
+                    // 自动判定方案
+                    text.appendLine()
+                    text.append(analyzeProtocol(allUuids))
                 }
                 resultText = text.toString().trimEnd()
                 latch.countDown()
@@ -171,6 +179,67 @@ object Diagnostics {
             if (props and 0x20 != 0) add("INDICATE")
         }
         return if (list.isEmpty()) "" else " [${list.joinToString("|")}]"
+    }
+
+    /** 标准服务名标注（含厂商方案识别）。 */
+    private fun standardServiceName(uuid: String): String = when {
+        uuid.startsWith("0000180f") -> "  ← 标准电池服务 BAS"
+        uuid.startsWith("0000180a") -> "  ← 设备信息服务 DIS"
+        uuid.startsWith("00001800") -> "  ← 通用访问 GAP"
+        uuid.startsWith("00001801") -> "  ← 通用属性 GATT"
+        uuid.startsWith("00001812") -> "  ← 人机接口 HID"
+        uuid.startsWith("0000ae00") -> "  ← ⭐ 杰理 JieLi RCSP 控制服务"
+        uuid.startsWith("0000fff0") || uuid.startsWith("0000ffe0") || uuid.startsWith("0000fee7") ->
+            "  ← ⭐ 常见私有透传服务"
+        else -> ""
+    }
+
+    /** 标准特征值名标注。 */
+    private fun standardCharName(uuid: String): String = when {
+        uuid.startsWith("00002a19") -> "  ← 电量值"
+        uuid.startsWith("0000ae01") -> "  ← ⭐ 杰理 RCSP 写通道"
+        uuid.startsWith("0000ae02") -> "  ← ⭐ 杰理 RCSP 通知通道"
+        uuid.startsWith("0000ae03") -> "  ← ⭐ 杰理 RCSP 数据通道"
+        else -> ""
+    }
+
+    /**
+     * 根据发现的服务自动判定芯片方案 —— 这是整份诊断最想要的结论。
+     */
+    private fun analyzeProtocol(uuids: List<String>): String {
+        val sb = StringBuilder()
+        fun has(prefix: String) = uuids.any { it.startsWith(prefix) }
+
+        sb.appendLine("── 方案判定 ──")
+        val jl = has("0000ae00") || has("0000ae01") || has("0000ae02")
+        val privateSvc = uuids.any { u ->
+            !u.startsWith("000018") && !u.startsWith("0000ae")
+        }
+
+        when {
+            jl -> {
+                sb.appendLine("✅ 判定：**杰理（JieLi）方案**")
+                sb.appendLine("   证据：出现 RCSP 服务 0000ae00 / 特征 0000ae01(写) / ae02(通知)")
+                sb.appendLine("   → 控制通道是 BLE GATT，**不是经典蓝牙 SPP**")
+                sb.appendLine("   → 这也解释了为什么 SPP 测试全部超时")
+            }
+
+            privateSvc -> {
+                sb.appendLine("⚠️ 判定：存在**非标准私有服务**（见上面未标注的 SERVICE）")
+                sb.appendLine("   → 大概率是厂商私有控制通道，但方案未知")
+                sb.appendLine("   → 请把上面完整列表发给开发者分析")
+            }
+
+            else -> {
+                sb.appendLine("ℹ️ 判定：只发现标准 GATT 服务，没有明显的私有控制通道")
+                sb.appendLine("   → 控制协议可能在 BLE 广播数据里，或需要先完成某种握手")
+            }
+        }
+
+        if (has("0000180f")) {
+            sb.appendLine("💡 发现标准电池服务（0x180F）→ 系统可能能自己读到电量")
+        }
+        return sb.toString()
     }
 
     // ------------------------------------------------------------------ 环境
