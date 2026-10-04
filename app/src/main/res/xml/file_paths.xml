@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- FileProvider 授权路径：应用缓存目录下的 updates/ 目录（下载的更新包） -->
+<paths>
+    <cache-path
+        name="apk_updates"
+        path="updates/" />
+</paths>

@@ -2,31 +2,39 @@ package com.yinpage.link.ui
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Devices
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.rounded.Settings
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.yinpage.link.R
 import com.yinpage.link.config.AppConfig
 import com.yinpage.link.core.AppState
+import com.yinpage.link.core.UpdateManager
 import kotlinx.coroutines.launch
 
 /**
@@ -68,6 +76,58 @@ fun App(
 
     val applyConfig: (AppConfig) -> Unit = { updated ->
         AppState.updateConfig { updated }
+    }
+
+    // ---------------------------- 应用内更新（检查 / 下载 / 安装） ----------------------------
+    var checkingUpdate by remember { mutableStateOf(false) }
+    var updateInfo by remember { mutableStateOf<UpdateManager.ReleaseInfo?>(null) }
+    var downloading by remember { mutableStateOf(false) }
+    var downloadProgress by remember { mutableStateOf(0L to 0L) }
+
+    val funToast: (Int) -> Unit = { resId ->
+        Toast.makeText(context, resId, Toast.LENGTH_SHORT).show()
+    }
+
+    /** 检查 GitHub 最新 Release：有新版本就弹窗，已最新则提示。 */
+    val checkUpdate: () -> Unit = {
+        if (!checkingUpdate && !downloading) {
+            checkingUpdate = true
+            Toast.makeText(context, R.string.update_checking, Toast.LENGTH_SHORT).show()
+            scope.launch {
+                val result = UpdateManager.checkForUpdate()
+                checkingUpdate = false
+                when (result) {
+                    is UpdateManager.CheckResult.Available -> updateInfo = result.info
+                    is UpdateManager.CheckResult.UpToDate -> funToast(R.string.update_latest)
+                    is UpdateManager.CheckResult.Failed ->
+                        Toast.makeText(context, result.message, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
+    /** 自动下载最新 APK，完成后调起系统安装器。 */
+    val startDownload: (UpdateManager.ReleaseInfo) -> Unit = { info ->
+        if (!downloading) {
+            downloading = true
+            downloadProgress = 0L to 0L
+            updateInfo = null
+            scope.launch {
+                runCatching {
+                    UpdateManager.download(context.applicationContext, info) { done, total ->
+                        downloadProgress = done to total
+                    }
+                }.onSuccess { apk ->
+                    downloading = false
+                    if (!UpdateManager.install(context.applicationContext, apk)) {
+                        Toast.makeText(context, R.string.update_install_failed, Toast.LENGTH_LONG).show()
+                    }
+                }.onFailure {
+                    downloading = false
+                    funToast(R.string.update_download_failed)
+                }
+            }
+        }
     }
 
     val permissionOk = permissionGranted ?: ui.permissionGranted
@@ -157,6 +217,7 @@ fun App(
                     pod = ui.pod,
                     onConfigChange = applyConfig,
                     onOpenDebug = { showDebug = true },
+                    onCheckUpdate = checkUpdate,
                     onRunDiagnostics = {
                         // 诊断含阻塞式蓝牙连接测试（最长可达数十秒），
                         // 必须在后台线程执行，否则主线程卡死 → ANR → 崩溃。
@@ -183,4 +244,60 @@ fun App(
             }
         }
     }
+
+        // 发现新版本：展示发布说明，点击「立即更新」自动下载
+        updateInfo?.let { info ->
+            AlertDialog(
+                onDismissRequest = { updateInfo = null },
+                title = {
+                    Text(text = "${stringResource(R.string.update_found)} ${info.tagName}")
+                },
+                text = {
+                    Column {
+                        Text(
+                            text = run {
+                                val body = info.body.trim().takeIf { it.isNotBlank() } ?: return@run ""
+                                if (body.length > 500) body.take(500) + "…" else body
+                            },
+                            style = MaterialTheme.typography.bodyMedium,
+                        )
+                        Text(
+                            text = "发布于 ${info.publishedAt.take(10)}",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.padding(top = 8.dp),
+                        )
+                    }
+                },
+                confirmButton = {
+                    TextButton(onClick = { startDownload(info) }) {
+                        Text(text = stringResource(R.string.update_now))
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = { updateInfo = null }) {
+                        Text(text = stringResource(R.string.update_cancel))
+                    }
+                },
+            )
+        }
+
+        // 下载中：显示进度，不可关闭（避免下载中断半包）
+        if (downloading) {
+            val (done, total) = downloadProgress
+            val percent = if (total > 0) (done * 100 / total).toInt().coerceIn(0, 100) else 0
+            AlertDialog(
+                onDismissRequest = {},
+                title = {
+                    Text(text = stringResource(R.string.update_downloading, percent))
+                },
+                text = {
+                    LinearProgressIndicator(
+                        progress = { if (total > 0) (done.toFloat() / total).coerceIn(0f, 1f) else 0f },
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                },
+                confirmButton = {},
+            )
+        }
 }

@@ -68,6 +68,7 @@ fun SettingsPage(
     onConfigChange: (AppConfig) -> Unit = {},
     onOpenDebug: () -> Unit = {},
     onRunDiagnostics: () -> Unit = {},
+    onCheckUpdate: () -> Unit = {},
 ) {
     var codecExpanded by rememberSaveable { mutableStateOf(false) }
 
@@ -253,6 +254,12 @@ fun SettingsPage(
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 },
+            )
+            SettingRow(
+                title = stringResource(R.string.settings_check_update),
+                subtitle = stringResource(R.string.settings_check_update_desc),
+                icon = Icons.Rounded.Refresh,
+                onClick = onCheckUpdate,
             )
             SettingRow(
                 title = stringResource(R.string.footer_link_state),
