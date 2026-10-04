@@ -1,0 +1,280 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.compose.foundation",
+    "module": "foundation-layout",
+    "version": "1.7.6",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.8-rc-1"
+    }
+  },
+  "variants": [
+    {
+      "name": "androidxSourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "androidx-multiplatform-docs"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.compose.foundation",
+          "module": "foundation",
+          "version": {
+            "requires": "1.7.6"
+          },
+          "reason": "foundation-layout is in atomic group androidx.compose.foundation"
+        }
+      ],
+      "files": [
+        {
+          "name": "foundation-layout-1.7.6-multiplatform-sources.jar",
+          "url": "foundation-layout-1.7.6-multiplatform-sources.jar",
+          "size": 96807,
+          "sha512": "22e864f327b0b331aa1d4887cf27935e3fac84960a200d558e817fa5d10b8209ada936bec565dc99242800842f844dc13593a78a760c8a73ee16ed560946b6b4",
+          "sha256": "0505e1663b8aa4fc855ccbe5aecfa9466c474c405d139c25781ee3363649d1be",
+          "sha1": "6d2baf526402c3b03fa2de94ee6237f6949aac1c",
+          "md5": "e03565f7f4aa0acf10f629445f68e896"
+        },
+        {
+          "name": "foundation-layout-1.7.6-samples-sources.jar",
+          "url": "foundation-layout-1.7.6-samples-sources.jar",
+          "size": 26643,
+          "sha512": "beb80b648aa2e4d43ba2c7e2d0a5cbf39846f6063620f94f0d4be4b738c9a92086b4d7345bade4466d52a329d3d7c4c9117abb11b80dfafebdf58264aad4538f",
+          "sha256": "d5cdba46a265c956ea9026ccc9d100f133ca39836fad6d61f897cb2173f91306",
+          "sha1": "c30fcc13ba6e6f10f524c3e5b3fee1f92ead2616",
+          "md5": "344cf5e95eb6c8ee9077a1ac7bbd6dfe"
+        }
+      ]
+    },
+    {
+      "name": "libraryVersionMetadata",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.usage": "library-version-metadata"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.compose.foundation",
+          "module": "foundation",
+          "version": {
+            "requires": "1.7.6"
+          },
+          "reason": "foundation-layout is in atomic group androidx.compose.foundation"
+        }
+      ],
+      "files": [
+        {
+          "name": "apiLevels.json",
+          "url": "foundation-layout-1.7.6-versionMetadata.json",
+          "size": 29819,
+          "sha512": "54a9b2423fc2c10e3e56bbf307f5dd4aa7126159bef4a639b5b3aac4d9887c532d2d4e82439c2535c2b13675caf4afb8597aa7cd7a16bb8dd7ef58a50440da4a",
+          "sha256": "c176ebb66f3936c0c48533621a70123556756544e9a011a012c480b191170c0e",
+          "sha1": "3103576e4b489f87bdeb84cfe468685e6ea599b1",
+          "md5": "127e73cb3c811228e0762ecd2464b2d2"
+        }
+      ]
+    },
+    {
+      "name": "metadataApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.compose.ui",
+          "module": "ui",
+          "version": {
+            "requires": "1.7.6"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.compose.foundation",
+          "module": "foundation",
+          "version": {
+            "requires": "1.7.6"
+          },
+          "reason": "foundation-layout is in atomic group androidx.compose.foundation"
+        }
+      ],
+      "files": [
+        {
+          "name": "foundation-layout-metadata-1.7.6.jar",
+          "url": "foundation-layout-1.7.6.jar",
+          "size": 30098,
+          "sha512": "22fb6239a360a442f05aeec1b39656145da3f70fdb6e76561377bd3d01b85023347e6efdd41f87d2883fa8e8183e7791e23bc1b605bbfa00431bd64bf63d8dde",
+          "sha256": "4094e5a3626380b22b684086e548be51afe18e7979f46d261d4f1e0b6898fb39",
+          "sha1": "5d8c07c8c14aee5c0d52bf4a502be4a530c69308",
+          "md5": "a75ce952cee66b7b70c62716b3a187b1"
+        }
+      ]
+    },
+    {
+      "name": "metadataSourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.compose.foundation",
+          "module": "foundation",
+          "version": {
+            "requires": "1.7.6"
+          },
+          "reason": "foundation-layout is in atomic group androidx.compose.foundation"
+        }
+      ],
+      "files": [
+        {
+          "name": "foundation-layout-kotlin-1.7.6-sources.jar",
+          "url": "foundation-layout-1.7.6-sources.jar",
+          "size": 83210,
+          "sha512": "26dd036c792e8a536b3d13fc1700d42e1f16d5b91c95e41f520a25332de1d07a4605be8d49739857d6bbfbf16e50fcd69c00f2d1855ebd21d78e534b524fcdfd",
+          "sha256": "f7f60ff888bb5f96a52a771d50f4ff2401fead1035c0ae9986c3f3b62a5edd77",
+          "sha1": "ed60ec5297ac9964b6798ab8ad5d6571f7cc5d50",
+          "md5": "179097dba1fc72aabb98bb33f5b7fd52"
+        }
+      ]
+    },
+    {
+      "name": "releaseApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "available-at": {
+        "url": "../../foundation-layout-android/1.7.6/foundation-layout-android-1.7.6.module",
+        "group": "androidx.compose.foundation",
+        "module": "foundation-layout-android",
+        "version": "1.7.6"
+      }
+    },
+    {
+      "name": "releaseRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "available-at": {
+        "url": "../../foundation-layout-android/1.7.6/foundation-layout-android-1.7.6.module",
+        "group": "androidx.compose.foundation",
+        "module": "foundation-layout-android",
+        "version": "1.7.6"
+      }
+    },
+    {
+      "name": "releaseSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "fake-sources",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "available-at": {
+        "url": "../../foundation-layout-android/1.7.6/foundation-layout-android-1.7.6.module",
+        "group": "androidx.compose.foundation",
+        "module": "foundation-layout-android",
+        "version": "1.7.6"
+      }
+    },
+    {
+      "name": "jvmStubsApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../foundation-layout-jvmstubs/1.7.6/foundation-layout-jvmstubs-1.7.6.module",
+        "group": "androidx.compose.foundation",
+        "module": "foundation-layout-jvmstubs",
+        "version": "1.7.6"
+      }
+    },
+    {
+      "name": "jvmStubsRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../foundation-layout-jvmstubs/1.7.6/foundation-layout-jvmstubs-1.7.6.module",
+        "group": "androidx.compose.foundation",
+        "module": "foundation-layout-jvmstubs",
+        "version": "1.7.6"
+      }
+    },
+    {
+      "name": "jvmStubsSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../foundation-layout-jvmstubs/1.7.6/foundation-layout-jvmstubs-1.7.6.module",
+        "group": "androidx.compose.foundation",
+        "module": "foundation-layout-jvmstubs",
+        "version": "1.7.6"
+      }
+    },
+    {
+      "name": "linuxx64StubsApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "linux_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../foundation-layout-linuxx64stubs/1.7.6/foundation-layout-linuxx64stubs-1.7.6.module",
+        "group": "androidx.compose.foundation",
+        "module": "foundation-layout-linuxx64stubs",
+        "version": "1.7.6"
+      }
+    },
+    {
+      "name": "linuxx64StubsSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "linux_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../foundation-layout-linuxx64stubs/1.7.6/foundation-layout-linuxx64stubs-1.7.6.module",
+        "group": "androidx.compose.foundation",
+        "module": "foundation-layout-linuxx64stubs",
+        "version": "1.7.6"
+      }
+    }
+  ]
+}

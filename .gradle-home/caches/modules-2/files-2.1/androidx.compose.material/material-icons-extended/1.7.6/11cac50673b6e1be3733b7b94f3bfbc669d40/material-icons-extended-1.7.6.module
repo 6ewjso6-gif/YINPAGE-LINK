@@ -1,0 +1,179 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.compose.material",
+    "module": "material-icons-extended",
+    "version": "1.7.6",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.8-rc-1"
+    }
+  },
+  "variants": [
+    {
+      "name": "androidxSourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "androidx-multiplatform-docs"
+      },
+      "files": [
+        {
+          "name": "material-icons-extended-1.7.6-multiplatform-sources.jar",
+          "url": "material-icons-extended-1.7.6-multiplatform-sources.jar",
+          "size": 23927219,
+          "sha512": "03f703a27a3acf12bb26bd2b5ff63ab780a9f128281b702af2ad5aa9d29d2cb7aaa13b8acb6823aa6370b98b2f8a5644c6bb362b77fb23af0c6fe64cb5e39b23",
+          "sha256": "543db0bdfc6e934e722176437bfc65a325ed3083fb49d3906d434755be73d3e7",
+          "sha1": "3bf56a429a0871edb6016908b27d58fe39c2b867",
+          "md5": "c606c560a1f5b36fada75cfc534127ad"
+        }
+      ]
+    },
+    {
+      "name": "metadataApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.compose.material",
+          "module": "material-icons-core",
+          "version": {
+            "requires": "1.7.6"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "material-icons-extended-metadata-1.7.6.jar",
+          "url": "material-icons-extended-1.7.6.jar",
+          "size": 736,
+          "sha512": "f3e6bc74480e57d8f3bd0c641450efefddcc8f7c5dfd25f5e1e95906269b934e4624c181ffd4f3884c98f3a9b63d11994d512aa556ca361dda931c2f31516425",
+          "sha256": "714e2bfc4095b291e0dbcbd7626bc0e420fc2f6a78f2416398596504debd9117",
+          "sha1": "dc62b0482b48b733105221b084a2c4628fbcd77a",
+          "md5": "cad069f63e19a0f9e5d337ecb3b361e5"
+        }
+      ]
+    },
+    {
+      "name": "metadataSourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "files": [
+        {
+          "name": "material-icons-extended-kotlin-1.7.6-sources.jar",
+          "url": "material-icons-extended-1.7.6-sources.jar",
+          "size": 12085941,
+          "sha512": "8052018ed087abb947f6063970211a78b1ca963fc3ba045bd07cd61e5817a5a3ebc61e2214ed1b88257011e5649899dfa3ab49d51b305d2dcf9b1971fc13bab5",
+          "sha256": "9b22840d9d5ec83fca54783df66640c0e2d76bb164687d654c23bcc6c02f3a96",
+          "sha1": "4c74984f208526fde6a4ad0d78d00a8d33cbcce0",
+          "md5": "9eb38b15d560c68fa1c277d4dbd85fe9"
+        }
+      ]
+    },
+    {
+      "name": "releaseApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "available-at": {
+        "url": "../../material-icons-extended-android/1.7.6/material-icons-extended-android-1.7.6.module",
+        "group": "androidx.compose.material",
+        "module": "material-icons-extended-android",
+        "version": "1.7.6"
+      }
+    },
+    {
+      "name": "releaseRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "available-at": {
+        "url": "../../material-icons-extended-android/1.7.6/material-icons-extended-android-1.7.6.module",
+        "group": "androidx.compose.material",
+        "module": "material-icons-extended-android",
+        "version": "1.7.6"
+      }
+    },
+    {
+      "name": "releaseSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "fake-sources",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "available-at": {
+        "url": "../../material-icons-extended-android/1.7.6/material-icons-extended-android-1.7.6.module",
+        "group": "androidx.compose.material",
+        "module": "material-icons-extended-android",
+        "version": "1.7.6"
+      }
+    },
+    {
+      "name": "desktopApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../material-icons-extended-desktop/1.7.6/material-icons-extended-desktop-1.7.6.module",
+        "group": "androidx.compose.material",
+        "module": "material-icons-extended-desktop",
+        "version": "1.7.6"
+      }
+    },
+    {
+      "name": "desktopRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../material-icons-extended-desktop/1.7.6/material-icons-extended-desktop-1.7.6.module",
+        "group": "androidx.compose.material",
+        "module": "material-icons-extended-desktop",
+        "version": "1.7.6"
+      }
+    },
+    {
+      "name": "desktopSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../material-icons-extended-desktop/1.7.6/material-icons-extended-desktop-1.7.6.module",
+        "group": "androidx.compose.material",
+        "module": "material-icons-extended-desktop",
+        "version": "1.7.6"
+      }
+    }
+  ]
+}
