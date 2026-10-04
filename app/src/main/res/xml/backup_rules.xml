@@ -7,7 +7,4 @@
     <include
         domain="sharedpref"
         path="yinpage_link_settings.xml" />
-    <exclude
-        domain="database"
-        path="." />
 </full-backup-content>

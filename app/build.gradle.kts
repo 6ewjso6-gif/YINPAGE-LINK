@@ -1,7 +1,5 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import java.text.SimpleDateFormat
 import java.util.Date
-import java.util.Locale
 
 plugins {
     alias(libs.plugins.android.application)
@@ -46,7 +44,8 @@ android {
          */
         val now = Date()
         versionCode = (now.time / 1000L).toInt()
-        versionName = "0.4-${SimpleDateFormat("MMdd-HHmm", Locale.US).format(now)}"
+        // 发布版本名格式：APP-t-v*.*（* 由版本号填充，递增需手动改这里）
+        versionName = "APP-t-v0.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }

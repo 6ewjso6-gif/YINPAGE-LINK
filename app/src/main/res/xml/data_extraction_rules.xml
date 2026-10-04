@@ -8,16 +8,10 @@
         <include
             domain="sharedpref"
             path="yinpage_link_settings.xml" />
-        <exclude
-            domain="database"
-            path="." />
     </cloud-backup>
     <device-transfer>
         <include
             domain="sharedpref"
             path="yinpage_link_settings.xml" />
-        <exclude
-            domain="database"
-            path="." />
     </device-transfer>
 </data-extraction-rules>
