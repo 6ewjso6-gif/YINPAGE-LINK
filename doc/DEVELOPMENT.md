@@ -2,9 +2,9 @@
 
 > ## 📌 开发声明
 >
-> **本项目由 DSH（DeepSeek Harness）与 AI 编程助手协作开发完成。**
+> **本项目由 DSH（DeepSeek Harness）与 TraeCode 协作开发完成。**
 >
-> 从耳机协议逆向、架构设计、全部源代码编写、构建调试到文档撰写，由 DSH 与 AI 编程助手共同完成。
+> 从耳机协议逆向、架构设计、全部源代码编写、构建调试到文档撰写，由 DSH 与 TraeCode 共同完成。
 > 用户提供的是：目标设备（YINPAGE 音贝奇 Feel 1 Pro）、参考项目（HyperOriG）、
 > 目标仓库、形态决策（不要 root）与实测反馈。
 >
