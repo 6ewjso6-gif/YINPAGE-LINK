@@ -66,6 +66,15 @@ class PodConnectionService : Service() {
 
     override fun onDestroy() {
         running = false
+        // 前台服务销毁时移除前台通知，否则通知会残留且用户划不掉
+        runCatching {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                stopForeground(STOP_FOREGROUND_REMOVE)
+            } else {
+                @Suppress("DEPRECATION")
+                stopForeground(true)
+            }
+        }.onFailure { EventLog.debug(TAG, "stopForeground 失败：${it.message}") }
         EventLog.info(TAG, "前台服务销毁（不主动断开连接）")
         super.onDestroy()
     }
@@ -85,18 +94,7 @@ class PodConnectionService : Service() {
             .setShowWhen(false)
             .setCategory(Notification.CATEGORY_SERVICE)
 
-        // 用启动器 Intent，避免 service 层反向依赖 ui.MainActivity。
-        packageManager.getLaunchIntentForPackage(packageName)?.let { launch ->
-            launch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            builder.setContentIntent(
-                PendingIntent.getActivity(
-                    this,
-                    0,
-                    launch,
-                    PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
-                ),
-            )
-        }
+        launchPendingIntent(this)?.let { builder.setContentIntent(it) }
 
         // 降噪快捷按钮：直接在通知里循环切换 关闭 → 通透 → 标准 → 深度
         // （无 root 的前提下，这是最接近"控制中心耳机控件"的体验）
@@ -142,6 +140,10 @@ class PodConnectionService : Service() {
         @Volatile
         private var running = false
 
+        /** launch 与降噪切换的 PendingIntent 不随状态变化，缓存避免每次刷新重建。 */
+        private val launchPending = java.util.concurrent.atomic.AtomicReference<PendingIntent?>()
+        private val noisePending = java.util.concurrent.atomic.AtomicReference<PendingIntent?>()
+
         /**
          * 启动保活服务（幂等）。
          * 连接耳机后由 [AppState] 调用；启动失败只记日志，不影响连接本身。
@@ -156,6 +158,17 @@ class PodConnectionService : Service() {
                     context.startService(intent)
                 }
             }.onFailure { EventLog.debug(TAG, "启动保活服务失败：${it.message}") }
+        }
+
+        /**
+         * 停止保活服务并移除前台通知。
+         * 由 [AppState] 在断开连接 / 进程收尾时调用；服务未运行时是空操作。
+         */
+        fun stop(context: Context?) {
+            if (context == null) return
+            runCatching {
+                context.stopService(Intent(context, PodConnectionService::class.java))
+            }.onFailure { EventLog.debug(TAG, "停止保活服务失败：${it.message}") }
         }
 
         /**
@@ -196,15 +209,7 @@ class PodConnectionService : Service() {
                 .setShowWhen(false)
                 .setCategory(Notification.CATEGORY_SERVICE)
 
-            context.packageManager.getLaunchIntentForPackage(context.packageName)?.let { launch ->
-                launch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                builder.setContentIntent(
-                    PendingIntent.getActivity(
-                        context, 0, launch,
-                        PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
-                    ),
-                )
-            }
+            launchPendingIntent(context)?.let { builder.setContentIntent(it) }
             builder.addAction(
                 Notification.Action.Builder(null, nextNoiseLabelStatic(pod.noise), noiseActionIntent(context)).build(),
             )
@@ -219,15 +224,24 @@ class PodConnectionService : Service() {
         }
 
         /** 降噪切换的 PendingIntent：发给本服务，由 [onStartCommand] 处理。 */
-        private fun noiseActionIntent(context: Context): PendingIntent {
-            val intent = Intent(context, PodConnectionService::class.java).apply {
-                action = ACTION_CYCLE_NOISE
-            }
-            return PendingIntent.getService(
-                context, 1, intent,
+        private fun noiseActionIntent(context: Context): PendingIntent =
+            noisePending.get() ?: PendingIntent.getService(
+                context, 1,
+                Intent(context, PodConnectionService::class.java).apply { action = ACTION_CYCLE_NOISE },
                 PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
-            )
-        }
+            ).also { noisePending.set(it) }
+
+        /** 打开主界面的 PendingIntent（避免 service 层反向依赖 ui.MainActivity）。 */
+        private fun launchPendingIntent(context: Context): PendingIntent? =
+            launchPending.get() ?: runCatching {
+                context.packageManager.getLaunchIntentForPackage(context.packageName)?.let { launch ->
+                    launch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    PendingIntent.getActivity(
+                        context, 0, launch,
+                        PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
+                    )
+                }
+            }.getOrNull()?.also { launchPending.set(it) }
 
         /** 通知按钮的 action。 */
         const val ACTION_CYCLE_NOISE = "com.yinpage.link.action.CYCLE_NOISE"

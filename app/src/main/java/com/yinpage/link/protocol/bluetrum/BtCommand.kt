@@ -208,11 +208,13 @@ object BtEq {
         com.yinpage.link.protocol.EqMode.TREBLE -> 0x03
         com.yinpage.link.protocol.EqMode.LIVE -> 0x04
         com.yinpage.link.protocol.EqMode.GAME -> 0x05
+        // 自定义档位只上报标志位，具体曲线由耳机侧保存
+        com.yinpage.link.protocol.EqMode.CUSTOM -> CUSTOM_FLAG
     }
 
     fun toUiMode(raw: Int): com.yinpage.link.protocol.EqMode {
         val v = raw and 0xFF
-        if (v >= CUSTOM_FLAG) return com.yinpage.link.protocol.EqMode.BALANCED
+        if (v and CUSTOM_FLAG != 0) return com.yinpage.link.protocol.EqMode.CUSTOM
         return com.yinpage.link.protocol.EqMode.fromCode(v)
     }
 }

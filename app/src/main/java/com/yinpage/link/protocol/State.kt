@@ -68,7 +68,9 @@ enum class EqMode(val code: Int, val label: String) {
     VOCAL(0x02, "人声"),
     TREBLE(0x03, "高音增强"),
     LIVE(0x04, "现场"),
-    GAME(0x05, "游戏增强");
+    GAME(0x05, "游戏增强"),
+    /** 耳机侧的自定义 EQ（mode >= 0x20，具体档位以 customIndex 区分）。 */
+    CUSTOM(0x20, "自定义");
 
     companion object {
         fun fromCode(code: Int): EqMode = entries.firstOrNull { it.code == code } ?: BALANCED

@@ -313,9 +313,13 @@ class SessionCoordinator(
     private fun teardown(reason: String) {
         generation.incrementAndGet()
         ready = false
+        val previousCodec = activeCodec
         val previous = activeTransport
         activeTransport = null
         activeCodec = null
+        // 清理解码器跨会话残留：codec 是单例，buffer/partial/seq 不清理会污染新会话
+        runCatching { previousCodec?.reset() }
+            .onFailure { EventLog.info(TAG, "codec.reset() 失败：${describe(it)}") }
         if (previous != null) {
             try {
                 previous.close()

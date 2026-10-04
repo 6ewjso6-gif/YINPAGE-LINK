@@ -17,7 +17,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -27,7 +26,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.yinpage.link.R
 import com.yinpage.link.config.AppConfig
-import com.yinpage.link.config.ConfigManager
 import com.yinpage.link.core.AppState
 import kotlinx.coroutines.launch
 
@@ -60,18 +58,16 @@ fun App(
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
-    // 配置对象由 core 初始化；万不得已（例如单元测试/预览）没有初始化时，
-    // 本地 pendingConfig 仍然能让开关“看起来是活的”，不会一点就弹回。
-    val configManager = remember { runCatching { ConfigManager.get() }.getOrNull() }
-    var pendingConfig by remember { mutableStateOf<AppConfig?>(null) }
-    val config: AppConfig = pendingConfig ?: ui.config
+    // 配置以 core 的 ui.config 为唯一来源：core 侧的任何写入
+    // （含 rememberDevice 这类不经过 UI 的更新）都能在 UI 上如实反映，
+    // 不再用本地 pendingConfig 永久遮蔽真实配置。
+    val config: AppConfig = ui.config
 
     var tab by rememberSaveable { mutableStateOf(0) }
     var showDebug by rememberSaveable { mutableStateOf(false) }
 
     val applyConfig: (AppConfig) -> Unit = { updated ->
-        pendingConfig = updated
-        configManager?.update { updated }
+        AppState.updateConfig { updated }
     }
 
     val permissionOk = permissionGranted ?: ui.permissionGranted
@@ -82,6 +78,7 @@ fun App(
             pod = ui.pod,
             debugEnabled = config.debugPanel,
             onBack = { showDebug = false },
+            onClear = { AppState.clearLog() },
         )
         return
     }

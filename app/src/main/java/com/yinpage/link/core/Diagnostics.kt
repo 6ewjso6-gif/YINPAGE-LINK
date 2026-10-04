@@ -56,7 +56,7 @@ object Diagnostics {
         appendEnvironment(context, sb)
         val adapter = appendAdapter(context, sb)
         appendPairedDevices(context, adapter, address, sb)
-        appendProtocolFrames(context, sb)
+        appendProtocolFrames(sb)
         appendSppTest(context, adapter, address, sb)
         appendBleTest(context, adapter, address, sb)
 
@@ -351,7 +351,7 @@ object Diagnostics {
 
     // ------------------------------------------------------------------ 协议帧
 
-    private fun appendProtocolFrames(context: Context, sb: StringBuilder) {
+    private fun appendProtocolFrames(sb: StringBuilder) {
         sb.appendLine()
         sb.appendLine("--- 5. 协议帧编码自检 ---")
         runCatching {

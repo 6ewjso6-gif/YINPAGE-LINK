@@ -76,6 +76,16 @@ class RfcommTransport(
     @Volatile
     private var listener: TransportListener? = null
 
+    /** 连接线程里的权限异常传递槽（openSocket 与连接线程共享）。 */
+    @Volatile
+    private var connectFailureRef: MissingPermissionException? = null
+
+    /** 从连接线程安全地记录权限异常（最终由主线程抛出）。 */
+    private fun lockConnectFailure(error: SecurityException) {
+        connectFailureRef = MissingPermissionException("BLUETOOTH_CONNECT")
+        EventLog.info(TAG, "SPP 连接被权限拦截：${error.message}")
+    }
+
     private var readJob: Job? = null
 
     /** 读循环代次：只有最新一代的读循环才有资格上报断开。 */
@@ -180,19 +190,46 @@ class RfcommTransport(
                     throw TransportIoException("通道已关闭")
                 }
 
-                try {
-                    candidate.connect()
+                // 阻塞式 connect 无法被协程取消：withTimeout 超时只是抛异常，
+                // native 的 connect 会继续跑、最终把 socket 返回给一个已死的协程，
+                // 且没人 close → 反复连接（耳机关机是常见场景）持续泄漏 FD。
+                // 改用独立线程 + join(超时)：超时后 close() 打断 native connect。
+                val connectWorker = Thread(
+                    {
+                        runCatching { candidate.connect() }.onFailure { connectError ->
+                            if (connectError is SecurityException) {
+                                // 权限异常要冒泡，不能吞掉（与旧行为一致）
+                                lockConnectFailure(connectError)
+                            }
+                        }
+                    },
+                    "yinpage-rfcomm-connect",
+                ).apply { isDaemon = true }
+                // 权限异常由这个字段传递到主线程
+                connectFailureRef = null
+                connectWorker.start()
+                connectWorker.join(CONNECT_TIMEOUT_MS)
+                if (connectWorker.isAlive) {
+                    runCatching { candidate.close() }
+                    lastError = "连接超时（${CONNECT_TIMEOUT_MS / 1000} 秒）"
+                    attempts += "$label:超时"
+                    EventLog.info(TAG, "$label 连接超时（已 close 打断）")
+                    continue
+                }
+                val permFailure = connectFailureRef
+                if (permFailure != null) {
+                    runCatching { candidate.close() }
+                    throw permFailure
+                }
+                if (candidate.isConnected) {
                     EventLog.info(TAG, "SPP 通道建立成功：$label")
                     return candidate
-                } catch (error: SecurityException) {
-                    runCatching { candidate.close() }
-                    throw MissingPermissionException("BLUETOOTH_CONNECT")
-                } catch (error: IOException) {
-                    lastError = describe(error)
-                    attempts += "$label:连接失败"
-                    EventLog.info(TAG, "$label 连接失败：${describe(error)}")
-                    runCatching { candidate.close() }
                 }
+                // 连接失败但未抛异常（isConnected=false）
+                lastError = "连接失败（未知原因）"
+                attempts += "$label:连接失败"
+                EventLog.info(TAG, "$label 连接失败（isConnected=false）")
+                runCatching { candidate.close() }
             }
         }
 

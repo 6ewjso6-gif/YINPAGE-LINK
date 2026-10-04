@@ -8,6 +8,7 @@ import com.yinpage.link.module.pods.RfcommController
 import com.yinpage.link.protocol.BatteryState
 import com.yinpage.link.protocol.NoiseMode
 import com.yinpage.link.protocol.PodUpdate
+import java.lang.reflect.Method
 import java.util.concurrent.Executors
 import java.util.concurrent.atomic.AtomicReference
 
@@ -52,7 +53,9 @@ class BluetoothUpstreamHeadsetHook : HookContext() {
         hookHeadsetService()
         hookBinderImplementation()
         hookA2dpService()
-        registerAncReceiver()
+        // 首次尝试注册 ANC 广播接收器；若 Application 还没创建（拿不到 Context），
+        // 后续每次回调入口（A2DP/SPP/Binder）都会再尝试补注册
+        ensureAncReceiver()
         hookFocusIsland()
 
         ModuleLog.i(TAG, "蓝牙 Hook 安装完成")
@@ -159,7 +162,9 @@ class BluetoothUpstreamHeadsetHook : HookContext() {
                 hookBefore(m) {
                     val device = arg<BluetoothDevice>(0)
                     if (device == null || !shouldHook(device)) return@hookBefore
-                    result = null
+                    // 按真实返回类型给安全值：connect/getDeviceConfig 多半返回 boolean/int，
+                    // 直接给 null 会在蓝牙进程拆箱崩
+                    result = coerceReturn(executable, null)
                     requestRefresh(device)
                 }
             }
@@ -175,7 +180,7 @@ class BluetoothUpstreamHeadsetHook : HookContext() {
                     val mode = arg<Int>(0) ?: return@hookBefore
                     val device = arg<BluetoothDevice>(1) ?: return@hookBefore
                     if (!shouldHook(device)) return@hookBefore
-                    result = null
+                    result = coerceReturn(executable, null)
                     applyAncFromMode(mode, device)
                 }
             }
@@ -187,7 +192,7 @@ class BluetoothUpstreamHeadsetHook : HookContext() {
                     val level = arg<String>(0) ?: return@hookBefore
                     val device = arg<BluetoothDevice>(1) ?: return@hookBefore
                     if (!shouldHook(device)) return@hookBefore
-                    result = null
+                    result = coerceReturn(executable, null)
                     applyAncFromLevel(level, device)
                 }
             }
@@ -223,7 +228,7 @@ class BluetoothUpstreamHeadsetHook : HookContext() {
                             else callbacks[binder] = callback
                         }
                         // 不真正注册：伪设备的真实回调永远不会来，注册了反而让系统拿到空响应
-                        result = null
+                        result = coerceReturn(executable, null)
                         val device = args.filterIsInstance<BluetoothDevice>().firstOrNull()
                         if (device != null) pushStatusToCallbacks(device.address)
                     }
@@ -251,8 +256,15 @@ class BluetoothUpstreamHeadsetHook : HookContext() {
         hookAfter(m) {
             val device = arg<BluetoothDevice>(0) ?: return@hookAfter
             if (!shouldHook(device)) return@hookAfter
-            val state = arg<Int>(1) ?: return@hookAfter
-            when (state) {
+            // 回调入口顺带补注册 ANC 广播接收器（Application 此时必然已创建）
+            ensureAncReceiver()
+            // AOSP 签名：handleConnectionStateChanged(device, fromState, toState)。
+            // 旧实现取了 arg(1)=fromState（旧状态），导致建链/断链时机完全反了：
+            // 耳机刚连上（0→2）读到 0 去 disconnect，断开（2→0）读到 2 去 connect。
+            val fromState = arg<Int>(1) ?: return@hookAfter
+            val toState = arg<Int>(2) ?: return@hookAfter
+            if (fromState == toState) return@hookAfter
+            when (toState) {
                 A2DP_STATE_CONNECTED -> connectPods(device)
                 A2DP_STATE_DISCONNECTED -> disconnectPods("A2DP 已断开")
             }
@@ -424,12 +436,28 @@ class BluetoothUpstreamHeadsetHook : HookContext() {
 
     // ------------------------------------------------------------------ 其它
 
+    /** ANC/刷新广播接收器是否已成功注册（一次性，拿到 Context 即注册）。 */
+    @Volatile
+    private var ancReceiverRegistered = false
+
+    /**
+     * 确保 ANC/刷新广播接收器已注册。
+     *
+     * ⚠️ LSPosed 的 `onPackageReady` 回调常早于 Application 创建，此时拿不到
+     * Context。旧实现只在 onHook() 里调一次 registerAncReceiver()，失败即永久放弃，
+     * 蓝牙进程从此收不到 ACTION_ANC_SELECT / ACTION_REFRESH_STATUS —— 系统 UI 与
+     * 耳机之间的双向链路整体失效。
+     * 改为懒注册：在每次回调入口（A2DP 状态、Binder 调用、SPP 事件）尝试补注册。
+     */
+    private fun ensureAncReceiver() {
+        if (ancReceiverRegistered) return
+        registerAncReceiver()
+    }
+
     /** 接收来自系统 UI / MiLink 的 ANC 选择广播。 */
     private fun registerAncReceiver() {
-        val ctx = appContext ?: run {
-            ModuleLog.w(TAG, "拿不到 Context，跳过 ANC 广播接收器")
-            return
-        }
+        val ctx = appContext ?: return
+        if (ancReceiverRegistered) return
         runCatching {
             val receiver = object : android.content.BroadcastReceiver() {
                 override fun onReceive(c: android.content.Context?, intent: android.content.Intent?) {
@@ -468,6 +496,7 @@ class BluetoothUpstreamHeadsetHook : HookContext() {
                 @Suppress("UnspecifiedRegisterReceiverFlag")
                 ctx.registerReceiver(receiver, filter)
             }
+            ancReceiverRegistered = true
             ModuleLog.i(TAG, "ANC/刷新广播接收器已注册")
         }.onFailure { ModuleLog.w(TAG, "注册广播接收器失败：${it.message}") }
     }
@@ -544,4 +573,51 @@ class BluetoothUpstreamHeadsetHook : HookContext() {
         val m = findMethodByNames(className, names, String::class.java) ?: return
         hookBefore(m) { result = value }
     }
+}
+
+/**
+ * 按方法**真实返回类型**校正伪造值（文件私有，与 MiLink/Settings 侧同一套逻辑）。
+ *
+ * 直接 `result = null` 时，若原方法返回 boolean / int，调用方拆箱 null 会抛
+ * NPE / ClassCastException —— 在蓝牙系统进程里就是崩溃。这里按返回类型给出
+ * 类型安全的值：void 给 null，boolean 给 false，int 给 0，String 给 ""。
+ */
+private fun coerceReturn(executable: java.lang.reflect.Executable, value: Any?): Any? {
+    val type = (executable as? Method)?.returnType ?: return value
+    if (type.name == "void" || type.name == "java.lang.Void") return null
+    if (CharSequence::class.java.isAssignableFrom(type)) return value?.toString() ?: ""
+    if (type == Boolean::class.javaPrimitiveType || type == Boolean::class.javaObjectType) {
+        return when (value) {
+            is Boolean -> value
+            is Number -> value.toInt() != 0
+            is String -> value == "1" || value.equals("true", ignoreCase = true)
+            else -> false
+        }
+    }
+    if (type == Int::class.javaPrimitiveType || type == Int::class.javaObjectType) {
+        return when (value) {
+            is Int -> value
+            is Number -> value.toInt()
+            is Boolean -> if (value) 1 else 0
+            is String -> value.toIntOrNull() ?: 0
+            else -> 0
+        }
+    }
+    if (type == Long::class.javaPrimitiveType || type == Long::class.javaObjectType) {
+        return when (value) {
+            is Long -> value
+            is Number -> value.toLong()
+            is Boolean -> if (value) 1L else 0L
+            is String -> value.toLongOrNull() ?: 0L
+            else -> 0L
+        }
+    }
+    if (type == Double::class.javaPrimitiveType || type == Double::class.javaObjectType) {
+        return (value as? Number)?.toDouble() ?: 0.0
+    }
+    if (type == Float::class.javaPrimitiveType || type == Float::class.javaObjectType) {
+        return (value as? Number)?.toFloat() ?: 0f
+    }
+    // 对象类型原样返回
+    return value
 }

@@ -102,24 +102,34 @@ class RfcommController(
         return true
     }
 
-    private fun tryOpen(device: BluetoothDevice, uuid: UUID, secure: Boolean): BluetoothSocket? =
-        runCatching {
-            val s = if (secure) {
+    private fun tryOpen(device: BluetoothDevice, uuid: UUID, secure: Boolean): BluetoothSocket? {
+        var s: BluetoothSocket? = null
+        return try {
+            s = if (secure) {
                 device.createRfcommSocketToServiceRecord(uuid)
             } else {
                 device.createInsecureRfcommSocketToServiceRecord(uuid)
             }
             s.connect()
             s
-        }.onFailure { ModuleLog.d(TAG, "连接尝试失败 uuid=$uuid secure=$secure: ${it.message}") }
-            .getOrNull()
+        } catch (e: Throwable) {
+            // connect() 抛错时必须关闭已创建的 socket，否则 3 UUID × 2 通道反复尝试会累积 fd
+            runCatching { s?.close() }
+            ModuleLog.d(TAG, "连接尝试失败 uuid=$uuid secure=$secure: ${e.message}")
+            null
+        }
+    }
 
     private fun readLoop(myGen: Int) {
         val buffer = ByteArray(1024)
         try {
             while (running.get() && generation.get() == myGen) {
                 val len = input?.read(buffer) ?: break
-                if (len <= 0) continue
+                // read() 返回 -1 表示流已结束（对端断开），必须退出循环；
+                // 只有返回 0（本次没读到）才 continue。旧实现把 -1 当空读 continue，
+                // 会变成不阻塞的忙等：100% 占满一个核，且 finally 里的断连回调永不触发。
+                if (len < 0) break
+                if (len == 0) continue
                 val chunk = IntArray(len) { buffer[it].toInt() and 0xFF }
                 codec.decode(chunk) { update -> onUpdate(update) }
             }

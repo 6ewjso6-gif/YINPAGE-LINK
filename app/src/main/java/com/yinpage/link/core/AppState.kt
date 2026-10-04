@@ -117,6 +117,13 @@ object AppState {
         scope.launch {
             EventLog.lines.collect { _debugLines.value = it }
         }
+        // 配置以 ConfigManager 为唯一来源：core 侧任何写入
+        // （含 rememberDevice 这类不经过 UI 的更新）都触发 UI 刷新
+        if (ConfigManager.initialized) {
+            scope.launch {
+                ConfigManager.get().config.collect { syncUi() }
+            }
+        }
     }
 
     /** 由 Activity 在取得权限后调用。 */
@@ -435,6 +442,12 @@ object AppState {
         }
         EventLog.info("连接", "目标=${item.address} 通道=${kind.label} 协议=${codec.id}")
 
+        // 保活前台服务在**进入 CONNECTING 时就启动**（此时用户还在前台 Activity 上），
+        // 而不是等连接成功回调（可能 15~20 秒后，用户多半已按 Home）。
+        // Android 12+ 对后台 startForegroundService 抛 ForegroundServiceStartNotAllowedException，
+        // 旧实现把启动放在成功回调里，失败被 runCatching 静默吞掉 → 保活静默失效。
+        com.yinpage.link.service.PodConnectionService.start(context())
+
         connectJob = scope.launch {
             val result = runCatching {
                 coordinator.connect(
@@ -459,8 +472,6 @@ object AppState {
                         )
                     }
                     EventLog.info("连接", "成功：${item.displayName}")
-                    // 启动保活前台服务：连接期间不被系统回收，通知栏常驻电量与降噪按钮
-                    com.yinpage.link.service.PodConnectionService.start(context())
                     if (ConfigManager.initialized) {
                         ConfigManager.get().rememberDevice(item.address, item.name)
                     }
@@ -471,6 +482,8 @@ object AppState {
                     probeBleBattery(device)
                 }
                 is ConnectResult.Failure -> {
+                    // 连接失败：保活服务已在前台启动，这里收掉，避免空转
+                    runCatching { com.yinpage.link.service.PodConnectionService.stop(context()) }
                     updatePod {
                         it.copy(
                             connection = ConnectionState.FAILED,
@@ -489,6 +502,8 @@ object AppState {
         connectJob = null
         stopHeartbeat()
         runCatching { coordinator?.disconnect() }
+        // 停止保活前台服务并移除前台通知（否则通知划不掉、服务 START_STICKY 常驻复活）
+        runCatching { com.yinpage.link.service.PodConnectionService.stop(context()) }
         updatePod {
             it.copy(
                 connection = ConnectionState.IDLE,
@@ -729,6 +744,7 @@ object AppState {
         stopScan()
         stopHeartbeat()
         runCatching { coordinator?.disconnect() }
+        runCatching { com.yinpage.link.service.PodConnectionService.stop(context()) }
     }
 
     private const val HEARTBEAT_INTERVAL_MS = 30_000L

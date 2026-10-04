@@ -296,6 +296,9 @@ class BluetrumCodec : PodCodec {
 
     fun resetDecoder() = frames.reset()
 
+    /** 通道复位：新会话开始前由 [com.yinpage.link.core.SessionCoordinator] 调用。 */
+    override fun reset() = frames.reset()
+
     private fun hex(data: Bytes): String = data.joinToString(" ") { "%02X".format(it and 0xFF) }
 
     companion object {

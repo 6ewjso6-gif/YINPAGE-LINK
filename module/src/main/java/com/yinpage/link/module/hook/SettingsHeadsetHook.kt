@@ -355,12 +355,17 @@ class SettingsHeadsetHook : HookContext() {
     /**
      * 注册耳机状态接收器：页面渲染用的电量来自 [ModuleIpc.snapshot]，
      * 不注册就永远读到"未连接"。
+     *
+     * ⚠️ 只允许用 **Application Context** 注册（[HookContext.appContext]），
+     * 否则 Activity 创建但没走完销毁流程时，广播接收器会持有 Activity 实例
+     * 导致 `IntentReceiverLeaked` 与内存泄漏。此处拿不到 appContext 就等下次
+     * Activity 打开时再重试 —— 注册是幂等的（[receiverRegistered] 去重）。
      */
     private fun ensureStateReceiver() {
         if (receiverRegistered.get()) return
-        val context = appContext ?: activityContext
+        val context = appContext
         if (context == null) {
-            ModuleLog.d(TAG, "暂无 Context，稍后重试注册状态接收器")
+            ModuleLog.d(TAG, "暂无 Application Context，稍后重试注册状态接收器")
             return
         }
         if (!receiverRegistered.compareAndSet(false, true)) return

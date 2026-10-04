@@ -59,12 +59,10 @@ class BluetoothStateReceiver : BroadcastReceiver() {
 
             BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED -> {
                 val state = intent.getIntExtra(BluetoothProfile.EXTRA_STATE, BluetoothProfile.STATE_DISCONNECTED)
+                // HFP 断开 ≠ SPP 控制通道断开（与下方 A2DP 分支同一结论）：
+                // TWS 在通话结束 / 音频 profile 释放时 HFP 会先掉，而 SPP 控制通道仍然活着。
+                // 旧实现在这里调 onDeviceDisconnected() 拆 SPP 会话，导致会话被无故拆掉。
                 EventLog.info(TAG, "HFP 通话音频状态=${describeProfileState(state)} 设备=${describeDevice(intent)}")
-                if (state == BluetoothProfile.STATE_DISCONNECTED) {
-                    deviceAddress(intent)?.let { address ->
-                        runCatching { AppState.onDeviceDisconnected(address) }
-                    }
-                }
             }
 
             BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED -> {

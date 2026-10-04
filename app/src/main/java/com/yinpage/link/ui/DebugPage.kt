@@ -35,7 +35,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -58,8 +57,9 @@ import java.time.format.DateTimeFormatter
 /**
  * 调试面板：等宽字体滚动显示收发字节流，支持一键复制。
  *
- * 「清空」只在 UI 层记录已读游标（不需要 core 提供清空接口），
- * 这样 core 的 AppState 不必为 UI 额外暴露 API。
+ * 「清空」通过 [onClear] 回调让 core 真正清空 [EventLog] 环形缓冲，
+ * 而不是在 UI 层用下标截断 —— 旧实现撞上 400 行环形缓冲后，
+ * 清空一次就永久空白（日志区再也不更新）。
  */
 @Composable
 fun DebugPage(
@@ -68,19 +68,15 @@ fun DebugPage(
     modifier: Modifier = Modifier,
     debugEnabled: Boolean = true,
     onBack: () -> Unit = {},
+    onClear: () -> Unit = {},
 ) {
     val context = LocalContext.current
     val listState = rememberLazyListState()
 
     var autoScroll by remember { mutableStateOf(true) }
-    var hiddenBefore by remember { mutableIntStateOf(0) }
     var copied by remember { mutableStateOf(false) }
 
-    val visibleLines = if (hiddenBefore <= 0) {
-        lines
-    } else {
-        lines.drop(hiddenBefore.coerceAtMost(lines.size))
-    }
+    val visibleLines = lines
 
     LaunchedEffect(copied) {
         if (copied) {
@@ -122,12 +118,13 @@ fun DebugPage(
             )
             IconButton(
                 onClick = {
-                    val text = lines.joinToString(separator = "\n")
+                    // 复制用界面实际显示的日志（与清空后的显示一致）
+                    val text = visibleLines.joinToString(separator = "\n")
                     val clipboard = context.getSystemService(ClipboardManager::class.java)
                     clipboard?.setPrimaryClip(ClipData.newPlainText("YINPAGE-LINK debug", text))
                     copied = true
                 },
-                enabled = lines.isNotEmpty(),
+                enabled = visibleLines.isNotEmpty(),
             ) {
                 Icon(
                     imageVector = Icons.Rounded.ContentCopy,
@@ -136,7 +133,7 @@ fun DebugPage(
                 )
             }
             IconButton(
-                onClick = { hiddenBefore = lines.size },
+                onClick = onClear,
                 enabled = visibleLines.isNotEmpty(),
             ) {
                 Icon(

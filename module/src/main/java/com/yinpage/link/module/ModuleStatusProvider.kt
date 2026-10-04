@@ -28,8 +28,11 @@ class ModuleStatusProvider : ContentProvider() {
         selectionArgs: Array<out String>?,
         sortOrder: String?,
     ): Cursor {
+        // 如实上报：只有至少一个目标进程真正装上了 Hook 才报"已激活"，
+        // 避免模块只是安装了、但 Hook 全部失败时仍向 App 谎报 active=1。
+        val active = ModuleConfigStore.hookResults(context!!).values.any { it }
         val cursor = MatrixCursor(arrayOf("active", "version", "module_id"))
-        cursor.addRow(arrayOf(1, BuildConfig.VERSION_NAME, "yinpage_link"))
+        cursor.addRow(arrayOf(if (active) 1 else 0, BuildConfig.VERSION_NAME, "yinpage_link"))
         return cursor
     }
 

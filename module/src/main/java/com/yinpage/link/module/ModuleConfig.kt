@@ -93,6 +93,9 @@ object ModuleConfigStore {
     private const val K_FOCUS_ISLAND = "focus_island"
     private const val K_NATIVE_PAGE = "native_headset_page"
 
+    /** 每个目标进程的 Hook 安装结果，key 前缀：`hook_ok_<包名>`。 */
+    private const val K_HOOK_RESULT_PREFIX = "hook_ok_"
+
     private val _config = MutableStateFlow(ModuleConfig())
     val config: StateFlow<ModuleConfig> = _config.asStateFlow()
 
@@ -139,4 +142,33 @@ object ModuleConfigStore {
     /** 便捷：给模块外（Activity）用的本地偏好。 */
     fun localPrefs(context: Context): SharedPreferences =
         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).also { prefs = it }
+
+    // ------------------------------------------------------------------ Hook 安装状态
+
+    /**
+     * 记录某目标进程的 Hook 安装结果，写入 remote preferences，
+     * 供 [ModuleStatusProvider]（模块自身进程）查询出真实激活状态。
+     */
+    fun reportHookResult(pkg: String, ok: Boolean) {
+        val p = prefs ?: return
+        runCatching {
+            p.edit().putBoolean("$K_HOOK_RESULT_PREFIX$pkg", ok).apply()
+        }.onFailure { /* 记录失败不影响 Hook 本身 */ }
+    }
+
+    /**
+     * 读取各目标进程的 Hook 安装结果（Provider 进程用）。
+     * MODE_MULTI_PROCESS 强制每次从磁盘重读，避免拿到其它进程写入前的旧缓存。
+     */
+    fun hookResults(context: Context): Map<String, Boolean> {
+        val p = @Suppress("DEPRECATION")
+        context.getSharedPreferences(PREFS_NAME, Context.MODE_MULTI_PROCESS)
+        val out = HashMap<String, Boolean>()
+        for ((k, v) in p.all) {
+            if (k.startsWith(K_HOOK_RESULT_PREFIX) && v is Boolean) {
+                out[k.removePrefix(K_HOOK_RESULT_PREFIX)] = v
+            }
+        }
+        return out
+    }
 }

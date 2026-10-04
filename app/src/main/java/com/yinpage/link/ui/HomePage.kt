@@ -253,7 +253,7 @@ private fun SectionCard(
     }
 }
 
-/** EQ 六档网格（每行三个，最后一行自动补空位）。 */
+/** EQ 档位网格（每行三个，最后一行自动补空位）。 */
 @Composable
 private fun EqGrid(
     selected: EqMode,

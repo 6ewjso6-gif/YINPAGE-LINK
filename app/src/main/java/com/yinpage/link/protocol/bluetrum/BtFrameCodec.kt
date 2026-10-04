@@ -103,8 +103,16 @@ class BtFrameCodec(
 
     // ------------------------------------------------------------------ 解码
 
-    /** 分片重组缓冲：key = command，value = 已收到的 payload 片段。 */
-    private val partial = HashMap<Int, MutableList<Bytes>>()
+    /** 分片重组缓冲：key = command，value = 正在重组的一整条多包消息。 */
+    private val partial = HashMap<Int, PartialMessage>()
+
+    /** 正在重组的消息；按 seq 区分新旧，避免残留分片污染下一条同 command 的消息。 */
+    private class PartialMessage(
+        val seq: Int,
+        val totalChunks: Int,
+        val parts: MutableList<Bytes>,
+    )
+
     private var buffer = IntArray(0)
 
     /**
@@ -156,22 +164,39 @@ class BtFrameCodec(
     /**
      * 分片重组。单包消息直接返回；
      * 多包消息按 command 累积，收齐后拼接并回调。
+     *
+     * 防御残留污染：一旦判定这是**一条新消息**（首包，或序号/总包数与正在
+     * 重组的消息不一致——说明旧消息丢包了），就丢弃旧分片重新开始。
      */
     private fun reassemble(frame: Frame): Frame? {
         if (frame.totalChunks <= 1) return frame
         if (frame.chunkIndex >= frame.totalChunks) return null
 
-        val parts = partial.getOrPut(frame.command) { MutableList(frame.totalChunks) { IntArray(0) } }
-        // 容量不足时扩容（防御异常 totalChunks）
-        while (parts.size < frame.totalChunks) parts.add(IntArray(0))
-        parts[frame.chunkIndex] = frame.payload
+        val existing = partial[frame.command]
+        val isNewMessage = existing == null ||
+            existing.seq != frame.seq ||
+            existing.totalChunks != frame.totalChunks ||
+            frame.chunkIndex == 0
+        if (isNewMessage) {
+            // 新消息开始：丢弃同 command 的残留片段，避免旧消息污染新消息
+            if (existing != null) partial.remove(frame.command)
+            partial[frame.command] = PartialMessage(
+                seq = frame.seq,
+                totalChunks = frame.totalChunks,
+                parts = MutableList(frame.totalChunks) { IntArray(0) },
+            )
+            // 防御：异常数据导致分片表无限膨胀
+            if (partial.size > MAX_PARTIAL_COMMANDS) partial.clear()
+        }
 
-        val complete = (0 until frame.totalChunks).all { parts[it].isNotEmpty() } ||
-            (frame.totalChunks == 1)
+        val msg = partial.getValue(frame.command)
+        msg.parts[frame.chunkIndex] = frame.payload
+
+        val complete = (0 until msg.totalChunks).all { msg.parts[it].isNotEmpty() }
         if (!complete) return null
 
         var merged = IntArray(0)
-        for (i in 0 until frame.totalChunks) merged = merged + parts[i]
+        for (i in 0 until msg.totalChunks) merged = merged + msg.parts[i]
         partial.remove(frame.command)
         return frame.copy(chunkIndex = 0, totalChunks = 1, payload = merged)
     }
@@ -193,5 +218,8 @@ class BtFrameCodec(
         const val HEADER_SIZE = 5
 
         private const val MAX_BUFFER = 4096
+
+        /** 同时在途的多包消息上限（防御异常输入）。 */
+        private const val MAX_PARTIAL_COMMANDS = 16
     }
 }

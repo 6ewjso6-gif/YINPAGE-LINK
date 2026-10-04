@@ -131,6 +131,8 @@ class YinpageModule : XposedModule() {
             }
         }
         ModuleLog.i(TAG, "$pkg 安装完成：$okCount/${hooks.size} 个 Hook 生效")
+        // 记录安装结果：Provider 据此向 App 如实上报"模块是否已激活"
+        ModuleConfigStore.reportHookResult(pkg, okCount > 0)
         // 一个都没装上 → 允许后续回退路径重试（例如 onPackageLoaded）
         if (okCount == 0) initialized.remove(pkg)
     }

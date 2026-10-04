@@ -30,6 +30,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -42,7 +43,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.yinpage.link.R
+import com.yinpage.link.core.AppState
 import com.yinpage.link.ui.theme.YinpageLinkTheme
 
 /**
@@ -89,6 +94,19 @@ fun BluetoothPermissionGate(
     // 蓝牙权限的结果单独记录：通知权限的申请要等它落定，避免两个系统弹窗互相打断
     var bluetoothSettled by remember { mutableStateOf(granted) }
     var asked by rememberSaveable { mutableStateOf(false) }
+
+    // 从「设置」里改完权限回到 App 时，重新读取一次授权状态，避免 UI 与实际不符（P1-13）
+    val lifecycleOwner = LocalLifecycleOwner.current
+    DisposableEffect(lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_RESUME) {
+                granted = hasAllPermissions(context, required)
+                AppState.refreshPermissions()
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
+    }
 
     val bluetoothLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestMultiplePermissions(),

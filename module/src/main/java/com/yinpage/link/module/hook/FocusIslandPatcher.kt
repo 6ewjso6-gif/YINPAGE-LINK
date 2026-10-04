@@ -39,46 +39,69 @@ object FocusIslandPatcher {
     /** 岛内容 JSON 所在的两个 key（已确证）。 */
     private val ISLAND_JSON_KEYS = listOf("param", "island_param")
 
-    private const val NOTIFICATION_CLASS = "com.android.bluetooth.ble.app.MiuiBluetoothNotification"
+    /**
+     * 候选类名：`com.android.bluetooth` 与 `com.xiaomi.bluetooth` 两个进程各自
+     * 有同一功能的通知类，但包前缀不同，且互相加载不到对方的类。
+     * 因此按进程依次尝试，第一个能解析出 `invokeStatusBar` 的类生效。
+     */
+    private val NOTIFICATION_CLASS_CANDIDATES = listOf(
+        "com.android.bluetooth.ble.app.MiuiBluetoothNotification",
+        "com.xiaomi.bluetooth.ble.app.MiuiBluetoothNotification",
+    )
 
     /**
      * 在给定进程里安装灵动岛 Hook。
      * 全程静默降级：类或方法找不到只记日志，绝不影响宿主进程。
      */
     fun install(ctx: HookContext) {
-        val invokeStatusBar = ctx.findMethodOrNull(
-            NOTIFICATION_CLASS,
-            "invokeStatusBar",
-            Context::class.java,
-            String::class.java,
-            Bundle::class.java,
-        )
-        if (invokeStatusBar == null) {
+        val invokeStatusBar = firstResolvableMethod(ctx) ?: run {
             ModuleLog.d(TAG, "未找到 invokeStatusBar（该版本可能不支持灵动岛）")
-        } else {
-            ctx.hookBefore(invokeStatusBar) {
-                val bundle = arg<Bundle>(2) ?: return@hookBefore
-                if (!isHeadsetWearIsland(bundle)) return@hookBefore
-
-                if (!ModuleConfigStore.current().focusIsland) {
-                    result = null
-                    ModuleLog.d(TAG, "已吞掉系统耳机灵动岛通知")
-                    return@hookBefore
-                }
-                if (patchIslandBattery(bundle)) {
-                    ModuleLog.d(TAG, "已改写耳机灵动岛电量文本")
-                }
-            }
-            ModuleLog.i(TAG, "灵动岛 Hook 已安装（${ctx.packageName}）")
+            return
         }
+        ctx.hookBefore(invokeStatusBar) {
+            val bundle = arg<Bundle>(2) ?: return@hookBefore
+            if (!isHeadsetWearIsland(bundle)) return@hookBefore
+
+            if (!ModuleConfigStore.current().focusIsland) {
+                result = null
+                ModuleLog.d(TAG, "已吞掉系统耳机灵动岛通知")
+                return@hookBefore
+            }
+            if (patchIslandBattery(bundle)) {
+                ModuleLog.d(TAG, "已改写耳机灵动岛电量文本")
+            }
+        }
+        ModuleLog.i(TAG, "灵动岛 Hook 已安装（${ctx.packageName}）")
 
         // 通知参数更新入口（部分版本走这里），仅记录，内容改写交给 invokeStatusBar
-        val updateParameters = ctx.findMethodByNames(NOTIFICATION_CLASS, listOf("updateParameters"))
+        val updateParameters = invokeStatusBar.declaringClass.methods.firstOrNull {
+            it.name == "updateParameters"
+        }
         if (updateParameters != null) {
             ctx.hookAfter(updateParameters) {
                 ModuleLog.d(TAG, "updateParameters 被调用（${args.size} 个参数）")
             }
         }
+    }
+
+    /** 遍历候选类，返回第一个同时解析出类与方法的目标。 */
+    private fun firstResolvableMethod(ctx: HookContext): java.lang.reflect.Method? {
+        for (className in NOTIFICATION_CLASS_CANDIDATES) {
+            val clazz = ctx.findClassOrNull(className) ?: continue
+            val method = ctx.findMethodOrNull(
+                className,
+                "invokeStatusBar",
+                Context::class.java,
+                String::class.java,
+                Bundle::class.java,
+            )
+            if (method != null) {
+                ModuleLog.d(TAG, "灵动岛类命中：$className")
+                return method
+            }
+            ModuleLog.d(TAG, "$className 存在但无 invokeStatusBar")
+        }
+        return null
     }
 
     // ------------------------------------------------------------------ 识别
