@@ -361,9 +361,12 @@ object Diagnostics {
             frames.take(4).forEach { f ->
                 sb.appendLine("  ${hex(f)}  （长度 ${f.size}）")
             }
-            // 手动构造一条"查询电量"验证编码
+            // 手动构造一条"查询电量"验证编码。
+            // ⚠️ 必须用**新的** codec 实例：BluetrumCodec 的发送序号按消息推进，
+            // 复用上面的 codec 会让 seq 从 6 开始，首帧字节不再等于 0x00，自检误报。
+            val fresh = BluetrumCodec()
             val expect = intArrayOf(0x00, BtCommand.DEVICE_INFO, BtCommand.TYPE_REQUEST, 0x00, 0x02, BtInfo.DEVICE_POWER, 0x00)
-            val actual = codec.handshake().firstOrNull()
+            val actual = fresh.handshake().firstOrNull()
             val ok = actual != null && actual.contentEquals(expect)
             sb.appendLine("首帧是否符合预期 [00 27 01 00 02 01 00]：${if (ok) "✅ 是" else "❌ 否，实际=${actual?.let { hex(it) }}"}")
         }.onFailure {

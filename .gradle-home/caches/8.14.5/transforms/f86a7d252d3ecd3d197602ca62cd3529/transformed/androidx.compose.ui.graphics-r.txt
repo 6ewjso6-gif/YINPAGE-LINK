@@ -1,2 +1,0 @@
-androidx.compose.ui.graphics
-id hide_graphics_layer_in_inspector_tag

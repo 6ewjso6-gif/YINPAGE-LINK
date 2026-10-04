@@ -2,7 +2,12 @@
 .gradle/
 build/
 app/build/
+module/build/
 gradle-home/
+.gradle-home/
+
+# Kotlin 编译会话
+.kotlin/
 
 # 本机构建环境（各人自行下载，不入库）
 _tools/

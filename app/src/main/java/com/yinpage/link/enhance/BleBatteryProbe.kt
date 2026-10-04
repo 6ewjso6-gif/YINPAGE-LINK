@@ -63,6 +63,8 @@ object BleBatteryProbe {
         return try {
             withTimeout(GATT_TIMEOUT_MS) {
                 suspendCancellableCoroutine { cont ->
+                    // 阶段状态：连接成功后依次 服务发现 → 读取电量 → 返回结果
+                    var discoveredServices = false
                     val callback = object : BluetoothGattCallback() {
                         override fun onConnectionStateChange(g: BluetoothGatt?, status: Int, newState: Int) {
                             if (newState != BluetoothProfile.STATE_CONNECTED) {
@@ -73,8 +75,62 @@ object BleBatteryProbe {
                         }
 
                         override fun onServicesDiscovered(g: BluetoothGatt?, status: Int) {
-                            val result = readBattery(g)
-                            if (cont.isActive) cont.resume(result)
+                            if (status != BluetoothGatt.GATT_SUCCESS || g == null) {
+                                if (cont.isActive) cont.resume(null)
+                                return
+                            }
+                            discoveredServices = true
+                            // 找标准电量服务；不存在时直接返回"无此服务"
+                            val services = runCatching { g!!.services }.getOrNull().orEmpty()
+                            val uuids = services.map { it.uuid.toString().lowercase() }
+                            val batteryService = services.firstOrNull {
+                                it.uuid.toString().equals(UUID_BATTERY_SERVICE, ignoreCase = true)
+                            }
+                            val levelChar = batteryService?.characteristics?.firstOrNull {
+                                it.uuid.toString().equals(UUID_BATTERY_LEVEL, ignoreCase = true)
+                            }
+                            if (levelChar == null) {
+                                if (cont.isActive) {
+                                    cont.resume(
+                                        Result(
+                                            hasBatteryService = batteryService != null,
+                                            level = null,
+                                            serviceUuids = uuids,
+                                        ),
+                                    )
+                                }
+                                return
+                            }
+                            // 发起异步读，值在 onCharacteristicRead 里拿
+                            @Suppress("DEPRECATION")
+                            val ok = runCatching { g!!.readCharacteristic(levelChar) }.getOrDefault(false)
+                            if (!ok && cont.isActive) {
+                                cont.resume(Result(hasBatteryService = true, level = null, serviceUuids = uuids))
+                            }
+                        }
+
+                        // API < 33 用旧签名；API >= 33 框架会先填 value 再回调此旧签名
+                        @Suppress("DEPRECATION")
+                        override fun onCharacteristicRead(
+                            g: BluetoothGatt?,
+                            characteristic: BluetoothGattCharacteristic,
+                            status: Int,
+                        ) {
+                            if (!discoveredServices || !cont.isActive) return
+                            val value = runCatching { characteristic.value }.getOrNull()
+                            val level = if (status == BluetoothGatt.GATT_SUCCESS && value != null && value.isNotEmpty()) {
+                                (value[0].toInt() and 0xFF).takeIf { it in 0..100 }
+                            } else {
+                                null
+                            }
+                            val services = runCatching { g?.services }.getOrNull().orEmpty()
+                            cont.resume(
+                                Result(
+                                    hasBatteryService = true,
+                                    level = level,
+                                    serviceUuids = services.map { it.uuid.toString().lowercase() },
+                                ),
+                            )
                         }
                     }
                     gatt = runCatching {
@@ -91,41 +147,6 @@ object BleBatteryProbe {
             runCatching { gatt?.disconnect() }
             runCatching { gatt?.close() }
         }
-    }
-
-    /** 在已发现的服务里找 0x180F 并读书 0x2A19。 */
-    private fun readBattery(gatt: BluetoothGatt?): Result? {
-        if (gatt == null) return null
-        val services = runCatching { gatt.services }.getOrNull().orEmpty()
-        val uuids = services.map { it.uuid.toString().lowercase() }
-
-        val batteryService = services.firstOrNull {
-            it.uuid.toString().equals(UUID_BATTERY_SERVICE, ignoreCase = true)
-        }
-        if (batteryService == null) {
-            return Result(hasBatteryService = false, level = null, serviceUuids = uuids)
-        }
-
-        val levelChar = batteryService.characteristics?.firstOrNull {
-            it.uuid.toString().equals(UUID_BATTERY_LEVEL, ignoreCase = true)
-        }
-        if (levelChar == null) {
-            return Result(hasBatteryService = true, level = null, serviceUuids = uuids)
-        }
-
-        val level = runCatching { readCharacteristic(gatt, levelChar) }.getOrNull()
-        return Result(hasBatteryService = true, level = level, serviceUuids = uuids)
-    }
-
-    /** 同步读特征值（BAS 的 0x2A19 是 Read 属性）。 */
-    private fun readCharacteristic(gatt: BluetoothGatt, char: BluetoothGattCharacteristic): Int? {
-        @Suppress("DEPRECATION")
-        val ok = runCatching { gatt.readCharacteristic(char) }.getOrDefault(false)
-        if (!ok) return null
-        val value = runCatching { char.value }.getOrNull() ?: return null
-        if (value.isEmpty()) return null
-        val level = value[0].toInt() and 0xFF
-        return level.takeIf { it in 0..100 }
     }
 
     private const val GATT_TIMEOUT_MS = 12_000L

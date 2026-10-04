@@ -237,13 +237,16 @@ object BtPower {
     /**
      * 解析单只耳机的电量字节。
      * bit7 = 充电中，bit0..6 = 电量（0..127）。
+     * 协议文档规定 bit0..6 就是百分比（0..127），但 UI 上限是 100，
+     * 因此 >100 的读数一律钳制到 100（满电），而不是当作"未知"丢弃；
+     * 0% 是合法电量，必须保留。
      */
     fun decode(raw: Int): com.yinpage.link.protocol.BatteryLevel {
         val v = raw and 0xFF
         val charging = (v and 0x80) != 0
-        val percent = v and 0x7F
+        val percent = (v and 0x7F).coerceAtMost(100)
         return com.yinpage.link.protocol.BatteryLevel(
-            percent = percent.takeIf { it in 0..100 },
+            percent = percent,
             charging = charging,
         )
     }
