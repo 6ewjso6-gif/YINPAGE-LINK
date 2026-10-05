@@ -20,9 +20,42 @@
 
 逆向对象：官方 APK（132.8 MB）解包后的 `classes.dex` / `classes2.dex` 字符串池。
 
-### 1.1 传输通道：经典蓝牙 RFCOMM / SPP ✅
+### 1.1 传输通道：BLE GATT（已修订，⚠️ 旧"SPP"结论被真机推翻）
 
-证据（`classes.dex` 字符串池）：
+**2026-10-05 重大修订：控制通道其实是 BLE GATT，不是 SPP。**
+
+旧结论（基于官方 APK 字符串池）认为走 SPP UUID `00001101`，但真机实测：
+SPP 能连上、握手帧能发出，**但耳机不响应任何控制命令**，且 SPP 上收到的数据
+（如 `01 AD 93 47 CA F7 ...` 17B）无法按 AB 帧解析。
+
+对照官方 **ABMate iOS SDK 源码**（`ABMate/Models/ABEarbuds.swift` + `Utils/BLEConstants.swift`）确证：
+
+| 项 | 值 |
+|---|---|
+| 传输 | **BLE GATT**（CoreBluetooth `CBPeripheral`） |
+| 服务 | `FDB3`（`0000FDB3-0000-1000-8000-00805F9B34FB`） |
+| 写特征 | `FF17`（`0000FF17-...`） |
+| 读/通知特征 | `FF18`（`0000FF18-...`） |
+| 帧格式 | 仍是 5 字节头 + payload（无加密） |
+
+要点：
+- **控制协议跑在 BLE GATT 上**；SPP 只是设备附带的串口（连得上≠控制通道）。
+- 设备地址若为 **BLE 随机静态地址**（首字节最高两位 `01`，如 `7A:...`），
+  几乎必然以 BLE 为主。
+- 本项目 v0.11 起（撤销 v0.10 的地址启发）：**AUTO 一律 SPP 优先、BLE 兜底**。
+  原因：真机（YINPAGE Relink `7A:70:96:4E:48:14`）实测 BLE GATT 枚举 10s 超时未完成，
+  而 SPP 通道能稳定建连——地址类型只是启发，BLE 优先只会白耗 15~20s 超时。
+
+**v0.11 新增「握手活性看门狗」（连上≠控制通道，这是本次修复的核心）：**
+- 设备常暴露多个 RFCOMM 服务：标准串口 `00001101` 可能只是**哑通道**
+  （连得上、但收到的是串口垃圾或干脆静默，不处理协议帧）。
+- SPP 连接候选**顺序即优先级**：`0000A100-...CKCTRL`（厂商自定义，UUID 尾部
+  `434B4354524C` = ASCII "CKCTRL"，module 版与诊断均列为候选）→ `00001101` → `00001102` …
+- 通道建立 + 握手帧（6 帧查询）发出后，4 秒内**一个字节都没收到** → 判定哑通道，
+  自动断开并尝试下一个候选（下个 UUID / BLE 兜底）。设备回任何数据（哪怕加密无法
+  解析）都视为通道正确，避免在真通道上误换。
+
+旧证据（保留备查）：
 
 ```
 00001101-0000-1000-8000-00805F9B34FB      ← 标准 Serial Port Profile UUID
@@ -31,8 +64,8 @@ createRfcommSocketToServiceRecord          ← 安全通道
 createInsecureRfcommSocketToServiceRecord  ← 非安全通道
 ```
 
-结论：耳机走**标准 SPP UUID 的 RFCOMM 通道**，与参考项目 PuddingPods 的做法一致。
-本项目 `RfcommTransport` 因此以 `00001101-...` 为首选 UUID，并保留若干厂商自定义 UUID 作为兜底候选。
+结论（旧）：耳机走**标准 SPP UUID 的 RFCOMM 通道**……（该结论已被上方"BLE GATT"修订推翻；
+APK 里出现 SPP 类只说明 SDK 同时内置 SPP 实现，真机控制通道实测是 BLE GATT。）
 
 ### 1.2 耳机主控方案：中科蓝讯 Bluetrum AB 系列 ✅
 
@@ -116,6 +149,11 @@ GAME_MODE
 
 逆向方式：jadx 反编译官方 APK，把发送路径（`DeviceCommManager.a()@3692332`）与接收路径
 （`com.bluetrum.devicemanager.f.b()@3711352`）**逐指令对齐**得出。
+
+> ✅ 2026-10-05 追加确证：与官方 **ABMate iOS SDK 源码**
+> （`DeviceManager/DeviceManager/Command/RequestHandler.swift` / `ResponseHandler.swift`）完全一致：
+> 发送与接收均为 5 字节头 `[seq][cmd][cmdType][chunk][len]` + payload，**无任何加密**；
+> 分片时**每个物理帧的 seq 都递增**（每条消息按帧数推进），接收端按 `seq` 从 0 递增严格校验。
 
 ```
 偏移   字段     宽度   说明

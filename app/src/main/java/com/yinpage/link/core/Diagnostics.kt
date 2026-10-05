@@ -86,12 +86,12 @@ object Diagnostics {
             return
         }
 
-        // 第 6 节已证明 SPP 可用（本 App 正占着通道）时，BLE 枚举只作辅助，
+        // 本 App 已建立控制通道（BLE GATT 或 SPP）时，BLE 枚举只作辅助参考，
         // 不能再给出"大概率不走 SPP"这类会自相矛盾的结论。
         val connectedHere = runCatching { AppState.pod.value.device?.address }.getOrNull()
         if (!connectedHere.isNullOrBlank() && connectedHere.equals(target, ignoreCase = true)) {
-            sb.appendLine("✅ 本 App 已通过经典蓝牙 SPP 连接该设备（见第 6 节）")
-            sb.appendLine("   → 设备必然支持经典蓝牙；下方 BLE 枚举仅供辅助参考，不影响 SPP 结论")
+            sb.appendLine("✅ 本 App 已建立控制通道连接该设备（见运行日志）")
+            sb.appendLine("   → 设备必然支持蓝牙；下方 BLE 枚举仅供辅助参考，不影响连接结论")
             sb.appendLine()
         }
         sb.appendLine("目标地址类型：${addressTypeHint(target)}")
@@ -173,7 +173,7 @@ object Diagnostics {
         val top2 = (first shr 6) and 0x03
         return when (top2) {
             0b00 -> "公共地址（经典蓝牙为主）"
-            0b01 -> "⚠️ BLE 随机静态地址 → 大概率是 BLE 设备，不走 SPP"
+            0b01 -> "⚠️ BLE 随机静态地址 → 设备以 BLE 为主，控制通道大概率走 BLE GATT（如 Bluetrum 服务 FDB3），SPP 只是附带串口"
             0b10 -> "保留"
             else -> "BLE 随机私有地址（可解析）"
         }
@@ -197,6 +197,7 @@ object Diagnostics {
         uuid.startsWith("00001800") -> "  ← 通用访问 GAP"
         uuid.startsWith("00001801") -> "  ← 通用属性 GATT"
         uuid.startsWith("00001812") -> "  ← 人机接口 HID"
+        uuid.startsWith("0000fdb3") -> "  ← ⭐ 中科蓝讯 Bluetrum AB 控制服务"
         uuid.startsWith("0000ae00") -> "  ← ⭐ 杰理 JieLi RCSP 控制服务"
         uuid.startsWith("0000fff0") || uuid.startsWith("0000ffe0") || uuid.startsWith("0000fee7") ->
             "  ← ⭐ 常见私有透传服务"
@@ -206,6 +207,8 @@ object Diagnostics {
     /** 标准特征值名标注。 */
     private fun standardCharName(uuid: String): String = when {
         uuid.startsWith("00002a19") -> "  ← 电量值"
+        uuid.startsWith("0000ff17") -> "  ← ⭐ Bluetrum AB 写通道"
+        uuid.startsWith("0000ff18") -> "  ← ⭐ Bluetrum AB 通知/读通道"
         uuid.startsWith("0000ae01") -> "  ← ⭐ 杰理 RCSP 写通道"
         uuid.startsWith("0000ae02") -> "  ← ⭐ 杰理 RCSP 通知通道"
         uuid.startsWith("0000ae03") -> "  ← ⭐ 杰理 RCSP 数据通道"
@@ -220,12 +223,20 @@ object Diagnostics {
         fun has(prefix: String) = uuids.any { it.startsWith(prefix) }
 
         sb.appendLine("── 方案判定 ──")
+        val ab = has("0000fdb3") && (has("0000ff17") || has("0000ff18"))
         val jl = has("0000ae00") || has("0000ae01") || has("0000ae02")
         val privateSvc = uuids.any { u ->
-            !u.startsWith("000018") && !u.startsWith("0000ae")
+            !u.startsWith("000018") && !u.startsWith("0000ae") && !u.startsWith("0000fdb3")
         }
 
         when {
+            ab -> {
+                sb.appendLine("✅ 判定：**中科蓝讯 Bluetrum AB（BLE GATT 通道）**")
+                sb.appendLine("   证据：出现控制服务 0000FDB3 + 写特征 0000FF17 + 通知特征 0000FF18")
+                sb.appendLine("   → 控制协议走 **BLE GATT**，**不走经典蓝牙 SPP**")
+                sb.appendLine("   → 这也解释了为什么 SPP 能连上但控制命令全部无效")
+            }
+
             jl -> {
                 sb.appendLine("✅ 判定：**杰理（JieLi）方案**")
                 sb.appendLine("   证据：出现 RCSP 服务 0000ae00 / 特征 0000ae01(写) / ae02(通知)")
@@ -412,22 +423,48 @@ object Diagnostics {
 
         runCatching { if (adapter.isDiscovering) adapter.cancelDiscovery() }
 
-        // 本 App 自己正占着该设备的 SPP 通道时，再连必然失败（耳机通常只允许一个 SPP 连接）。
-        // 此时"通道可用"已经被运行日志证明，实测只会得到一堆超时误报。
+        // 本 App 自己正占着该设备的控制通道（BLE GATT 或 SPP）时，再开新连接
+        // 必然失败（设备通常只接受一个控制连接）。此时"通道可用"已被运行日志证明，
+        // 实测只会得到一堆超时误报。
         val currentAddress = runCatching { AppState.pod.value.device?.address }.getOrNull()
         if (!currentAddress.isNullOrBlank() && currentAddress.equals(target, ignoreCase = true)) {
-            sb.appendLine("跳过实测：本 App 当前正占用该设备的 SPP 通道（已连接）")
+            val channelName = runCatching { AppState.pod.value.connection.name }.getOrNull()
+                ?: "已连接"
+            sb.appendLine("跳过实测：本 App 当前正占用该设备的控制通道（$channelName）")
             sb.appendLine()
             sb.appendLine(
-                "结论：✅ SPP 通道正常（运行日志已确认建连成功）——断开连接后再跑诊断可复测各 UUID",
+                "结论：✅ 控制通道已建立（运行日志已确认建连成功）——断开连接后再跑诊断可复测各 UUID",
             )
             return
         }
 
         val uuids = listOf(
-            "00001101-0000-1000-8000-00805F9B34FB",
             "0000A100-1000-8000-4E48-434B4354524C",
+            "00001101-0000-1000-8000-00805F9B34FB",
+            "00001102-0000-1000-8000-00805F9B34FB",
         )
+
+        // SDP 服务枚举：设备注册了哪些 RFCOMM 服务，直接决定控制通道 UUID。
+        // 这是「连得上却无响应」问题的最强证据——若设备 SDP 里有自定义 UUID
+        // （如 0000A100-...CKCTRL），00001101 就只是附带的标准串口（哑通道）。
+        sb.appendLine("SDP 服务（设备注册的 RFCOMM UUID）：")
+        val sdpUuids = runCatching {
+            device.uuids?.map { it.uuid.toString().lowercase() }.orEmpty()
+        }.getOrNull().orEmpty()
+        if (sdpUuids.isEmpty()) {
+            sb.appendLine("  （无 SDP 缓存——白牌 TWS 常见，请先断开本 App 后重试）")
+        } else {
+            sdpUuids.forEach { u ->
+                val mark = when {
+                    u.startsWith("0000a100") -> " ← ⭐ 厂商自定义控制通道（CKCTRL）"
+                    u.startsWith("00001101") -> " ← 标准串口（可能是哑通道）"
+                    else -> ""
+                }
+                sb.appendLine("  $u$mark")
+            }
+        }
+        sb.appendLine()
+
         var anySuccess = false
         for (uuidText in uuids) {
             val uuid = runCatching { UUID.fromString(uuidText) }.getOrNull() ?: continue

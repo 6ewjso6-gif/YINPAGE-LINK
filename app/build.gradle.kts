@@ -60,7 +60,7 @@ android {
         val now = Date()
         versionCode = (now.time / 1000L).toInt()
         // 发布版本名格式：APP-t-v*.*（* 由版本号填充，递增需手动改这里）
-        versionName = "APP-t-v0.9"
+        versionName = "APP-t-v0.11"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }

@@ -286,13 +286,24 @@ class BleGattTransport(
         val services = client.services ?: emptyList()
         val tree = logGattTree(services)
 
+        // 1) Bluetrum AB 专属通道优先（官方 ABMate SDK 确证）：
+        //    服务 0000FDB3 / 写特征 0000FF17 / 读-通知特征 0000FF18。
+        //    这类耳机服务里常有多对可写/可通知特征，通用启发式会选错，
+        //    命中官方 UUID 时直接锁定，不参与启发式打分。
+        val ab = findBluetrumChannel(services)
+
+        // 2) 通用启发式（无 Bluetrum 服务时兜底）
         val all = services.flatMap { it.characteristics }
         val combined = all
             .filter { isWritable(it) && isNotifiable(it) }
             .maxByOrNull { propertyScore(it) }
 
-        val writeChar = combined ?: all.filter { isWritable(it) }.maxByOrNull { propertyScore(it) }
-        val notifyChar = combined ?: all.filter { isNotifiable(it) }.maxByOrNull { propertyScore(it) }
+        val writeChar = ab?.write
+            ?: combined
+            ?: all.filter { isWritable(it) }.maxByOrNull { propertyScore(it) }
+        val notifyChar = ab?.notify
+            ?: combined
+            ?: all.filter { isNotifiable(it) }.maxByOrNull { propertyScore(it) }
 
         if (writeChar == null || notifyChar == null) {
             val detail = buildString {
@@ -309,7 +320,9 @@ class BleGattTransport(
         notifyCharacteristic = notifyChar
         EventLog.info(
             TAG,
-            if (writeChar == notifyChar) {
+            if (ab != null) {
+                "选定 Bluetrum AB 通道：写=${writeChar.uuid} 通知=${notifyChar.uuid}"
+            } else if (writeChar == notifyChar) {
                 "选定特征（读写合一）：${writeChar.uuid} props=[${describeProperties(writeChar.properties)}]"
             } else {
                 "选定特征（读写分离）：写=${writeChar.uuid} 通知=${notifyChar.uuid}"
@@ -387,6 +400,24 @@ class BleGattTransport(
         EventLog.info(TAG_ENUM, "STATS services=${services.size} chars=$charCount descs=$descCount")
         EventLog.info(TAG_ENUM, "END services=${services.size} address=$address")
         return sb.toString()
+    }
+
+    /**
+     * 在已发现的服务里找 Bluetrum AB 专属通道：
+     * 服务 0000FDB3 + 写 0000FF17 + 通知 0000FF18（官方 ABMate SDK UUID）。
+     * 返回 null 表示没找到（走通用启发式）。
+     */
+    private data class BluetrumChannel(val write: BluetoothGattCharacteristic, val notify: BluetoothGattCharacteristic)
+
+    private fun findBluetrumChannel(services: List<BluetoothGattService>): BluetrumChannel? {
+        val service = services.firstOrNull { it.uuid.toString().lowercase() == BLUETRUM_SERVICE_UUID } ?: return null
+        val write = service.characteristics.firstOrNull {
+            it.uuid.toString().lowercase() == BLUETRUM_WRITE_UUID && isWritable(it)
+        } ?: return null
+        val notify = service.characteristics.firstOrNull {
+            it.uuid.toString().lowercase() == BLUETRUM_NOTIFY_UUID && isNotifiable(it)
+        } ?: return null
+        return BluetrumChannel(write, notify)
     }
 
     private fun writeDescriptor(gatt: BluetoothGatt, descriptor: BluetoothGattDescriptor, value: ByteArray) {
@@ -556,6 +587,11 @@ class BleGattTransport(
         const val WRITE_PACING_MS = 20L
 
         val CCCD_UUID: UUID = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb")
+
+        /** Bluetrum AB 系官方控制通道（ABMate SDK 确证）：服务 + 写 + 通知。 */
+        val BLUETRUM_SERVICE_UUID = "0000fdb3-0000-1000-8000-00805f9b34fb"
+        val BLUETRUM_WRITE_UUID = "0000ff17-0000-1000-8000-00805f9b34fb"
+        val BLUETRUM_NOTIFY_UUID = "0000ff18-0000-1000-8000-00805f9b34fb"
 
         fun isWritable(characteristic: BluetoothGattCharacteristic): Boolean =
             characteristic.properties and (
