@@ -122,9 +122,13 @@ fun App(
                     if (!UpdateManager.install(context.applicationContext, apk)) {
                         Toast.makeText(context, R.string.update_install_failed, Toast.LENGTH_LONG).show()
                     }
-                }.onFailure {
+                }.onFailure { error ->
                     downloading = false
-                    funToast(R.string.update_download_failed)
+                    // 展示具体线路错误（如"所有 4 条下载线路均失败"），便于反馈排查
+                    val msg = error.message
+                        ?.takeIf { it.isNotBlank() }
+                        ?: context.getString(R.string.update_download_failed)
+                    Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
                 }
             }
         }
