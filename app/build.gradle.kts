@@ -17,6 +17,11 @@ android {
      * 默认情况下 AGP 会把 debug.keystore 放到 ~/.android/，在受限环境
      * （沙箱 / 只读用户目录）里会因 AccessDeniedException 打包失败。
      * 这里显式指定到构建目录内，保证任何环境都能出包。
+     *
+     * Release 签名（可选，CI 专用）：
+     * 只有提供了 RELEASE_KEYSTORE 等环境变量（GitHub Actions Secrets 注入）时
+     * 才会创建 release 签名配置，本地构建不变（保持 unsigned，手动 apksigner）。
+     * 密钥不落仓库、不落公开代码，从源头避免"开源仓库泄露签名"。
      */
     signingConfigs {
         getByName("debug") {
@@ -25,6 +30,16 @@ android {
             storePassword = "android"
             keyAlias = "androiddebugkey"
             keyPassword = "android"
+        }
+
+        val releaseKeystore = System.getenv("RELEASE_KEYSTORE")
+        if (!releaseKeystore.isNullOrBlank() && file(releaseKeystore).exists()) {
+            create("release") {
+                storeFile = file(releaseKeystore)
+                storePassword = System.getenv("RELEASE_KEYSTORE_PASS") ?: ""
+                keyAlias = System.getenv("RELEASE_KEY_ALIAS") ?: ""
+                keyPassword = System.getenv("RELEASE_KEY_PASS") ?: ""
+            }
         }
     }
 

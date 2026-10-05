@@ -1,0 +1,85 @@
+# ============================================================================
+#  YINPAGE-LINK 自动构建 + 签名 + 发布
+# ============================================================================
+#  触发方式：
+#   1) 推送 `APP-t-v*` 标签（正式发布）：构建 → 签名 → 创建 GitHub Release 并附 APK
+#   2) workflow_dispatch（手动）：只构建 + 签名，上传 signed APK 为构建产物（不建 Release）
+#
+#  签名密钥来源：仓库 Settings → Secrets and variables → Actions，全部私有：
+#    RELEASE_KEYSTORE_B64  密钥库文件（base64）
+#    RELEASE_KEYSTORE_PASS 密钥库口令
+#    RELEASE_KEY_PASS      私钥口令
+#    RELEASE_KEY_ALIAS     别名
+#  密钥不进入任何代码/文件，杜绝开源仓库泄露签名。
+# ============================================================================
+name: release
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "APP-t-v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build-sign:
+    name: Build & Sign
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      # GitHub 托管 runner 自带 Android SDK（ANDROID_HOME 已预设、许可已接受），
+      # 缺失的平台/构建工具由 AGP 自动补下。
+      - name: Decode release keystore (from Secrets)
+        run: |
+          echo "$RELEASE_KEYSTORE_B64" | base64 -d > "${GITHUB_WORKSPACE}/keystore-release.jks"
+          test -s "${GITHUB_WORKSPACE}/keystore-release.jks"
+        env:
+          RELEASE_KEYSTORE_B64: ${{ secrets.RELEASE_KEYSTORE_B64 }}
+
+      - name: Build & sign release APK
+        run: ./gradlew :app:assembleRelease --no-daemon --console=plain
+        env:
+          RELEASE_KEYSTORE: ${{ github.workspace }}/keystore-release.jks
+          RELEASE_KEYSTORE_PASS: ${{ secrets.RELEASE_KEYSTORE_PASS }}
+          RELEASE_KEY_PASS: ${{ secrets.RELEASE_KEY_PASS }}
+          RELEASE_KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
+
+      - name: Verify signature
+        run: |
+          APKSIGNER="${ANDROID_HOME}/build-tools/$(ls "${ANDROID_HOME}/build-tools" | sort -V | tail -1)/apksigner"
+          "$APKSIGNER" verify --print-certs app/build/outputs/apk/release/app-release.apk | head -4
+
+      - name: Prepare APK name (APP-t-<tag>-signed.apk)
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          APK="app/build/outputs/apk/release/APP-t-${TAG}-signed.apk"
+          cp app/build/outputs/apk/release/app-release.apk "$APK"
+          echo "APK_PATH=$APK" >> "$GITHUB_ENV"
+
+      - name: Upload signed APK (manual run, no Release)
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v4
+        with:
+          name: APP-t-latest-signed
+          path: ${{ env.APK_PATH }}
+
+      - name: Create GitHub Release (tag push)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ env.APK_PATH }}
+          draft: false
+          prerelease: false
