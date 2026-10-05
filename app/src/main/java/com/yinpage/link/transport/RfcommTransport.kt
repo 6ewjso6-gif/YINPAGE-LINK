@@ -145,8 +145,8 @@ class RfcommTransport(
             opened.javaClass
                 .getMethod("setSoTimeout", Int::class.javaPrimitiveType)
                 .invoke(opened, SO_TIMEOUT_MS)
-        }.onFailure {
-            EventLog.debug(TAG, "setSoTimeout 反射调用失败（忽略）：${it.message}")
+        }.onFailure { e ->
+            EventLog.debug(TAG, "setSoTimeout 反射调用失败（忽略）：${e.javaClass.simpleName} ${e.message}")
         }
         socket = opened
         connected = true

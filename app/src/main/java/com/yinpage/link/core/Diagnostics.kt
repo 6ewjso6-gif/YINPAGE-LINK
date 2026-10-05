@@ -85,6 +85,15 @@ object Diagnostics {
             sb.appendLine("跳过：缺少适配器或目标地址")
             return
         }
+
+        // 第 6 节已证明 SPP 可用（本 App 正占着通道）时，BLE 枚举只作辅助，
+        // 不能再给出"大概率不走 SPP"这类会自相矛盾的结论。
+        val connectedHere = runCatching { AppState.pod.value.device?.address }.getOrNull()
+        if (!connectedHere.isNullOrBlank() && connectedHere.equals(target, ignoreCase = true)) {
+            sb.appendLine("✅ 本 App 已通过经典蓝牙 SPP 连接该设备（见第 6 节）")
+            sb.appendLine("   → 设备必然支持经典蓝牙；下方 BLE 枚举仅供辅助参考，不影响 SPP 结论")
+            sb.appendLine()
+        }
         sb.appendLine("目标地址类型：${addressTypeHint(target)}")
 
         val device = runCatching { adapter.getRemoteDevice(target) }.getOrNull()
@@ -402,6 +411,18 @@ object Diagnostics {
         }
 
         runCatching { if (adapter.isDiscovering) adapter.cancelDiscovery() }
+
+        // 本 App 自己正占着该设备的 SPP 通道时，再连必然失败（耳机通常只允许一个 SPP 连接）。
+        // 此时"通道可用"已经被运行日志证明，实测只会得到一堆超时误报。
+        val currentAddress = runCatching { AppState.pod.value.device?.address }.getOrNull()
+        if (!currentAddress.isNullOrBlank() && currentAddress.equals(target, ignoreCase = true)) {
+            sb.appendLine("跳过实测：本 App 当前正占用该设备的 SPP 通道（已连接）")
+            sb.appendLine()
+            sb.appendLine(
+                "结论：✅ SPP 通道正常（运行日志已确认建连成功）——断开连接后再跑诊断可复测各 UUID",
+            )
+            return
+        }
 
         val uuids = listOf(
             "00001101-0000-1000-8000-00805F9B34FB",

@@ -31,6 +31,9 @@ class BluetrumCodec : PodCodec {
 
     private val frames = BtFrameCodec()
 
+    /** 上次"无法解析"提示的帧头，避免同一段垃圾数据反复刷屏。 */
+    private var lastUnparsedHead: String = ""
+
     /** 最近一次解析到的状态，用于补齐只上报部分字段的场景。 */
     private var lastBattery = BatteryState()
     private var lastNoise = NoiseMode.OFF
@@ -126,6 +129,24 @@ class BluetrumCodec : PodCodec {
                 handleFrame(frame, sink)
             } catch (error: Throwable) {
                 Log.i(TAG, "处理帧失败 cmd=0x%02X：%s".format(frame.command, error.message))
+            }
+        }
+
+        // 收到了数据却没产出任何帧 → 无法按 AB 五段式解析。
+        // 常见原因：耳机固件对 SPP 数据加密、或该型号用的不是 AB 系帧格式。
+        // 必须把**完整原文**（不是截断的头部）展示出来，用户才能对照抓包进一步确证协议。
+        if (decoded.isEmpty() && frames.bufferedBytes > 0) {
+            val shown = chunk.take(MAX_UNPARSED_SHOW_BYTES)
+            val body = shown.joinToString(" ") { "%02X".format(it and 0xFF) }
+            val clipped = if (chunk.size > shown.size) "…(+${chunk.size - shown.size}B)" else ""
+            if (body != lastUnparsedHead) {
+                lastUnparsedHead = body
+                Log.i(
+                    TAG,
+                    "⚠️ 收到 ${chunk.size}B 但无法按 AB 帧解析（原文=$body$clipped，缓冲=${frames.bufferedBytes}B）" +
+                        "——可能是加密帧或协议变体",
+                )
+                sink(PodUpdate.Raw("⚠️ 无法识别的数据：$body$clipped"))
             }
         }
     }
@@ -303,5 +324,8 @@ class BluetrumCodec : PodCodec {
 
     companion object {
         private const val TAG = "bluetrum"
+
+        /** 无法解析时展示的原始字节数（贴完整原文便于对照抓包）。 */
+        private const val MAX_UNPARSED_SHOW_BYTES = 48
     }
 }
