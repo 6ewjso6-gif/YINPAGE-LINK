@@ -1,5 +1,6 @@
 package com.yinpage.link.core
 
+import com.yinpage.link.config.ConfigManager
 import com.yinpage.link.protocol.BluetoothOffException
 import com.yinpage.link.protocol.DeviceUnavailableException
 import com.yinpage.link.protocol.MissingPermissionException
@@ -97,7 +98,7 @@ class SessionCoordinator(
         onUpdate: (PodUpdate) -> Unit,
         onLog: (String) -> Unit,
     ): ConnectResult {
-        val plan = connectionPlan(kind, address)
+        val plan = connectionPlan(kind)
         val target = deviceName?.takeIf { it.isNotBlank() } ?: address
         onLog("连接计划：${plan.joinToString(" → ") { it.label }}，目标=$target，协议=${codec.id}")
         EventLog.info(
@@ -140,12 +141,21 @@ class SessionCoordinator(
      * 链路很慢/不可用，BLE 优先只会白白消耗 15~20 秒超时。
      * 顺序固定为 RFCOMM → BLE：SPP 是全白牌 TWS 事实上的控制通道标准，
      * BLE GATT 仅当 SPP 完全失败时兜底。
+     *
+     * N3 修复：AUTO 恢复读取 `AppConfig.bleTransport`（默认 **false**，与
+     * 「默认禁用所有 BLE 行为」的设计保持一致）——关闭时 AUTO 只走 SPP，
+     * 不再无条件在 SPP 失败后去建 GATT、白耗 15~20 秒。同时删除了自始至终
+     * 未被使用的 `address` 死参数。
      */
-    private fun connectionPlan(kind: TransportKind, address: String): List<TransportKind> {
+    private fun connectionPlan(kind: TransportKind): List<TransportKind> {
         return when (kind) {
             TransportKind.RFCOMM -> listOf(TransportKind.RFCOMM)
             TransportKind.BLE -> listOf(TransportKind.BLE)
-            TransportKind.AUTO -> listOf(TransportKind.RFCOMM, TransportKind.BLE)
+            TransportKind.AUTO -> if (ConfigManager.get().current.bleTransport) {
+                listOf(TransportKind.RFCOMM, TransportKind.BLE)
+            } else {
+                listOf(TransportKind.RFCOMM)
+            }
         }
     }
 
@@ -164,6 +174,14 @@ class SessionCoordinator(
     ): ConnectResult {
         teardown("准备新连接")
         val myGeneration = generation.incrementAndGet()
+
+        // N2 修复：活性信号必须在通道建立**之前**就绪。
+        // 通道一建立，读循环就开始投递 onFrame；若设备在握手帧发出前主动推送
+        // 电量/状态通知，早到的数据会因 firstDataSignal 仍为 null 而被丢弃，
+        // 随后握手窗口内设备不再发数据 → 误判「哑通道」并断开一条正常连接。
+        // 提前赋值即可彻底消除该竞态。
+        val firstData = CompletableDeferred<Unit>()
+        firstDataSignal = firstData
 
         val channel = try {
             factory.create(kind, address)
@@ -266,8 +284,8 @@ class SessionCoordinator(
         // 握手帧发出后若 HANDSHAKE_RESPONSE_WINDOW_MS 内**一个字节都没收到**，
         // 判定连到了非控制通道，返回失败让外层尝试下一个候选（下个 UUID / BLE）。
         // 设备回任何数据（哪怕无法解析）都视为通道正确，避免在真通道上误换。
-        val firstData = CompletableDeferred<Unit>()
-        firstDataSignal = firstData
+        // 注：firstData / firstDataSignal 已在通道建立前赋值（见上），若设备在
+        // 握手前就已推送数据，await() 会立即返回，不再消耗 4 秒窗口。
         // 无握手帧的协议（handshake 为空）不需要活性确认，直接通过。
         val responded = handshake.isEmpty() || try {
             withTimeoutOrNull(HANDSHAKE_RESPONSE_WINDOW_MS) { firstData.await() } != null

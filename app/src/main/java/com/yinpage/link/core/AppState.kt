@@ -45,24 +45,29 @@ import java.io.FileWriter
  *  应用状态协调器  ——  这是 UI 层唯一需要依赖的对外 API
  * ============================================================================
  *  完全免 root：只使用公开的 Android 蓝牙 API（BluetoothAdapter / SPP / GATT）。
- *  没有 Xposed、没有系统服务注入、没有隐藏 API 调用。
+ *
+ *  ⚠️ 关于「隐藏 API」的如实说明：本类自身不调用任何隐藏 API，Context 由
+ *  [YinpageApp.onCreate] 通过 [attach] 直接注入（不再反射 `ActivityThread`）。
+ *  但 `:app` 内仍有少数**不得不**反射的 @hide 调用（如 `BluetoothSocket.setSoTimeout`
+ *  在 minSdk=27 下没有公开替代品），这些点在各自文件注释里逐处标注，不再宣称
+ *  "全仓库零隐藏 API"。
  * ============================================================================
  */
 object AppState {
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
-    /** 应用上下文（反射获取，避免在 core 层持有 Activity 引用）。 */
-    private val appContext: Context? by lazy {
-        runCatching {
-            val activityThread = Class.forName("android.app.ActivityThread")
-            val current = activityThread.getMethod("currentApplication").invoke(null) as? Context
-            val system = activityThread.getMethod("currentActivityThread").invoke(null)
-            val fromSystem = system?.let {
-                activityThread.getMethod("getSystemContext").invoke(it) as? Context
-            }
-            (current ?: fromSystem)?.applicationContext
-        }.getOrNull()
+    /**
+     * 应用上下文：由 Application 直接注入（S6 修复）。
+     * 过去用 `by lazy { 反射 ActivityThread }`，失败会被永久固化为 null，
+     * 导致连接 / 扫描 / 导出全部不可用且只在启动日志留一行。直接注入彻底消除该隐患。
+     */
+    @Volatile
+    private var appContext: Context? = null
+
+    /** 由 [YinpageApp.onCreate] 注入 Application Context（幂等，可重复调用）。 */
+    fun attach(context: Context) {
+        appContext = context.applicationContext
     }
 
     private val _pod = MutableStateFlow(PodState())
@@ -316,7 +321,10 @@ object AppState {
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            ctx.registerReceiver(receiver, filter, Context.RECEIVER_EXPORTED)
+            // S8：这里接收的是 ACTION_FOUND / ACTION_BOND_STATE_CHANGED 等**系统广播**，
+            // 没有任何第三方应用会合法发送它们。用 NOT_EXPORTED 后系统 UID 发送的广播
+            // 仍会正常送达（不影响扫描），同时堵死第三方 App 注入虚假设备条目的路径。
+            ctx.registerReceiver(receiver, filter, Context.RECEIVER_NOT_EXPORTED)
         } else {
             ctx.registerReceiver(receiver, filter)
         }
@@ -697,7 +705,10 @@ object AppState {
     fun exportLog(): String? {
         val ctx = context() ?: return null
         return runCatching {
-            val file = File(ctx.getExternalFilesDir(null) ?: ctx.filesDir, "yinpage-link-log.txt")
+            // S4：必须写入**应用私有目录**（filesDir）。原实现用 getExternalFilesDir，
+            // 在 Android 10 及以下（minSdk=27）位于 /sdcard/Android/data/...，
+            // 任何持有 READ_EXTERNAL_STORAGE 的 App 都能读取，而日志含 MAC / 设备名 / 收发字节。
+            val file = File(ctx.filesDir, "yinpage-link-log.txt")
             FileWriter(file, false).use { it.write(EventLog.dump()) }
             file.absolutePath
         }.getOrNull()

@@ -55,9 +55,14 @@ class BtFrameCodec(
      */
     fun encode(command: Int, type: Int, payload: Bytes): List<Bytes> {
         val safePayload = if (payload.isEmpty()) IntArray(0) else payload
-        val chunkSize = maxChunkSize.coerceIn(1, 255)
+        // chunk 高 4 位最多表示 16 包；若按配置分包会超过 16 包，则自动放大每包大小，
+        // 保证 totalChunks ≤ 16（帧同步正确性优先于"包更小"）。
+        val configured = maxChunkSize.coerceIn(1, 255)
+        val minChunkForFit = if (safePayload.isEmpty()) 1
+        else ceilDiv(safePayload.size, MAX_TOTAL_CHUNKS)
+        val chunkSize = maxOf(configured, minChunkForFit).coerceIn(1, 255)
         val totalChunks = if (safePayload.isEmpty()) 1
-        else ((safePayload.size + chunkSize - 1) / chunkSize)
+        else ceilDiv(safePayload.size, chunkSize)
 
         val currentSeq = seq
         // 序号按消息推进
@@ -111,6 +116,8 @@ class BtFrameCodec(
         val seq: Int,
         val totalChunks: Int,
         val parts: MutableList<Bytes>,
+        /** 最近一次收到本消息分片的时刻，用于老化清理。 */
+        var lastTouchedMs: Long,
     )
 
     private var buffer = IntArray(0)
@@ -138,9 +145,12 @@ class BtFrameCodec(
             if (reassembled != null) done.add(reassembled)
         }
 
-        // 防御：异常数据导致缓冲无限增长
+        // 防御：异常数据导致缓冲无限增长。
+        // 本协议无帧同步标记，若保留尾部（旧写法）会在帧中间截断 → 之后全部错位；
+        // 溢出说明数据已不可信，直接丢弃整段缓冲并清空重组状态，等待重新对齐。
         if (buffer.size > MAX_BUFFER) {
-            buffer = buffer.copyOfRange(buffer.size - MAX_BUFFER, buffer.size)
+            buffer = IntArray(0)
+            partial.clear()
         }
         return done
     }
@@ -172,6 +182,9 @@ class BtFrameCodec(
         if (frame.totalChunks <= 1) return frame
         if (frame.chunkIndex >= frame.totalChunks) return null
 
+        val now = System.currentTimeMillis()
+        evictStalePartials(now)
+
         val existing = partial[frame.command]
         val isNewMessage = existing == null ||
             existing.seq != frame.seq ||
@@ -184,12 +197,14 @@ class BtFrameCodec(
                 seq = frame.seq,
                 totalChunks = frame.totalChunks,
                 parts = MutableList(frame.totalChunks) { IntArray(0) },
+                lastTouchedMs = now,
             )
             // 防御：异常数据导致分片表无限膨胀
             if (partial.size > MAX_PARTIAL_COMMANDS) partial.clear()
         }
 
         val msg = partial.getValue(frame.command)
+        msg.lastTouchedMs = now
         msg.parts[frame.chunkIndex] = frame.payload
 
         val complete = (0 until msg.totalChunks).all { msg.parts[it].isNotEmpty() }
@@ -199,6 +214,15 @@ class BtFrameCodec(
         for (i in 0 until msg.totalChunks) merged = merged + msg.parts[i]
         partial.remove(frame.command)
         return frame.copy(chunkIndex = 0, totalChunks = 1, payload = merged)
+    }
+
+    /** 老化清理：丢弃超时仍未收齐的分片，避免永久占用内存并污染后续同 command 消息。 */
+    private fun evictStalePartials(now: Long) {
+        if (partial.isEmpty()) return
+        val it = partial.entries.iterator()
+        while (it.hasNext()) {
+            if (now - it.next().value.lastTouchedMs > PARTIAL_TTL_MS) it.remove()
+        }
     }
 
     fun reset() {
@@ -217,9 +241,17 @@ class BtFrameCodec(
         /** 帧头固定长度。 */
         const val HEADER_SIZE = 5
 
+        /** chunk 高 4 位能表示的最大总包数。 */
+        private const val MAX_TOTAL_CHUNKS = 16
+
         private const val MAX_BUFFER = 4096
 
         /** 同时在途的多包消息上限（防御异常输入）。 */
         private const val MAX_PARTIAL_COMMANDS = 16
+
+        /** 未收齐的分片保留时长，超时即老化清理。 */
+        private const val PARTIAL_TTL_MS = 5_000L
+
+        private fun ceilDiv(a: Int, b: Int): Int = (a + b - 1) / b
     }
 }

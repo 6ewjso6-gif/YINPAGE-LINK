@@ -20,16 +20,15 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
-import kotlinx.coroutines.withTimeout
 import java.io.IOException
 import java.net.SocketTimeoutException
 import java.util.UUID
+import java.util.concurrent.atomic.AtomicReference
 
 /**
  * ============================================================================
@@ -45,8 +44,10 @@ import java.util.UUID
  *    借此检查协程取消 / 关闭标志，从而让 close() 能及时生效。
  *  - 写：outputStream.write + flush，串行化在 [writeGate] 内。
  *
- *  ⚠️ 不使用任何隐藏 API（createRfcommSocket / 反射调用 BluetoothSocket 私有方法
- *  等一律没有），保证在无 root 设备上可用。
+ *  ⚠️ 关于隐藏 API（S6 如实说明）：本类**不使用** createRfcommSocket 之类的私有连接
+ *  手段，建链全程走公开 API。唯一的例外是 `connect()` 里对 `BluetoothSocket.setSoTimeout`
+ *  的反射调用 —— 该方法是 @hide，在 minSdk=27 下没有公开替代品；它只影响读超时，
+ *  调用失败会退化为阻塞读（功能仍可用），且已被 runCatching 兜住。
  * ============================================================================
  */
 class RfcommTransport(
@@ -75,16 +76,6 @@ class RfcommTransport(
 
     @Volatile
     private var listener: TransportListener? = null
-
-    /** 连接线程里的权限异常传递槽（openSocket 与连接线程共享）。 */
-    @Volatile
-    private var connectFailureRef: MissingPermissionException? = null
-
-    /** 从连接线程安全地记录权限异常（最终由主线程抛出）。 */
-    private fun lockConnectFailure(error: SecurityException) {
-        connectFailureRef = MissingPermissionException("BLUETOOTH_CONNECT")
-        EventLog.info(TAG, "SPP 连接被权限拦截：${error.message}")
-    }
 
     private var readJob: Job? = null
 
@@ -120,12 +111,11 @@ class RfcommTransport(
 
         EventLog.info(TAG, "开始连接 $address（bondState=${bondText(device)}）")
 
+        // N4 修复：不再在外层叠加 withTimeout。openSocket 内部持有**全局总预算**
+        // 并在每个候选上用 join(剩余预算) 约束，语义单一且不会出现「外层已超时返回、
+        // 内层工作线程仍在后台跑完剩余候选」的最坏 N×2×15 秒。
         val opened = try {
-            withTimeout(CONNECT_TIMEOUT_MS) {
-                withContext(Dispatchers.IO) { openSocket(device) }
-            }
-        } catch (timeout: TimeoutCancellationException) {
-            throw TransportTimeoutException("RFCOMM 连接 ${CONNECT_TIMEOUT_MS / 1000} 秒未完成（$address）")
+            withContext(Dispatchers.IO) { openSocket(device) }
         } catch (error: PodTransportException) {
             throw error
         } catch (error: SecurityException) {
@@ -156,8 +146,13 @@ class RfcommTransport(
     }
 
     /**
-     * 逐个 SPP UUID + secure/insecure 组合尝试建链。
-     * 全部失败时抛出携带完整尝试记录的 [ServiceNotFoundException]。
+     * 逐个 SPP UUID + secure/insecure 组合尝试建链，**共享一个全局总预算**。
+     *
+     * N4 修复：每个候选不再各自 `join(15s)`（候选数 N 时最坏 N×2×15 秒），而是
+     * 以 `System.nanoTime()` 计算剩余预算，`join(剩余)`；预算耗尽即抛
+     * [TransportTimeoutException]，保证整个建链在 [CONNECT_TIMEOUT_MS] 内结束，
+     * 且超时后前台协程返回时后台不会再有工作线程继续 connect。
+     * 全部候选正常失败时抛携带完整尝试记录的 [ServiceNotFoundException]。
      */
     private fun openSocket(device: BluetoothDevice): BluetoothSocket {
         val uuids = AppState.SPP_UUID_CANDIDATES.mapNotNull { text ->
@@ -165,10 +160,19 @@ class RfcommTransport(
         }
         val attempts = mutableListOf<String>()
         var lastError: String = "无"
+        // 全局截止时间：所有候选共享，避免内外层超时语义冲突。
+        val deadlineNanos = System.nanoTime() + CONNECT_TIMEOUT_MS * 1_000_000L
 
         for (uuid in uuids) {
             for (insecure in listOf(false, true)) {
                 if (closed) throw TransportIoException("通道已关闭")
+
+                val remainingMs = (deadlineNanos - System.nanoTime()) / 1_000_000L
+                if (remainingMs <= 0L) {
+                    throw TransportTimeoutException(
+                        "RFCOMM 连接 ${CONNECT_TIMEOUT_MS / 1000} 秒总预算已耗尽（$device）"
+                    )
+                }
 
                 val label = "${uuid.toString().substring(0, 8)}${if (insecure) "/insecure" else "/secure"}"
                 val candidate = try {
@@ -193,30 +197,34 @@ class RfcommTransport(
                 // 阻塞式 connect 无法被协程取消：withTimeout 超时只是抛异常，
                 // native 的 connect 会继续跑、最终把 socket 返回给一个已死的协程，
                 // 且没人 close → 反复连接（耳机关机是常见场景）持续泄漏 FD。
-                // 改用独立线程 + join(超时)：超时后 close() 打断 native connect。
+                // 改用独立线程 + join(剩余预算)：超时后 close() 打断 native connect。
+                //
+                // N5 修复：权限异常槽改为**每个候选独立**的 AtomicReference，
+                // 不再用实例字段共享——避免上一轮「已超时被 close」的线程稍后才抛
+                // SecurityException 并把异常误报给下一个候选。
+                val permRef = AtomicReference<MissingPermissionException?>(null)
                 val connectWorker = Thread(
                     {
                         runCatching { candidate.connect() }.onFailure { connectError ->
                             if (connectError is SecurityException) {
                                 // 权限异常要冒泡，不能吞掉（与旧行为一致）
-                                lockConnectFailure(connectError)
+                                permRef.set(MissingPermissionException("BLUETOOTH_CONNECT"))
+                                EventLog.info(TAG, "SPP 连接被权限拦截：${connectError.message}")
                             }
                         }
                     },
                     "yinpage-rfcomm-connect",
                 ).apply { isDaemon = true }
-                // 权限异常由这个字段传递到主线程
-                connectFailureRef = null
                 connectWorker.start()
-                connectWorker.join(CONNECT_TIMEOUT_MS)
+                connectWorker.join(remainingMs)
                 if (connectWorker.isAlive) {
                     runCatching { candidate.close() }
-                    lastError = "连接超时（${CONNECT_TIMEOUT_MS / 1000} 秒）"
+                    lastError = "连接超时（总预算 ${CONNECT_TIMEOUT_MS / 1000} 秒）"
                     attempts += "$label:超时"
                     EventLog.info(TAG, "$label 连接超时（已 close 打断）")
                     continue
                 }
-                val permFailure = connectFailureRef
+                val permFailure = permRef.get()
                 if (permFailure != null) {
                     runCatching { candidate.close() }
                     throw permFailure

@@ -92,7 +92,7 @@
 - `transport/RfcommTransport.kt`（SPP 多 UUID 候选遍历）
 - `transport/BleGattTransport.kt`（GATT 服务树枚举 + 特征值打分 + MTU 分片）
 - `core/SessionCoordinator.kt`（AUTO 通道回退、握手、异常翻译、超时看门狗）
-- `service/` 前台服务与广播接收器、`enhance/ShizukuEnhancer.kt`（纯反射零依赖）
+- `service/` 前台服务与广播接收器
 
 ### 3.2 引用的开源项目
 

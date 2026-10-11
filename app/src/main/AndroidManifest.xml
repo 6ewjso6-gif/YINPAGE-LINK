@@ -21,9 +21,6 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
-    <!-- 可选增强：让系统蓝牙设置页显示已连接设备（非 root 仅能读取，不能注入界面） -->
-    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
-
     <!-- 应用内检查更新：访问 GitHub Release API 并下载 APK，安装需用户允许「安装未知应用」 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
@@ -70,16 +67,8 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <receiver
-            android:name=".service.BluetoothStateReceiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
-                <action android:name="android.bluetooth.device.action.ACL_DISCONNECTED" />
-                <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
-                <action android:name="android.bluetooth.headset.profile.action.CONNECTION_STATE_CHANGED" />
-                <action android:name="android.bluetooth.a2dp.profile.action.CONNECTION_STATE_CHANGED" />
-            </intent-filter>
-        </receiver>
+        <!-- F14：蓝牙状态广播（ACL / STATE_CHANGED / HFP / A2DP）改为在
+             YinpageApp.onCreate 中动态注册（RECEIVER_NOT_EXPORTED），
+             不再静态声明 —— Android 8+ 对 manifest 隐式广播有后台限制。 -->
     </application>
 </manifest>

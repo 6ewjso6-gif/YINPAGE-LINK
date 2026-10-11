@@ -187,7 +187,9 @@ com.xiaomi.bluetooth       连接通知
 - BLE GATT：`BluetoothGatt` + `BluetoothLeScanner`
 - 前台服务保活：`foregroundServiceType="connectedDevice"`
 
-没有 Xposed、没有隐藏 API 反射、没有系统签名、没有 Shizuku 强依赖。
+主控制链路（`:app`）只使用 Android 公开 API；个别 @hide 调用（如 `BluetoothSocket.setSoTimeout`，
+在 `minSdk=27` 下无公开替代品）会逐处标注并异步降级。没有 Xposed 强依赖 —— 系统 UI 融合属于
+**可选的 LSPosed 模块**（`:module`）；没有系统签名、没有 Shizuku 强依赖。
 
 > Shizuku（可选）能提供 shell 级权限，用于读取系统蓝牙管理器里的设备信息作为补充，
 > 但它同样**无法注入系统 UI**——所以它替代不了形态一。
@@ -293,7 +295,6 @@ app/src/main/java/com/yinpage/link/               ← 形态二：独立控制�
 │       └── BluetrumCodec.kt      握手 / 命令编码 / 状态解析
 ├── transport/                    SPP 与 BLE GATT 两种通道
 ├── service/                      前台服务与蓝牙状态广播
-├── enhance/ShizukuEnhancer.kt    Shizuku 可选增强（反射调用，零依赖）
 └── ui/                           Compose 页面 / 组件 / 主题
 ```
 

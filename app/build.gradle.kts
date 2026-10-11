@@ -1,5 +1,10 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import java.util.Date
+
+/** 本地构建默认版本名（CI 发布时会用 `-PversionName` 覆盖为真实 tag）。 */
+val DEFAULT_VERSION_NAME = "APP-t-v0.12"
+
+/** versionCode 基座：高于历史基于 Unix 秒数的最大值，保证可覆盖安装。 */
+val VERSION_CODE_BASE = 1_800_000_000
 
 plugins {
     alias(libs.plugins.android.application)
@@ -49,18 +54,25 @@ android {
         targetSdk = 35
 
         /**
-         * 版本号每次编译自动生成，保证可**直接覆盖安装**（不需要卸载）。
+         * N6 修复：versionName 由 **git tag 注入**（CI 通过 `-PversionName=$GITHUB_REF_NAME` 传入），
+         * 本地构建回退到默认值。这样「Release 的 tag」与「本机 BuildConfig.VERSION_NAME」
+         * 同源，杜绝「发版漏改 versionName → 装完仍提示有新版本」的无限更新陷阱。
          *
-         * versionCode 必须落在 Android 允许的范围（<= 2_100_000_000）。
-         * 用 Unix 时间戳的**秒数**：当前约 1.79e9，到 2038 年才接近上限，
-         * 且天然单调递增 —— 每次编译都不同，Android 就不会拒绝覆盖安装。
-         *
-         * （曾试过 `YYMMDD*10000+分钟`，但 261003*10000 = 26 亿直接溢出 toInt。）
+         * F30 修复：versionCode 收敛为「固定基座 + 语义化版本」，不再用 Unix 秒数。
+         *   - 单调递增（0.12 → 0.13 递增），支持同签名直接覆盖安装；
+         *   - 远离 Google Play 上限 2_100_000_000，且与时间无关、永不溢出；
+         *   - 基座 1_800_000_000 高于历史基于秒数的最大值（v0.11 ≈ 1.79e9），
+         *     保证老用户能直接覆盖安装新包。
          */
-        val now = Date()
-        versionCode = (now.time / 1000L).toInt()
-        // 发布版本名格式：APP-t-v*.*（* 由版本号填充，递增需手动改这里）
-        versionName = "APP-t-v0.11"
+        val injectedVersionName = (project.findProperty("versionName") as? String)?.takeIf { it.isNotBlank() }
+        val resolvedVersionName = injectedVersionName ?: DEFAULT_VERSION_NAME
+        versionName = resolvedVersionName
+
+        val semver = Regex("(\\d+)\\.(\\d+)(?:\\.(\\d+))?").find(resolvedVersionName)
+        val major = semver?.groupValues?.get(1)?.toIntOrNull() ?: 0
+        val minor = semver?.groupValues?.get(2)?.toIntOrNull() ?: 0
+        val patch = semver?.groupValues?.get(3)?.toIntOrNull() ?: 0
+        versionCode = VERSION_CODE_BASE + major * 1_000_000 + minor * 1_000 + patch
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }

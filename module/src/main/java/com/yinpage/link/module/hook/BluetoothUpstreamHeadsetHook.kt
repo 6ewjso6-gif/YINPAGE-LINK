@@ -461,6 +461,11 @@ class BluetoothUpstreamHeadsetHook : HookContext() {
         runCatching {
             val receiver = object : android.content.BroadcastReceiver() {
                 override fun onReceive(c: android.content.Context?, intent: android.content.Intent?) {
+                    // 鉴权：第三方 App 读不到共享令牌，无法伪造 ANC 控制 / 刷新 DoS（S1）
+                    if (!ModuleIpc.verifyToken(intent)) {
+                        ModuleLog.w(TAG, "丢弃令牌不符的广播（疑似伪造）：${intent?.action}")
+                        return
+                    }
                     runCatching {
                         when (intent?.action) {
                             ModuleIpc.ACTION_ANC_SELECT -> {

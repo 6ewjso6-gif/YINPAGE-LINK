@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Build
+import com.yinpage.link.module.ModuleConfigStore
 import com.yinpage.link.module.hook.ModuleLog
 import java.util.concurrent.atomic.AtomicReference
 
@@ -56,6 +57,28 @@ object ModuleIpc {
     const val EXTRA_CASE_CHARGING = "case_charging"
     const val EXTRA_ANC = "anc"
     const val EXTRA_CONNECTED = "connected"
+
+    /**
+     * 跨进程广播鉴权令牌 extra。
+     *
+     * 收发的都是不同 UID 的系统进程，不能用 RECEIVER_NOT_EXPORTED 一刀切，
+     * 因此每个广播都附带该令牌；接收端比对不一致即丢弃。第三方 App 读不到
+     * 令牌，故无法伪造 ANC 控制 / 电量状态广播（见 S1 / S2）。
+     */
+    const val EXTRA_TOKEN = "ipc_token"
+
+    /** 当前令牌（各进程读同一份 remote prefs，值一致）。 */
+    private fun token(): String = runCatching { ModuleConfigStore.ipcToken() }.getOrDefault("")
+
+    /**
+     * 校验收到的广播是否携带合法令牌。
+     * 令牌为空（配置尚未初始化）时视为**不通过**，避免鉴权被静默绕过。
+     */
+    fun verifyToken(intent: Intent?): Boolean {
+        val expected = token()
+        if (expected.isBlank()) return false
+        return intent?.getStringExtra(EXTRA_TOKEN) == expected
+    }
 
     /** 自家 ANC 码（与 HyperOriG 保持一致，便于对照参考实现）。 */
     const val ANC_OFF = 1
@@ -169,6 +192,7 @@ object ModuleIpc {
     private fun sendToBluetooth(context: Context, intent: Intent) {
         runCatching {
             intent.setPackage("com.android.bluetooth")
+            intent.putExtra(EXTRA_TOKEN, token())
             context.sendBroadcast(intent)
         }.onFailure { ModuleLog.w(TAG, "发送到蓝牙进程失败：${it.message}") }
     }
@@ -178,6 +202,7 @@ object ModuleIpc {
         for (pkg in CONSUMER_PACKAGES) {
             runCatching {
                 val copy = Intent(intent).setPackage(pkg)
+                copy.putExtra(EXTRA_TOKEN, token())
                 context.sendBroadcast(copy)
             }
         }
@@ -203,6 +228,11 @@ object ModuleIpc {
             override fun onReceive(ctx: Context?, intent: Intent?) {
                 val action = intent?.action ?: return
                 if (action != ACTION_PODS_STATE) return
+                // 鉴权：第三方 App 读不到共享令牌，无法伪造电量/ANC 状态欺骗系统 UI（S2）
+                if (!verifyToken(intent)) {
+                    ModuleLog.w(TAG, "丢弃令牌不符的状态广播（疑似伪造）：$action")
+                    return
+                }
                 runCatching {
                     val snap = PodSnapshot(
                         address = intent.getStringExtra(EXTRA_ADDRESS).orEmpty(),

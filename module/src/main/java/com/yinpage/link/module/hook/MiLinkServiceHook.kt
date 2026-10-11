@@ -305,6 +305,8 @@ class MiLinkServiceHook : HookContext() {
                 // 蓝牙进程读 EXTRA_ANC（"anc"）；任务书早期约定的 "status" 也一并带上，双保险
                 putExtra(ModuleIpc.EXTRA_ANC, ancCode)
                 putExtra(EXTRA_ANC_STATUS, ancCode)
+                // 鉴权令牌：蓝牙进程侧会校验，否则丢弃（S1）
+                putExtra(ModuleIpc.EXTRA_TOKEN, ModuleConfigStore.ipcToken())
                 setPackage(BLUETOOTH_PACKAGE)
             }
             context.sendBroadcast(intent)
@@ -352,7 +354,8 @@ class MiLinkServiceHook : HookContext() {
      *  - 配置了 `targetAddress`：只认该地址（用户显式指定，最可靠）；
      *  - 否则：地址与蓝牙进程推来的快照一致 → 是我们的耳机；
      *  - 否则：名称可判定时按 [ModuleConfigStore] 的规则排除小米自家耳机；
-     *  - 名称拿不到（未解析）时**放行**——否则可能在设备刚连接时漏掉真耳机。
+     *  - 名称拿不到（未解析）时**不接管**（Fail-Closed）——否则会在设备刚连接、
+     *    名称尚未解析时，对所有蓝牙耳机（含用户真实的小米耳机）执行伪装。
      */
     private fun isTargetDevice(device: BluetoothDevice?): Boolean {
         if (device == null) return false
@@ -363,7 +366,8 @@ class MiLinkServiceHook : HookContext() {
         }
         if (sameAsSnapshot(address)) return true
         val name = runCatching { device.name }.getOrNull()?.trim().orEmpty()
-        return name.isEmpty() || config.shouldHookDevice(name, address)
+        // Fail-Closed：名称解析不出来就**不接管**，避免污染用户真实的小米耳机。
+        return name.isNotEmpty() && config.shouldHookDevice(name, address)
     }
 
     /** 只有 MAC 字符串时的归属判定：必要时反查一次设备名。 */
@@ -378,7 +382,8 @@ class MiLinkServiceHook : HookContext() {
         val name = runCatching {
             BluetoothAdapter.getDefaultAdapter()?.getRemoteDevice(mac)?.name
         }.getOrNull()?.trim().orEmpty()
-        return name.isEmpty() || config.shouldHookDevice(name, mac)
+        // Fail-Closed：名称拿不到时不接管（与 isTargetDevice 保持一致）
+        return name.isNotEmpty() && config.shouldHookDevice(name, mac)
     }
 
     private fun sameAsSnapshot(address: String?): Boolean {
@@ -389,11 +394,11 @@ class MiLinkServiceHook : HookContext() {
 
     /**
      * `HeadsetInfo` 的归属判定：它是 data class，字段名不可知，
-     * 这里尽力从字段/component 里找出设备地址；**找不到地址就按任务书要求直接伪造**。
+     * 这里尽力从字段/component 里找出设备地址；**找不到地址则不伪造**（Fail-Closed）。
      */
     private fun shouldFakeHeadsetInfo(instance: Any?): Boolean {
-        if (instance == null) return true
-        val address = headsetInfoAddress(instance) ?: return true
+        if (instance == null) return false
+        val address = headsetInfoAddress(instance) ?: return false
         return isTargetAddress(address)
     }
 

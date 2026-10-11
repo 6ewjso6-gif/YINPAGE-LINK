@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import java.security.SecureRandom
 
 /**
  * ============================================================================
@@ -39,6 +40,16 @@ data class ModuleConfig(
     val focusIsland: Boolean = true,
     /** 是否在系统设置页复用原生高级耳机界面 */
     val useNativeHeadsetPage: Boolean = true,
+    /**
+     * 跨进程广播鉴权令牌（各被 Hook 进程共享同一份 remote prefs 中的值）。
+     *
+     * 为什么需要：模块的 IPC 走显式广播（`com.yinpage.link.action.*`），
+     * 而蓝牙 / SystemUI / MiLink / Settings 是**不同 UID 的系统进程**，
+     * 不能用 `RECEIVER_NOT_EXPORTED` 一刀切（那只收同 UID，会切断合法链路）。
+     * 因此改用共享令牌：任意第三方 App 无法读到该令牌，也就无法伪造
+     * ANC 控制或电量/状态广播。令牌在模块首次启动时用 [SecureRandom] 生成。
+     */
+    val ipcToken: String = "",
 ) {
     /**
      * 支持性判定字符串：`<8位设备ID>,<24位能力位掩码>`。
@@ -93,6 +104,9 @@ object ModuleConfigStore {
     private const val K_FOCUS_ISLAND = "focus_island"
     private const val K_NATIVE_PAGE = "native_headset_page"
 
+    /** 跨进程广播鉴权令牌（首次使用时生成并持久化）。 */
+    private const val K_IPC_TOKEN = "ipc_token"
+
     /** 每个目标进程的 Hook 安装结果，key 前缀：`hook_ok_<包名>`。 */
     private const val K_HOOK_RESULT_PREFIX = "hook_ok_"
 
@@ -113,6 +127,14 @@ object ModuleConfigStore {
     /** 从 SharedPreferences 重新读取（配置变化时由框架通知）。 */
     fun reload() {
         val p = prefs ?: return
+        // 鉴权令牌：首次读取为空时生成并持久化；各进程读同一份 remote prefs，
+        // 因此令牌在整个模块内保持一致。
+        var token = p.getString(K_IPC_TOKEN, "").orEmpty().trim()
+        if (token.isBlank()) {
+            token = generateIpcToken()
+            runCatching { p.edit().putString(K_IPC_TOKEN, token).apply() }
+        }
+        cachedIpcToken = token
         _config.value = ModuleConfig(
             fakeDeviceId = (p.getString(K_FAKE_ID, null) ?: ModuleConfig.DEFAULT_FAKE_DEVICE_ID)
                 .trim().ifEmpty { ModuleConfig.DEFAULT_FAKE_DEVICE_ID },
@@ -121,7 +143,40 @@ object ModuleConfigStore {
             hookAnc = p.getBoolean(K_HOOK_ANC, true),
             focusIsland = p.getBoolean(K_FOCUS_ISLAND, true),
             useNativeHeadsetPage = p.getBoolean(K_NATIVE_PAGE, true),
+            ipcToken = token,
         )
+    }
+
+    /** 鉴权令牌的进程内缓存，避免每次收发广播都走一遍配置读取。 */
+    @Volatile
+    private var cachedIpcToken: String? = null
+
+    /**
+     * 当前跨进程鉴权令牌。若尚未生成（例如模块 App 从未打开、remote prefs 里没有），
+     * 这里兜底生成一次并尽量持久化，保证同一进程内收发双方一致。
+     */
+    fun ipcToken(): String {
+        cachedIpcToken?.let { if (it.isNotBlank()) return it }
+        val existing = _config.value.ipcToken
+        if (existing.isNotBlank()) {
+            cachedIpcToken = existing
+            return existing
+        }
+        synchronized(this) {
+            cachedIpcToken?.let { if (it.isNotBlank()) return it }
+            val token = generateIpcToken()
+            cachedIpcToken = token
+            _config.value = _config.value.copy(ipcToken = token)
+            runCatching { prefs?.edit()?.putString(K_IPC_TOKEN, token)?.apply() }
+            return token
+        }
+    }
+
+    /** 生成 128 位随机令牌（32 位十六进制）。 */
+    private fun generateIpcToken(): String {
+        val bytes = ByteArray(16)
+        SecureRandom().nextBytes(bytes)
+        return bytes.joinToString("") { "%02x".format(it) }
     }
 
     /** 写入（仅 ModuleActivity 所在进程使用本地 prefs，其它进程只读）。 */

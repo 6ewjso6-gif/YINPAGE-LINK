@@ -33,6 +33,21 @@ case "${1:-}" in
   *)       TASK="$*" ;;
 esac
 
+# S10：debug 签名库自举。
+# .gitignore 忽略了 .android/，仓库里没有 debug.keystore，本地首次构建会失败。
+# 不存在时用 keytool 生成一个（口令是公开约定值，仅用于 debug，无安全影响）。
+DEBUG_KEYSTORE=".android/debug.keystore"
+if [ "$TASK" != "clean" ] && [ ! -f "$DEBUG_KEYSTORE" ]; then
+  echo ">> 未找到 $DEBUG_KEYSTORE，正在生成 debug 签名库"
+  mkdir -p .android
+  keytool -genkeypair -v \
+    -keystore "$DEBUG_KEYSTORE" \
+    -storepass android -keypass android \
+    -alias androiddebugkey \
+    -keyalg RSA -keysize 2048 -validity 10000 \
+    -dname "CN=Android Debug,O=Android,C=US" >/dev/null
+fi
+
 echo ">> $GRADLE_BIN $TASK"
 "$GRADLE_BIN" "$TASK" --console=plain
 

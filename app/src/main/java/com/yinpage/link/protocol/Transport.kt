@@ -92,6 +92,13 @@ interface PodCodec {
     /** 人类可读名称，例如 "音贝奇 YSCOCO 通用协议"。 */
     val displayName: String
 
+    /**
+     * F17：显式优先级，值越大越优先；多个 codec 同时匹配一台设备时据此排序。
+     * 默认 0 —— 同优先级时保持**注册顺序**（[ProtocolRegistry.register] 的追加顺序），
+     * 因此"新增品牌只需追加一行"的行为是可预期的。
+     */
+    val priority: Int get() = 0
+
     /** 通道就绪后需要立刻发送的握手/同步帧；返回空列表表示无需握手。 */
     fun handshake(): List<Bytes>
 
@@ -143,12 +150,16 @@ object ProtocolRegistry {
     fun byId(id: String): PodCodec? = synchronized(lock) { codecs.firstOrNull { it.id == id } }
 
     /**
-     * 按设备信息挑选首选协议：先用 matchesDevice 过滤，再按 confidence 排序。
-     * 若都不匹配则返回全部（让运行时按实际收包自动切换）。
+     * 按设备信息挑选首选协议：先用 matchesDevice 过滤，再按其**显式优先级**
+     * [PodCodec.priority] 排序（同优先级保持注册顺序）。
+     *
+     * F17 修复：原实现是 `sortedByDescending { it.id }`（按 id 字典序倒序），
+     * 与注释承诺的语义不符 —— 一旦注册多个品牌，协议选择会退化为不可预期的字母序。
+     * 若都不匹配则返回全部，让运行时按实际收包自动切换。
      */
     fun candidatesFor(deviceName: String?, serviceUuids: List<String>): List<PodCodec> {
         val list = all()
         val matched = list.filter { runCatching { it.matchesDevice(deviceName, serviceUuids) }.getOrDefault(false) }
-        return (matched.ifEmpty { list }).sortedByDescending { it.id }
+        return (matched.ifEmpty { list }).sortedByDescending { it.priority }
     }
 }

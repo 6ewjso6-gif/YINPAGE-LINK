@@ -48,14 +48,27 @@ abstract class HookContext {
         }.getOrNull()
     }
 
-    /** 按参数个数找方法（应对混淆改名后签名不变的情况）。 */
+    /**
+     * 按参数个数找方法（应对混淆改名后签名不变的情况）。
+     *
+     * 注意：同名同参数个数的重载其顺序未定义，命中多个时无法保证选对，
+     * 这里打印告警以便定位；调用方能拿到实参时应优先用 [callMethodOrNull]
+     * （它会进一步按参数类型做兼容性筛选）。
+     */
     fun findMethodByParamCount(className: String, methodName: String, paramCount: Int): Method? {
         val clazz = findClassOrNull(className) ?: return null
-        return runCatching {
-            clazz.declaredMethods
-                .firstOrNull { it.name == methodName && it.parameterTypes.size == paramCount }
-                ?.apply { isAccessible = true }
-        }.getOrNull()
+        val candidates = runCatching {
+            clazz.declaredMethods.filter { it.name == methodName && it.parameterTypes.size == paramCount }
+        }.getOrDefault(emptyList())
+        if (candidates.isEmpty()) return null
+        if (candidates.size > 1) {
+            ModuleLog.w(
+                TAG,
+                "findMethodByParamCount 命中多个重载 $className#$methodName/$paramCount，" +
+                    "取第一个：${candidates.first().parameterTypes.joinToString { it.simpleName }}",
+            )
+        }
+        return candidates.first().apply { isAccessible = true }
     }
 
     /**
@@ -87,21 +100,35 @@ abstract class HookContext {
 
     /** 沿继承链找字段。 */
     fun getObjectFieldOrNull(instance: Any?, fieldName: String): Any? {
+        val field = findFieldInChainOrNull(instance, fieldName) ?: return null
+        return runCatching { field.get(instance) }.getOrNull()
+    }
+
+    /**
+     * 多候选字段名（混淆名漂移时用）。
+     *
+     * 判据是「字段是否存在」而非「字段值是否为 null」：
+     * 一旦某个候选字段**存在**（哪怕其值为 null），就采纳它、不再继续探测，
+     * 避免把「字段存在但值为 null」误判为「字段不存在」而落到错误的候选名上。
+     */
+    fun getObjectFieldAny(instance: Any?, vararg fieldNames: String): Any? {
         if (instance == null) return null
-        var cls: Class<*>? = instance.javaClass
-        while (cls != null) {
-            runCatching {
-                return cls.getDeclaredField(fieldName).apply { isAccessible = true }.get(instance)
-            }
-            cls = cls.superclass
+        for (name in fieldNames) {
+            val field = findFieldInChainOrNull(instance, name) ?: continue
+            return runCatching { field.get(instance) }.getOrNull()
         }
         return null
     }
 
-    /** 多候选字段名（混淆名漂移时用）。 */
-    fun getObjectFieldAny(instance: Any?, vararg fieldNames: String): Any? {
-        for (name in fieldNames) {
-            getObjectFieldOrNull(instance, name)?.let { return it }
+    /** 沿继承链查找 Field 对象，找不到返回 null（用于区分"字段不存在"与"值为 null"）。 */
+    private fun findFieldInChainOrNull(instance: Any?, fieldName: String): Field? {
+        if (instance == null) return null
+        var cls: Class<*>? = instance.javaClass
+        while (cls != null) {
+            runCatching {
+                return cls.getDeclaredField(fieldName).apply { isAccessible = true }
+            }
+            cls = cls.superclass
         }
         return null
     }
@@ -131,21 +158,55 @@ abstract class HookContext {
         return false
     }
 
-    /** 按参数个数调用方法（返回值可空）。 */
+    /**
+     * 按名字调用方法（返回值可空）。
+     *
+     * 同名同参数个数的重载可能多个，这里在个数匹配之外再做**参数类型兼容性**筛选，
+     * 避免选中错误重载后 invoke 抛 [IllegalArgumentException] 被静默吞掉；调用失败会打日志。
+     */
     fun callMethodOrNull(instance: Any?, methodName: String, vararg args: Any?): Any? {
         if (instance == null) return null
         var cls: Class<*>? = instance.javaClass
         while (cls != null) {
             val m = cls.declaredMethods.firstOrNull {
-                it.name == methodName && it.parameterTypes.size == args.size
+                it.name == methodName && it.parameterTypes.size == args.size && acceptsArgs(it, args)
             }
             if (m != null) {
                 m.isAccessible = true
-                return runCatching { m.invoke(instance, *args) }.getOrNull()
+                return runCatching { m.invoke(instance, *args) }
+                    .onFailure { ModuleLog.w(TAG, "callMethodOrNull 调用 $methodName 失败: ${it.message}") }
+                    .getOrNull()
             }
             cls = cls.superclass
         }
+        ModuleLog.d(TAG, "callMethodOrNull 未找到 $methodName/${args.size}（${instance.javaClass.name}）")
         return null
+    }
+
+    /** 实参能否赋给该方法的形参：null 仅可赋给引用类型；非 null 用装箱后类型判断。 */
+    private fun acceptsArgs(method: Method, args: Array<out Any?>): Boolean {
+        val types = method.parameterTypes
+        for (i in types.indices) {
+            val arg = args[i]
+            if (arg == null) {
+                if (types[i].isPrimitive) return false
+            } else if (!boxedType(types[i]).isInstance(arg)) {
+                return false
+            }
+        }
+        return true
+    }
+
+    private fun boxedType(t: Class<*>): Class<*> = when (t) {
+        java.lang.Boolean.TYPE -> java.lang.Boolean::class.java
+        java.lang.Byte.TYPE -> java.lang.Byte::class.java
+        java.lang.Character.TYPE -> java.lang.Character::class.java
+        java.lang.Short.TYPE -> java.lang.Short::class.java
+        java.lang.Integer.TYPE -> java.lang.Integer::class.java
+        java.lang.Long.TYPE -> java.lang.Long::class.java
+        java.lang.Float.TYPE -> java.lang.Float::class.java
+        java.lang.Double.TYPE -> java.lang.Double::class.java
+        else -> t
     }
 
     // ------------------------------------------------------------------ 安装 Hook
@@ -206,14 +267,25 @@ abstract class HookContext {
      * 反射获取当前进程的 Application Context。
      * 被 Hook 的进程里拿不到 Activity，但广播收发、查包名等都需要 Context，
      * 因此统一从 ActivityThread 取。
+     *
+     * 成功结果会被缓存（每次访问都重做 Class.forName / getMethod 开销过大）；
+     * **null 不缓存**，以便目标进程稍后才具备 Context 时能重新取到。
      */
+    @Volatile
+    private var cachedAppContext: android.content.Context? = null
+
     val appContext: android.content.Context?
-        get() = runCatching {
-            val activityThread = Class.forName("android.app.ActivityThread")
-            val thread = activityThread.getMethod("currentActivityThread").invoke(null)
-            activityThread.getMethod("getApplication").invoke(thread) as? android.content.Context
-                ?: activityThread.getMethod("getSystemContext").invoke(thread) as? android.content.Context
-        }.getOrNull()
+        get() {
+            cachedAppContext?.let { return it }
+            val ctx = runCatching {
+                val activityThread = Class.forName("android.app.ActivityThread")
+                val thread = activityThread.getMethod("currentActivityThread").invoke(null)
+                activityThread.getMethod("getApplication").invoke(thread) as? android.content.Context
+                    ?: activityThread.getMethod("getSystemContext").invoke(thread) as? android.content.Context
+            }.getOrNull() ?: return null
+            cachedAppContext = ctx
+            return ctx
+        }
 
     private companion object {
         const val TAG = "YINPAGE-Hook"

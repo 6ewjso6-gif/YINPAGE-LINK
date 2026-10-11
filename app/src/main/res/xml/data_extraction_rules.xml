@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   Android 12+ 的数据提取规则（android:dataExtractionRules）。
-  云备份与设备间迁移都只带上应用设置，不带任何蓝牙配对/密钥信息。
+
+  S5 修复：`yinpage_link_settings.xml` 含 `last_addr` / `last_name`
+  （耳机 MAC + 名称），云备份与设备迁移都不应携带。SharedPreferences 无法
+  按 key 拆分规则，故整体排除该 prefs（开关类配置无隐私属性，丢失可接受）。
 -->
 <data-extraction-rules>
     <cloud-backup>
-        <include
+        <exclude
             domain="sharedpref"
             path="yinpage_link_settings.xml" />
     </cloud-backup>
     <device-transfer>
-        <include
+        <exclude
             domain="sharedpref"
             path="yinpage_link_settings.xml" />
     </device-transfer>

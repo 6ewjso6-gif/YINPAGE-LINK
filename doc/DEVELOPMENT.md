@@ -80,7 +80,6 @@ UI、传输、会话三层**一行都没改**。
 | `core/SessionCoordinator.kt` | 连接状态机：AUTO 通道回退（RFCOMM → BLE）、握手、读循环、异常翻译、超时看门狗 |
 | `service/PodConnectionService.kt` | 前台服务保活 |
 | `service/BluetoothStateReceiver.kt` | 系统蓝牙广播 → AppState 状态同步 |
-| `enhance/ShizukuEnhancer.kt` | Shizuku 可选增强（纯反射，零依赖） |
 
 ---
 
@@ -126,7 +125,6 @@ UI、传输、会话三层**一行都没改**。
 | Kotlinx Serialization | 配置序列化 | Apache-2.0 |
 
 **未使用**：OkHttp、Retrofit、任何统计/广告 SDK、任何需要额外权限的库。
-Shizuku 也未作为依赖引入——`ShizukuEnhancer` 用纯反射调用，缺失时安全降级为 no-op。
 
 ---
 

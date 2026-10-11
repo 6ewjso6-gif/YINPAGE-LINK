@@ -39,6 +39,20 @@ object Diagnostics {
 
     private val timeFmt = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
 
+    /** 匹配标准蓝牙 MAC（六段十六进制），用于剪贴板脱敏。 */
+    private val MAC_REGEX =
+        Regex("([0-9A-Fa-f]{2}:[0-9A-Fa-f]{2}):[0-9A-Fa-f]{2}:[0-9A-Fa-f]{2}:([0-9A-Fa-f]{2}:[0-9A-Fa-f]{2})")
+
+    /**
+     * S4：诊断报告脱敏 —— 把 MAC 打码为 `AA:BB:**:**:EE:FF` 后再放剪贴板。
+     *
+     * 为什么必须做：报告含适配器地址、全部已配对设备名 + MAC；Android 10 及以下
+     * 剪贴板可被任意 App 后台读取，用户也常直接粘贴到公开 issue。
+     * 脱敏后仍保留可读的诊断信息（时间/权限/服务 UUID/连接结论），只是不再泄漏硬件标识。
+     */
+    fun redact(text: String): String =
+        text.replace(MAC_REGEX) { m -> "${m.groupValues[1]}:**:**:${m.groupValues[2]}" }
+
     /**
      * 生成诊断报告。
      * @param address 目标耳机地址；为空时报告列出所有已配对设备供选择

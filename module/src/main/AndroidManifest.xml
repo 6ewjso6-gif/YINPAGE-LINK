@@ -8,8 +8,9 @@
          / com.android.systemui / com.android.settings / com.xiaomi.bluetooth）。
          ============================================================ -->
 
+    <!-- S5：模块配置含跨进程 IPC 令牌等敏感数据，禁止云备份 / 换机迁移 -->
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@android:drawable/ic_lock_silent_mode_off"
         android:label="@string/module_name"
         android:supportsRtl="true"

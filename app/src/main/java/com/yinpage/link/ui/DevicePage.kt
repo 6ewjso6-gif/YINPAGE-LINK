@@ -82,6 +82,10 @@ fun DevicePage(
     val busy = pod.connection == ConnectionState.CONNECTING ||
         pod.connection == ConnectionState.HANDSHAKING ||
         pod.connection == ConnectionState.RECONNECTING
+    // F18：连接/握手/重连过程中 pod.connected 为 false，但 pod.device 已指向**目标设备**。
+    // 用目标地址判定"忙碌行"，否则 CONNECTING 期间所有行 isBusy 恒为 false，
+    // 正在连接的设备仍显示可点的"连接"按钮，用户可连点发起多次连接。
+    val pendingAddress = if (busy) pod.device?.address else null
 
     val bonded = devices
         .filter { it.bonded }
@@ -228,7 +232,7 @@ fun DevicePage(
             DeviceList(
                 items = bonded,
                 connectedAddress = connectedAddress,
-                busy = busy,
+                pendingAddress = pendingAddress,
                 clickable = canScan,
                 onConnect = onConnect,
                 onDisconnect = onDisconnect,
@@ -245,7 +249,7 @@ fun DevicePage(
             DeviceList(
                 items = found,
                 connectedAddress = connectedAddress,
-                busy = busy,
+                pendingAddress = pendingAddress,
                 clickable = canScan,
                 onConnect = onConnect,
                 onDisconnect = onDisconnect,
@@ -260,7 +264,7 @@ fun DevicePage(
 private fun DeviceList(
     items: List<DeviceItem>,
     connectedAddress: String?,
-    busy: Boolean,
+    pendingAddress: String?,
     clickable: Boolean,
     onConnect: (DeviceItem) -> Unit,
     onDisconnect: () -> Unit,
@@ -268,10 +272,12 @@ private fun DeviceList(
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         items.forEach { item ->
             val isCurrent = connectedAddress != null && item.address.equals(connectedAddress, ignoreCase = true)
+            // F18：忙碌行按**目标地址**判定，而非已连接地址
+            val isBusy = pendingAddress != null && item.address.equals(pendingAddress, ignoreCase = true)
             DeviceRow(
                 item = item,
                 isConnected = isCurrent,
-                isBusy = isCurrent && busy,
+                isBusy = isBusy,
                 enabled = clickable,
                 onConnect = { onConnect(item) },
                 onDisconnect = onDisconnect,

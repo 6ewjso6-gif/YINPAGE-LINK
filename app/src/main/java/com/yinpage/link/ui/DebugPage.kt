@@ -119,7 +119,10 @@ fun DebugPage(
             IconButton(
                 onClick = {
                     // 复制用界面实际显示的日志（与清空后的显示一致）
-                    val text = visibleLines.joinToString(separator = "\n")
+                    // S4：剪贴板脱敏（MAC 打码），日志含设备地址与收发字节
+                    val text = com.yinpage.link.core.Diagnostics.redact(
+                        visibleLines.joinToString(separator = "\n"),
+                    )
                     val clipboard = context.getSystemService(ClipboardManager::class.java)
                     clipboard?.setPrimaryClip(ClipData.newPlainText("YINPAGE-LINK debug", text))
                     copied = true

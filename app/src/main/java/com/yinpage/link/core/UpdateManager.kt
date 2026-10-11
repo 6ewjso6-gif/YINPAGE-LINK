@@ -2,7 +2,12 @@ package com.yinpage.link.core
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
+import android.content.pm.Signature
 import android.net.Uri
+import android.os.Build
+import android.provider.Settings
 import com.yinpage.link.BuildConfig
 import androidx.core.content.FileProvider
 import kotlinx.coroutines.Dispatchers
@@ -13,6 +18,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
+import java.security.MessageDigest
 
 /**
  * ============================================================================
@@ -32,6 +38,12 @@ import java.net.URL
  *
  *  ⚠️ 免责声明：正常 App 无法静默覆盖安装，系统安装器确认弹窗不可绕过；
  *  且 Android 8+ 需要用户在「安装未知应用」里允许本应用。
+ *
+ *  🔒 完整性防线（v0.12 新增，防供应链替换）：
+ *    1. **签名一致性**：安装前用 `getPackageArchiveInfo` 取下载包签名，
+ *       与本机签名逐指纹比对，不一致直接拒绝 —— 这一条即可堵死镜像/中间人替换；
+ *    2. **SHA-256**：若 Release 附带 `<apk>.sha256` 附件，下载后比对哈希，
+ *       不一致删除并拒绝（未提供时跳过，仍有第 1 条兜底）。
  * ============================================================================
  */
 object UpdateManager {
@@ -54,6 +66,9 @@ object UpdateManager {
     /**
      * 国内加速镜像前缀。用法：`前缀 + GitHub 完整 URL` 即为镜像地址。
      * 直连失败时按此顺序回退（谁先通就用谁）。
+     *
+     * ⚠️ 镜像站返回的内容完全由第三方决定，因此下载完成后**必须**经过
+     * [install] 的签名校验 +（可用的）SHA-256 校验，二者缺一不可当成可信来源。
      */
     private data class Line(val name: String, val prefix: String)
 
@@ -71,6 +86,10 @@ object UpdateManager {
         val apkUrl: String,
         val apkName: String,
         val apkSize: Long,
+        /** 可选的 SHA-256 附件直链（Release 未附带时为空串）。 */
+        val apkSha256Url: String = "",
+        /** SHA-256 附件名，仅用于日志。 */
+        val apkSha256Name: String = "",
     )
 
     sealed interface CheckResult {
@@ -138,19 +157,36 @@ object UpdateManager {
         var apkUrl = ""
         var apkName = ""
         var apkSize = 0L
+        val shaAssets = LinkedHashMap<String, String>()
         for (i in 0 until assets.length()) {
             val asset = assets.optJSONObject(i) ?: continue
             val name = asset.optString("name", "")
-            if (name.startsWith(APK_PREFIX) && name.endsWith(".apk")) {
+            val url = asset.optString("browser_download_url", "")
+            if (name.startsWith(APK_PREFIX) && name.endsWith(".apk") && apkUrl.isBlank()) {
                 apkName = name
-                apkUrl = asset.optString("browser_download_url", "")
+                apkUrl = url
                 apkSize = asset.optLong("size", 0L)
-                break
+            } else if (name.endsWith(".sha256")) {
+                shaAssets[name] = url
             }
         }
         if (apkUrl.isBlank()) return CheckResult.Failed("Release 中没有找到 APK 安装包")
 
-        val info = ReleaseInfo(tag, published, body, apkUrl, apkName, apkSize)
+        // 优先取与 APK 同名的 <apk>.sha256；否则任取一个 .sha256 附件。
+        val shaEntry = shaAssets.entries.firstOrNull { it.key == "$apkName.sha256" }
+            ?: shaAssets.entries.firstOrNull { it.key.substringBeforeLast(".sha256") == apkName }
+            ?: shaAssets.entries.firstOrNull()
+
+        val info = ReleaseInfo(
+            tagName = tag,
+            publishedAt = published,
+            body = body,
+            apkUrl = apkUrl,
+            apkName = apkName,
+            apkSize = apkSize,
+            apkSha256Url = shaEntry?.value.orEmpty(),
+            apkSha256Name = shaEntry?.key.orEmpty(),
+        )
         return if (isNewerVersion(tag, BuildConfig.VERSION_NAME)) {
             CheckResult.Available(info)
         } else {
@@ -186,7 +222,7 @@ object UpdateManager {
      * 依次尝试 直连 → 国内镜像 各线路，任一条成功即返回；
      * 下载中断/失败时保留已下部分（断点续传），自动换下一条线路继续。
      * @param onProgress 已下载字节 / 总字节（总字节未知时为 0）
-     * @throws IOException 所有线路都失败时，携带最后一条线路的错误
+     * @throws IOException 所有线路都失败，或完整性校验（SHA-256）不通过
      */
     suspend fun download(
         context: Context,
@@ -195,6 +231,8 @@ object UpdateManager {
     ): File = withContext(Dispatchers.IO) {
         val dir = File(context.cacheDir, "updates").apply { mkdirs() }
         val target = File(dir, info.apkName)
+        // N11：清理上一次下载遗留的其它 APK / 残片，避免 cache 无限膨胀
+        cleanupStaleFiles(dir, target)
 
         val lines = buildList {
             add(Line("GitHub 直连", info.apkUrl))
@@ -209,6 +247,10 @@ object UpdateManager {
             }.exceptionOrNull()
             if (failure == null) {
                 EventLog.info(TAG, "下载完成（${line.name}）：${target.name}")
+                // N1：SHA-256 校验（Release 提供 .sha256 时才做；不通过会删除并抛异常）
+                verifyDownloaded(info, target)
+                // 下载完成，续传校验文件不再需要
+                runCatching { File(dir, "${target.name}.etag").delete() }
                 return@withContext target
             }
             lastError = failure.message ?: failure.javaClass.simpleName
@@ -218,9 +260,23 @@ object UpdateManager {
         throw IOException("所有 ${lines.size} 条下载线路均失败（最后错误：$lastError）")
     }
 
+    /** 清理 updates/ 下与本次目标无关的历史下载（旧版本 APK、其它残片）。 */
+    private fun cleanupStaleFiles(dir: File, keep: File) {
+        runCatching {
+            dir.listFiles()?.forEach { file ->
+                if (file.name == keep.name || file.name == "${keep.name}.etag") return@forEach
+                if (file.delete()) EventLog.debug(TAG, "已清理旧下载文件：${file.name}")
+            }
+        }
+    }
+
     /**
      * 单条线路的下载。若之前在同一文件留有未下完的残片（且小于目标体积），
      * 自动带 `Range` 头断点续传；服务器不支持续传时回退整包重下。
+     *
+     * 续传安全（N8）：同时带上 `If-Range`（上一次的 ETag / Last-Modified）。
+     * 若资源已变（换镜像续传、发布被覆盖），服务器会返回 200 整包，
+     * 从而避免「两段不同版本的数据拼成一个体积正确但内容损坏的文件」。
      */
     private fun fetchToFile(
         urlText: String,
@@ -228,11 +284,14 @@ object UpdateManager {
         expectSize: Long,
         onProgress: (Long, Long) -> Unit,
     ) {
+        val metaFile = File(target.parentFile, "${target.name}.etag")
+
         // 期望体积已知且存在残片时，优先断点续传
         var partial = if (expectSize > 0 && target.exists() && target.length() in 1 until expectSize) {
             target.length()
         } else {
             if (target.exists()) target.delete()
+            metaFile.delete()
             0L
         }
 
@@ -243,7 +302,10 @@ object UpdateManager {
             // identity：避免服务器对 APK 做 gzip 后 Content-Length 不可信
             conn.setRequestProperty("User-Agent", "YINPAGE-LINK")
             conn.setRequestProperty("Accept-Encoding", "identity")
-            if (partial > 0) conn.setRequestProperty("Range", "bytes=$partial-")
+            if (partial > 0) {
+                conn.setRequestProperty("Range", "bytes=$partial-")
+                readValidator(metaFile)?.let { conn.setRequestProperty("If-Range", it) }
+            }
 
             val code = conn.responseCode
             // 有残片且服务器响应 206 = 续传；响应 200 = 服务器忽略 Range，
@@ -257,6 +319,12 @@ object UpdateManager {
                 throw IOException(code.toString())
             }
             val isResume = partial > 0
+
+            // 记录本资源的校验器，供后续线路续传时用 If-Range 判定资源是否一致
+            val validator = conn.getHeaderField("ETag") ?: conn.getHeaderField("Last-Modified")
+            if (!validator.isNullOrBlank()) {
+                runCatching { metaFile.writeText(validator) }
+            }
 
             val total = if (isResume) expectSize // 206 的 Content-Length 只剩余量
             else conn.contentLengthLong.takeIf { it > 0 } ?: expectSize
@@ -284,23 +352,176 @@ object UpdateManager {
         }
     }
 
+    private fun readValidator(file: File): String? = runCatching {
+        file.takeIf { it.exists() }?.readText()?.trim()?.takeIf { it.isNotEmpty() }
+    }.getOrNull()
+
+    // ------------------------------------------------------------------ 完整性校验
+
+    /** 若 Release 附带 SHA-256 附件则下载并比对；不通过删除文件并抛异常。 */
+    private fun verifyDownloaded(info: ReleaseInfo, apk: File) {
+        if (info.apkSha256Url.isBlank()) {
+            EventLog.info(TAG, "Release 未提供 SHA-256 附件，跳过哈希校验（安装前仍有签名校验兜底）")
+            return
+        }
+        val expected = fetchSha256(info)
+        if (expected == null) {
+            EventLog.info(TAG, "SHA-256 附件下载失败，跳过哈希校验（安装前仍有签名校验兜底）")
+            return
+        }
+        val actual = fileSha256(apk)
+        if (!expected.equals(actual, ignoreCase = true)) {
+            runCatching { apk.delete() }
+            throw IOException("安装包 SHA-256 校验失败（疑似被镜像/中间人替换），已删除并拒绝安装")
+        }
+        EventLog.info(TAG, "SHA-256 校验通过")
+    }
+
+    /** 下载 `<apk>.sha256` 附件并解析出 64 位十六进制哈希（失败返回 null）。 */
+    private fun fetchSha256(info: ReleaseInfo): String? {
+        val lines = buildList {
+            add(Line("GitHub 直连", info.apkSha256Url))
+            for (m in MIRRORS) add(Line(m.name, m.prefix + info.apkSha256Url))
+        }
+        for (line in lines) {
+            val text = runCatching { fetchText(line.prefix) }.getOrElse { e ->
+                EventLog.info(TAG, "SHA-256 线路失败（${line.name}）：${e.message}")
+                null
+            } ?: continue
+            val hex = Regex("[0-9a-fA-F]{64}").find(text)?.value
+            if (hex != null) return hex.lowercase()
+        }
+        return null
+    }
+
+    private fun fetchText(urlText: String): String {
+        val conn = URL(urlText).openConnection() as HttpURLConnection
+        try {
+            conn.connectTimeout = CONNECT_TIMEOUT_MS
+            conn.readTimeout = CHECK_READ_TIMEOUT_MS
+            conn.setRequestProperty("User-Agent", "YINPAGE-LINK")
+            conn.setRequestProperty("Accept-Encoding", "identity")
+            if (conn.responseCode != 200) throw IOException("HTTP ${conn.responseCode}")
+            return conn.inputStream.bufferedReader().use { it.readText() }
+        } finally {
+            conn.disconnect()
+        }
+    }
+
+    private fun fileSha256(file: File): String? = runCatching {
+        val digest = MessageDigest.getInstance("SHA-256")
+        file.inputStream().use { input ->
+            val buffer = ByteArray(64 * 1024)
+            while (true) {
+                val n = input.read(buffer)
+                if (n < 0) break
+                digest.update(buffer, 0, n)
+            }
+        }
+        digest.digest().joinToString("") { "%02x".format(it) }
+    }.getOrNull()
+
+    private fun sha256Hex(bytes: ByteArray): String =
+        MessageDigest.getInstance("SHA-256").digest(bytes).joinToString("") { "%02x".format(it) }
+
+    /** 取一个已安装/归档包的签名指纹集合（排序后便于比较）。 */
+    private fun signerFingerprints(info: PackageInfo?): List<String> {
+        if (info == null) return emptyList()
+        val signers: Array<Signature> = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            info.signingInfo?.apkContentsSigners ?: emptyArray()
+        } else {
+            @Suppress("DEPRECATION")
+            info.signatures ?: emptyArray()
+        }
+        return signers.map { sha256Hex(it.toByteArray()) }.sorted()
+    }
+
+    private fun signatureFlags(): Int =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            PackageManager.GET_SIGNING_CERTIFICATES
+        } else {
+            @Suppress("DEPRECATION")
+            PackageManager.GET_SIGNATURES
+        }
+
+    /** 本机已安装版本的签名指纹。 */
+    private fun installedSigners(context: Context): List<String> = runCatching {
+        signerFingerprints(
+            context.packageManager.getPackageInfo(context.packageName, signatureFlags()),
+        )
+    }.getOrDefault(emptyList())
+
+    /** 下载到的 APK 归档的签名指纹。 */
+    private fun archiveSigners(context: Context, apk: File): List<String> = runCatching {
+        signerFingerprints(
+            context.packageManager.getPackageArchiveInfo(apk.absolutePath, signatureFlags()),
+        )
+    }.getOrDefault(emptyList())
+
     // ------------------------------------------------------------------ 安装
 
-    /** 调起系统安装器。Android 8+ 需已允许「安装未知应用」。 */
-    fun install(context: Context, apk: File): Boolean = runCatching {
-        val appContext = context.applicationContext
-        val uri = FileProvider.getUriForFile(
-            appContext,
-            "${appContext.packageName}.fileprovider",
-            apk,
-        )
-        val intent = Intent(Intent.ACTION_VIEW).apply {
-            setDataAndType(uri, "application/vnd.android.package-archive")
-            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_NEW_TASK)
-            // 通知系统"这是更新已安装应用"，尽量少打扰用户
-            putExtra(Intent.EXTRA_NOT_UNKNOWN_SOURCE, true)
-        }
-        appContext.startActivity(intent)
+    /**
+     * 安装前是否已允许「安装未知应用」。Android 8+ 未授权时 PackageInstaller
+     * 会**静默失败**，用户只看到"没反应"，因此必须先检查并引导（N10）。
+     */
+    fun canInstallPackages(context: Context): Boolean = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        runCatching { context.packageManager.canRequestPackageInstalls() }.getOrDefault(false)
+    } else {
         true
-    }.getOrNull() ?: false
+    }
+
+    /** 「安装未知应用」授权页（用于引导用户）。 */
+    fun installPermissionIntent(context: Context): Intent? = runCatching {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return@runCatching null
+        Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES)
+            .setData(Uri.parse("package:${context.packageName}"))
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    }.getOrNull()
+
+    /**
+     * 调起系统安装器。会依次校验：
+     *   1. 文件存在；
+     *   2. **签名与本应用一致**（不同签名无法覆盖安装，也拦截了镜像替换的恶意包）；
+     *   3. 已允许「安装未知应用」。
+     * 任一步不通过返回 false，由调用方给出对应提示。
+     */
+    fun install(context: Context, apk: File): Boolean {
+        val appContext = context.applicationContext
+        if (!apk.exists()) {
+            EventLog.info(TAG, "安装失败：APK 不存在 ${apk.absolutePath}")
+            return false
+        }
+        val self = installedSigners(appContext)
+        val downloaded = archiveSigners(appContext, apk)
+        if (self.isEmpty() || downloaded.isEmpty() || self != downloaded) {
+            EventLog.info(
+                TAG,
+                "拒绝安装：安装包签名与本应用不一致（本机=${self.size} 包=${downloaded.size}）——疑似镜像/中间人替换",
+            )
+            return false
+        }
+        if (!canInstallPackages(appContext)) {
+            EventLog.info(TAG, "未授权「安装未知应用」，需引导用户去系统设置开启")
+            return false
+        }
+        return runCatching {
+            val uri = FileProvider.getUriForFile(
+                appContext,
+                "${appContext.packageName}.fileprovider",
+                apk,
+            )
+            val intent = Intent(Intent.ACTION_VIEW).apply {
+                setDataAndType(uri, "application/vnd.android.package-archive")
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_NEW_TASK)
+                // 注：EXTRA_NOT_UNKNOWN_SOURCE 单独设置无效（需配合 EXTRA_INSTALLER_PACKAGE_NAME），
+                // 已移除该无效代码；覆盖安装交由系统安装器按包名比对处理。
+            }
+            appContext.startActivity(intent)
+            EventLog.info(TAG, "已调起系统安装器：${apk.name}")
+            true
+        }.getOrElse {
+            EventLog.info(TAG, "安装失败：${it.message}")
+            false
+        }
+    }
 }

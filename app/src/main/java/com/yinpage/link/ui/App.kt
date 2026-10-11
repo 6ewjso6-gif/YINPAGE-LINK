@@ -234,7 +234,11 @@ fun App(
                             runCatching {
                                 val clipboard = context.getSystemService(android.content.ClipboardManager::class.java)
                                 clipboard?.setPrimaryClip(
-                                    android.content.ClipData.newPlainText("YINPAGE-LINK 诊断", report),
+                                    // S4：剪贴板只放脱敏后的报告（MAC 打码），避免硬件标识泄漏
+                                    android.content.ClipData.newPlainText(
+                                        "YINPAGE-LINK 诊断",
+                                        com.yinpage.link.core.Diagnostics.redact(report),
+                                    ),
                                 )
                             }
                             Toast.makeText(

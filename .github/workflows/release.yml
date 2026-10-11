@@ -11,6 +11,11 @@
 #    RELEASE_KEY_PASS      私钥口令
 #    RELEASE_KEY_ALIAS     别名
 #  密钥不进入任何代码/文件，杜绝开源仓库泄露签名。
+#
+#  N9：所有第三方 Action 固定到 commit SHA（tag 可被上游重指，属供应链风险）。
+#  N6：发布构建用 `-PversionName=$GITHUB_REF_NAME` 把 tag 注入 versionName，
+#      与 Release 的 tag_name 同源，避免「本机版本名落后于 tag → 无限提示更新」。
+#  N7：APK 附件名统一为 `<tag>-signed.apk`（tag 本身已含 APP-t- 前缀）。
 # ============================================================================
 name: release
 
@@ -29,16 +34,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Setup JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4
         with:
           distribution: temurin
           java-version: "17"
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@ed408507eac070d1f99cc633dbcf757c94c7933a # v4
 
       # GitHub 托管 runner 自带 Android SDK（ANDROID_HOME 已预设、许可已接受），
       # 缺失的平台/构建工具由 AGP 自动补下。
@@ -50,7 +55,15 @@ jobs:
           RELEASE_KEYSTORE_B64: ${{ secrets.RELEASE_KEYSTORE_B64 }}
 
       - name: Build & sign release APK
-        run: ./gradlew :app:assembleRelease --no-daemon --console=plain
+        run: |
+          # N6：仅在 tag 触发时注入 versionName，使其与 Release tag 严格一致；
+          # 手动 workflow_dispatch 的 ref 是分支名，不能当版本号，走默认值。
+          if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            ./gradlew :app:assembleRelease --no-daemon --console=plain \
+              -PversionName="${GITHUB_REF_NAME}"
+          else
+            ./gradlew :app:assembleRelease --no-daemon --console=plain
+          fi
         env:
           RELEASE_KEYSTORE: ${{ github.workspace }}/keystore-release.jks
           RELEASE_KEYSTORE_PASS: ${{ secrets.RELEASE_KEYSTORE_PASS }}
@@ -62,24 +75,54 @@ jobs:
           APKSIGNER="${ANDROID_HOME}/build-tools/$(ls "${ANDROID_HOME}/build-tools" | sort -V | tail -1)/apksigner"
           "$APKSIGNER" verify --print-certs app/build/outputs/apk/release/app-release.apk | head -4
 
-      - name: Prepare APK name (APP-t-<tag>-signed.apk)
+      - name: Prepare APK name (<tag>-signed.apk)
         run: |
-          TAG="${GITHUB_REF_NAME}"
-          APK="app/build/outputs/apk/release/APP-t-${TAG}-signed.apk"
+          # N7：tag 本身已是 APP-t-v*.*，直接用 <tag>-signed.apk，避免 APP-t-APP-t- 双前缀。
+          if [ "${GITHUB_REF_TYPE}" = "tag" ]; then NAME="${GITHUB_REF_NAME}"; else NAME="APP-t-latest"; fi
+          APK="app/build/outputs/apk/release/${NAME}-signed.apk"
           cp app/build/outputs/apk/release/app-release.apk "$APK"
+          # N1：随包发布 SHA-256 附件（<apk>.sha256），App 内下载后据此做哈希校验，
+          # 与安装前的签名校验形成双重防线。
+          ( cd "$(dirname "$APK")" && sha256sum "$(basename "$APK")" | awk '{print $1}' > "$(basename "$APK").sha256" )
           echo "APK_PATH=$APK" >> "$GITHUB_ENV"
+          echo "SHA_PATH=${APK}.sha256" >> "$GITHUB_ENV"
 
       - name: Upload signed APK (manual run, no Release)
         if: github.event_name == 'workflow_dispatch'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: APP-t-latest-signed
-          path: ${{ env.APK_PATH }}
+          path: |
+            ${{ env.APK_PATH }}
+            ${{ env.SHA_PATH }}
 
       - name: Create GitHub Release (tag push)
         if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2
         with:
-          files: ${{ env.APK_PATH }}
+          files: |
+            ${{ env.APK_PATH }}
+            ${{ env.SHA_PATH }}
+          body: |
+            ## YINPAGE-LINK v0.12 更新公告
+
+            本次为安全与稳定性专项更新，修复了代码审查报告中列出的全部 32 项缺陷（11 项安全 / 21 项功能）。
+
+            ### 安全
+            - 跨进程广播增加共享令牌鉴权，第三方 App 无法再伪造耳机控制指令或状态（S1/S2）
+            - 应用内更新增加「签名一致性 + SHA-256」双重校验，拦截镜像/中间人替换（N1）
+            - 模块设备归属判定改为 Fail-Closed，不再误伤真实小米耳机（S3）
+            - 日志改私有目录、剪贴板与诊断报告脱敏；备份规则排除含蓝牙 MAC 的配置（S4/S5/S6/S8/S9）
+            - 删除多余危险权限、隐式广播改动态注册、CI Action 固定到 commit SHA（S10/N9）
+
+            ### 稳定性 / 功能
+            - 修复握手活性看门狗竞态导致的随机连接失败（N2）
+            - 连接计划恢复 BLE 开关门控，RFCOMM 超时语义统一（N3/N4/N5）
+            - 版本号由发布 tag 注入，杜绝「装完仍无限提示更新」（N6/F30）
+            - 安装前引导「安装未知应用」授权，并自动清理旧安装包（N10/N11/N8）
+            - 设备列表连接中不再重复触发连接、协议候选按优先级选择（F14/F17/F18）
+            - 模块 Hook 反射更稳健，删除无调用点的死代码（F24/F25/F26/F27/F29）
+
+            提示：Android 8+ 首次安装需在系统设置里允许「安装未知应用」；升级不会清除数据。
           draft: false
           prerelease: false
