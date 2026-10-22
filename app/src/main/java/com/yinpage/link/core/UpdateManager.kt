@@ -377,21 +377,20 @@ object UpdateManager {
         EventLog.info(TAG, "SHA-256 校验通过")
     }
 
-    /** 下载 `<apk>.sha256` 附件并解析出 64 位十六进制哈希（失败返回 null）。 */
+    /**
+     * 下载 `<apk>.sha256` 附件并解析出 64 位十六进制哈希（失败返回 null）。
+     *
+     * v0.14：**只走 GitHub 直连，不挂镜像**。
+     * 哈希的意义是防镜像/中间人替换；如果哈希本身也从镜像取，攻击者可以
+     * 同时替换 APK 与哈希，"双重校验"就退化成只剩签名一重。直连失败时宁可
+     * 跳过哈希（日志记录），也不能用不可信来源的哈希。
+     */
     private fun fetchSha256(info: ReleaseInfo): String? {
-        val lines = buildList {
-            add(Line("GitHub 直连", info.apkSha256Url))
-            for (m in MIRRORS) add(Line(m.name, m.prefix + info.apkSha256Url))
+        val text = runCatching { fetchText(info.apkSha256Url) }.getOrElse { e ->
+            EventLog.info(TAG, "SHA-256 直连获取失败（不降级到镜像）：${e.message}")
+            return null
         }
-        for (line in lines) {
-            val text = runCatching { fetchText(line.prefix) }.getOrElse { e ->
-                EventLog.info(TAG, "SHA-256 线路失败（${line.name}）：${e.message}")
-                null
-            } ?: continue
-            val hex = Regex("[0-9a-fA-F]{64}").find(text)?.value
-            if (hex != null) return hex.lowercase()
-        }
-        return null
+        return Regex("[0-9a-fA-F]{64}").find(text)?.value?.lowercase()
     }
 
     private fun fetchText(urlText: String): String {

@@ -9,6 +9,7 @@ import com.yinpage.link.protocol.PodCommand
 import com.yinpage.link.protocol.PodTransport
 import com.yinpage.link.protocol.PodTransportException
 import com.yinpage.link.protocol.PodUpdate
+import com.yinpage.link.protocol.ProbeableTransport
 import com.yinpage.link.protocol.ServiceNotFoundException
 import com.yinpage.link.protocol.TransportFrame
 import com.yinpage.link.protocol.TransportIoException
@@ -151,10 +152,16 @@ class SessionCoordinator(
         return when (kind) {
             TransportKind.RFCOMM -> listOf(TransportKind.RFCOMM)
             TransportKind.BLE -> listOf(TransportKind.BLE)
-            TransportKind.AUTO -> if (ConfigManager.get().current.bleTransport) {
-                listOf(TransportKind.RFCOMM, TransportKind.BLE)
-            } else {
-                listOf(TransportKind.RFCOMM)
+            TransportKind.AUTO -> {
+                // 配置尚未初始化时 ConfigManager.get() 会抛 IllegalStateException，
+                // 这里兜底为「只用 SPP」，不让一次配置读取失败把连接整体打断。
+                val bleEnabled = runCatching { ConfigManager.get().current.bleTransport }
+                    .getOrDefault(false)
+                if (bleEnabled) {
+                    listOf(TransportKind.RFCOMM, TransportKind.BLE)
+                } else {
+                    listOf(TransportKind.RFCOMM)
+                }
             }
         }
     }
@@ -230,9 +237,72 @@ class SessionCoordinator(
         this.activeTransport = channel
         this.ready = false
 
-        // ---- 1. 建立通道 ----
-        try {
-            withTimeout(CONNECT_WATCHDOG_MS) { channel.connect(listener) }
+        // ---- 1. 握手帧先构造好 ----
+        // 它要在**每个候选通道**上重复发送，因此必须能在「建链 + 活性确认」
+        // 的原子尝试单元里执行，不能再等 connect 返回后才构造。
+        val handshake = try {
+            codec.handshake()
+        } catch (error: Throwable) {
+            if (error is CancellationException) throw error
+            teardown("握手帧构造失败")
+            return ConnectResult.Failure("协议握手帧构造失败：${describe(error)}")
+        }
+
+        /** 最近一次活性确认失败的原因，用于最终失败提示（不再只报"超时"）。 */
+        var probeFailure: String? = null
+
+        /**
+         * 活性确认：在**当前已建立的候选**上发握手帧并等待首帧。
+         * 返回 false = 该候选是哑通道，由传输层关掉并换下一个 UUID。
+         *
+         * 注：firstData 在通道建立**之前**就已就绪（见上），设备若在握手前
+         * 主动推送数据，await() 会立即返回，不再消耗 4 秒窗口。
+         */
+        suspend fun probe(target: PodTransport): Boolean {
+            for ((index, frame) in handshake.withIndex()) {
+                if (frame.isEmpty()) continue
+                try {
+                    target.write(frame)
+                } catch (error: Throwable) {
+                    if (error is CancellationException) throw error
+                    if (error is MissingPermissionException) throw error
+                    val mapped = mapError(error, kind)
+                    probeFailure = "握手第 ${index + 1}/${handshake.size} 帧发送失败（${human(mapped, kind)}）"
+                    return false
+                }
+            }
+
+            if (generation.get() != myGeneration) {
+                probeFailure = "连接已被新的连接请求取代"
+                return false
+            }
+
+            // 无握手帧的协议（handshake 为空）不需要活性确认，直接通过。
+            if (handshake.isEmpty()) return true
+
+            val responded = withTimeoutOrNull(HANDSHAKE_RESPONSE_WINDOW_MS) { firstData.await() } != null
+            if (!responded) {
+                probeFailure =
+                    "通道已建立，但握手帧发出后 ${HANDSHAKE_RESPONSE_WINDOW_MS / 1000} 秒内无任何数据返回——" +
+                        "大概率连到了非控制通道（哑串口）"
+                return false
+            }
+            return true
+        }
+
+        // ---- 2. 建立通道 + 逐候选活性确认 ----
+        // ProbeableTransport（RFCOMM）把「建链 + probe」放进 UUID 循环：
+        // 某个候选连上却不应答，会自动关掉并试下一个候选；只有全部候选都失败
+        // 才会切到计划里的下一种传输类型（BLE）。
+        val connected = try {
+            withTimeout(CONNECT_WATCHDOG_MS) {
+                if (channel is ProbeableTransport) {
+                    channel.connectWithProbe(listener) { target -> probe(target) }
+                } else {
+                    channel.connect(listener)
+                    probe(channel)
+                }
+            }
         } catch (timeout: TimeoutCancellationException) {
             teardown("连接超时")
             val mapped = TransportTimeoutException("${kind.label} 连接超过 ${CONNECT_WATCHDOG_MS / 1000} 秒未完成")
@@ -246,61 +316,20 @@ class SessionCoordinator(
             return ConnectResult.Failure(human(mapped, kind), mapped)
         }
 
-        if (generation.get() != myGeneration) {
-            teardown("连接已被新请求取代")
-            return ConnectResult.Failure("连接已被新的连接请求取代")
-        }
-
-        // ---- 2. 发送握手帧 ----
-        val handshake = try {
-            codec.handshake()
-        } catch (error: Throwable) {
-            if (error is CancellationException) throw error
-            teardown("握手帧构造失败")
-            return ConnectResult.Failure("协议握手帧构造失败：${describe(error)}")
-        }
-
-        for ((index, frame) in handshake.withIndex()) {
-            if (frame.isEmpty()) continue
-            try {
-                channel.write(frame)
-            } catch (error: Throwable) {
-                if (error is CancellationException) throw error
-                val mapped = mapError(error, kind)
-                teardown("握手发送失败")
-                val reason = "握手第 ${index + 1}/${handshake.size} 帧发送失败（${human(mapped, kind)}）"
-                return ConnectResult.Failure(reason, mapped)
-            }
-        }
-
-        if (generation.get() != myGeneration) {
-            teardown("连接已被新请求取代")
-            return ConnectResult.Failure("连接已被新的连接请求取代")
-        }
-
-        // ---- 2.5 握手活性看门狗 ----
-        // 连上 ≠ 控制通道：设备常暴露多个 RFCOMM 服务（标准串口 00001101 只是
-        // 哑串口，真正的控制服务可能是厂商自定义 UUID，如 0000A100-...CKCTRL）。
-        // 握手帧发出后若 HANDSHAKE_RESPONSE_WINDOW_MS 内**一个字节都没收到**，
-        // 判定连到了非控制通道，返回失败让外层尝试下一个候选（下个 UUID / BLE）。
-        // 设备回任何数据（哪怕无法解析）都视为通道正确，避免在真通道上误换。
-        // 注：firstData / firstDataSignal 已在通道建立前赋值（见上），若设备在
-        // 握手前就已推送数据，await() 会立即返回，不再消耗 4 秒窗口。
-        // 无握手帧的协议（handshake 为空）不需要活性确认，直接通过。
-        val responded = handshake.isEmpty() || try {
-            withTimeoutOrNull(HANDSHAKE_RESPONSE_WINDOW_MS) { firstData.await() } != null
-        } catch (cancel: CancellationException) {
-            teardown("连接被取消")
-            throw cancel
-        }
-        if (!responded) {
+        if (!connected) {
             teardown("握手后无数据响应")
-            val mapped = TransportTimeoutException(
-                "通道已建立，但握手帧发出后 ${HANDSHAKE_RESPONSE_WINDOW_MS / 1000} 秒内无任何数据返回——" +
-                    "大概率连到了非控制通道（哑串口）",
-            )
+            val detail = probeFailure
+                ?: "通道已建立，但握手帧发出后 ${HANDSHAKE_RESPONSE_WINDOW_MS / 1000} 秒内无任何数据返回——" +
+                    "大概率连到了非控制通道（哑串口）"
+            val mapped = TransportTimeoutException(detail)
             return ConnectResult.Failure(human(mapped, kind), mapped)
         }
+
+        if (generation.get() != myGeneration) {
+            teardown("连接已被新请求取代")
+            return ConnectResult.Failure("连接已被新的连接请求取代")
+        }
+
         EventLog.debug(TAG, "${channel.name} 握手活性确认：已收到首帧数据")
 
         // ---- 3. 标记就绪 ----

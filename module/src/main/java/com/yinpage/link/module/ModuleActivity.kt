@@ -28,6 +28,9 @@ class ModuleActivity : Activity() {
         super.onCreate(savedInstanceState)
         ModuleConfigStore.localPrefs(this)
         ModuleConfigStore.reload()
+        // IPC 令牌只允许在本进程生成：Hook 进程各自"读到空就生成"会互相覆盖，
+        // 导致各进程令牌不一致、合法广播被丢弃（见 ModuleConfigStore.reload 的说明）。
+        ModuleConfigStore.ensureIpcToken()
         setContentView(buildUi())
     }
 

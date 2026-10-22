@@ -54,6 +54,29 @@ interface PodTransport {
     val maxFrameSize: Int
 }
 
+/**
+ * 可选能力：一个传输实例内含**多个候选通道**（典型为 SPP 的多 UUID /
+ * secure-insecure 组合），需要把「建链 + 握手 + 活性确认」当成一个原子尝试
+ * 单元逐个试。
+ *
+ * 为什么需要：[PodTransport.connect] 一旦返回成功，上层就认为通道可用；
+ * 但 SPP 的标准串口 UUID 可能只是"哑通道"（连得上、发得出、收不到）。
+ * 若不在这里继续轮换，活性确认失败后只能整体切到别的传输类型（BLE），
+ * 永远试不到下一个 UUID。
+ */
+interface ProbeableTransport : PodTransport {
+    /**
+     * 依次尝试候选通道，每建立一个就调用 [probe] 做活性确认：
+     *  - [probe] 返回 true：保留该候选并返回 true（连接与读循环均已就绪）；
+     *  - [probe] 返回 false：关闭该候选，继续下一个；
+     *  - 所有候选都失败：抛 [PodTransportException]（带完整尝试记录）。
+     */
+    suspend fun connectWithProbe(
+        listener: TransportListener,
+        probe: suspend (PodTransport) -> Boolean,
+    ): Boolean
+}
+
 // ------------------------------- 异常 -------------------------------
 
 sealed class PodTransportException(message: String, cause: Throwable? = null) :

@@ -9,7 +9,7 @@ import com.yinpage.link.protocol.Bytes
 import com.yinpage.link.protocol.DeviceUnavailableException
 import com.yinpage.link.protocol.MissingPermissionException
 import com.yinpage.link.protocol.PodTransport
-import com.yinpage.link.protocol.PodTransportException
+import com.yinpage.link.protocol.ProbeableTransport
 import com.yinpage.link.protocol.ServiceNotFoundException
 import com.yinpage.link.protocol.TransportFrame
 import com.yinpage.link.protocol.TransportIoException
@@ -52,7 +52,7 @@ import java.util.concurrent.atomic.AtomicReference
  */
 class RfcommTransport(
     private val address: String,
-) : PodTransport {
+) : ProbeableTransport {
 
     override val name: String = "RFCOMM"
 
@@ -89,6 +89,26 @@ class RfcommTransport(
     // ------------------------------------------------------------------ 连接
 
     override suspend fun connect(listener: TransportListener) {
+        // 没有活性回调 = "连上即成功"，与其他传输的语义保持一致。
+        if (!connectWithProbe(listener) { true }) {
+            throw ServiceNotFoundException("所有 SPP UUID 候选均未通过活性确认")
+        }
+    }
+
+    /**
+     * 逐个候选执行「建链 → 活性确认」，**活性确认失败时继续下一个 UUID**。
+     *
+     * v0.14 修复：此前 `openSocket` 只在 connect 抛错时才换 UUID；"连上但无响应"
+     * 的判定在协调器的 4 秒看门狗里，失败后直接切到 BLE，标准串口这种哑通道会
+     * 让厂商控制 UUID（0000A100-…CKCTRL）永远没有尝试机会。
+     *
+     * 预算：所有候选共享 [CONNECT_TIMEOUT_MS] 总预算，单个候选的 connect 再额外
+     * 限制为 [PER_CANDIDATE_CONNECT_MS]，避免第一个候选卡死吃满全部预算。
+     */
+    override suspend fun connectWithProbe(
+        listener: TransportListener,
+        probe: suspend (PodTransport) -> Boolean,
+    ): Boolean {
         this.listener = listener
         this.closed = false
         this.closeNotified = false
@@ -111,139 +131,174 @@ class RfcommTransport(
 
         EventLog.info(TAG, "开始连接 $address（bondState=${bondText(device)}）")
 
-        // N4 修复：不再在外层叠加 withTimeout。openSocket 内部持有**全局总预算**
-        // 并在每个候选上用 join(剩余预算) 约束，语义单一且不会出现「外层已超时返回、
-        // 内层工作线程仍在后台跑完剩余候选」的最坏 N×2×15 秒。
-        val opened = try {
-            withContext(Dispatchers.IO) { openSocket(device) }
-        } catch (error: PodTransportException) {
-            throw error
-        } catch (error: SecurityException) {
-            throw MissingPermissionException("BLUETOOTH_CONNECT")
-        } catch (error: IOException) {
-            throw TransportIoException("RFCOMM 连接失败：${describe(error)}", error)
-        }
-
-        if (closed) {
-            runCatching { opened.close() }
-            throw TransportIoException("通道在建立过程中已被关闭")
-        }
-
-        // BluetoothSocket.setSoTimeout 属于 @hide API，SDK 存根里不可见，
-        // 因此用反射调用；失败不影响连接（只是读循环改为阻塞式）。
-        runCatching {
-            opened.javaClass
-                .getMethod("setSoTimeout", Int::class.javaPrimitiveType)
-                .invoke(opened, SO_TIMEOUT_MS)
-        }.onFailure { e ->
-            EventLog.debug(TAG, "setSoTimeout 反射调用失败（忽略）：${e.javaClass.simpleName} ${e.message}")
-        }
-        socket = opened
-        connected = true
-        EventLog.info(TAG, "已连接 $address（soTimeout=${SO_TIMEOUT_MS}ms，最大帧长=不限）")
-        listener.onTransportReady()
-        startReadLoop(opened)
-    }
-
-    /**
-     * 逐个 SPP UUID + secure/insecure 组合尝试建链，**共享一个全局总预算**。
-     *
-     * N4 修复：每个候选不再各自 `join(15s)`（候选数 N 时最坏 N×2×15 秒），而是
-     * 以 `System.nanoTime()` 计算剩余预算，`join(剩余)`；预算耗尽即抛
-     * [TransportTimeoutException]，保证整个建链在 [CONNECT_TIMEOUT_MS] 内结束，
-     * 且超时后前台协程返回时后台不会再有工作线程继续 connect。
-     * 全部候选正常失败时抛携带完整尝试记录的 [ServiceNotFoundException]。
-     */
-    private fun openSocket(device: BluetoothDevice): BluetoothSocket {
         val uuids = AppState.SPP_UUID_CANDIDATES.mapNotNull { text ->
             runCatching { UUID.fromString(text) }.getOrNull()
         }
         val attempts = mutableListOf<String>()
-        var lastError: String = "无"
-        // 全局截止时间：所有候选共享，避免内外层超时语义冲突。
+        var lastError = "无"
         val deadlineNanos = System.nanoTime() + CONNECT_TIMEOUT_MS * 1_000_000L
 
-        for (uuid in uuids) {
-            for (insecure in listOf(false, true)) {
-                if (closed) throw TransportIoException("通道已关闭")
+        return withContext(Dispatchers.IO) {
+            for (uuid in uuids) {
+                for (insecure in listOf(false, true)) {
+                    if (closed) throw TransportIoException("通道已关闭")
 
-                val remainingMs = (deadlineNanos - System.nanoTime()) / 1_000_000L
-                if (remainingMs <= 0L) {
-                    throw TransportTimeoutException(
-                        "RFCOMM 连接 ${CONNECT_TIMEOUT_MS / 1000} 秒总预算已耗尽（$device）"
-                    )
-                }
+                    val remainingMs = (deadlineNanos - System.nanoTime()) / 1_000_000L
+                    if (remainingMs <= 0L) {
+                        throw TransportTimeoutException(
+                            "RFCOMM 连接 ${CONNECT_TIMEOUT_MS / 1000} 秒总预算已耗尽（$device）"
+                        )
+                    }
 
-                val label = "${uuid.toString().substring(0, 8)}${if (insecure) "/insecure" else "/secure"}"
-                val candidate = try {
-                    if (insecure) device.createInsecureRfcommSocketToServiceRecord(uuid)
-                    else device.createRfcommSocketToServiceRecord(uuid)
-                } catch (error: SecurityException) {
-                    throw MissingPermissionException("BLUETOOTH_CONNECT")
-                } catch (error: IOException) {
-                    lastError = describe(error)
-                    attempts += "$label:建socket失败"
-                    // 用 info 级别：这些是用户排查"功能不生效"的第一手信息，
-                    // 不应被 debug 开关隐藏
-                    EventLog.info(TAG, "$label 创建 socket 失败：${describe(error)}")
-                    continue
-                }
+                    val label =
+                        "${uuid.toString().substring(0, 8)}${if (insecure) "/insecure" else "/secure"}"
+                    val sliceMs = minOf(remainingMs, PER_CANDIDATE_CONNECT_MS)
 
-                if (closed) {
-                    runCatching { candidate.close() }
-                    throw TransportIoException("通道已关闭")
-                }
+                    val candidate = openCandidate(device, uuid, insecure, sliceMs, label, attempts)
+                        ?: continue
 
-                // 阻塞式 connect 无法被协程取消：withTimeout 超时只是抛异常，
-                // native 的 connect 会继续跑、最终把 socket 返回给一个已死的协程，
-                // 且没人 close → 反复连接（耳机关机是常见场景）持续泄漏 FD。
-                // 改用独立线程 + join(剩余预算)：超时后 close() 打断 native connect。
-                //
-                // N5 修复：权限异常槽改为**每个候选独立**的 AtomicReference，
-                // 不再用实例字段共享——避免上一轮「已超时被 close」的线程稍后才抛
-                // SecurityException 并把异常误报给下一个候选。
-                val permRef = AtomicReference<MissingPermissionException?>(null)
-                val connectWorker = Thread(
-                    {
-                        runCatching { candidate.connect() }.onFailure { connectError ->
-                            if (connectError is SecurityException) {
-                                // 权限异常要冒泡，不能吞掉（与旧行为一致）
-                                permRef.set(MissingPermissionException("BLUETOOTH_CONNECT"))
-                                EventLog.info(TAG, "SPP 连接被权限拦截：${connectError.message}")
-                            }
-                        }
-                    },
-                    "yinpage-rfcomm-connect",
-                ).apply { isDaemon = true }
-                connectWorker.start()
-                connectWorker.join(remainingMs)
-                if (connectWorker.isAlive) {
-                    runCatching { candidate.close() }
-                    lastError = "连接超时（总预算 ${CONNECT_TIMEOUT_MS / 1000} 秒）"
-                    attempts += "$label:超时"
-                    EventLog.info(TAG, "$label 连接超时（已 close 打断）")
-                    continue
+                    if (closed) {
+                        runCatching { candidate.close() }
+                        throw TransportIoException("通道已关闭")
+                    }
+
+                    // BluetoothSocket.setSoTimeout 属于 @hide API，SDK 存根里不可见，
+                    // 因此用反射调用；失败不影响连接（只是读循环改为阻塞式）。
+                    runCatching {
+                        candidate.javaClass
+                            .getMethod("setSoTimeout", Int::class.javaPrimitiveType)
+                            .invoke(candidate, SO_TIMEOUT_MS)
+                    }.onFailure { e ->
+                        EventLog.debug(TAG, "setSoTimeout 反射调用失败（忽略）：${e.javaClass.simpleName} ${e.message}")
+                    }
+
+                    // 先挂上 socket 并启动读循环：probe 要写握手帧、并等待首帧到达。
+                    socket = candidate
+                    connected = true
+                    startReadLoop(candidate)
+
+                    val verified = try {
+                        probe(this@RfcommTransport)
+                    } catch (cancel: CancellationException) {
+                        discardCandidate(candidate)
+                        throw cancel
+                    } catch (error: Throwable) {
+                        EventLog.info(TAG, "$label 活性确认异常：${describe(error)}")
+                        false
+                    }
+
+                    if (closed) {
+                        discardCandidate(candidate)
+                        throw TransportIoException("通道在活性确认期间被关闭")
+                    }
+
+                    if (verified) {
+                        EventLog.info(
+                            TAG,
+                            "SPP 通道建立成功：$label（soTimeout=${SO_TIMEOUT_MS}ms，最大帧长=不限）",
+                        )
+                        listener.onTransportReady()
+                        return@withContext true
+                    }
+
+                    // 连上却没人应答 → 哑通道：关掉换下一个 UUID，
+                    // 而不是直接放弃 SPP 去建 BLE。
+                    discardCandidate(candidate)
+                    attempts += "$label:握手无响应"
+                    lastError = "通道已建立但握手后无数据返回（疑似哑通道）"
+                    EventLog.info(TAG, "$label 握手无响应，已关闭并尝试下一个候选")
                 }
-                val permFailure = permRef.get()
-                if (permFailure != null) {
-                    runCatching { candidate.close() }
-                    throw permFailure
-                }
-                if (candidate.isConnected) {
-                    EventLog.info(TAG, "SPP 通道建立成功：$label")
-                    return candidate
-                }
-                // 连接失败但未抛异常（isConnected=false）
-                lastError = "连接失败（未知原因）"
-                attempts += "$label:连接失败"
-                EventLog.info(TAG, "$label 连接失败（isConnected=false）")
-                runCatching { candidate.close() }
             }
+
+            throw ServiceNotFoundException(
+                "已尝试 ${attempts.size} 种 SPP UUID/方式（${attempts.joinToString("，")}），最后错误=$lastError"
+            )
+        }
+    }
+
+    /**
+     * 打开单个候选 socket（secure / insecure），最多等待 [sliceMs]。
+     *
+     * 失败返回 null 并把原因记入 [attempts]；权限异常直接抛出（不能吞）。
+     *
+     * 阻塞式 connect 无法被协程取消：withTimeout 超时只是抛异常，native 的
+     * connect 会继续跑、最终把 socket 返回给一个已死的协程，且没人 close →
+     * 反复连接（耳机关机是常见场景）持续泄漏 FD。因此用独立线程 +
+     * `join(切片预算)`，超时后 close() 打断 native connect。
+     *
+     * N5：权限异常槽每个候选独立（局部 AtomicReference），避免上一轮
+     * 「已超时被 close」的线程稍后才抛 SecurityException 并误报给下一个候选。
+     */
+    private fun openCandidate(
+        device: BluetoothDevice,
+        uuid: UUID,
+        insecure: Boolean,
+        sliceMs: Long,
+        label: String,
+        attempts: MutableList<String>,
+    ): BluetoothSocket? {
+        val candidate = try {
+            if (insecure) device.createInsecureRfcommSocketToServiceRecord(uuid)
+            else device.createRfcommSocketToServiceRecord(uuid)
+        } catch (error: SecurityException) {
+            throw MissingPermissionException("BLUETOOTH_CONNECT")
+        } catch (error: IOException) {
+            attempts += "$label:建socket失败"
+            // 用 info 级别：这些是用户排查"功能不生效"的第一手信息，
+            // 不应被 debug 开关隐藏
+            EventLog.info(TAG, "$label 创建 socket 失败：${describe(error)}")
+            return null
         }
 
-        throw ServiceNotFoundException(
-            "已尝试 ${attempts.size} 种 SPP UUID/方式（${attempts.joinToString("，")}），最后错误=$lastError"
-        )
+        if (closed) {
+            runCatching { candidate.close() }
+            throw TransportIoException("通道已关闭")
+        }
+
+        val permRef = AtomicReference<MissingPermissionException?>(null)
+        val connectWorker = Thread(
+            {
+                runCatching { candidate.connect() }.onFailure { connectError ->
+                    if (connectError is SecurityException) {
+                        // 权限异常要冒泡，不能吞掉
+                        permRef.set(MissingPermissionException("BLUETOOTH_CONNECT"))
+                        EventLog.info(TAG, "SPP 连接被权限拦截：${connectError.message}")
+                    }
+                }
+            },
+            "yinpage-rfcomm-connect",
+        ).apply { isDaemon = true }
+        connectWorker.start()
+        connectWorker.join(sliceMs)
+        if (connectWorker.isAlive) {
+            runCatching { candidate.close() }
+            attempts += "$label:超时"
+            EventLog.info(TAG, "$label 连接超时（${sliceMs}ms，已 close 打断）")
+            return null
+        }
+        permRef.get()?.let { failure ->
+            runCatching { candidate.close() }
+            throw failure
+        }
+        if (candidate.isConnected) return candidate
+        // 连接失败但未抛异常（isConnected=false）
+        attempts += "$label:连接失败"
+        EventLog.info(TAG, "$label 连接失败（isConnected=false）")
+        runCatching { candidate.close() }
+        return null
+    }
+
+    /**
+     * 丢弃一个未通过活性确认的候选：先作废读循环代次，避免 socket.close()
+     * 触发读异常后被误报成"通道断开"（上层会以为真通道掉了）。
+     */
+    private fun discardCandidate(target: BluetoothSocket) {
+        readGeneration++
+        readJob?.cancel()
+        readJob = null
+        connected = false
+        socket = null
+        runCatching { target.close() }
     }
 
     // ------------------------------------------------------------------ 读循环
@@ -359,8 +414,15 @@ class RfcommTransport(
     private companion object {
         const val TAG = "RFCOMM"
 
-        /** 建链超时（含 SDP 查询），与任务约定一致：15 秒。 */
+        /** 建链超时（含 SDP 查询），与任务约定一致：15 秒（所有候选共享）。 */
         const val CONNECT_TIMEOUT_MS = 15_000L
+
+        /**
+         * 单个候选建链的时间上限。为什么要单独限时：6 个 UUID × 2 种方式，
+         * 若第一个候选阻塞到总预算耗尽，后面的候选（包括厂商控制 UUID）
+         * 就永远没有尝试机会——这正是 v0.12 报告里"SDP 只有哑串口"的后果。
+         */
+        const val PER_CANDIDATE_CONNECT_MS = 5_000L
 
         /** read() 的阻塞上限，用于让读循环能周期性检查取消 / 关闭。 */
         const val SO_TIMEOUT_MS = 700

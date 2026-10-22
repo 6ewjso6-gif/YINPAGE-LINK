@@ -25,12 +25,17 @@ captures/
 local.properties
 probe.txt
 
-# 本机自动生成的 debug 签名（由 app/build.gradle.kts 指向 .android/）
-.android/
+# 本机自动生成的 debug 签名目录（由 app/module build.gradle.kts 指向 .android/）
+# 仅仓库内的通用 debug keystore 例外入库，见文件末尾
+.android/*
 
 # 签名（绝不入库）
 *.jks
 *.keystore
+
+# 例外：debug keystore 是 Android 公开通用调试密钥（storepass/keypass=android），
+# 不含任何发布密钥；入库后新机器 ./build.sh 可直接构建，无需本地生成。
+!.android/debug.keystore
 keystore.properties
 
 # 系统

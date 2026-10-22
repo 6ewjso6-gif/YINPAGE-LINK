@@ -127,13 +127,12 @@ object ModuleConfigStore {
     /** 从 SharedPreferences 重新读取（配置变化时由框架通知）。 */
     fun reload() {
         val p = prefs ?: return
-        // 鉴权令牌：首次读取为空时生成并持久化；各进程读同一份 remote prefs，
-        // 因此令牌在整个模块内保持一致。
-        var token = p.getString(K_IPC_TOKEN, "").orEmpty().trim()
-        if (token.isBlank()) {
-            token = generateIpcToken()
-            runCatching { p.edit().putString(K_IPC_TOKEN, token).apply() }
-        }
+        // 鉴权令牌：**只读**，绝不在 Hook 进程里生成。
+        // LSPosed 的 remote preferences 没有跨进程原子写：多个进程同时"读到空就生成"
+        // 会互相覆盖，结果各自缓存不同令牌 → 合法广播全部被对方丢弃（且时好时坏）。
+        // 令牌唯一由模块 App 进程通过 [ensureIpcToken] 生成并落盘，其余进程只读；
+        // 读到空值时 IPC 按"鉴权不通过"处理（fail-closed），不会退化成无鉴权。
+        val token = p.getString(K_IPC_TOKEN, "").orEmpty().trim()
         cachedIpcToken = token
         _config.value = ModuleConfig(
             fakeDeviceId = (p.getString(K_FAKE_ID, null) ?: ModuleConfig.DEFAULT_FAKE_DEVICE_ID)
@@ -152,25 +151,37 @@ object ModuleConfigStore {
     private var cachedIpcToken: String? = null
 
     /**
-     * 当前跨进程鉴权令牌。若尚未生成（例如模块 App 从未打开、remote prefs 里没有），
-     * 这里兜底生成一次并尽量持久化，保证同一进程内收发双方一致。
+     * **仅模块 App 进程调用**：首次生成并持久化 IPC 令牌。
+     *
+     * 为什么只有写侧能生成：见 [reload] 的说明——多进程并发"首次生成"会互相覆盖。
+     * 这里用 `commit()` 同步落盘，保证随后启动的 Hook 进程立刻能读到同一个值。
      */
-    fun ipcToken(): String {
-        cachedIpcToken?.let { if (it.isNotBlank()) return it }
-        val existing = _config.value.ipcToken
+    fun ensureIpcToken() {
+        val p = prefs ?: return
+        val existing = p.getString(K_IPC_TOKEN, "").orEmpty().trim()
         if (existing.isNotBlank()) {
             cachedIpcToken = existing
-            return existing
+            if (_config.value.ipcToken != existing) {
+                _config.value = _config.value.copy(ipcToken = existing)
+            }
+            return
         }
-        synchronized(this) {
-            cachedIpcToken?.let { if (it.isNotBlank()) return it }
-            val token = generateIpcToken()
-            cachedIpcToken = token
-            _config.value = _config.value.copy(ipcToken = token)
-            runCatching { prefs?.edit()?.putString(K_IPC_TOKEN, token)?.apply() }
-            return token
-        }
+        val token = generateIpcToken()
+        runCatching { p.edit().putString(K_IPC_TOKEN, token).commit() }
+        cachedIpcToken = token
+        _config.value = _config.value.copy(ipcToken = token)
     }
+
+    /**
+     * 当前跨进程鉴权令牌。
+     *
+     * ⚠️ 不再"兜底生成"：读不到就返回空串，IPC 收发双方都会因令牌为空而拒绝
+     * （[com.yinpage.link.module.ipc.ModuleIpc.verifyToken] 明确把空令牌视为不通过）。
+     * 这样宁可暂时不同步状态，也不会出现"各进程各自生成、互相不认"的随机故障。
+     */
+    fun ipcToken(): String = cachedIpcToken?.takeIf { it.isNotBlank() }
+        ?: _config.value.ipcToken.takeIf { it.isNotBlank() }
+        ?: ""
 
     /** 生成 128 位随机令牌（32 位十六进制）。 */
     private fun generateIpcToken(): String {
