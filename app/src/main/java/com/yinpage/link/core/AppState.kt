@@ -106,6 +106,9 @@ object AppState {
         this.coordinator = coordinator
     }
 
+    /** 当前活动通道名（"RFCOMM"/"BLE"），未连接为 null（诊断报告使用）。 */
+    fun activeTransportName(): String? = coordinator?.activeTransportName
+
     private var initialized = false
 
     // ------------------------------------------------------------------ 初始化

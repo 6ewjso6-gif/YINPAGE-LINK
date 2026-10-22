@@ -13,6 +13,7 @@ import android.os.Build
 import com.yinpage.link.protocol.bluetrum.BluetrumCodec
 import com.yinpage.link.protocol.bluetrum.BtCommand
 import com.yinpage.link.protocol.bluetrum.BtInfo
+import com.yinpage.link.transport.TransportEnv
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -100,33 +101,57 @@ object Diagnostics {
             return
         }
 
-        // 本 App 已建立控制通道（BLE GATT 或 SPP）时，BLE 枚举只作辅助参考，
-        // 不能再给出"大概率不走 SPP"这类会自相矛盾的结论。
-        val connectedHere = runCatching { AppState.pod.value.device?.address }.getOrNull()
-        if (!connectedHere.isNullOrBlank() && connectedHere.equals(target, ignoreCase = true)) {
-            sb.appendLine("✅ 本 App 已建立控制通道连接该设备（见运行日志）")
-            sb.appendLine("   → 设备必然支持蓝牙；下方 BLE 枚举仅供辅助参考，不影响连接结论")
-            sb.appendLine()
-        }
-        sb.appendLine("目标地址类型：${addressTypeHint(target)}")
-
+        // 本 App 已建立控制通道（BLE GATT 或 SPP）时，**不再**发起第二次 GATT 连接：
+        // 多数 TWS 同一时间只接受一个控制连接，二次连接不会回调，
+        // 只会拖到超时并给出"未完成"这种没有信息量的结论（v0.12 真机报告即如此）。
         val device = runCatching { adapter.getRemoteDevice(target) }.getOrNull()
         if (device == null) {
             sb.appendLine("跳过：无法构造 BluetoothDevice")
             return
         }
 
+        sb.appendLine("目标地址类型：${addressTypeHint(target)}")
+        // 公开 API 的设备类型是最可靠的事实：地址高位只能推断随机地址种类，
+        // 无法区分「公共地址」与「随机地址」，更不能据此判断有没有 SPP。
+        sb.appendLine("系统设备类型：${transportTypeText(device)}")
+        systemAddressType(device)?.let { sb.appendLine("系统地址类型：$it") }
+
+        val connectedHere = runCatching { AppState.pod.value.device?.address }.getOrNull()
+        if (!connectedHere.isNullOrBlank() && connectedHere.equals(target, ignoreCase = true)) {
+            val transport = AppState.activeTransportName() ?: "已连接"
+            sb.appendLine()
+            sb.appendLine("✅ 本 App 已建立控制通道（$transport），跳过二次 GATT 连接")
+            sb.appendLine("   · 设备通常只接受一个控制连接，二次连接会一直等到超时")
+            sb.appendLine("   · 若当前通道是 BLE：完整 GATT 结构已在建连时写入运行日志（筛选 [GATT]）")
+            sb.appendLine("   · 需要现场枚举：请先断开连接，再运行诊断")
+            appendBleHint(sb)
+            return
+        }
+        sb.appendLine()
+        sb.appendLine("正在发起 GATT 连接（最长 ${BLE_TIMEOUT_SEC}s）…")
+
         val latch = java.util.concurrent.CountDownLatch(1)
-        var resultText = "未完成"
+        var resultText = "等待连接回调"
         var gatt: android.bluetooth.BluetoothGatt? = null
 
         val callback = object : android.bluetooth.BluetoothGattCallback() {
             override fun onConnectionStateChange(g: android.bluetooth.BluetoothGatt?, status: Int, newState: Int) {
+                // status 必须优先判断：某些设备会以 newState=CONNECTED + status!=0
+                // 的形式回调，旧实现会继续 discoverServices()，最后卡到超时。
+                if (status != android.bluetooth.BluetoothGatt.GATT_SUCCESS) {
+                    resultText = "连接失败：status=$status（${TransportEnv.describeGattStatus(status)}）"
+                    latch.countDown()
+                    return
+                }
                 if (newState == android.bluetooth.BluetoothProfile.STATE_CONNECTED) {
                     resultText = "已连接，正在发现服务…"
-                    runCatching { g?.discoverServices() }
+                    val started = runCatching { g?.discoverServices() == true }.getOrDefault(false)
+                    if (!started) {
+                        resultText = "已连接，但 discoverServices() 调用失败"
+                        latch.countDown()
+                    }
                 } else {
-                    resultText = "连接失败或被断开（status=$status newState=$newState）"
+                    resultText = "连接断开：newState=$newState status=$status（${TransportEnv.describeGattStatus(status)}）"
                     latch.countDown()
                 }
             }
@@ -134,18 +159,21 @@ object Diagnostics {
             override fun onServicesDiscovered(g: android.bluetooth.BluetoothGatt?, status: Int) {
                 val text = StringBuilder()
                 if (status != android.bluetooth.BluetoothGatt.GATT_SUCCESS) {
-                    text.appendLine("服务发现失败：status=$status")
+                    text.appendLine("服务发现失败：status=$status（${TransportEnv.describeGattStatus(status)}）")
                 } else {
                     val services = runCatching { g?.services }.getOrNull().orEmpty()
                     text.appendLine("发现 ${services.size} 个服务：")
-                    val allUuids = mutableListOf<String>()
+                    // 服务与特征分开收集：方案判定只看服务 UUID，
+                    // 否则 00002A19(电量) 这类标准特征值会被误判成"私有服务"。
+                    val serviceUuids = mutableListOf<String>()
+                    val charUuids = mutableListOf<String>()
                     services.forEach { svc ->
                         val svcUuid = svc.uuid.toString().lowercase()
-                        allUuids += svcUuid
+                        serviceUuids += svcUuid
                         text.appendLine("  SERVICE ${svc.uuid}${standardServiceName(svcUuid)}")
                         svc.characteristics?.forEach { ch ->
                             val chUuid = ch.uuid.toString().lowercase()
-                            allUuids += chUuid
+                            charUuids += chUuid
                             text.appendLine("    CHAR ${ch.uuid}  props=0x${Integer.toHexString(ch.properties)}${propsText(ch.properties)}${standardCharName(chUuid)}")
                             ch.descriptors?.forEach { d ->
                                 text.appendLine("      DESC ${d.uuid}")
@@ -154,7 +182,7 @@ object Diagnostics {
                     }
                     // 自动判定方案
                     text.appendLine()
-                    text.append(analyzeProtocol(allUuids))
+                    text.append(analyzeProtocol(serviceUuids, charUuids))
                 }
                 resultText = text.toString().trimEnd()
                 latch.countDown()
@@ -168,7 +196,16 @@ object Diagnostics {
                 return
             }
             val finished = latch.await(BLE_TIMEOUT_SEC, java.util.concurrent.TimeUnit.SECONDS)
-            sb.appendLine(if (finished) resultText else "⏱ 超时（${BLE_TIMEOUT_SEC}s）：$resultText")
+            if (finished) {
+                sb.appendLine(resultText)
+            } else {
+                sb.appendLine("⏱ 超时（${BLE_TIMEOUT_SEC}s）：$resultText")
+                sb.appendLine("可能原因：")
+                sb.appendLine("  · 设备被官方 App 或其他主机占用（同一时间通常只接受一个连接）")
+                sb.appendLine("  · 耳机当前只保持经典蓝牙连接，BLE 未开放")
+                sb.appendLine("  · 距离过远 / 电量低 / 该耳机不提供 BLE GATT")
+                sb.appendLine("建议：退出官方 App、断开系统蓝牙里的其他连接后重试。")
+            }
         }.onFailure {
             sb.appendLine("❌ BLE 测试异常：${it.javaClass.simpleName} ${it.message}")
         }.also {
@@ -176,22 +213,64 @@ object Diagnostics {
             runCatching { gatt?.close() }
         }
 
+        appendBleHint(sb)
+    }
+
+    /** BLE 枚举的固定尾注（两条分支共用，避免重复文案）。 */
+    private fun appendBleHint(sb: StringBuilder) {
         sb.appendLine()
         sb.appendLine("提示：若上面出现非标准 UUID（非 0000xxxx-0000-1000-8000-00805f9b34fb 形式），")
         sb.appendLine("那很可能就是厂商私有的控制通道 —— 协议应基于它来逆向。")
     }
 
-    /** 从地址推断是公共地址还是 BLE 随机地址。 */
+    /**
+     * 从地址高位推断 BLE 随机地址的种类（只是提示，不是结论）。
+     *
+     * 蓝牙规范只对**随机地址**规定了最高两位：
+     *   11 = 静态随机地址；01 = 可解析私有地址(RPA)；
+     *   00 且 locally-administered 位=1 = 不可解析私有地址；
+     *   00 且 locally-administered 位=0 = 可能是公共地址(IEEE OUI)；
+     *   10 = 保留。
+     *
+     * ⚠️ 公共地址没有固定高位特征，单看地址无法完全确认；更重要的是，
+     * 地址类型与「走 SPP 还是 BLE GATT」**没有因果关系**（双模设备两者并存），
+     * 因此这里不再输出"大概率走 BLE / SPP 只是附带"这类误导性结论。
+     */
     private fun addressTypeHint(address: String): String {
         val first = address.substringBefore(':').toIntOrNull(16) ?: return "无法解析"
         val top2 = (first shr 6) and 0x03
-        return when (top2) {
-            0b00 -> "公共地址（经典蓝牙为主）"
-            0b01 -> "⚠️ BLE 随机静态地址 → 设备以 BLE 为主，控制通道大概率走 BLE GATT（如 Bluetrum 服务 FDB3），SPP 只是附带串口"
-            0b10 -> "保留"
-            else -> "BLE 随机私有地址（可解析）"
+        val locallyAdministered = (first and 0x02) != 0
+        return when {
+            top2 == 0b11 -> "BLE 随机静态地址（随机生成但固定不变）"
+            top2 == 0b01 -> "BLE 随机可解析私有地址（RPA，通常周期性变化）"
+            top2 == 0b00 && locallyAdministered -> "BLE 随机不可解析私有地址"
+            top2 == 0b00 -> "可能为公共地址（IEEE OUI）；单凭地址无法完全确认"
+            else -> "保留/非标准地址（高位 0b10）"
         }
     }
+
+    /** 系统设备类型（公开 API，比地址高位更可靠）。 */
+    private fun transportTypeText(device: BluetoothDevice): String {
+        val type = runCatching { device.type }.getOrDefault(BluetoothDevice.DEVICE_TYPE_UNKNOWN)
+        return when (type) {
+            BluetoothDevice.DEVICE_TYPE_CLASSIC -> "经典蓝牙"
+            BluetoothDevice.DEVICE_TYPE_LE -> "低功耗(BLE)"
+            BluetoothDevice.DEVICE_TYPE_DUAL -> "双模（经典 + BLE）"
+            else -> "未知"
+        }
+    }
+
+    /** 系统地址类型（隐藏 API，读不到时返回 null，由高位推断兜底）。 */
+    private fun systemAddressType(device: BluetoothDevice): String? = runCatching {
+        val type = device.javaClass.getMethod("getAddressType").invoke(device) as? Int ?: return null
+        when (type) {
+            0 -> "PUBLIC（公共地址）"
+            1 -> "RANDOM（随机地址）"
+            2 -> "PUBLIC_IDENTITY（公共身份地址）"
+            3 -> "RANDOM_IDENTITY（随机身份地址）"
+            else -> "TYPE($type)"
+        }
+    }.getOrNull()
 
     private fun propsText(props: Int): String {
         val list = buildList {
@@ -231,47 +310,59 @@ object Diagnostics {
 
     /**
      * 根据发现的服务自动判定芯片方案 —— 这是整份诊断最想要的结论。
+     *
+     * 服务与特征必须分开看：特征值 `00002A19`（电量）虽有标准基址，
+     * 但旧实现把它和所有非 `000018xx` 的 UUID 一起判成"私有服务"，
+     * 导致几乎任何设备都误报。这里只对服务 UUID 做私有性判断。
      */
-    private fun analyzeProtocol(uuids: List<String>): String {
+    private fun analyzeProtocol(services: List<String>, characteristics: List<String>): String {
         val sb = StringBuilder()
-        fun has(prefix: String) = uuids.any { it.startsWith(prefix) }
+        fun hasService(prefix: String) = services.any { it.startsWith(prefix) }
+        fun hasChar(prefix: String) = characteristics.any { it.startsWith(prefix) }
 
         sb.appendLine("── 方案判定 ──")
-        val ab = has("0000fdb3") && (has("0000ff17") || has("0000ff18"))
-        val jl = has("0000ae00") || has("0000ae01") || has("0000ae02")
-        val privateSvc = uuids.any { u ->
-            !u.startsWith("000018") && !u.startsWith("0000ae") && !u.startsWith("0000fdb3")
+        if (services.isEmpty()) {
+            sb.appendLine("⚠️ 未发现任何 GATT 服务：设备可能未完成服务发现、连接后立即断开，或不提供 GATT")
+            return sb.toString()
         }
+
+        // Bluetrum AB：控制服务 FDB3 + 写 FF17 / 通知 FF18
+        val ab = hasService("0000fdb3") && (hasChar("0000ff17") || hasChar("0000ff18"))
+        // 杰理 RCSP：服务 AE00 / 特征 AE01(写) / AE02(通知)
+        val jl = hasService("0000ae00") || hasChar("0000ae01") || hasChar("0000ae02")
+        // 只把"非标准 UUID 基址"的服务视为私有服务（128 位自定义服务）。
+        val standardBase = Regex("^0000[0-9a-f]{4}-0000-1000-8000-00805f9b34fb$")
+        val privateServices = services.filterNot { standardBase.matches(it) }
 
         when {
             ab -> {
-                sb.appendLine("✅ 判定：**中科蓝讯 Bluetrum AB（BLE GATT 通道）**")
-                sb.appendLine("   证据：出现控制服务 0000FDB3 + 写特征 0000FF17 + 通知特征 0000FF18")
-                sb.appendLine("   → 控制协议走 **BLE GATT**，**不走经典蓝牙 SPP**")
-                sb.appendLine("   → 这也解释了为什么 SPP 能连上但控制命令全部无效")
+                sb.appendLine("✅ 判定：**中科蓝讯 Bluetrum AB（含 BLE GATT 控制通道）**")
+                sb.appendLine("   证据：控制服务 0000FDB3 + 写特征 0000FF17 + 通知特征 0000FF18")
+                sb.appendLine("   → 该设备确实提供 BLE 私有通道（写 FF17 / 通知 FF18）")
+                sb.appendLine("   → 但这**不代表** SPP 不可用：双模设备常同时提供两条通道")
             }
 
             jl -> {
-                sb.appendLine("✅ 判定：**杰理（JieLi）方案**")
-                sb.appendLine("   证据：出现 RCSP 服务 0000ae00 / 特征 0000ae01(写) / ae02(通知)")
-                sb.appendLine("   → 控制通道是 BLE GATT，**不是经典蓝牙 SPP**")
-                sb.appendLine("   → 这也解释了为什么 SPP 测试全部超时")
+                sb.appendLine("✅ 判定：**杰理（JieLi）方案（含 BLE RCSP 通道）**")
+                sb.appendLine("   证据：RCSP 服务 0000ae00 / 特征 0000ae01(写) / ae02(通知)")
+                sb.appendLine("   → 该设备提供 BLE 私有通道；与 SPP 是否可用无关")
             }
 
-            privateSvc -> {
-                sb.appendLine("⚠️ 判定：存在**非标准私有服务**（见上面未标注的 SERVICE）")
+            privateServices.isNotEmpty() -> {
+                sb.appendLine("⚠️ 判定：存在**非标准私有服务**：")
+                privateServices.forEach { sb.appendLine("   · $it") }
                 sb.appendLine("   → 大概率是厂商私有控制通道，但方案未知")
                 sb.appendLine("   → 请把上面完整列表发给开发者分析")
             }
 
             else -> {
-                sb.appendLine("ℹ️ 判定：只发现标准 GATT 服务，没有明显的私有控制通道")
+                sb.appendLine("ℹ️ 判定：只发现标准/已知 GATT 服务，没有明显的私有控制通道")
                 sb.appendLine("   → 控制协议可能在 BLE 广播数据里，或需要先完成某种握手")
             }
         }
 
-        if (has("0000180f")) {
-            sb.appendLine("💡 发现标准电池服务（0x180F）→ 系统可能能自己读到电量")
+        if (hasService("0000180f") || hasChar("00002a19")) {
+            sb.appendLine("💡 发现标准电池服务/电量特征（0x180F / 0x2A19）→ 系统可能能自己读到电量")
         }
         return sb.toString()
     }
@@ -284,7 +375,17 @@ object Diagnostics {
         sb.appendLine("应用版本：${appVersion(context)}")
         sb.appendLine("Android：${Build.VERSION.RELEASE} (API ${Build.VERSION.SDK_INT})")
         sb.appendLine("机型：${Build.MANUFACTURER} ${Build.MODEL}")
-        sb.appendLine("是否为 HyperOS：${runCatching { SystemPropertiesProxy.get("ro.mi.os.version.code") }.getOrNull() ?: "未知"}")
+        // 旧实现直接打印 ro.mi.os.version.code，报告里会出现「是否为 HyperOS：4」
+        // 这种把版本号当答案的歧义输出。
+        val hyperCode = runCatching { SystemPropertiesProxy.get("ro.mi.os.version.code") }.getOrNull()
+        val miuiName = runCatching { SystemPropertiesProxy.get("ro.miui.ui.version.name") }.getOrNull()
+        sb.appendLine(
+            "是否为 HyperOS：" + when {
+                hyperCode != null -> "是（版本 $hyperCode）"
+                miuiName != null -> "否（MIUI $miuiName）"
+                else -> "否/未知"
+            },
+        )
 
         sb.appendLine("权限：")
         val perms = buildList {
@@ -324,7 +425,15 @@ object Diagnostics {
             return null
         }
         sb.appendLine("名称：${runCatching { adapter.name }.getOrNull() ?: "读取失败（缺权限）"}")
-        sb.appendLine("地址：${runCatching { adapter.address }.getOrNull() ?: "读取失败（缺权限）"}")
+        val adapterAddress = runCatching { adapter.address }.getOrNull()
+        // Android 6+ 起，普通应用读不到本机真实 MAC，系统固定返回 02:00:00:00:00:00。
+        // 不解释的话，用户会把这个占位地址当成异常。
+        val addressNote = if (adapterAddress.equals("02:00:00:00:00:00", ignoreCase = true)) {
+            "（系统对普通应用固定返回的占位地址，属正常）"
+        } else {
+            ""
+        }
+        sb.appendLine("地址：${adapterAddress ?: "读取失败（缺权限）"}$addressNote")
         sb.appendLine("已开启：${runCatching { adapter.isEnabled }.getOrDefault(false)}")
         sb.appendLine("正在扫描：${runCatching { adapter.isDiscovering }.getOrDefault(false)}")
         return adapter
@@ -437,30 +546,9 @@ object Diagnostics {
 
         runCatching { if (adapter.isDiscovering) adapter.cancelDiscovery() }
 
-        // 本 App 自己正占着该设备的控制通道（BLE GATT 或 SPP）时，再开新连接
-        // 必然失败（设备通常只接受一个控制连接）。此时"通道可用"已被运行日志证明，
-        // 实测只会得到一堆超时误报。
-        val currentAddress = runCatching { AppState.pod.value.device?.address }.getOrNull()
-        if (!currentAddress.isNullOrBlank() && currentAddress.equals(target, ignoreCase = true)) {
-            val channelName = runCatching { AppState.pod.value.connection.name }.getOrNull()
-                ?: "已连接"
-            sb.appendLine("跳过实测：本 App 当前正占用该设备的控制通道（$channelName）")
-            sb.appendLine()
-            sb.appendLine(
-                "结论：✅ 控制通道已建立（运行日志已确认建连成功）——断开连接后再跑诊断可复测各 UUID",
-            )
-            return
-        }
-
-        val uuids = listOf(
-            "0000A100-1000-8000-4E48-434B4354524C",
-            "00001101-0000-1000-8000-00805F9B34FB",
-            "00001102-0000-1000-8000-00805F9B34FB",
-        )
-
         // SDP 服务枚举：设备注册了哪些 RFCOMM 服务，直接决定控制通道 UUID。
-        // 这是「连得上却无响应」问题的最强证据——若设备 SDP 里有自定义 UUID
-        // （如 0000A100-...CKCTRL），00001101 就只是附带的标准串口（哑通道）。
+        // 先于"已连接"判断执行：读取 SDP 缓存不会新建连接，即使本 App 正占用通道也能拿到，
+        // 旧实现把这段放在跳过分支之后，导致报告第 6 节只剩一句"跳过"。
         sb.appendLine("SDP 服务（设备注册的 RFCOMM UUID）：")
         val sdpUuids = runCatching {
             device.uuids?.map { it.uuid.toString().lowercase() }.orEmpty()
@@ -478,6 +566,27 @@ object Diagnostics {
             }
         }
         sb.appendLine()
+
+        // 本 App 自己正占着该设备的控制通道（BLE GATT 或 SPP）时，再开新连接
+        // 必然失败（设备通常只接受一个控制连接）。此时"通道可用"已被运行日志证明，
+        // 实测只会得到一堆超时误报。
+        val currentAddress = runCatching { AppState.pod.value.device?.address }.getOrNull()
+        if (!currentAddress.isNullOrBlank() && currentAddress.equals(target, ignoreCase = true)) {
+            val transport = AppState.activeTransportName() ?: "已连接"
+            val channelName = runCatching { AppState.pod.value.connection.name }.getOrNull() ?: "CONNECTED"
+            sb.appendLine("跳过实测：本 App 当前正占用该设备的控制通道（$transport / $channelName）")
+            sb.appendLine()
+            sb.appendLine(
+                "结论：✅ 控制通道已建立（运行日志已确认建连成功）——断开连接后再跑诊断可复测各 UUID",
+            )
+            return
+        }
+
+        val uuids = listOf(
+            "0000A100-1000-8000-4E48-434B4354524C",
+            "00001101-0000-1000-8000-00805F9B34FB",
+            "00001102-0000-1000-8000-00805F9B34FB",
+        )
 
         var anySuccess = false
         for (uuidText in uuids) {
@@ -539,8 +648,8 @@ object Diagnostics {
     /** 单次 SPP 连接测试超时。诊断要跑多个组合，不宜过长。 */
     private const val CONNECT_TIMEOUT_MS = 4_000L
 
-    /** BLE 服务发现超时（秒）。 */
-    private const val BLE_TIMEOUT_SEC = 10L
+    /** BLE 服务发现超时（秒）。与 BleGattTransport 的连接超时保持一致： */
+    private const val BLE_TIMEOUT_SEC = 15L
 
     private fun hex(data: IntArray): String = data.joinToString(" ") { "%02X".format(it and 0xFF) }
 
