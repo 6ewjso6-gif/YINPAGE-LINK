@@ -1,8 +1,10 @@
 package com.yinpage.link.core
 
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInfo
+import android.content.pm.PackageInstaller
 import android.content.pm.PackageManager
 import android.content.pm.Signature
 import android.net.Uri
@@ -101,6 +103,29 @@ object UpdateManager {
 
         /** 检查失败（网络 / 解析 / 无 APK）。 */
         data class Failed(val message: String) : CheckResult
+    }
+
+    /**
+     * 安装阶段结果。
+     *
+     * 为什么不再返回 Boolean：调用方只能提示"失败"，用户无法判断是
+     * 「没给安装未知应用权限」还是「签名不一致」，排查成本极高。
+     */
+    sealed interface InstallResult {
+        /** 安装会话已提交 / 安装界面已打开。 */
+        data object Launched : InstallResult
+
+        /** 下载的 APK 文件不存在。 */
+        data object FileMissing : InstallResult
+
+        /** 安装包签名与本机不一致（无法覆盖安装）。 */
+        data object SignatureMismatch : InstallResult
+
+        /** 未授予「安装未知应用」权限，需要引导用户去设置页。 */
+        data object UnknownSourcesRequired : InstallResult
+
+        /** 其它失败，[message] 为技术原因。 */
+        data class Failed(val message: String) : InstallResult
     }
 
     // ------------------------------------------------------------------ 检查
@@ -482,13 +507,19 @@ object UpdateManager {
      *   1. 文件存在；
      *   2. **签名与本应用一致**（不同签名无法覆盖安装，也拦截了镜像替换的恶意包）；
      *   3. 已允许「安装未知应用」。
-     * 任一步不通过返回 false，由调用方给出对应提示。
+     *
+     * v0.15：优先使用 [PackageInstaller] 会话，而不是 `ACTION_VIEW + content://`。
+     * 原因：HyperOS / MIUI 等 OEM 对 `ACTION_VIEW` 打开 APK 有额外拦截，
+     * 常见表现就是"点了下载完成，但安装界面根本不出现"（且不会抛异常）；
+     * 会话安装由系统弹出统一的确认框，行为稳定，还能通过
+     * [InstallResultReceiver] 拿到失败原因。
+     * 会话创建失败（极少数老 ROM）才退回 `ACTION_VIEW`。
      */
-    fun install(context: Context, apk: File): Boolean {
+    fun install(context: Context, apk: File): InstallResult {
         val appContext = context.applicationContext
         if (!apk.exists()) {
             EventLog.info(TAG, "安装失败：APK 不存在 ${apk.absolutePath}")
-            return false
+            return InstallResult.FileMissing
         }
         val self = installedSigners(appContext)
         val downloaded = archiveSigners(appContext, apk)
@@ -497,30 +528,79 @@ object UpdateManager {
                 TAG,
                 "拒绝安装：安装包签名与本应用不一致（本机=${self.size} 包=${downloaded.size}）——疑似镜像/中间人替换",
             )
-            return false
+            return InstallResult.SignatureMismatch
         }
         if (!canInstallPackages(appContext)) {
             EventLog.info(TAG, "未授权「安装未知应用」，需引导用户去系统设置开启")
-            return false
+            return InstallResult.UnknownSourcesRequired
         }
-        return runCatching {
-            val uri = FileProvider.getUriForFile(
-                appContext,
-                "${appContext.packageName}.fileprovider",
-                apk,
-            )
-            val intent = Intent(Intent.ACTION_VIEW).apply {
-                setDataAndType(uri, "application/vnd.android.package-archive")
-                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_NEW_TASK)
-                // 注：EXTRA_NOT_UNKNOWN_SOURCE 单独设置无效（需配合 EXTRA_INSTALLER_PACKAGE_NAME），
-                // 已移除该无效代码；覆盖安装交由系统安装器按包名比对处理。
+
+        val viaSession = runCatching { launchSession(appContext, apk) }
+            .onFailure { EventLog.info(TAG, "安装会话创建失败，改用 ACTION_VIEW：${it.message}") }
+            .getOrDefault(false)
+        if (viaSession) {
+            EventLog.info(TAG, "已提交安装会话：${apk.name}")
+            return InstallResult.Launched
+        }
+        return launchViewIntent(appContext, apk)
+    }
+
+    /**
+     * 通过 PackageInstaller 会话安装：把 APK 流式写入会话后 commit，
+     * 系统会弹出安装确认框，结果回调到 [InstallResultReceiver]。
+     */
+    private fun launchSession(context: Context, apk: File): Boolean {
+        val installer = context.packageManager.packageInstaller
+        val params = PackageInstaller.SessionParams(PackageInstaller.SessionParams.MODE_FULL_INSTALL)
+        val sessionId = installer.createSession(params)
+        try {
+            installer.openSession(sessionId).use { session ->
+                apk.inputStream().use { input ->
+                    session.openWrite("base.apk", 0, apk.length()).use { output ->
+                        input.copyTo(output)
+                        session.fsync(output)
+                    }
+                }
+                val callback = Intent(context, InstallResultReceiver::class.java)
+                val flags = PendingIntent.FLAG_UPDATE_CURRENT or
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) PendingIntent.FLAG_MUTABLE else 0
+                val pending = PendingIntent.getBroadcast(context, sessionId, callback, flags)
+                session.commit(pending.intentSender)
             }
-            appContext.startActivity(intent)
-            EventLog.info(TAG, "已调起系统安装器：${apk.name}")
-            true
-        }.getOrElse {
-            EventLog.info(TAG, "安装失败：${it.message}")
-            false
+        } catch (error: Throwable) {
+            runCatching { installer.abandonSession(sessionId) }
+            throw error
         }
+        return true
+    }
+
+    /** 兜底：`ACTION_VIEW` 打开 APK（并显式把读权限授予实际处理它的安装器）。 */
+    private fun launchViewIntent(context: Context, apk: File): InstallResult = runCatching {
+        val uri = FileProvider.getUriForFile(
+            context,
+            "${context.packageName}.fileprovider",
+            apk,
+        )
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            setDataAndType(uri, "application/vnd.android.package-archive")
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+        val resolved = context.packageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY)
+        if (resolved == null) {
+            EventLog.info(TAG, "系统没有可处理 APK 安装的 Activity")
+            return InstallResult.Failed("系统没有可用的安装器")
+        }
+        // 部分 OEM 的安装器只认「显式授予的 URI 权限」，仅靠 Intent flag 会读不到文件
+        context.grantUriPermission(
+            resolved.activityInfo.packageName,
+            uri,
+            Intent.FLAG_GRANT_READ_URI_PERMISSION,
+        )
+        context.startActivity(intent)
+        EventLog.info(TAG, "已调起系统安装器：${apk.name}")
+        InstallResult.Launched
+    }.getOrElse {
+        EventLog.info(TAG, "安装失败：${it.message}")
+        InstallResult.Failed(it.message ?: it.javaClass.simpleName)
     }
 }

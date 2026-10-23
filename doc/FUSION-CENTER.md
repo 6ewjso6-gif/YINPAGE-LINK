@@ -225,7 +225,6 @@ module/src/main/java/com/yinpage/link/module/
 ├── YinpageModule.kt              入口：按包名分派到各 Hook
 ├── ModuleConfig.kt               配置（remote preferences 跨进程共享）
 ├── ModuleActivity.kt             配置界面（纯 View，无 Compose 依赖）
-├── ModuleStatusProvider.kt       供独立 App 查询模块是否生效
 ├── hook/
 │   ├── HookContext.kt            反射工具层（所有查找可空 + 静默降级）
 │   ├── BluetoothUpstreamHeadsetHook.kt   ★ P0 核心

@@ -107,9 +107,6 @@ object ModuleConfigStore {
     /** 跨进程广播鉴权令牌（首次使用时生成并持久化）。 */
     private const val K_IPC_TOKEN = "ipc_token"
 
-    /** 每个目标进程的 Hook 安装结果，key 前缀：`hook_ok_<包名>`。 */
-    private const val K_HOOK_RESULT_PREFIX = "hook_ok_"
-
     private val _config = MutableStateFlow(ModuleConfig())
     val config: StateFlow<ModuleConfig> = _config.asStateFlow()
 
@@ -151,10 +148,15 @@ object ModuleConfigStore {
     private var cachedIpcToken: String? = null
 
     /**
-     * **仅模块 App 进程调用**：首次生成并持久化 IPC 令牌。
+     * **唯一写者**：`com.android.bluetooth`（开机即启动的核心进程），
+     * 以及模块 App（[ModuleActivity]，作为用户手动打开时的第二重保障）。
      *
      * 为什么只有写侧能生成：见 [reload] 的说明——多进程并发"首次生成"会互相覆盖。
      * 这里用 `commit()` 同步落盘，保证随后启动的 Hook 进程立刻能读到同一个值。
+     *
+     * v0.15 修复：此前只有打开模块 App 才会生成令牌，导致「装了模块但没点开过
+     * 模块界面」时所有 Hook 进程都读到空令牌、IPC 全部 fail-closed。现在改由
+     * 蓝牙进程在模块加载时生成，不再依赖用户操作。
      */
     fun ensureIpcToken() {
         val p = prefs ?: return
@@ -167,7 +169,17 @@ object ModuleConfigStore {
             return
         }
         val token = generateIpcToken()
-        runCatching { p.edit().putString(K_IPC_TOKEN, token).commit() }
+        val written = runCatching {
+            p.edit().putString(K_IPC_TOKEN, token).commit()
+        }.getOrDefault(false)
+        if (!written) {
+            // 写盘失败（个别框架的 remote prefs 对 Hook 进程只读）时**不能**采用
+            // 这个令牌：它没有落盘，其它进程永远读不到，只会让本进程单方面"认"
+            // 一个别人没有的值。保持 fail-closed，等模块 App 进程写入。
+            cachedIpcToken = null
+            _config.value = _config.value.copy(ipcToken = "")
+            return
+        }
         cachedIpcToken = token
         _config.value = _config.value.copy(ipcToken = token)
     }
@@ -178,10 +190,25 @@ object ModuleConfigStore {
      * ⚠️ 不再"兜底生成"：读不到就返回空串，IPC 收发双方都会因令牌为空而拒绝
      * （[com.yinpage.link.module.ipc.ModuleIpc.verifyToken] 明确把空令牌视为不通过）。
      * 这样宁可暂时不同步状态，也不会出现"各进程各自生成、互相不认"的随机故障。
+     *
+     * 缓存为空时额外直接回读一次 preference：令牌由蓝牙进程在开机时写入，
+     * 本进程（SystemUI / Settings / MiLink）可能先于它启动；等蓝牙进程写好后再来
+     * 询问时就能拿到，不需要用户手动打开模块界面或重启。
      */
-    fun ipcToken(): String = cachedIpcToken?.takeIf { it.isNotBlank() }
-        ?: _config.value.ipcToken.takeIf { it.isNotBlank() }
-        ?: ""
+    fun ipcToken(): String {
+        cachedIpcToken?.takeIf { it.isNotBlank() }?.let { return it }
+        val stored = runCatching { prefs?.getString(K_IPC_TOKEN, "")?.trim() }
+            .getOrNull()
+            .orEmpty()
+        if (stored.isNotBlank()) {
+            cachedIpcToken = stored
+            if (_config.value.ipcToken != stored) {
+                _config.value = _config.value.copy(ipcToken = stored)
+            }
+            return stored
+        }
+        return ""
+    }
 
     /** 生成 128 位随机令牌（32 位十六进制）。 */
     private fun generateIpcToken(): String {
@@ -208,33 +235,4 @@ object ModuleConfigStore {
     /** 便捷：给模块外（Activity）用的本地偏好。 */
     fun localPrefs(context: Context): SharedPreferences =
         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).also { prefs = it }
-
-    // ------------------------------------------------------------------ Hook 安装状态
-
-    /**
-     * 记录某目标进程的 Hook 安装结果，写入 remote preferences，
-     * 供 [ModuleStatusProvider]（模块自身进程）查询出真实激活状态。
-     */
-    fun reportHookResult(pkg: String, ok: Boolean) {
-        val p = prefs ?: return
-        runCatching {
-            p.edit().putBoolean("$K_HOOK_RESULT_PREFIX$pkg", ok).apply()
-        }.onFailure { /* 记录失败不影响 Hook 本身 */ }
-    }
-
-    /**
-     * 读取各目标进程的 Hook 安装结果（Provider 进程用）。
-     * MODE_MULTI_PROCESS 强制每次从磁盘重读，避免拿到其它进程写入前的旧缓存。
-     */
-    fun hookResults(context: Context): Map<String, Boolean> {
-        val p = @Suppress("DEPRECATION")
-        context.getSharedPreferences(PREFS_NAME, Context.MODE_MULTI_PROCESS)
-        val out = HashMap<String, Boolean>()
-        for ((k, v) in p.all) {
-            if (k.startsWith(K_HOOK_RESULT_PREFIX) && v is Boolean) {
-                out[k.removePrefix(K_HOOK_RESULT_PREFIX)] = v
-            }
-        }
-        return out
-    }
 }

@@ -2,6 +2,7 @@ package com.yinpage.link.transport
 
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
+import com.yinpage.link.config.ConfigManager
 import com.yinpage.link.core.AppState
 import com.yinpage.link.core.EventLog
 import com.yinpage.link.protocol.BluetoothOffException
@@ -133,6 +134,19 @@ class RfcommTransport(
 
         val uuids = AppState.SPP_UUID_CANDIDATES.mapNotNull { text ->
             runCatching { UUID.fromString(text) }.getOrNull()
+        }.let { candidates ->
+            // 上次握手成功的 UUID 置顶：固定顺序下，若排在前面但不应答的候选
+            // 每次都要先白耗一次建链（最长 5 秒）。记住成功项即可一次命中。
+            val lastGood = runCatching { ConfigManager.get().current.lastSppUuid }
+                .getOrNull()
+                ?.trim()
+                ?.takeIf { it.isNotEmpty() }
+            if (lastGood == null) {
+                candidates
+            } else {
+                // sortedBy 是稳定排序，其余候选的相对顺序保持不变
+                candidates.sortedBy { if (it.toString().equals(lastGood, ignoreCase = true)) 0 else 1 }
+            }
         }
         val attempts = mutableListOf<String>()
         var lastError = "无"
@@ -177,6 +191,15 @@ class RfcommTransport(
                     connected = true
                     startReadLoop(candidate)
 
+                    // 总预算检查：活性确认（握手等待窗口）也要花时间，
+                    // 若建链后预算已耗尽就不该再开始 probe，否则整体必然超时。
+                    if ((deadlineNanos - System.nanoTime()) / 1_000_000L <= 0L) {
+                        discardCandidate(candidate)
+                        throw TransportTimeoutException(
+                            "RFCOMM 连接 ${CONNECT_TIMEOUT_MS / 1000} 秒总预算已耗尽（$device）"
+                        )
+                    }
+
                     val verified = try {
                         probe(this@RfcommTransport)
                     } catch (cancel: CancellationException) {
@@ -197,6 +220,8 @@ class RfcommTransport(
                             TAG,
                             "SPP 通道建立成功：$label（soTimeout=${SO_TIMEOUT_MS}ms，最大帧长=不限）",
                         )
+                        // 记住这条 UUID，下次连接直接置顶
+                        runCatching { ConfigManager.get().rememberSppUuid(uuid.toString()) }
                         listener.onTransportReady()
                         return@withContext true
                     }

@@ -266,7 +266,6 @@ module/src/main/java/com/yinpage/link/module/     ← 形态一：LSPosed 模块
 ├── YinpageModule.kt              入口：按包名分派到五个作用域
 ├── ModuleConfig.kt               配置（remote preferences 跨进程共享）
 ├── ModuleActivity.kt             配置界面
-├── ModuleStatusProvider.kt       供独立 App 查询模块是否生效
 ├── hook/
 │   ├── HookContext.kt            反射工具层（全部查找可空 + 静默降级）
 │   ├── BluetoothUpstreamHeadsetHook.kt  ★ 核心：身份伪装 + SPP 通信 + 状态推送

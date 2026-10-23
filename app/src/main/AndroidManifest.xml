@@ -56,6 +56,12 @@
             android:exported="false"
             android:foregroundServiceType="connectedDevice" />
 
+        <!-- 安装会话结果回调（PackageInstaller.commit 的 PendingIntent 目标）。
+             仅接收系统安装器发来的显式广播，因此不导出。 -->
+        <receiver
+            android:name=".core.InstallResultReceiver"
+            android:exported="false" />
+
         <!-- 更新包下载到 cacheDir/updates，通过 FileProvider 授权给系统安装器 -->
         <provider
             android:name="androidx.core.content.FileProvider"

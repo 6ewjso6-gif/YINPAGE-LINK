@@ -119,8 +119,27 @@ fun App(
                     }
                 }.onSuccess { apk ->
                     downloading = false
-                    if (!UpdateManager.install(context.applicationContext, apk)) {
-                        Toast.makeText(context, R.string.update_install_failed, Toast.LENGTH_LONG).show()
+                    // 按安装结果分别提示：只报"失败"的话，用户无法区分是
+                    // 「没给未知来源权限」「签名不一致」还是「系统没有安装器」。
+                    when (val result = UpdateManager.install(context.applicationContext, apk)) {
+                        is UpdateManager.InstallResult.Launched -> Unit
+                        is UpdateManager.InstallResult.FileMissing ->
+                            Toast.makeText(context, R.string.update_install_file_missing, Toast.LENGTH_LONG).show()
+                        is UpdateManager.InstallResult.SignatureMismatch ->
+                            Toast.makeText(context, R.string.update_install_signature_mismatch, Toast.LENGTH_LONG).show()
+                        is UpdateManager.InstallResult.UnknownSourcesRequired -> {
+                            Toast.makeText(context, R.string.update_install_need_permission, Toast.LENGTH_LONG).show()
+                            // 直接跳到本应用的「安装未知应用」授权页，省去用户自己找
+                            UpdateManager.installPermissionIntent(context)?.let { permissionIntent ->
+                                runCatching { context.startActivity(permissionIntent) }
+                            }
+                        }
+                        is UpdateManager.InstallResult.Failed ->
+                            Toast.makeText(
+                                context,
+                                context.getString(R.string.update_install_failed_reason, result.message),
+                                Toast.LENGTH_LONG,
+                            ).show()
                     }
                 }.onFailure { error ->
                     downloading = false

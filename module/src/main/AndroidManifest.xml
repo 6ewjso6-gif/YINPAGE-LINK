@@ -27,13 +27,5 @@
             </intent-filter>
         </activity>
 
-        <!-- 模块状态查询 provider。
-             仅模块自身进程使用：外部 App 无需（也无权）探测模块是否激活。
-             之前 exported=true 且无权限，任意 App 都能查询用户是否安装了本模块，
-             属于可被用于指纹识别 / 定向攻击的信息泄漏，v0.14 起关闭导出。 -->
-        <provider
-            android:name=".ModuleStatusProvider"
-            android:authorities="com.yinpage.link.module.status"
-            android:exported="false" />
     </application>
 </manifest>

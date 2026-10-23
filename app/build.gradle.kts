@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 /** 本地构建默认版本名（CI 发布时会用 `-PversionName` 覆盖为真实 tag）。 */
-val DEFAULT_VERSION_NAME = "APP-t-v0.14"
+val DEFAULT_VERSION_NAME = "APP-t-v0.15"
 
 /** versionCode 基座：高于历史基于 Unix 秒数的最大值，保证可覆盖安装。 */
 val VERSION_CODE_BASE = 1_800_000_000

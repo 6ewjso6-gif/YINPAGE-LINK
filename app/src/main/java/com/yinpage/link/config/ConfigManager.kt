@@ -31,6 +31,16 @@ data class AppConfig(
     val lastDeviceName: String? = null,
 
     /**
+     * 上一次成功握手通过的 SPP 服务 UUID。
+     *
+     * 为什么需要：UUID 候选表里既有厂商自定义控制通道，也有标准串口，
+     * 但同一只耳机只有一个能应答。固定顺序会让「排在前面但不对」的候选
+     * 每次连接都白耗一次建链（最长 5 秒）。记住上次成功的那个并置顶，
+     * 后续连接一次命中。
+     */
+    val lastSppUuid: String? = null,
+
+    /**
      * 是否允许使用 **BLE GATT** 作为控制通道。
      *
      * ⚠️ **默认关闭**，原因是实测反馈的"系统蓝牙与应用不能同时使用"：
@@ -81,6 +91,7 @@ class ConfigManager private constructor(context: Context) {
         lowBatteryThreshold = prefs.getInt(K_LOW_BATTERY, 20).coerceIn(5, 50),
         lastDeviceAddress = prefs.getString(K_LAST_ADDR, null),
         lastDeviceName = prefs.getString(K_LAST_NAME, null),
+        lastSppUuid = prefs.getString(K_LAST_SPP_UUID, null),
         bleTransport = prefs.getBoolean(K_BLE_TRANSPORT, false),
         bleBatteryProbe = prefs.getBoolean(K_BLE_PROBE, false),
     )
@@ -97,6 +108,7 @@ class ConfigManager private constructor(context: Context) {
             putInt(K_LOW_BATTERY, cfg.lowBatteryThreshold)
             putString(K_LAST_ADDR, cfg.lastDeviceAddress)
             putString(K_LAST_NAME, cfg.lastDeviceName)
+            putString(K_LAST_SPP_UUID, cfg.lastSppUuid)
             putBoolean(K_BLE_TRANSPORT, cfg.bleTransport)
             putBoolean(K_BLE_PROBE, cfg.bleBatteryProbe)
         }
@@ -107,6 +119,10 @@ class ConfigManager private constructor(context: Context) {
 
     fun rememberDevice(address: String?, name: String?) =
         update { it.copy(lastDeviceAddress = address, lastDeviceName = name) }
+
+    /** 记录最近一次握手成功的 SPP UUID，下次连接置顶尝试。 */
+    fun rememberSppUuid(uuid: String?) =
+        update { it.copy(lastSppUuid = uuid) }
 
     companion object {
         const val PREFS_NAME = "yinpage_link_settings"
@@ -120,6 +136,7 @@ class ConfigManager private constructor(context: Context) {
         private const val K_LOW_BATTERY = "low_battery"
         private const val K_LAST_ADDR = "last_addr"
         private const val K_LAST_NAME = "last_name"
+        private const val K_LAST_SPP_UUID = "last_spp_uuid"
         private const val K_BLE_TRANSPORT = "ble_transport"
         private const val K_BLE_PROBE = "ble_battery_probe"
 

@@ -52,6 +52,14 @@ class YinpageModule : XposedModule() {
                 ModuleConfigStore.install(prefs)
             }.onFailure { ModuleLog.w(TAG, "远程配置不可用，使用默认值：${it.message}") }
 
+            // 2.1) 跨进程 IPC 令牌的唯一写者：核心蓝牙进程（开机即启动）。
+            //      其它进程只读，避免多进程"读到空就生成"互相覆盖；
+            //      这样也不再要求用户先打开一次模块 App 才能建立鉴权。
+            if (pkg == "com.android.bluetooth") {
+                runCatching { ModuleConfigStore.ensureIpcToken() }
+                    .onFailure { ModuleLog.w(TAG, "生成 IPC 令牌失败：${it.message}") }
+            }
+
             ModuleLog.i(TAG, "模块加载：pkg=$pkg api=${getApiVersion()}")
 
             // 3) 按包名分派。
@@ -131,8 +139,6 @@ class YinpageModule : XposedModule() {
             }
         }
         ModuleLog.i(TAG, "$pkg 安装完成：$okCount/${hooks.size} 个 Hook 生效")
-        // 记录安装结果：Provider 据此向 App 如实上报"模块是否已激活"
-        ModuleConfigStore.reportHookResult(pkg, okCount > 0)
         // 一个都没装上 → 允许后续回退路径重试（例如 onPackageLoaded）
         if (okCount == 0) initialized.remove(pkg)
     }

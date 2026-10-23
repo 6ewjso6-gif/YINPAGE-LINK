@@ -252,6 +252,12 @@ class SessionCoordinator(
         var probeFailure: String? = null
 
         /**
+         * 本次尝试的总预算起点。活性确认（等首帧）必须和建链共享这一份预算，
+         * 否则「5 秒建链 + 4 秒等首帧」会突破对用户承诺的 15 秒上限。
+         */
+        val connectDeadlineNanos = System.nanoTime() + CONNECT_WATCHDOG_MS * 1_000_000L
+
+        /**
          * 活性确认：在**当前已建立的候选**上发握手帧并等待首帧。
          * 返回 false = 该候选是哑通道，由传输层关掉并换下一个 UUID。
          *
@@ -280,10 +286,19 @@ class SessionCoordinator(
             // 无握手帧的协议（handshake 为空）不需要活性确认，直接通过。
             if (handshake.isEmpty()) return true
 
-            val responded = withTimeoutOrNull(HANDSHAKE_RESPONSE_WINDOW_MS) { firstData.await() } != null
+            // 活性窗口取「协议默认窗口」与「总预算剩余」的较小值：
+            // 剩余不足时不再傻等满 4 秒，直接把预算耗尽的真实原因报出来。
+            val remainingMs = (connectDeadlineNanos - System.nanoTime()) / 1_000_000L
+            if (remainingMs <= 0L) {
+                probeFailure =
+                    "连接总预算（${CONNECT_WATCHDOG_MS / 1000} 秒）已耗尽，握手未完成"
+                return false
+            }
+            val windowMs = minOf(HANDSHAKE_RESPONSE_WINDOW_MS, remainingMs)
+            val responded = withTimeoutOrNull(windowMs) { firstData.await() } != null
             if (!responded) {
                 probeFailure =
-                    "通道已建立，但握手帧发出后 ${HANDSHAKE_RESPONSE_WINDOW_MS / 1000} 秒内无任何数据返回——" +
+                    "通道已建立，但握手帧发出后 ${windowMs}ms 内无任何数据返回——" +
                         "大概率连到了非控制通道（哑串口）"
                 return false
             }

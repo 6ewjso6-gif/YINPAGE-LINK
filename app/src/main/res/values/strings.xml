@@ -152,7 +152,10 @@
     <string name="update_cancel">取消</string>
     <string name="update_downloading">正在下载 %1$d%%</string>
     <string name="update_download_failed">下载失败，请稍后重试</string>
-    <string name="update_install_failed">无法打开安装界面，请到系统设置允许「安装未知应用」后重试</string>
+    <string name="update_install_file_missing">更新包已不存在，请重新下载</string>
+    <string name="update_install_signature_mismatch">更新包签名与本应用不一致，已拒绝安装（请从官方 Release 重新下载）</string>
+    <string name="update_install_need_permission">需要先允许本应用安装未知应用，正在打开设置…</string>
+    <string name="update_install_failed_reason">无法调起系统安装器：%1$s</string>
 
     <!-- ============ 调试页 ============ -->
     <string name="debug_title">调试面板</string>
