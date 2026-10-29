@@ -385,15 +385,9 @@ class SettingsHeadsetHook : HookContext() {
             ModuleLog.w(TAG, "拿不到 Context，无法把 ANC 选择广播给蓝牙进程")
             return
         }
-        runCatching {
-            val intent = Intent(ModuleIpc.ACTION_ANC_SELECT).apply {
-                // 蓝牙进程读 EXTRA_ANC（"anc"）；任务书早期约定的 "status" 也一并带上，双保险
-                putExtra(ModuleIpc.EXTRA_ANC, ancCode)
-                putExtra(EXTRA_ANC_STATUS, ancCode)
-                setPackage(BLUETOOTH_PACKAGE)
-            }
-            context.sendBroadcast(intent)
-        }.onFailure { ModuleLog.w(TAG, "广播 ANC 选择失败：${it.message}") }
+        // 必须走 ModuleIpc 的封装：它负责附上鉴权令牌（缺令牌会被蓝牙进程直接丢弃）。
+        // 旧实现手拼 Intent 漏了 EXTRA_TOKEN，导致设置页切降噪永远无效。
+        ModuleIpc.broadcastAncSelect(context, ancCode)
     }
 
     // ------------------------------------------------------------------ 状态串与映射
@@ -550,8 +544,6 @@ class SettingsHeadsetHook : HookContext() {
 
         const val MMA_FAILED_PREFIX = "MMA_CONNECTION_FAILED"
 
-        const val BLUETOOTH_PACKAGE = "com.android.bluetooth"
-        const val EXTRA_ANC_STATUS = "status"
         const val DEFAULT_FAKE_DEVICE_ID = "01010607"
 
         val MAC_REGEX = Regex("([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}")

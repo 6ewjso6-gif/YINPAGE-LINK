@@ -6,9 +6,15 @@
   （耳机 MAC + 名称），属于隐私敏感信息 —— 原文件注释声称"不带任何蓝牙
   配对信息"与实际不符。SharedPreferences 无法按 key 拆分备份，因此这里
   **整体排除**该 prefs，云备份与换机迁移都不再带上耳机标识。
+
+  issue #3-4：导出的运行日志含 MAC / 设备名 / 协议收发字节，同样不能进备份。
+  （写入位置已改为 noBackupFilesDir，这里再显式排除一遍，双保险。）
 -->
 <full-backup-content>
     <exclude
         domain="sharedpref"
         path="yinpage_link_settings.xml" />
+    <exclude
+        domain="file"
+        path="yinpage-link-log.txt" />
 </full-backup-content>

@@ -708,10 +708,12 @@ object AppState {
     fun exportLog(): String? {
         val ctx = context() ?: return null
         return runCatching {
-            // S4：必须写入**应用私有目录**（filesDir）。原实现用 getExternalFilesDir，
+            // S4：必须写入**应用私有目录**。原实现用 getExternalFilesDir，
             // 在 Android 10 及以下（minSdk=27）位于 /sdcard/Android/data/...，
             // 任何持有 READ_EXTERNAL_STORAGE 的 App 都能读取，而日志含 MAC / 设备名 / 收发字节。
-            val file = File(ctx.filesDir, "yinpage-link-log.txt")
+            // issue #3-4：改用 noBackupFilesDir —— 该目录天然不进云备份/换机迁移，
+            // 避免日志（含 MAC、设备名、协议字节）被备份到云端。
+            val file = File(ctx.noBackupFilesDir, "yinpage-link-log.txt")
             FileWriter(file, false).use { it.write(EventLog.dump()) }
             file.absolutePath
         }.getOrNull()

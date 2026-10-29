@@ -100,7 +100,14 @@ class YinpageModule : XposedModule() {
             val loader = runCatching { param.defaultClassLoader }.getOrNull() ?: return
             ModuleLog.i(TAG, "通过 onPackageLoaded 回退安装：$pkg")
             when (pkg) {
-                "com.android.bluetooth" -> install(setOf(BluetoothUpstreamHeadsetHook()), loader, pkg)
+                "com.android.bluetooth" -> {
+                    // issue #3-5：API 101 框架只回调 onPackageLoaded 时，
+                    // 上面的令牌生成分支不会执行 → 令牌永远为空、全部 IPC fail-closed。
+                    // 这里补一次（ensureIpcToken 幂等，已存在则直接返回）。
+                    runCatching { ModuleConfigStore.ensureIpcToken() }
+                        .onFailure { ModuleLog.w(TAG, "生成 IPC 令牌失败：${it.message}") }
+                    install(setOf(BluetoothUpstreamHeadsetHook()), loader, pkg)
+                }
                 "com.milink.service" -> install(setOf(MiLinkServiceHook()), loader, pkg)
                 "com.xiaomi.bluetooth" -> install(setOf(FocusIslandHook()), loader, pkg)
                 "com.android.settings" -> install(setOf(SettingsHeadsetHook()), loader, pkg)

@@ -56,6 +56,8 @@ object ModuleIpc {
     const val EXTRA_RIGHT_CHARGING = "right_charging"
     const val EXTRA_CASE_CHARGING = "case_charging"
     const val EXTRA_ANC = "anc"
+    /** 任务书早期约定的 ANC extra 名，与 [EXTRA_ANC] 同值一起发送（双保险）。 */
+    const val EXTRA_ANC_STATUS = "status"
     const val EXTRA_CONNECTED = "connected"
 
     /**
@@ -176,10 +178,18 @@ object ModuleIpc {
         sendToAll(context, intent)
     }
 
-    /** 把"用户切了 ANC"通知给蓝牙进程。 */
+    /**
+     * 把"用户切了 ANC"通知给蓝牙进程。
+     *
+     * 蓝牙进程读 [EXTRA_ANC]；早期约定的 "status" 也一并带上（双保险），
+     * 并附带鉴权令牌 —— 调用方不要再自己拼 Intent，否则极易漏掉令牌被丢弃。
+     */
     fun broadcastAncSelect(context: Context?, ancCode: Int) {
         if (context == null) return
-        val intent = Intent(ACTION_ANC_SELECT).apply { putExtra(EXTRA_ANC, ancCode) }
+        val intent = Intent(ACTION_ANC_SELECT).apply {
+            putExtra(EXTRA_ANC, ancCode)
+            putExtra(EXTRA_ANC_STATUS, ancCode)
+        }
         sendToBluetooth(context, intent)
     }
 

@@ -153,11 +153,13 @@ class RfcommTransport(
         val deadlineNanos = System.nanoTime() + CONNECT_TIMEOUT_MS * 1_000_000L
 
         return withContext(Dispatchers.IO) {
-            for (uuid in uuids) {
-                // 官方 `b/b.java` 建链用的是 createInsecureRfcommSocketToServiceRecord，
-                // 即 **insecure 优先**。先试 secure 不仅慢（需要链路加密/可能的配对流程），
-                // 在未配对设备上还会直接卡住，白白吃掉候选的 5 秒预算，所以顺序反转。
-                for (insecure in listOf(true, false)) {
+            // issue #3-2：按「方式」分两轮扫描，而不是每个 UUID 连试 secure+insecure。
+            // 6 个 UUID × 2 种方式共享 15 秒预算，单候选最坏 5s 建链 + 4s 活性；
+            // 若内层是方式，两个哑通道就能吃光预算，靠后的 UUID 永远试不到。
+            // 外层先扫 insecure（官方 `b/b.java` 用的就是 createInsecureRfcommSocket…），
+            // 全部失败再扫 secure —— 预算利用率翻倍，且与官方行为一致。
+            for (insecure in listOf(true, false)) {
+                for (uuid in uuids) {
                     if (closed) throw TransportIoException("通道已关闭")
 
                     val remainingMs = (deadlineNanos - System.nanoTime()) / 1_000_000L
@@ -353,6 +355,12 @@ class RfcommTransport(
                         }
                         read == 0 -> Unit
                         else -> {
+                            // issue #3-6：候选被 discard 后，旧读线程可能仍阻塞在
+                            // input.read()（soTimeout 到期才返回）。若它读到残留字节，
+                            // 会把下一个候选的 probe 窗口误判成"有响应"。
+                            // readGeneration 已在 discardCandidate 里 +1，这里按 token
+                            // 校验，非当前读循环一律丢弃。
+                            if (readGeneration != token) continue
                             val data = IntArray(read) { buffer[it].toInt() and 0xFF }
                             EventLog.bytes(TAG, "RX", data)
                             listener?.onFrame(TransportFrame(data))

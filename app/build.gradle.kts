@@ -1,7 +1,12 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
-/** 本地构建默认版本名（CI 发布时会用 `-PversionName` 覆盖为真实 tag）。 */
-val DEFAULT_VERSION_NAME = "APP-t-v0.15"
+/**
+ * 本地构建默认版本名（CI 发布时会用 `-PversionName` 覆盖为真实 tag）。
+ *
+ * issue #3-5：本地构建也可用环境变量 `YINPAGE_VERSION_NAME` 覆盖，
+ * 避免打出来的包永远叫旧版本、装上去后反复提示"发现新版本"。
+ */
+val DEFAULT_VERSION_NAME = "APP-t-v0.16"
 
 /** versionCode 基座：高于历史基于 Unix 秒数的最大值，保证可覆盖安装。 */
 val VERSION_CODE_BASE = 1_800_000_000
@@ -64,7 +69,8 @@ android {
          *   - 基座 1_800_000_000 高于历史基于秒数的最大值（v0.11 ≈ 1.79e9），
          *     保证老用户能直接覆盖安装新包。
          */
-        val injectedVersionName = (project.findProperty("versionName") as? String)?.takeIf { it.isNotBlank() }
+        val injectedVersionName = ((project.findProperty("versionName") as? String)
+            ?: System.getenv("YINPAGE_VERSION_NAME"))?.takeIf { it.isNotBlank() }
         val resolvedVersionName = injectedVersionName ?: DEFAULT_VERSION_NAME
         versionName = resolvedVersionName
 

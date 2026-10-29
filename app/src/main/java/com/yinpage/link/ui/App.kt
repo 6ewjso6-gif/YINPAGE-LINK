@@ -35,7 +35,9 @@ import com.yinpage.link.R
 import com.yinpage.link.config.AppConfig
 import com.yinpage.link.core.AppState
 import com.yinpage.link.core.UpdateManager
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * ============================================================================
@@ -119,9 +121,14 @@ fun App(
                     }
                 }.onSuccess { apk ->
                     downloading = false
+                    // issue #3-3：install() 内部同步做签名解析（getPackageArchiveInfo 要
+                    // 完整解析 APK）+ 1.1MB 拷贝 + fsync，低端机上足以触发 ANR，必须挪到 IO。
+                    val result = withContext(Dispatchers.IO) {
+                        UpdateManager.install(context.applicationContext, apk)
+                    }
                     // 按安装结果分别提示：只报"失败"的话，用户无法区分是
                     // 「没给未知来源权限」「签名不一致」还是「系统没有安装器」。
-                    when (val result = UpdateManager.install(context.applicationContext, apk)) {
+                    when (result) {
                         is UpdateManager.InstallResult.Launched -> Unit
                         is UpdateManager.InstallResult.FileMissing ->
                             Toast.makeText(context, R.string.update_install_file_missing, Toast.LENGTH_LONG).show()

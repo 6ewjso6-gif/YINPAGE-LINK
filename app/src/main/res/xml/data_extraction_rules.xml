@@ -5,16 +5,24 @@
   S5 修复：`yinpage_link_settings.xml` 含 `last_addr` / `last_name`
   （耳机 MAC + 名称），云备份与设备迁移都不应携带。SharedPreferences 无法
   按 key 拆分规则，故整体排除该 prefs（开关类配置无隐私属性，丢失可接受）。
+
+  issue #3-4：运行日志（含 MAC / 设备名 / 协议字节）也要排除，云备份与迁移都不带。
 -->
 <data-extraction-rules>
     <cloud-backup>
         <exclude
             domain="sharedpref"
             path="yinpage_link_settings.xml" />
+        <exclude
+            domain="file"
+            path="yinpage-link-log.txt" />
     </cloud-backup>
     <device-transfer>
         <exclude
             domain="sharedpref"
             path="yinpage_link_settings.xml" />
+        <exclude
+            domain="file"
+            path="yinpage-link-log.txt" />
     </device-transfer>
 </data-extraction-rules>
