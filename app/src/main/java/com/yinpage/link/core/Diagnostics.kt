@@ -504,14 +504,17 @@ object Diagnostics {
             frames.take(4).forEach { f ->
                 sb.appendLine("  ${hex(f)}  （长度 ${f.size}）")
             }
-            // 手动构造一条"查询电量"验证编码。
-            // ⚠️ 必须用**新的** codec 实例：BluetrumCodec 的发送序号按消息推进，
-            // 复用上面的 codec 会让 seq 从 6 开始，首帧字节不再等于 0x00，自检误报。
+            // 手动构造一条"查询 MTU"验证编码（官方连上后的第一条请求就是 0xFF）。
+            // ⚠️ 必须用**新的** codec 实例：seq 会随已编码帧推进，
+            // 复用上面的 codec 会让 seq 不再从 0 开始，自检误报。
             val fresh = BluetrumCodec()
-            val expect = intArrayOf(0x00, BtCommand.DEVICE_INFO, BtCommand.TYPE_REQUEST, 0x00, 0x02, BtInfo.DEVICE_POWER, 0x00)
+            val expect = intArrayOf(
+                0x00, BtCommand.DEVICE_INFO, BtCommand.TYPE_REQUEST, 0x00, 0x02,
+                BtInfo.MAX_PACKET_SIZE, 0x00,
+            )
             val actual = fresh.handshake().firstOrNull()
             val ok = actual != null && actual.contentEquals(expect)
-            sb.appendLine("首帧是否符合预期 [00 27 01 00 02 01 00]：${if (ok) "✅ 是" else "❌ 否，实际=${actual?.let { hex(it) }}"}")
+            sb.appendLine("首帧是否符合预期 [00 27 01 00 02 FF 00]：${if (ok) "✅ 是" else "❌ 否，实际=${actual?.let { hex(it) }}"}")
         }.onFailure {
             sb.appendLine("协议帧自检失败：${it.message}")
         }

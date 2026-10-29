@@ -154,7 +154,10 @@ class RfcommTransport(
 
         return withContext(Dispatchers.IO) {
             for (uuid in uuids) {
-                for (insecure in listOf(false, true)) {
+                // 官方 `b/b.java` 建链用的是 createInsecureRfcommSocketToServiceRecord，
+                // 即 **insecure 优先**。先试 secure 不仅慢（需要链路加密/可能的配对流程），
+                // 在未配对设备上还会直接卡住，白白吃掉候选的 5 秒预算，所以顺序反转。
+                for (insecure in listOf(true, false)) {
                     if (closed) throw TransportIoException("通道已关闭")
 
                     val remainingMs = (deadlineNanos - System.nanoTime()) / 1_000_000L

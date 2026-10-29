@@ -16,11 +16,14 @@ import com.yinpage.link.protocol.Bytes
  *  与旧版 `yscoco` 推测实现的区别：**本实现基于官方 App 反编译的确证结论**，
  *  不是猜的。命令码、帧格式、电量布局都有 code_off 级证据（见 doc/PROTOCOL.md）。
  *
- *  协议要点：
- *   - 通道：经典蓝牙 SPP，UUID 00001101-0000-1000-8000-00805F9B34FB
- *   - 帧：5 字节头 + payload，无 CRC
- *   - 查询统一走 DEVICE_INFO(0x27)，payload = [INFO_x, 0x00]
- *   - 通知与响应同码不同 type，路由必须用 (type, command)
+ *  协议要点（2026-10 官方 APK v1.4.27 反编译确证）：
+ *   - 通道：经典蓝牙 SPP，手机做 **client**，`createInsecureRfcommSocketToServiceRecord`，
+ *     UUID 只有 00001101-0000-1000-8000-00805F9B34FB（`dd/a.java:23,94`）
+ *   - 帧：5 字节头 + payload，无 CRC；seq **每个物理帧**递增
+ *   - 查询统一走 DEVICE_INFO(0x27)，payload = `[INFO_x, 0x00]`（可多个成对拼接）
+ *   - `DEVICE_INFO` 的**响应是 TLV**：`[infoId][len][data...]`，可含多条
+ *   - 请求必须**串行**：一条请求发出后等响应（官方 10s 超时）再发下一条
+ *   - 连上后第一条请求是 `INFO_MAX_PACKET_SIZE(0xFF)`，用返回值-5 作为分包大小
  * ============================================================================
  */
 class BluetrumCodec : PodCodec {
@@ -29,7 +32,11 @@ class BluetrumCodec : PodCodec {
 
     override val displayName: String = "中科蓝讯 AB 系（音贝奇 Feel 1 Pro）"
 
-    private val frames = BtFrameCodec()
+    /**
+     * 分包大小初值：官方 `DefaultDeviceCommManager.setMaxPacketSize(255)`
+     * → payload 上限 = 255 - 5 = 250。连上后会用设备回填的真实 MTU 覆盖。
+     */
+    private val frames = BtFrameCodec(maxChunkSize = INITIAL_CHUNK_SIZE)
 
     /** 上次"无法解析"提示的帧头，避免同一段垃圾数据反复刷屏。 */
     private var lastUnparsedHead: String = ""
@@ -50,16 +57,37 @@ class BluetrumCodec : PodCodec {
     // ------------------------------------------------------------------ 握手
 
     /**
-     * 连接后的初始化序列。
-     * 先查电量（最常用），再查能力位图与固件版本，最后同步 ANC / EQ / 入耳状态。
+     * 连接后的**第一条**请求：MTU 查询。
+     *
+     * 官方 `id/l.onConnected()` 只做两件事：注册 MTU 回调 + 发
+     * `DeviceInfoRequest(0xFF)`；其它状态查询是在响应回来后由各页面按需发。
+     * 这里保持同样语义：握手只查 MTU，既是最小活性探针，也让设备先回填分包大小。
      */
-    override fun handshake(): List<Bytes> = buildList {
-        add(query(BtInfo.DEVICE_POWER))
-        add(query(BtInfo.DEVICE_CAPABILITIES))
-        add(query(BtInfo.FIRMWARE_VERSION))
-        add(query(BtInfo.ANC_MODE))
-        add(query(BtInfo.EQ_SETTING))
-        add(query(BtInfo.IN_EAR_STATUS))
+    override fun handshake(): List<Bytes> = listOf(query(BtInfo.MAX_PACKET_SIZE))
+
+    /**
+     * 连上后的一次性状态同步。
+     *
+     * 官方 `DeviceInfoRequest` 的 payload 就是**多个 `[infoId][0x00]` 成对拼接**
+     * （`DeviceInfoRequest.java:24` 的 `defaultInfoRequest()` 一次请求 29 个字段），
+     * 设备用一条（或数条）TLV 响应回全部字段。因此这里合并成**一条**请求，
+     * 而不是每个字段发一条——既贴合官方行为，也避免多次往返。
+     */
+    private fun stateQueries(): List<Bytes> {
+        val infos = intArrayOf(
+            BtInfo.DEVICE_POWER,
+            BtInfo.DEVICE_CAPABILITIES,
+            BtInfo.FIRMWARE_VERSION,
+            BtInfo.ANC_MODE,
+            BtInfo.EQ_SETTING,
+            BtInfo.IN_EAR_STATUS,
+        )
+        val payload = IntArray(infos.size * 2)
+        infos.forEachIndexed { index, infoId ->
+            payload[index * 2] = infoId and 0xFF
+            payload[index * 2 + 1] = 0x00
+        }
+        return frames.encode(BtCommand.DEVICE_INFO, BtCommand.TYPE_REQUEST, payload)
     }
 
     /** 构造一条设备信息查询：DEVICE_INFO(0x27) + payload [infoId, 0x00]。 */
@@ -96,7 +124,7 @@ class BluetrumCodec : PodCodec {
         is PodCommand.SetWindSuppression ->
             request(BtCommand.NOISE_REDUCTION, if (command.enabled) BtAnc.GAIN_MAX else BtAnc.GAIN_MIN)
 
-        PodCommand.QueryAll -> handshake()
+        PodCommand.QueryAll -> stateQueries()
 
         PodCommand.QueryBattery -> listOf(query(BtInfo.DEVICE_POWER))
 
@@ -159,9 +187,13 @@ class BluetrumCodec : PodCodec {
             ),
         )
 
-        // 设备信息响应/通知：payload[0] = infoId，其后为数据
-        if (frame.command == BtCommand.DEVICE_INFO && frame.payload.size >= 2) {
-            handleDeviceInfo(frame.type, frame.payload, sink)
+        // 设备信息响应（0x27）与通知容器（0x28）：payload 是 TLV 列表
+        // `[infoId][len][data...]`，可含多条。官方 DeviceCommManager.processDeviceInfoData()
+        // 就是按这个结构循环切分的。
+        if ((frame.command == BtCommand.DEVICE_INFO || frame.command == BtCommand.NOTIFY) &&
+            frame.payload.size >= 2
+        ) {
+            handleTlv(frame.payload, sink)
             return
         }
 
@@ -175,10 +207,26 @@ class BluetrumCodec : PodCodec {
         }
     }
 
-    private fun handleDeviceInfo(type: Int, payload: Bytes, sink: (PodUpdate) -> Unit) {
-        val infoId = payload[0] and 0xFF
-        val data = if (payload.size > 1) payload.copyOfRange(1, payload.size) else IntArray(0)
+    /**
+     * 解析 TLV 列表 `[infoId][len][data...](重复)`。
+     *
+     * 之前把 `payload[1..]` 直接当数据是错的：`:01 03 L R C` 会把长度字节
+     * 当成左耳电量，导致电量/ANC 等全部错位。
+     */
+    private fun handleTlv(payload: Bytes, sink: (PodUpdate) -> Unit) {
+        var cursor = 0
+        while (cursor + 1 < payload.size) {
+            val infoId = payload[cursor] and 0xFF
+            val len = payload[cursor + 1] and 0xFF
+            val start = cursor + 2
+            val end = minOf(start + len, payload.size)
+            val data = if (end > start) payload.copyOfRange(start, end) else IntArray(0)
+            handleDeviceInfo(infoId, data, sink)
+            cursor = end
+        }
+    }
 
+    private fun handleDeviceInfo(infoId: Int, data: Bytes, sink: (PodUpdate) -> Unit) {
         when (infoId) {
             BtInfo.DEVICE_POWER -> BtPower.decodeState(data)?.let { publishBattery(it, sink) }
 
@@ -191,6 +239,17 @@ class BluetrumCodec : PodCodec {
                 data.firstOrNull()?.let {
                     lastInEar = it != 0
                     sink(PodUpdate.InEarDetection(lastInEar))
+                }
+            }
+
+            BtInfo.MAX_PACKET_SIZE -> {
+                // 官方 setMaxPacketSize(x) 的实现是 packetSize = x - 5（帧头 5 字节）。
+                data.firstOrNull()?.let { reported ->
+                    val chunk = (reported and 0xFF) - BtFrameCodec.HEADER_SIZE
+                    if (chunk >= 1) {
+                        frames.maxChunkSize = chunk
+                        Log.i(TAG, "设备分包上限：$reported → payload $chunk 字节")
+                    }
                 }
             }
 
@@ -327,5 +386,8 @@ class BluetrumCodec : PodCodec {
 
         /** 无法解析时展示的原始字节数（贴完整原文便于对照抓包）。 */
         private const val MAX_UNPARSED_SHOW_BYTES = 48
+
+        /** 初始分包 payload 上限：官方 setMaxPacketSize(255) → 255 - 5 = 250。 */
+        private const val INITIAL_CHUNK_SIZE = 250
     }
 }

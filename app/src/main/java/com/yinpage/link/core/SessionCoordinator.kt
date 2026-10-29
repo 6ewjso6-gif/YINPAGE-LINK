@@ -18,6 +18,8 @@ import com.yinpage.link.protocol.TransportTimeoutException
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.TimeoutCancellationException
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withTimeout
@@ -67,6 +69,17 @@ class SessionCoordinator(
      */
     @Volatile
     private var firstDataSignal: CompletableDeferred<Unit>? = null
+
+    /**
+     * 入站通知信号（CONFLATED）：每收到一段数据就标记一次。
+     *
+     * 用途：官方 SDK 的请求是**严格串行**的——一条 request 发出后，必须等
+     * 到它的 response（或 10 秒超时）才发下一条（`DeviceCommManager.a()` +
+     * `sendRequest()` 的单飞队列）。多条查询一次性连发会被设备侧丢弃或错序，
+     * 因此这里用「每发一帧后等一次入站数据」复刻同样的节奏。
+     */
+    @Volatile
+    private var inboundSignal: Channel<Unit>? = null
 
     override val activeTransportName: String?
         get() = activeTransport?.name
@@ -189,6 +202,9 @@ class SessionCoordinator(
         // 提前赋值即可彻底消除该竞态。
         val firstData = CompletableDeferred<Unit>()
         firstDataSignal = firstData
+        // 新会话的入站信号：旧会话残留的标记不能算数
+        val inbound = Channel<Unit>(Channel.CONFLATED)
+        inboundSignal = inbound
 
         val channel = try {
             factory.create(kind, address)
@@ -209,6 +225,7 @@ class SessionCoordinator(
                 // 通道活性：首个到达的字节就解锁握手看门狗（无论能否解析——
                 // 设备回加密帧也算「通道选对了」，只有全程静默才判定连到了哑通道）。
                 firstDataSignal?.takeIf { !it.isCompleted }?.complete(Unit)
+                inboundSignal?.trySend(Unit)
                 val decoder = this@SessionCoordinator.activeCodec ?: return
                 try {
                     // 顺序敏感：RFCOMM 在 IO 读线程上投递，BLE 在主线程上投递，
@@ -375,17 +392,31 @@ class SessionCoordinator(
             return@withLock false
         }
 
-        for (frame in frames) {
+        var written = 0
+        for ((index, frame) in frames.withIndex()) {
             if (frame.isEmpty()) continue
             try {
                 transport.write(frame)
+                written++
             } catch (error: Throwable) {
                 if (error is CancellationException) throw error
                 EventLog.info(TAG, "发送失败（${transport.name}）：${describe(error)}")
                 return@withLock false
             }
+
+            // 多帧请求必须串行：等上一条的响应到达（或超时）再发下一条。
+            // 官方 SDK 的请求队列是单飞的（DeviceCommManager.f7745f + 10s 超时），
+            // 一次性连发多条查询会被设备侧丢弃或造成响应错序。
+            if (index != frames.lastIndex) {
+                val signal = inboundSignal
+                if (signal != null) {
+                    withTimeoutOrNull(FRAME_RESPONSE_TIMEOUT_MS) { signal.receive() }
+                } else {
+                    delay(FRAME_GAP_MS)
+                }
+            }
         }
-        EventLog.debug(TAG, "$command → ${frames.size} 帧已写出（${transport.name}）")
+        EventLog.debug(TAG, "$command → $written/${frames.size} 帧已写出（${transport.name}）")
         true
     }
 
@@ -410,6 +441,7 @@ class SessionCoordinator(
         generation.incrementAndGet()
         ready = false
         firstDataSignal = null
+        inboundSignal = null
         val previousCodec = activeCodec
         val previous = activeTransport
         activeTransport = null
@@ -460,5 +492,16 @@ class SessionCoordinator(
          * 同时避免「哑通道」把一次连接拖到 15 秒才暴露。
          */
         const val HANDSHAKE_RESPONSE_WINDOW_MS = 4_000L
+
+        /**
+         * 多帧请求的「等上一条响应」上限。
+         * 官方对每条 request 的超时是 10 秒（`LocationClientOption.MIN_AUTO_NOTIFY_INTERVAL`），
+         * 但查询类响应正常在几十毫秒内到达；这里用 1.2 秒即可覆盖慢设备，
+         * 又不会让一次 QueryAll（6 条）拖到分钟级。
+         */
+        const val FRAME_RESPONSE_TIMEOUT_MS = 1_200L
+
+        /** 没有入站信号时（例如调试直写）的保守帧间隔：官方队列间隔 15ms。 */
+        const val FRAME_GAP_MS = 15L
     }
 }

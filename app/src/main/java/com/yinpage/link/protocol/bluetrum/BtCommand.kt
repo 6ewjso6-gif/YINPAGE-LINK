@@ -76,6 +76,12 @@ object BtCommand {
     const val ANC_MODE = 0x2C
     /** 自定义命令 */
     const val CUSTOM = 0x40
+    /**
+     * 通知容器（type = 3）。官方 `Command.COMMAND_NOTIFY = 40`：
+     * 载荷与 0x27 响应同样按 TLV `[infoId][len][data...]` 组织，
+     * 常用来一次推送多条状态。
+     */
+    const val NOTIFY = 0x28
 
     /** 指令类型（帧头第 3 字节）。 */
     const val TYPE_REQUEST = 1

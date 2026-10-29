@@ -20,7 +20,11 @@
 
 逆向对象：官方 APK（132.8 MB）解包后的 `classes.dex` / `classes2.dex` 字符串池。
 
-### 1.1 传输通道：BLE GATT（已修订，⚠️ 旧"SPP"结论被真机推翻）
+### 1.1 传输通道：BLE GATT（⚠️ 已被 §1.1.1 推翻，仅保留历史）
+
+> **以 §1.1.1 为准**：下面这段"BLE GATT"结论来自 ABMate **iOS** SDK 源码，
+> 与实际官方 Android App 的行为不符——Android 官方走经典蓝牙 SPP。
+> 保留此段只用于记录推理过程，不要据此改代码。
 
 **2026-10-05 重大修订：控制通道其实是 BLE GATT，不是 SPP。**
 
@@ -66,6 +70,39 @@ createInsecureRfcommSocketToServiceRecord  ← 非安全通道
 
 结论（旧）：耳机走**标准 SPP UUID 的 RFCOMM 通道**……（该结论已被上方"BLE GATT"修订推翻；
 APK 里出现 SPP 类只说明 SDK 同时内置 SPP 实现，真机控制通道实测是 BLE GATT。）
+
+#### 1.1.1 再修订：官方 Android APK v1.4.27 全量反编译确证（2026-10-29）✅
+
+> 上一版"BLE GATT"结论来自 **ABMate iOS SDK 源码**，不是官方 Android App 的实际行为。
+> 本次用 jadx 1.5.6 反编译官方 APK（MD5 `D31F2892632776AC597F9680B13A43A8`，v1.4.27），
+> 逐类对照后**以 Android 官方实现为准**。
+
+| 项 | 官方 Android 实现 | 证据 |
+|---|---|---|
+| 控制通道 | **经典蓝牙 SPP**，手机做 client | `dd/a.java:88-95` |
+| UUID | **只有** `00001101-0000-1000-8000-00805F9B34FB` | `dd/a.java:23` |
+| 建链方式 | `createInsecureRfcommSocketToServiceRecord`（**insecure**，不要求 bond） | `b/b.java:29` |
+| 连接时机 | 仅在 `ACL_CONNECTED` 广播后连 SPP（音频链路已建立） | `androidx/appcompat/app/u.java:100-110` → `id/p.java:123` |
+| BLE GATT | **bluetrum 路径完全没有 GATT**；`connectGatt` 只出现在杰理 RCSP | 全库检索 `connectGatt` 仅 `com/jieli/bluetooth/impl/BluetoothBle.java` |
+| 配对 | 不强制 `createBond()`（该方法只被杰理路径使用） | `dd/a.java:98-100` |
+| 握手 | 连上后只做：注册 MTU 回调 + 发 `DeviceInfoRequest(0xFF)` | `id/l.java:33-40` |
+| 分包 | 先 `setMaxPacketSize(255)`（payload=250），再由 MTU 响应覆盖为 `值-5` | `id/p.java:187`、`DeviceCommManager.java:401-403` |
+| 请求节奏 | **严格串行**：一条 request → 等 response（10s 超时）→ 下一条；发送队列间隔 15ms | `DeviceCommManager.java:113-178,386-395`、`Request.java:27`、`dd/a.java:63,201` |
+| seq | **每个物理帧** `(seq+1)&0x0F`，接收端逐帧校验 | `DeviceCommManager.java:154-161`、`f.java:51-57` |
+| 响应载荷 | `DEVICE_INFO(0x27)` 响应是 **TLV**：`[infoId][len][data...]`，可多条 | `DeviceCommManager.java:303-314` |
+| 通知容器 | `COMMAND_NOTIFY(0x28)` 同样按 TLV 解析 | `DeviceCommManager.java:247-255` |
+
+由此产生的**本项目根因（v0.15 及以前）**：
+
+1. 分包大小固定 15 字节，官方实际 250（先 255 再按 MTU 回填）；
+2. seq 按"消息"递增，官方按"物理帧"递增（多分包时设备会因 seq 不连续丢帧）；
+3. 握手一次连发 6 条查询，官方严格单飞（发一条等一条响应）；
+4. `DEVICE_INFO` 响应按 `payload[1..]` 当数据，**漏掉了 TLV 的 `len` 字节**
+   → 电量/ANC/EQ 全部错位（`:01 03 L R C` 会把 `03` 读成左耳电量）；
+5. SPP 先试 secure socket，官方只用 insecure（未配对设备上 secure 会白耗预算）。
+
+v0.16 起上述五点已按官方实现修正（`BtFrameCodec` / `BluetrumCodec` /
+`SessionCoordinator` / `RfcommTransport`）。
 
 ### 1.2 耳机主控方案：中科蓝讯 Bluetrum AB 系列 ✅
 
@@ -168,9 +205,11 @@ GAME_MODE
 
 - **整帧长度 = 5 + len**
 - **无 CRC、无校验、无转义**（全 bluetrum 反汇编中没有任何 CRC 调用，仅 OTA 状态码用到）
-- **分包**：默认每包 payload 15 字节（类 `e.a` 初值 `const/16 #15`），
-  可由 `INFO_MAX_PACKET_SIZE(0xFF)` 查询结果覆盖
-- **序号按"消息"递增而非按帧**：一条消息拆成 N 个物理帧时共用同一序号
+- **分包**：官方连上后先 `setMaxPacketSize(255)` → 每包 payload **250 字节**；
+  再按 `INFO_MAX_PACKET_SIZE(0xFF)` 响应回填为 `值 - 5`（见 §1.1.1）。
+  旧实现里的 15 字节初值不是官方路径实际使用的值
+- **序号按"物理帧"逐帧递增**：一条消息拆成 N 个物理帧时**每帧** `(seq+1)&0x0F`，
+  接收端逐帧校验 seq 连续性（见 §1.1.1）
 - 接收端校验：`Frame seq mismatch: Expected … but got …`、`The length of payload mismatch: Expected …`、
   `The length of received data is too short…`（< 5 字节直接丢弃）
 

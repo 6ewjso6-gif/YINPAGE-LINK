@@ -10,7 +10,7 @@ import com.yinpage.link.protocol.Bytes
  *
  *   偏移  字段     说明
  *   ----  -------  --------------------------------------------------
- *    [0]  seq      bits0-3 发送序号 0..15，发送后 (x+1) and 0x0F，初值 0
+ *    [0]  seq      bits0-3 发送序号 0..15，**每个物理帧**发送后 (x+1) and 0x0F
  *    [1]  command  命令码（见 [BtCommand]）
  *    [2]  type     1=请求 2=响应 3=通知
  *    [3]  chunk    高 4 位 = (总包数 - 1)，低 4 位 = 当前包序号
@@ -19,8 +19,12 @@ import com.yinpage.link.protocol.Bytes
  *
  *  - 整帧长度 = 5 + len
  *  - **无 CRC / 无校验 / 无转义**
- *  - 大数据分包：默认每包 payload 15 字节（类 `e.a` 初值），
- *    实际值可由 `INFO_MAX_PACKET_SIZE(0xFF)` 查询覆盖
+ *  - 大数据分包：框架默认 15 字节（SDK 类 `e.a` 初值），但官方连上后
+ *    先 `setMaxPacketSize(255)` → payload 250，再由 `INFO_MAX_PACKET_SIZE(0xFF)`
+ *    响应回填为 `值 - 5`；本项目由 [BluetrumCodec] 传入 250 并在握手后回填
+ *  - 官方 SDK 在 `DeviceCommManager.a()` 的分包循环里对**每个物理帧**都执行
+ *    `seq = (seq + 1) & 0x0F`（一条消息拆 N 帧时 seq 各不相同），接收端
+ *    `f.b()` 逐帧校验 `Expected seq`，所以这里必须按帧递增，不能按消息递增。
  * ============================================================================
  */
 class BtFrameCodec(
@@ -51,7 +55,7 @@ class BtFrameCodec(
 
     /**
      * 把一条逻辑消息编码为若干物理帧（长度超过 maxChunkSize 时自动分包）。
-     * 分包时所有帧共用同一序号（SDK 行为：序号按"消息"递增而非按帧）。
+     * 分包时**每个物理帧各自递增序号**（与官方 SDK `DeviceCommManager.a()` 一致）。
      */
     fun encode(command: Int, type: Int, payload: Bytes): List<Bytes> {
         val safePayload = if (payload.isEmpty()) IntArray(0) else payload
@@ -64,16 +68,15 @@ class BtFrameCodec(
         val totalChunks = if (safePayload.isEmpty()) 1
         else ceilDiv(safePayload.size, chunkSize)
 
-        val currentSeq = seq
-        // 序号按消息推进
-        seq = (seq + 1) and 0x0F
-
         val frames = ArrayList<Bytes>(totalChunks)
         for (i in 0 until totalChunks) {
             val start = i * chunkSize
             val end = minOf(start + chunkSize, safePayload.size)
             val slice = if (end > start) safePayload.copyOfRange(start, end) else IntArray(0)
-            frames.add(buildFrame(currentSeq, command, type, totalChunks, i, slice))
+            // 每个物理帧发完即推进序号（官方 SDK 分包循环内同样逐帧递增）
+            val frameSeq = seq
+            seq = (seq + 1) and 0x0F
+            frames.add(buildFrame(frameSeq, command, type, totalChunks, i, slice))
         }
         return frames
     }
@@ -111,11 +114,19 @@ class BtFrameCodec(
     /** 分片重组缓冲：key = command，value = 正在重组的一整条多包消息。 */
     private val partial = HashMap<Int, PartialMessage>()
 
-    /** 正在重组的消息；按 seq 区分新旧，避免残留分片污染下一条同 command 的消息。 */
+    /**
+     * 正在重组的消息。
+     *
+     * 注意：由于 seq 是**按物理帧**递增的，分片之间 seq 必然不同，
+     * 因此不能再用 seq 判断“是不是同一条消息”。改用「总包数 + 下一包序号」判定：
+     * 首包（chunkIndex=0）或序号不连续，都视为新消息，丢弃旧分片重新开始。
+     */
     private class PartialMessage(
-        val seq: Int,
         val totalChunks: Int,
         val parts: MutableList<Bytes>,
+        val received: BooleanArray,
+        /** 期望的下一个分片序号。 */
+        var nextIndex: Int,
         /** 最近一次收到本消息分片的时刻，用于老化清理。 */
         var lastTouchedMs: Long,
     )
@@ -187,16 +198,17 @@ class BtFrameCodec(
 
         val existing = partial[frame.command]
         val isNewMessage = existing == null ||
-            existing.seq != frame.seq ||
             existing.totalChunks != frame.totalChunks ||
-            frame.chunkIndex == 0
+            frame.chunkIndex == 0 ||
+            frame.chunkIndex != existing.nextIndex
         if (isNewMessage) {
             // 新消息开始：丢弃同 command 的残留片段，避免旧消息污染新消息
             if (existing != null) partial.remove(frame.command)
             partial[frame.command] = PartialMessage(
-                seq = frame.seq,
                 totalChunks = frame.totalChunks,
                 parts = MutableList(frame.totalChunks) { IntArray(0) },
+                received = BooleanArray(frame.totalChunks),
+                nextIndex = 1,
                 lastTouchedMs = now,
             )
             // 防御：异常数据导致分片表无限膨胀
@@ -206,8 +218,10 @@ class BtFrameCodec(
         val msg = partial.getValue(frame.command)
         msg.lastTouchedMs = now
         msg.parts[frame.chunkIndex] = frame.payload
+        msg.received[frame.chunkIndex] = true
+        msg.nextIndex = frame.chunkIndex + 1
 
-        val complete = (0 until msg.totalChunks).all { msg.parts[it].isNotEmpty() }
+        val complete = msg.received.all { it }
         if (!complete) return null
 
         var merged = IntArray(0)
@@ -235,7 +249,7 @@ class BtFrameCodec(
     val bufferedBytes: Int get() = buffer.size
 
     companion object {
-        /** SDK 默认分包大小（类 `e.a` 初值）。 */
+        /** 框架默认分包大小（SDK 类 `e.a` 初值）；实际使用值由调用方传入 250。 */
         const val DEFAULT_CHUNK_SIZE = 15
 
         /** 帧头固定长度。 */
