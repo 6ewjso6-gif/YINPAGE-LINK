@@ -188,8 +188,10 @@ com.xiaomi.bluetooth       连接通知
 - 前台服务保活：`foregroundServiceType="connectedDevice"`
 
 主控制链路（`:app`）只使用 Android 公开 API；个别 @hide 调用（如 `BluetoothSocket.setSoTimeout`，
-在 `minSdk=27` 下无公开替代品）会逐处标注并异步降级。没有 Xposed 强依赖 —— 系统 UI 融合属于
-**可选的 LSPosed 模块**（`:module`）；没有系统签名、没有 Shizuku 强依赖。
+在 `minSdk=27` 下无公开替代品）会逐处标注并异步降级。另有一处 `ActivityThread.currentApplication()`
+反射，**仅在未注入 Context 时兜底**（正常启动路径由 `YinpageApp.onCreate()` 显式注入）。
+没有 Xposed 强依赖 —— 系统 UI 融合属于**可选的 LSPosed 模块**（`:module`）；
+没有系统签名、没有 Shizuku 强依赖。
 
 > Shizuku（可选）能提供 shell 级权限，用于读取系统蓝牙管理器里的设备信息作为补充，
 > 但它同样**无法注入系统 UI**——所以它替代不了形态一。

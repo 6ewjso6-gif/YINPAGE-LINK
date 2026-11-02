@@ -420,18 +420,27 @@ class BluetoothUpstreamHeadsetHook : HookContext() {
         applyAnc(ancCodeFromMiuiLevel(level), device)
     }
 
-    /** 统一下发 ANC：更新快照 → 发 SPP 命令 → 广播给其它进程 → 推送系统回调。 */
+    /** 统一下发 ANC：发 SPP 命令 → 成功后更新快照并广播 → 推送系统回调。 */
     private fun applyAnc(ancCode: Int, device: BluetoothDevice) {
         val address = runCatching { device.address }.getOrNull().orEmpty()
-        val snap = ModuleIpc.snapshot().copy(address = address, anc = ancCode)
-        ModuleIpc.broadcastState(appContext, snap)
         ioExecutor.execute {
-            runCatching {
-                controller.get()?.setNoise(ancCodeToNoise(ancCode))
+            // issue #4-7：先下发、再广播。下发失败（耳机通道未就绪 / 写失败）时
+            // 不广播，让各消费进程继续显示耳机真实状态，而不是把 UI 改成没生效的值。
+            val sent = runCatching {
+                controller.get()?.setNoise(ancCodeToNoise(ancCode)) == true
             }.onFailure { ModuleLog.w(TAG, "下发 ANC 失败：${it.message}") }
+                .getOrDefault(false)
+            if (!sent) {
+                ModuleLog.w(TAG, "ANC 未下发（耳机通道未就绪）：code=$ancCode -> $address")
+                return@execute
+            }
+            ModuleIpc.broadcastState(
+                appContext,
+                ModuleIpc.snapshot().copy(address = address, anc = ancCode),
+            )
+            pushStatusToCallbacks(address)
+            ModuleLog.i(TAG, "ANC 已切换：code=$ancCode -> $address")
         }
-        pushStatusToCallbacks(address)
-        ModuleLog.i(TAG, "ANC 已切换：code=$ancCode -> $address")
     }
 
     // ------------------------------------------------------------------ 其它
@@ -472,13 +481,24 @@ class BluetoothUpstreamHeadsetHook : HookContext() {
                                 val code = intent.getIntExtra(ModuleIpc.EXTRA_ANC, ModuleIpc.ANC_NC)
                                 val address = currentAddress.get() ?: lastConnectedAddress
                                 if (address != null) {
-                                    val snap = ModuleIpc.snapshot().copy(anc = code)
-                                    ModuleIpc.broadcastState(appContext, snap)
+                                    // issue #4-7：先在 IO 线程下发，成功后再广播状态。
+                                    // 先广播会让各进程显示一个耳机并未接受的档位。
                                     ioExecutor.execute {
-                                        controller.get()?.setNoise(ancCodeToNoise(code))
+                                        val sent = runCatching {
+                                            controller.get()?.setNoise(ancCodeToNoise(code)) == true
+                                        }.onFailure { ModuleLog.w(TAG, "下发 ANC 失败：${it.message}") }
+                                            .getOrDefault(false)
+                                        if (!sent) {
+                                            ModuleLog.w(TAG, "收到 ANC 选择广播但下发失败：code=$code")
+                                            return@execute
+                                        }
+                                        ModuleIpc.broadcastState(
+                                            appContext,
+                                            ModuleIpc.snapshot().copy(anc = code),
+                                        )
+                                        pushStatusToCallbacks(address)
+                                        ModuleLog.i(TAG, "收到 ANC 选择广播：code=$code")
                                     }
-                                    pushStatusToCallbacks(address)
-                                    ModuleLog.i(TAG, "收到 ANC 选择广播：code=$code")
                                 }
                             }
 

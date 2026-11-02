@@ -630,35 +630,50 @@ object AppState {
 
     fun refresh() = send(PodCommand.QueryAll)
 
+    /** 未就绪时不改 UI：避免乐观更新停在"已切换"但实际没有下发（issue #4-7）。 */
+    private fun canSend(): Boolean {
+        val ready = coordinator?.isReady == true
+        if (!ready) EventLog.debug("指令", "未就绪，忽略状态更新")
+        return ready
+    }
+
     fun setNoise(mode: NoiseMode) {
+        if (!canSend()) return
         // 乐观更新：立即反馈，随后由耳机回包纠正
         updatePod { it.copy(noise = mode) }
         send(PodCommand.SetNoise(mode))
     }
 
     fun setEq(mode: EqMode) {
+        if (!canSend()) return
         updatePod { it.copy(eq = mode) }
         send(PodCommand.SetEq(mode))
     }
 
     fun setGameMode(enabled: Boolean) {
+        if (!canSend()) return
         updatePod { it.copy(gameMode = enabled) }
         send(PodCommand.SetGameMode(enabled))
     }
 
     fun setInEar(enabled: Boolean) {
+        if (!canSend()) return
         updatePod { it.copy(inEarDetection = enabled) }
         send(PodCommand.SetInEarDetection(enabled))
     }
 
     fun setDualConnection(enabled: Boolean) {
+        if (!canSend()) return
         updatePod { it.copy(dualConnection = enabled) }
         send(PodCommand.SetDualConnection(enabled))
     }
 
+    /**
+     * 抗风噪：命令 0x41 与 SHUTDOWN 同码，在确证固件按 (command, type) 双键分发前
+     * 不再下发（issue #4-2），否则点一下开关可能让耳机直接关机。UI 已同步置灰。
+     */
     fun setWindSuppression(enabled: Boolean) {
-        updatePod { it.copy(windSuppression = enabled) }
-        send(PodCommand.SetWindSuppression(enabled))
+        EventLog.info("指令", "抗风噪命令（0x41）待真机确证，已阻止下发 enabled=$enabled")
     }
 
     private fun send(command: PodCommand) {

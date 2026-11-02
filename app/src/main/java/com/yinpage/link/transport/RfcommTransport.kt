@@ -26,6 +26,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.withTimeoutOrNull
 import java.io.IOException
 import java.net.SocketTimeoutException
 import java.util.UUID
@@ -91,7 +92,7 @@ class RfcommTransport(
 
     override suspend fun connect(listener: TransportListener) {
         // 没有活性回调 = "连上即成功"，与其他传输的语义保持一致。
-        if (!connectWithProbe(listener) { true }) {
+        if (!connectWithProbe(listener) { _, _ -> true }) {
             throw ServiceNotFoundException("所有 SPP UUID 候选均未通过活性确认")
         }
     }
@@ -108,7 +109,7 @@ class RfcommTransport(
      */
     override suspend fun connectWithProbe(
         listener: TransportListener,
-        probe: suspend (PodTransport) -> Boolean,
+        probe: suspend (PodTransport, deadlineNanos: Long) -> Boolean,
     ): Boolean {
         this.listener = listener
         this.closed = false
@@ -198,15 +199,26 @@ class RfcommTransport(
 
                     // 总预算检查：活性确认（握手等待窗口）也要花时间，
                     // 若建链后预算已耗尽就不该再开始 probe，否则整体必然超时。
-                    if ((deadlineNanos - System.nanoTime()) / 1_000_000L <= 0L) {
+                    val probeBudgetMs = (deadlineNanos - System.nanoTime()) / 1_000_000L
+                    if (probeBudgetMs <= 0L) {
                         discardCandidate(candidate)
                         throw TransportTimeoutException(
                             "RFCOMM 连接 ${CONNECT_TIMEOUT_MS / 1000} 秒总预算已耗尽（$device）"
                         )
                     }
 
+                    // issue #4-4：探针耗时必须计入同一个 15 秒预算，否则哑通道
+                    // 每个白吃 4 秒活性窗口，12 个候选实际只能试到 4 个。
+                    // 绝对 deadline 传给 probe 计算窗口；这里再用 withTimeoutOrNull
+                    // 兜底，防止某个实现忽略 deadline 超跑预算。
+                    var probeTimedOut = false
                     val verified = try {
-                        probe(this@RfcommTransport)
+                        withTimeoutOrNull(probeBudgetMs) {
+                            probe(this@RfcommTransport, deadlineNanos)
+                        } ?: run {
+                            probeTimedOut = true
+                            false
+                        }
                     } catch (cancel: CancellationException) {
                         discardCandidate(candidate)
                         throw cancel
@@ -234,9 +246,15 @@ class RfcommTransport(
                     // 连上却没人应答 → 哑通道：关掉换下一个 UUID，
                     // 而不是直接放弃 SPP 去建 BLE。
                     discardCandidate(candidate)
-                    attempts += "$label:握手无响应"
-                    lastError = "通道已建立但握手后无数据返回（疑似哑通道）"
-                    EventLog.info(TAG, "$label 握手无响应，已关闭并尝试下一个候选")
+                    if (probeTimedOut) {
+                        attempts += "$label:活性确认超出预算"
+                        lastError = "连接总预算在活性确认阶段耗尽"
+                        EventLog.info(TAG, "$label 活性确认超出剩余预算，已关闭并尝试下一个候选")
+                    } else {
+                        attempts += "$label:握手无响应"
+                        lastError = "通道已建立但握手后无数据返回（疑似哑通道）"
+                        EventLog.info(TAG, "$label 握手无响应，已关闭并尝试下一个候选")
+                    }
                 }
             }
 

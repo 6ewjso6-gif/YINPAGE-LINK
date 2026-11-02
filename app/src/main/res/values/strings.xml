@@ -52,7 +52,7 @@
     <string name="feature_dual">双设备连接</string>
     <string name="feature_dual_desc">同时连接手机与平板或电脑</string>
     <string name="feature_wind">抗风噪</string>
-    <string name="feature_wind_desc">户外骑行时抑制风噪</string>
+    <string name="feature_wind_desc">户外骑行时抑制风噪（协议待确证，暂不可用）</string>
 
     <!-- ============ 主页底部状态 ============ -->
     <string name="footer_protocol">协议</string>

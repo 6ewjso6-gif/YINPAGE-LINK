@@ -280,8 +280,13 @@ class SessionCoordinator(
          *
          * 注：firstData 在通道建立**之前**就已就绪（见上），设备若在握手前
          * 主动推送数据，await() 会立即返回，不再消耗 4 秒窗口。
+         *
+         * [transportDeadlineNanos] 是传输层的绝对截止时刻（issue #4-4）。
+         * 活性窗口必须同时受「协议默认窗口」「协调器 20 秒看门狗」和
+         * 「传输层 15 秒预算」三者约束，否则 probe 消耗的时间对传输层不可见，
+         * 靠后的 UUID 候选会被前面的哑通道吃光预算而永远试不到。
          */
-        suspend fun probe(target: PodTransport): Boolean {
+        suspend fun probe(target: PodTransport, transportDeadlineNanos: Long): Boolean {
             for ((index, frame) in handshake.withIndex()) {
                 if (frame.isEmpty()) continue
                 try {
@@ -303,9 +308,11 @@ class SessionCoordinator(
             // 无握手帧的协议（handshake 为空）不需要活性确认，直接通过。
             if (handshake.isEmpty()) return true
 
-            // 活性窗口取「协议默认窗口」与「总预算剩余」的较小值：
+            // 活性窗口取「协议默认窗口」与「剩余预算」的较小值：
+            // 两个 deadline 都要看——协调器看门狗 20 秒、传输层预算 15 秒。
             // 剩余不足时不再傻等满 4 秒，直接把预算耗尽的真实原因报出来。
-            val remainingMs = (connectDeadlineNanos - System.nanoTime()) / 1_000_000L
+            val effectiveDeadlineNanos = minOf(connectDeadlineNanos, transportDeadlineNanos)
+            val remainingMs = (effectiveDeadlineNanos - System.nanoTime()) / 1_000_000L
             if (remainingMs <= 0L) {
                 probeFailure =
                     "连接总预算（${CONNECT_WATCHDOG_MS / 1000} 秒）已耗尽，握手未完成"
@@ -329,10 +336,12 @@ class SessionCoordinator(
         val connected = try {
             withTimeout(CONNECT_WATCHDOG_MS) {
                 if (channel is ProbeableTransport) {
-                    channel.connectWithProbe(listener) { target -> probe(target) }
+                    channel.connectWithProbe(listener) { target, deadline ->
+                        probe(target, deadline)
+                    }
                 } else {
                     channel.connect(listener)
-                    probe(channel)
+                    probe(channel, connectDeadlineNanos)
                 }
             }
         } catch (timeout: TimeoutCancellationException) {
@@ -404,20 +413,38 @@ class SessionCoordinator(
                 return@withLock false
             }
 
-            // 多帧请求必须串行：等上一条的响应到达（或超时）再发下一条。
-            // 官方 SDK 的请求队列是单飞的（DeviceCommManager.f7745f + 10s 超时），
-            // 一次性连发多条查询会被设备侧丢弃或造成响应错序。
-            if (index != frames.lastIndex) {
-                val signal = inboundSignal
-                if (signal != null) {
-                    withTimeoutOrNull(FRAME_RESPONSE_TIMEOUT_MS) { signal.receive() }
-                } else {
-                    delay(FRAME_GAP_MS)
-                }
-            }
+            // 同一条消息拆成多帧时按官方发送队列的 15ms 节奏留间隔。
+            if (index != frames.lastIndex) delay(FRAME_GAP_MS)
         }
-        EventLog.debug(TAG, "$command → $written/${frames.size} 帧已写出（${transport.name}）")
+
+        // issue #4-5：官方请求是「命令级」单飞 —— 整条命令的帧全部写完后，
+        // 等一次响应（或超时）才允许下一条命令进入。原实现把等待放在帧循环里、
+        // 条件是 index != lastIndex，而当前所有命令都是单物理帧，这段逻辑从未执行，
+        // 快速连点两条 ANC 仍会连发。挪到结尾即可真正串行「不同命令之间」。
+        val signal = inboundSignal
+        val awaited = if (signal != null) {
+            withTimeoutOrNull(responseTimeoutFor(command)) { signal.receive() }
+        } else {
+            delay(FRAME_GAP_MS)
+            null
+        }
+        EventLog.debug(
+            TAG,
+            "$command → $written/${frames.size} 帧已写出（${transport.name}），" +
+                "响应=${if (awaited != null) "已到达" else "超时"}",
+        )
         true
+    }
+
+    /**
+     * 等响应的上限（按命令区分）。
+     * 官方单条 request 的超时是 10 秒，但正常响应在几十毫秒内到达；
+     * 查询类可能稍慢，控制类用更短的上限，避免快速连点被拖到分钟级。
+     */
+    private fun responseTimeoutFor(command: PodCommand): Long = when (command) {
+        PodCommand.QueryAll, PodCommand.QueryBattery, PodCommand.QueryFirmware ->
+            QUERY_RESPONSE_TIMEOUT_MS
+        else -> COMMAND_RESPONSE_TIMEOUT_MS
     }
 
     // ------------------------------------------------------------------ 断开
@@ -493,13 +520,11 @@ class SessionCoordinator(
          */
         const val HANDSHAKE_RESPONSE_WINDOW_MS = 4_000L
 
-        /**
-         * 多帧请求的「等上一条响应」上限。
-         * 官方对每条 request 的超时是 10 秒（`LocationClientOption.MIN_AUTO_NOTIFY_INTERVAL`），
-         * 但查询类响应正常在几十毫秒内到达；这里用 1.2 秒即可覆盖慢设备，
-         * 又不会让一次 QueryAll（6 条）拖到分钟级。
-         */
-        const val FRAME_RESPONSE_TIMEOUT_MS = 1_200L
+        /** 控制类命令写完后等一次响应的上限。 */
+        const val COMMAND_RESPONSE_TIMEOUT_MS = 2_000L
+
+        /** 查询类命令的上限：设备回包可能稍慢。 */
+        const val QUERY_RESPONSE_TIMEOUT_MS = 2_500L
 
         /** 没有入站信号时（例如调试直写）的保守帧间隔：官方队列间隔 15ms。 */
         const val FRAME_GAP_MS = 15L

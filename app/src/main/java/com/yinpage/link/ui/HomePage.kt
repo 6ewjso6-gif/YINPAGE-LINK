@@ -158,7 +158,8 @@ fun HomePage(
                 icon = Icons.Rounded.Air,
                 checked = pod.windSuppression,
                 onCheckedChange = onWindSuppression,
-                enabled = connected,
+                // issue #4-2：0x41 与 SHUTDOWN 同码，实测前禁止下发
+                enabled = false,
                 showDivider = false,
             )
         }

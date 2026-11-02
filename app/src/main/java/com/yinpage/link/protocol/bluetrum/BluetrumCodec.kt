@@ -49,6 +49,17 @@ class BluetrumCodec : PodCodec {
     private var lastInEar = false
     private var lastDual = false
 
+    /**
+     * 用户最近一次主动选择的降噪档位。
+     *
+     * 设备只上报三值（OFF/ON/TRANSPARENCY），四档 UI 的「标准/深度」都会落到 ON。
+     * 记住用户的选择，才能在设备回 ON 时还原成 NORMAL 或 DEEP，而不是恒回弹到 NORMAL。
+     */
+    private var desiredNoise: NoiseMode? = null
+
+    /** 设备上报的 ANC 增益档位数（0 = 未上报/不支持多档增益）。 */
+    private var ancGainNum: Int = 0
+
     /** 耳机上报的能力位图（0xFE），决定 UI 展示哪些开关。 */
     @Volatile
     var capabilities: Int = -1
@@ -57,13 +68,16 @@ class BluetrumCodec : PodCodec {
     // ------------------------------------------------------------------ 握手
 
     /**
-     * 连接后的**第一条**请求：MTU 查询。
+     * 连接后的**第一批**请求：电量 + MTU。
      *
-     * 官方 `id/l.onConnected()` 只做两件事：注册 MTU 回调 + 发
-     * `DeviceInfoRequest(0xFF)`；其它状态查询是在响应回来后由各页面按需发。
-     * 这里保持同样语义：握手只查 MTU，既是最小活性探针，也让设备先回填分包大小。
+     * issue #4-3：v0.16 只查 MTU，如果固件不实现 `INFO_MAX_PACKET_SIZE(0xFF)`，
+     * 一条正常的控制通道会被活性探针判成哑通道。电量查询是必答项，放在最前面
+     * 充当活性探针；MTU 查询随后发，失败也不影响连接（分包退回默认值 250）。
      */
-    override fun handshake(): List<Bytes> = listOf(query(BtInfo.MAX_PACKET_SIZE))
+    override fun handshake(): List<Bytes> = listOf(
+        query(BtInfo.DEVICE_POWER),
+        query(BtInfo.MAX_PACKET_SIZE),
+    )
 
     /**
      * 连上后的一次性状态同步。
@@ -79,6 +93,7 @@ class BluetrumCodec : PodCodec {
             BtInfo.DEVICE_CAPABILITIES,
             BtInfo.FIRMWARE_VERSION,
             BtInfo.ANC_MODE,
+            BtInfo.ANC_GAIN_NUM,
             BtInfo.EQ_SETTING,
             BtInfo.IN_EAR_STATUS,
         )
@@ -101,17 +116,32 @@ class BluetrumCodec : PodCodec {
     // ------------------------------------------------------------------ 编码
 
     override fun encode(command: PodCommand): List<Bytes> = when (command) {
-        is PodCommand.SetNoise -> request(BtCommand.ANC_MODE, BtAnc.toDevice(command.mode))
+        is PodCommand.SetNoise -> {
+            // issue #4-1：设备的 ANC 模式只有 OFF/ON/TRANSPARENCY 三值，
+            //「深度降噪」要靠 ANC 增益档位区分。记住用户选择，供回包时还原 UI 档位。
+            desiredNoise = command.mode
+            val frames = request(BtCommand.ANC_MODE, BtAnc.toDevice(command.mode))
+            // 仅当设备上报过 ≥2 档增益时才下发最大增益档，避免往未知设备写猜测值。
+            if (command.mode == NoiseMode.DEEP && ancGainNum >= 2) {
+                frames + request(BtCommand.ANC_GAIN, ancGainNum - 1)
+            } else {
+                frames
+            }
+        }
 
         is PodCommand.SetEq -> {
-            // EQ 写入：payload = [bandCount, mode, gains...]
-            // 使用预设档位时 gains 为空，bandCount 取 SDK 默认 10
+            // EQ 写入：官方 payload = [bandCount, mode, gains...]，2 参构造器固定 10 段。
+            // issue #4-7：预设档位也需要完整补上 10 个 gain 字节（全 0 = 出厂曲线），
+            // 缺字节设备可能直接丢弃或解析越界。
             val mode = BtEq.toDevice(command.mode)
-            request(
-                BtCommand.EQ,
-                BtEq.DEFAULT_BAND_COUNT and 0xFF,
-                mode and 0xFF,
-            )
+            val payload = IntArray(BtEq.DEFAULT_BAND_COUNT + 2) { index ->
+                when (index) {
+                    0 -> BtEq.DEFAULT_BAND_COUNT and 0xFF
+                    1 -> mode and 0xFF
+                    else -> 0x00
+                }
+            }
+            request(BtCommand.EQ, *payload)
         }
 
         is PodCommand.SetGameMode -> request(BtCommand.WORK_MODE, if (command.enabled) 0x01 else 0x00)
@@ -232,10 +262,16 @@ class BluetrumCodec : PodCodec {
 
             BtInfo.ANC_MODE -> data.firstOrNull()?.let { publishNoise(it, sink) }
 
+            BtInfo.ANC_GAIN_NUM -> data.firstOrNull()?.let {
+                ancGainNum = it and 0xFF
+                Log.i(TAG, "ANC 增益档位数：$ancGainNum")
+            }
+
             BtInfo.EQ_SETTING -> data.firstOrNull()?.let { publishEq(it, sink) }
 
             BtInfo.IN_EAR_STATUS -> {
-                // 入耳状态：0 表示检测开启/已入耳，具体语义随固件，这里按非零为开
+                // 入耳状态：非零 = 已入耳（与 InEarDetection 开关共用这一上报）。
+                // issue #4-6：此前注释误写"0 表示已入耳"，与代码相反，已纠正。
                 data.firstOrNull()?.let {
                     lastInEar = it != 0
                     sink(PodUpdate.InEarDetection(lastInEar))
@@ -298,7 +334,7 @@ class BluetrumCodec : PodCodec {
 
             BtInfo.ALL_EQ_SETTINGS, BtInfo.KEY_SETTINGS, BtInfo.LANGUAGE_SETTING,
             BtInfo.LED_SWITCH, BtInfo.VOLUME_LIMIT, BtInfo.PRODUCT_COLOR,
-            BtInfo.ANC_GAIN, BtInfo.TRANSPARENCY_GAIN, BtInfo.ANC_GAIN_NUM,
+            BtInfo.ANC_GAIN, BtInfo.TRANSPARENCY_GAIN,
             BtInfo.TRANSPARENCY_GAIN_NUM, BtInfo.BLUETOOTH_NAME, BtInfo.FW_CHECKSUM,
             BtInfo.AUTO_ANSWER, BtInfo.LISTEN_TIP, BtInfo.CALL_STATUS_UI_INFO,
             BtInfo.ONE_CLOSE_KEY,
@@ -317,7 +353,18 @@ class BluetrumCodec : PodCodec {
     }
 
     private fun publishNoise(raw: Int, sink: (PodUpdate) -> Unit) {
-        val mode = BtAnc.toUiMode(raw)
+        val value = raw and 0xFF
+        val mode = when (value) {
+            // 设备只回 ON：用用户最近一次选择区分「标准」与「深度」；
+            // 没有记录（例如刚连上）时按标准降噪展示。
+            BtAnc.ON -> desiredNoise?.takeIf { it == NoiseMode.NORMAL || it == NoiseMode.DEEP }
+                ?: NoiseMode.NORMAL
+            else -> {
+                // 设备切到关/通透，说明用户选择已失效（可能通过耳机触控改了）
+                desiredNoise = null
+                BtAnc.toUiMode(value)
+            }
+        }
         lastNoise = mode
         sink(PodUpdate.Noise(mode))
     }
@@ -377,7 +424,13 @@ class BluetrumCodec : PodCodec {
     fun resetDecoder() = frames.reset()
 
     /** 通道复位：新会话开始前由 [com.yinpage.link.core.SessionCoordinator] 调用。 */
-    override fun reset() = frames.reset()
+    override fun reset() {
+        frames.reset()
+        // 复位后回到官方初始分包值（255 - 5），避免沿用上一个设备回填的 MTU
+        frames.maxChunkSize = INITIAL_CHUNK_SIZE
+        desiredNoise = null
+        ancGainNum = 0
+    }
 
     private fun hex(data: Bytes): String = data.joinToString(" ") { "%02X".format(it and 0xFF) }
 

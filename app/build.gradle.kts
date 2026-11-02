@@ -6,7 +6,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
  * issue #3-5：本地构建也可用环境变量 `YINPAGE_VERSION_NAME` 覆盖，
  * 避免打出来的包永远叫旧版本、装上去后反复提示"发现新版本"。
  */
-val DEFAULT_VERSION_NAME = "APP-t-v0.16"
+val DEFAULT_VERSION_NAME = "APP-t-v0.17"
 
 /** versionCode 基座：高于历史基于 Unix 秒数的最大值，保证可覆盖安装。 */
 val VERSION_CODE_BASE = 1_800_000_000

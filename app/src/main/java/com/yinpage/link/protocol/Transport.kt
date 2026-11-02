@@ -70,10 +70,14 @@ interface ProbeableTransport : PodTransport {
      *  - [probe] 返回 true：保留该候选并返回 true（连接与读循环均已就绪）；
      *  - [probe] 返回 false：关闭该候选，继续下一个；
      *  - 所有候选都失败：抛 [PodTransportException]（带完整尝试记录）。
+     *
+     * [probe] 的第二个参数是本轮连接的**绝对截止时刻**（`System.nanoTime()` 基准）。
+     * 活性确认的等待窗口必须据此计算，使「建链 + 探针」共享同一份总预算，
+     * 否则探针耗时不计入传输层预算，靠后的候选永远轮不到（issue #4-4）。
      */
     suspend fun connectWithProbe(
         listener: TransportListener,
-        probe: suspend (PodTransport) -> Boolean,
+        probe: suspend (PodTransport, deadlineNanos: Long) -> Boolean,
     ): Boolean
 }
 

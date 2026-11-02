@@ -190,7 +190,12 @@ class BtFrameCodec(
      * 重组的消息不一致——说明旧消息丢包了），就丢弃旧分片重新开始。
      */
     private fun reassemble(frame: Frame): Frame? {
-        if (frame.totalChunks <= 1) return frame
+        if (frame.totalChunks <= 1) {
+            // issue #4-7：单帧消息也要清掉同 command 的残留分片，
+            // 否则上一条多包消息没收齐时，残留分片会污染后续消息。
+            partial.remove(frame.command)
+            return frame
+        }
         if (frame.chunkIndex >= frame.totalChunks) return null
 
         val now = System.currentTimeMillis()
@@ -243,6 +248,9 @@ class BtFrameCodec(
         buffer = IntArray(0)
         partial.clear()
         seq = 0
+        // issue #4-7：MTU 回填只对当前设备/当前会话有效，复位时回到默认值，
+        // 避免换设备后沿用上一个设备的分包上限。
+        maxChunkSize = DEFAULT_CHUNK_SIZE
     }
 
     /** 缓冲中未解析字节数（调试用）。 */
