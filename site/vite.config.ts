@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-cloudflare';
 import { sveltekit } from '@sveltejs/kit/vite';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
@@ -11,13 +11,9 @@ export default defineConfig({
 				runes: ({ filename }) =>
 					filename.split(/[/\\]/).includes('node_modules') ? undefined : true
 			},
-			// 全站静态预渲染：每个正式路由在构建期写成 HTML 文件。
+			// 运行在 Cloudflare Workers：页面服务端渲染，D1 存文章与评论。
 			adapter: adapter({
-				pages: 'build',
-				assets: 'build',
-				fallback: undefined,
-				precompress: false,
-				strict: true
+				platformProxy: { configPath: 'wrangler.jsonc' }
 			})
 		})
 	]

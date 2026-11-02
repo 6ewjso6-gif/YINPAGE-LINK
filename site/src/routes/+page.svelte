@@ -21,7 +21,7 @@
 	</h1>
 
 	<p class="mt-4 max-w-xl text-[15px] leading-relaxed text-muted-foreground">
-		不用登录，也没有加载动画。文章在构建期就写成 HTML，打开链接，正文就在那里。
+		不用登录，也没有加载动画。正文在服务端就渲染成 HTML，打开链接，文章就在那里。
 	</p>
 
 	<div class="mt-7 flex flex-wrap items-center gap-3">
@@ -48,7 +48,7 @@
 		</div>
 	{:else}
 		<p class="mt-4 border-t border-border py-16 text-center text-sm text-muted-foreground">
-			还没有文章。往 `src/content/blog` 里放一个 Markdown 文件就会出现在这里。
+			还没有文章。登录后台就能写第一篇。
 		</p>
 	{/if}
 </section>
@@ -61,7 +61,7 @@
 			<p class="text-[13px] text-muted-foreground">01</p>
 			<h3 class="mt-1 text-sm font-medium">内容先行</h3>
 			<p class="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-				Markdown 在构建时解析，标题、正文、代码块都已经是 HTML。
+				Markdown 存在数据库里，请求时由服务端渲染成 HTML。
 			</p>
 		</div>
 		<div>

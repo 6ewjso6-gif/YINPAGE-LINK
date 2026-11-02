@@ -1,9 +1,10 @@
 <script lang="ts">
 	import type { PageProps } from './$types';
-	import { formatDate } from '#lib/content';
+	import Button from '#lib/components/ui/button.svelte';
+	import { formatDate } from '#lib/date';
 	import { site } from '#lib/site';
 
-	let { data }: PageProps = $props();
+	let { data, form }: PageProps = $props();
 </script>
 
 <svelte:head>
@@ -38,7 +39,9 @@
 	</h1>
 
 	<div class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
-		<time datetime={data.post.date} class="tabular-nums">{formatDate(data.post.date)}</time>
+		<time datetime={data.post.createdAt} class="tabular-nums">
+			{formatDate(data.post.createdAt)}
+		</time>
 		{#if data.post.tags.length}
 			<span class="text-border">|</span>
 			{#each data.post.tags as tag (tag)}
@@ -57,8 +60,73 @@
 		{@html data.post.html}
 	</div>
 
-	<div class="mt-14 border-t border-border pt-6">
-		<a href="/blog" class="text-[13px] text-muted-foreground transition-colors hover:text-foreground">
+	<section id="comments" class="mt-14 border-t border-border pt-8">
+		<h2 class="text-base font-semibold tracking-tight">
+			评论{#if data.comments.length}<span class="ml-1.5 text-muted-foreground">{data.comments.length}</span>{/if}
+		</h2>
+
+		{#if data.sent}
+			<p
+				class="mt-3 rounded-lg border border-border bg-surface-muted px-3 py-2 text-[13px] text-muted-foreground"
+			>
+				评论已提交，审核通过后会显示在这里。
+			</p>
+		{/if}
+
+		{#if data.comments.length}
+			<ul class="mt-5 grid gap-5">
+				{#each data.comments as comment (comment.id)}
+					<li class="border-l-2 border-border pl-4">
+						<div class="flex flex-wrap items-baseline gap-x-2 text-xs text-muted-foreground">
+							<span class="text-[13px] font-medium text-foreground">{comment.name}</span>
+							<time datetime={comment.createdAt}>{formatDate(comment.createdAt)}</time>
+						</div>
+						<p class="mt-1.5 text-sm leading-relaxed whitespace-pre-line">{comment.body}</p>
+					</li>
+				{/each}
+			</ul>
+		{:else}
+			<p class="mt-4 text-sm text-muted-foreground">还没有评论。</p>
+		{/if}
+
+		<form method="POST" action="?/comment" class="mt-8 grid gap-3">
+			{#if form?.commentError}
+				<p class="text-[13px] text-danger">{form.commentError}</p>
+			{/if}
+
+			<input
+				name="name"
+				type="text"
+				value={form?.name ?? ''}
+				required
+				maxlength={20}
+				aria-label="昵称"
+				placeholder="昵称"
+				class="h-10 w-full rounded-lg border border-border bg-surface px-3 text-sm outline-none placeholder:text-muted-foreground focus:border-brand/60"
+			/>
+			<textarea
+				name="body"
+				rows={4}
+				required
+				maxlength={2000}
+				aria-label="评论内容"
+				placeholder="说点什么…"
+				class="w-full resize-y rounded-lg border border-border bg-surface px-3 py-2 text-sm leading-relaxed outline-none placeholder:text-muted-foreground focus:border-brand/60"
+			>{form?.body ?? ''}</textarea>
+			<input name="website" class="hidden" tabindex={-1} autocomplete="off" aria-hidden="true" />
+
+			<div class="flex flex-wrap items-center justify-between gap-3">
+				<p class="text-xs text-muted-foreground">提交后需要审核，不会立刻显示。</p>
+				<Button type="submit" size="sm">提交评论</Button>
+			</div>
+		</form>
+	</section>
+
+	<div class="mt-10 border-t border-border pt-6">
+		<a
+			href="/blog"
+			class="text-[13px] text-muted-foreground transition-colors hover:text-foreground"
+		>
 			← 返回所有文章
 		</a>
 	</div>

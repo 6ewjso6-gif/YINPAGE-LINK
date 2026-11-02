@@ -1,7 +1,6 @@
-import { getPosts } from '#lib/content';
+import { getEnv } from '#lib/server/d1';
+import { listPosts } from '#lib/server/db';
 import { site } from '#lib/site';
-
-export const prerender = true;
 
 function escapeXml(value: string): string {
 	return value
@@ -10,17 +9,18 @@ function escapeXml(value: string): string {
 		.replace(/>/g, '&gt;');
 }
 
-export function GET() {
-	const items = getPosts()
+export async function GET({ platform }) {
+	const posts = await listPosts(getEnv(platform).DB);
+
+	const items = posts
 		.map((post) => {
 			const link = `${site.url}/blog/${post.slug}`;
-			const pubDate = new Date(`${post.date}T00:00:00+08:00`).toUTCString();
 
 			return `		<item>
 			<title>${escapeXml(post.title)}</title>
 			<link>${link}</link>
 			<guid isPermaLink="true">${link}</guid>
-			<pubDate>${pubDate}</pubDate>
+			<pubDate>${new Date(post.createdAt).toUTCString()}</pubDate>
 			<description>${escapeXml(post.summary)}</description>
 		</item>`;
 		})

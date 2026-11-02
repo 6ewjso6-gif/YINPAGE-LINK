@@ -40,11 +40,9 @@
 <section class="border-t border-border pt-8">
 	<h2 class="text-sm font-semibold">怎么做的</h2>
 	<p class="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-		SvelteKit 负责路由与静态预渲染，文章在构建期从 Markdown 解析成 HTML。交互按需加载，正文不依赖脚本。页面、RSS、Sitemap 和 LLM 文本共用同一份内容源。
+		SvelteKit 运行在 Cloudflare Workers，文章存在 D1 数据库，请求时渲染成 HTML。交互按需加载，正文不依赖脚本。页面、RSS、Sitemap 和 LLM 文本共用同一份内容源。
 	</p>
 	<p class="mt-4 text-sm text-muted-foreground">
-		想改内容，往
-		<span class="font-mono text-[13px] text-foreground">src/content/blog</span>
-		里加一个 Markdown 文件即可。
+		文章存在 D1 数据库里，后台登录后可以直接写、改、删，不用改代码再发布。
 	</p>
 </section>

@@ -2,9 +2,17 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "baigong",
 	"compatibility_date": "2026-11-01",
+	"main": ".svelte-kit/cloudflare/_worker.js",
 	"assets": {
-		"directory": "./build",
-		"not_found_handling": "404-page"
+		"binding": "ASSETS",
+		"directory": ".svelte-kit/cloudflare"
 	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "baigong-db",
+			"database_id": "PLACEHOLDER"
+		}
+	],
 	"routes": [{ "pattern": "zzz.denia.dpdns.org", "custom_domain": true }]
 }

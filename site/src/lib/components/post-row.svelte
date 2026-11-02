@@ -1,15 +1,16 @@
 <script lang="ts">
-	import { formatDate, type PostMeta } from '#lib/content';
+	import type { PostSummary } from '#lib/server/db';
+	import { formatDate } from '#lib/date';
 
-	let { post }: { post: PostMeta } = $props();
+	let { post }: { post: PostSummary } = $props();
 </script>
 
 <a
 	href={`/blog/${post.slug}`}
 	class="group grid gap-1.5 border-b border-border py-5 transition-colors sm:grid-cols-[7rem_minmax(0,1fr)] sm:gap-6"
 >
-	<time datetime={post.date} class="text-xs text-muted-foreground tabular-nums sm:pt-0.5">
-		{formatDate(post.date)}
+	<time datetime={post.createdAt} class="text-xs text-muted-foreground tabular-nums sm:pt-0.5">
+		{formatDate(post.createdAt)}
 	</time>
 
 	<div class="min-w-0">

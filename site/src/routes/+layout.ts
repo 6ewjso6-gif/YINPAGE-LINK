@@ -1,2 +1,2 @@
-// 全站预渲染：所有正式路由在构建期写成 HTML。
-export const prerender = true;
+// 页面在 Workers 上按请求渲染，内容来自 D1。
+export const prerender = false;

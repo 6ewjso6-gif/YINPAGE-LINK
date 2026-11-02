@@ -1,7 +1,6 @@
-import { getPosts } from '#lib/content';
+import { getEnv } from '#lib/server/d1';
+import { listPosts } from '#lib/server/db';
 import { site } from '#lib/site';
-
-export const prerender = true;
 
 const staticRoutes = ['/', '/blog', '/about'];
 
@@ -12,8 +11,9 @@ function escapeXml(value: string): string {
 		.replace(/>/g, '&gt;');
 }
 
-export function GET() {
-	const urls = [...staticRoutes, ...getPosts().map((post) => `/blog/${post.slug}`)];
+export async function GET({ platform }) {
+	const posts = await listPosts(getEnv(platform).DB);
+	const urls = [...staticRoutes, ...posts.map((post) => `/blog/${post.slug}`)];
 
 	const body = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
