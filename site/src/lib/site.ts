@@ -2,7 +2,7 @@ export const site = {
 	name: '百工',
 	title: '百工 · 在线工具集',
 	description: '打开就能用的轻量工具集。文件只在你的浏览器里处理，不上传服务器。',
-	url: 'https://example.com',
+	url: 'https://zzz.denia.dpdns.org',
 	nav: [
 		{ href: '/', label: '首页' },
 		{ href: '/tools', label: '工具' },
