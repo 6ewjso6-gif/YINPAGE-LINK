@@ -1,0 +1,100 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-surface: var(--surface);
+	--color-surface-muted: var(--surface-muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-border: var(--border);
+	--color-brand: var(--brand);
+	--color-brand-foreground: var(--brand-foreground);
+	--color-brand-soft: var(--brand-soft);
+	--color-danger: var(--danger);
+	--color-danger-soft: var(--danger-soft);
+	--color-success: var(--success);
+	--color-success-soft: var(--success-soft);
+	--radius-card: var(--radius-card);
+	--font-sans: var(--font-sans);
+	--font-mono: var(--font-mono);
+}
+
+@layer base {
+	:root {
+		color-scheme: light;
+		--background: #ffffff;
+		--foreground: #171717;
+		--surface: #f7f7f8;
+		--surface-muted: #efeff2;
+		--muted-foreground: #52525b;
+		--border: rgba(23, 23, 23, 0.12);
+		--brand: #4b3fe3;
+		--brand-foreground: #ffffff;
+		--brand-soft: #f2f2ff;
+		--danger: #d93a2f;
+		--danger-soft: #fdf0ef;
+		--success: #137a55;
+		--success-soft: #eefbf4;
+		--radius: 8px;
+		--radius-card: 12px;
+		--font-sans: 'SF Pro Text', 'PingFang SC', system-ui, -apple-system, 'Segoe UI', Roboto,
+			'Helvetica Neue', Arial, sans-serif;
+		--font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+	}
+
+	.dark {
+		color-scheme: dark;
+		--background: #0b0b0d;
+		--foreground: #e7e7ea;
+		--surface: #151518;
+		--surface-muted: #222227;
+		--muted-foreground: #a1a1aa;
+		--border: rgba(231, 231, 234, 0.14);
+		--brand: #6f63f5;
+		--brand-foreground: #ffffff;
+		--brand-soft: #1c1a3a;
+		--danger: #f0746a;
+		--danger-soft: #2a1514;
+		--success: #4fd6a3;
+		--success-soft: #10251c;
+	}
+
+	html {
+		scroll-behavior: smooth;
+		-webkit-text-size-adjust: 100%;
+	}
+
+	body {
+		background: var(--background);
+		color: var(--foreground);
+		font-family: var(--font-sans);
+		font-size: 15px;
+		line-height: 1.6;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	::selection {
+		background: color-mix(in srgb, var(--brand) 22%, transparent);
+	}
+
+	:focus-visible {
+		outline: 2px solid color-mix(in srgb, var(--brand) 70%, transparent);
+		outline-offset: 2px;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+
+		*,
+		*::before,
+		*::after {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+		}
+	}
+}

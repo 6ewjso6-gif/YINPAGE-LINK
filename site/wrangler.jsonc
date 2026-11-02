@@ -1,0 +1,9 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "baigong",
+	"compatibility_date": "2026-11-01",
+	"assets": {
+		"directory": "./build",
+		"not_found_handling": "404-page"
+	}
+}
