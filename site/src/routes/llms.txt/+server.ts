@@ -1,4 +1,5 @@
-import { site, tools } from '#lib/site';
+import { getPosts } from '#lib/content';
+import { site } from '#lib/site';
 
 export const prerender = true;
 
@@ -8,13 +9,10 @@ export function GET() {
 		'',
 		`> ${site.description}`,
 		'',
-		'## 工具',
-		...tools.map((tool) => {
-			if (tool.status === 'ready' && tool.href) {
-				return `- [${tool.name}](${site.url}${tool.href}): ${tool.description}`;
-			}
-			return `- ${tool.name}（筹备中）: ${tool.description}`;
-		}),
+		'## 文章',
+		...getPosts().map(
+			(post) => `- [${post.title}](${site.url}/blog/${post.slug}): ${post.summary}`
+		),
 		'',
 		'## 页面',
 		...site.nav.map((item) => `- [${item.label}](${site.url}${item.href === '/' ? '' : item.href})`)

@@ -10,9 +10,10 @@
 	>
 		<p>© {year} {site.name}</p>
 		<div class="flex flex-wrap items-center gap-x-5 gap-y-2">
-			<a href="/tools" class="hover:text-foreground">工具</a>
-			<a href="/about" class="hover:text-foreground">关于</a>
-			<a href="/sitemap.xml" class="hover:text-foreground">Sitemap</a>
+			<a href="/blog" class="transition-colors hover:text-foreground">博客</a>
+			<a href="/about" class="transition-colors hover:text-foreground">关于</a>
+			<a href="/rss.xml" class="transition-colors hover:text-foreground">RSS</a>
+			<a href="/sitemap.xml" class="transition-colors hover:text-foreground">Sitemap</a>
 		</div>
 	</div>
 </footer>
