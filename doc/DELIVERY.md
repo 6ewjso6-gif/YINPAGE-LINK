@@ -11,8 +11,13 @@
 
 | 形态 | Gradle 模块 | 需要 root | 交付物 | 能达到的效果 |
 |---|---|---|---|---|
-| 🎯 **融合设备中心接入** | `:module` | ✅ root + LSPosed | `module-debug.apk`（约 7 MB） | 系统蓝牙设置页出现耳机卡片、四档 ANC 控件、电量显示 |
-| 🔓 **独立控制应用** | `:app` | ❌ 不需要 | `app-debug.apk`（约 16 MB） | 打开 App 直连耳机，控制降噪/EQ/游戏模式、看电量 |
+| 🎯 **融合设备中心接入** | `:module` | ✅ root + LSPosed | `module-release.apk`（需自带 release 密钥签名） | 系统蓝牙设置页出现耳机卡片、四档 ANC 控件、电量显示 |
+| 🔓 **独立控制应用** | `:app` | ❌ 不需要 | `APP-t-v*-signed.apk`（GitHub Release，约 1.2 MB） | 打开 App 直连耳机，控制降噪/EQ/游戏模式、看电量 |
+
+> ⚠️ **签名纪律（issue #5 / #6）**：仓库内不再保存任何 keystore。
+> 对外分发的 `:app` 产物一律由 CI 用 Secrets 注入的私有 release 密钥签名，
+> 并在 Release 附带强制校验的 `.sha256`；本地 `assembleDebug` 产物仅供开发调试，
+> 不支持应用内更新。debug 密钥曾随仓库公开，已作废。
 
 **为什么必须分两种**：不 root 就无法把界面注入系统进程，
 这是 Android 安全模型决定的。所以想要"融合设备中心"必须用 `:module`；
@@ -28,8 +33,8 @@
 
 | # | 交付物 | 位置 | 状态 |
 |---|---|---|---|
-| 1 | LSPosed 模块 APK | `module/build/outputs/apk/debug/module-debug.apk` | ✅ 已构建 |
-| 2 | 独立应用 APK | `app/build/outputs/apk/debug/app-debug.apk` | ✅ 已构建 |
+| 1 | LSPosed 模块 APK | `module/build/outputs/apk/release/module-release.apk`（未注入密钥时为 unsigned） | ✅ 已构建 |
+| 2 | 独立应用 APK | GitHub Release 的 `APP-t-v*-signed.apk` + `.sha256` | ✅ 已发布 |
 | 3 | 工程源码（双模块） | 仓库 `main` 分支 | ✅ 已推送 |
 | 4 | README | [README.md](../README.md) | ✅ |
 | 5 | 耳机协议逆向文档 | [doc/PROTOCOL.md](PROTOCOL.md) | ✅ |
@@ -41,14 +46,16 @@
 **APK 校验值**
 
 ```
-① module-debug.apk   （LSPosed 模块，需 root）
+① module-release.apk （LSPosed 模块，需 root；必须用你自己的 release 密钥签名）
    包名     com.yinpage.link.module
    模块 ID  yinpage_link
    作用域   com.android.bluetooth / com.milink.service / com.xiaomi.bluetooth
             / com.android.systemui / com.android.settings
 
-② app-debug.apk      （独立控制应用，免 root）
+② APP-t-v*-signed.apk （独立控制应用，免 root）
    包名     com.yinpage.link
+   签名     CN=YINPAGE-LINK, O=YINPAGE-LINK, C=CN
+   SHA-256  C2:A0:8C:60:7F:01:64:BC:B2:8C:F5:7C:BA:75:71:41:0D:35:88:70:EA:FA:57:0A:34:29:1A:F2:C1:BB:25:71
 ```
 
 ## 二、工程规模

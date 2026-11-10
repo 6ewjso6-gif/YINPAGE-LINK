@@ -121,7 +121,8 @@
 
 ---
 
-> ⚠️ **当前处于 debug 阶段**（版本号形如 `app-debug-0.x`）。
+> ⚠️ **请只从 GitHub Release 下载 `APP-t-v*-signed.apk`**。
+> 本地 `assembleDebug` 产物仅用于开发调试，签名各不相同，不支持应用内更新。
 > 协议层基于对官方 App 的逆向确证，但**尚未在真机上完整验证**；
 > 若功能异常，请用 App 内「一键诊断」生成报告后提 issue。
 
@@ -229,6 +230,37 @@ com.xiaomi.bluetooth       连接通知
 - **乐观更新**：控制指令先本地生效给即时反馈，耳机回包后再以真实状态纠正。
 - **`(type, command)` 路由**：AB 系存在同码跨方向复用（如 `0x2C` 既是 ANC 设置也是 ANC 查询），
   只看 command 会串台，本项目所有分支都按二元组路由。
+
+## 签名与更新校验
+
+官方 Release 一律使用独立的私有发布证书签名（**不使用**仓库内任何 debug 密钥）。
+APK 旁的 `.sha256` 附件是**强制**校验项：缺失或哈希不符时，应用内更新会直接拒绝安装，
+而不是跳过校验。
+
+官方发布证书（SHA-256，DER）：
+
+```
+C2:A0:8C:60:7F:01:64:BC:B2:8C:F5:7C:BA:75:71:41:0D:35:88:70:EA:FA:57:0A:34:29:1A:F2:C1:BB:25:71
+```
+
+安装前可自行核验：
+
+```bash
+apksigner verify --print-certs APP-t-v0.17-signed.apk
+sha256sum -c <(sed 's/$/  APP-t-v0.17-signed.apk/' APP-t-v0.17-signed.apk.sha256)
+```
+
+App 内更新只信任上面这枚证书：下载包的签名必须与它完全一致，
+Release 元数据也不采信镜像给出的 URL（镜像仅作传输通道）。
+当前安装包若不是官方签名（debug / 第三方重签名），应用内更新会直接禁用并提示重装。
+
+> 历史提醒：v0.14 及更早曾分发过用仓库内 debug 密钥签名的 `app-debug.apk`，
+> 该密钥已随仓库公开并作废（issue #5 / #6）。这类包无法通过应用内更新升级，
+> 请卸载后重新安装官方签名版本。
+
+构建侧同样不落任何密钥：`build.sh` 在本地生成 `.android/debug.keystore`
+（已被 `.gitignore` 排除），也可用 `DEBUG_KEYSTORE` 指定；
+`:module` 的 release 只在注入 `RELEASE_KEYSTORE` 等环境变量时才签名，否则产出 unsigned。
 
 ## 构建
 

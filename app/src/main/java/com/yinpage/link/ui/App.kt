@@ -96,13 +96,15 @@ fun App(
             checkingUpdate = true
             Toast.makeText(context, R.string.update_checking, Toast.LENGTH_SHORT).show()
             scope.launch {
-                val result = UpdateManager.checkForUpdate()
+                val result = UpdateManager.checkForUpdate(context.applicationContext)
                 checkingUpdate = false
                 when (result) {
                     is UpdateManager.CheckResult.Available -> updateInfo = result.info
                     is UpdateManager.CheckResult.UpToDate -> funToast(R.string.update_latest)
                     is UpdateManager.CheckResult.Failed ->
                         Toast.makeText(context, result.message, Toast.LENGTH_LONG).show()
+                    is UpdateManager.CheckResult.UnofficialBuild ->
+                        funToast(R.string.update_unofficial_build)
                 }
             }
         }
@@ -134,6 +136,8 @@ fun App(
                             Toast.makeText(context, R.string.update_install_file_missing, Toast.LENGTH_LONG).show()
                         is UpdateManager.InstallResult.SignatureMismatch ->
                             Toast.makeText(context, R.string.update_install_signature_mismatch, Toast.LENGTH_LONG).show()
+                        is UpdateManager.InstallResult.NotOfficialBuild ->
+                            funToast(R.string.update_unofficial_build)
                         is UpdateManager.InstallResult.UnknownSourcesRequired -> {
                             Toast.makeText(context, R.string.update_install_need_permission, Toast.LENGTH_LONG).show()
                             // 直接跳到本应用的「安装未知应用」授权页，省去用户自己找
