@@ -6,7 +6,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
  * issue #3-5：本地构建也可用环境变量 `YINPAGE_VERSION_NAME` 覆盖，
  * 避免打出来的包永远叫旧版本、装上去后反复提示"发现新版本"。
  */
-val DEFAULT_VERSION_NAME = "APP-t-v0.17"
+val DEFAULT_VERSION_NAME = "APP-t-v0.18"
 
 /** versionCode 基座：高于历史基于 Unix 秒数的最大值，保证可覆盖安装。 */
 val VERSION_CODE_BASE = 1_800_000_000
@@ -23,23 +23,29 @@ android {
     compileSdk = 35
 
     /**
-     * Debug 签名配置。
-     * 默认情况下 AGP 会把 debug.keystore 放到 ~/.android/，在受限环境
-     * （沙箱 / 只读用户目录）里会因 AccessDeniedException 打包失败。
-     * 这里显式指定到构建目录内，保证任何环境都能出包。
+     * 签名配置（issue #5 整改）。
      *
-     * Release 签名（可选，CI 专用）：
-     * 只有提供了 RELEASE_KEYSTORE 等环境变量（GitHub Actions Secrets 注入）时
-     * 才会创建 release 签名配置，本地构建不变（保持 unsigned，手动 apksigner）。
-     * 密钥不落仓库、不落公开代码，从源头避免"开源仓库泄露签名"。
+     * debug：**keystore 不再入库**。密钥一旦提交就等于公开，任何人都能签出
+     * "同签名"的可覆盖安装包。现在优先用 `DEBUG_KEYSTORE` 环境变量，
+     * 其次用本机 `.android/debug.keystore`（build.sh 会自动生成，已被 .gitignore
+     * 排除），两者都不存在时交给 AGP 使用 `~/.android/debug.keystore`。
+     *
+     * Release（可选，CI 专用）：只有提供 RELEASE_KEYSTORE 等环境变量
+     * （GitHub Actions Secrets 注入）时才创建，缺失时为 unsigned。
+     * 密钥不落仓库、不落公开代码。
      */
     signingConfigs {
-        getByName("debug") {
-            storeFile = rootProject.layout.projectDirectory
-                .file(".android/debug.keystore").asFile
-            storePassword = "android"
-            keyAlias = "androiddebugkey"
-            keyPassword = "android"
+        val debugStore = System.getenv("DEBUG_KEYSTORE")
+            ?.takeIf { it.isNotBlank() }
+            ?.let { rootProject.file(it) }
+            ?: rootProject.file(".android/debug.keystore")
+        if (debugStore.exists()) {
+            getByName("debug") {
+                storeFile = debugStore
+                storePassword = System.getenv("DEBUG_KEYSTORE_PASS") ?: "android"
+                keyAlias = System.getenv("DEBUG_KEY_ALIAS") ?: "androiddebugkey"
+                keyPassword = System.getenv("DEBUG_KEY_PASS") ?: "android"
+            }
         }
 
         val releaseKeystore = System.getenv("RELEASE_KEYSTORE")

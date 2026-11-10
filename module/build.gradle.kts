@@ -31,18 +31,39 @@ android {
     }
 
     /**
-     * 签名配置。
-     * AGP 默认把 debug.keystore 放在 ~/.android/，在受限环境（沙箱 / 只读用户目录）
-     * 会因 AccessDeniedException 打包失败。这里与 :app 一致，显式指向仓库内路径。
-     * 该目录已加入 .gitignore。
+     * 签名配置（issue #5 整改）。
+     *
+     * 该模块拥有系统进程 Hook 权限，**绝不能**再用仓库内公开的 debug 密钥签名：
+     * 私钥公开意味着任何人都能产出同包名、同签名的恶意模块，系统会当成正常升级。
+     *
+     * - debug：优先 `DEBUG_KEYSTORE`，其次本机 `.android/debug.keystore`
+     *   （build.sh 生成、已被 .gitignore 排除），都没有则交给 AGP 用
+     *   `~/.android/debug.keystore`；
+     * - release：只接受 CI Secrets 注入的独立密钥，缺失时产出 **unsigned**，
+     *   不再回退到 debug 密钥。
      */
     signingConfigs {
-        getByName("debug") {
-            storeFile = rootProject.layout.projectDirectory
-                .file(".android/debug.keystore").asFile
-            storePassword = "android"
-            keyAlias = "androiddebugkey"
-            keyPassword = "android"
+        val debugStore = System.getenv("DEBUG_KEYSTORE")
+            ?.takeIf { it.isNotBlank() }
+            ?.let { rootProject.file(it) }
+            ?: rootProject.file(".android/debug.keystore")
+        if (debugStore.exists()) {
+            getByName("debug") {
+                storeFile = debugStore
+                storePassword = System.getenv("DEBUG_KEYSTORE_PASS") ?: "android"
+                keyAlias = System.getenv("DEBUG_KEY_ALIAS") ?: "androiddebugkey"
+                keyPassword = System.getenv("DEBUG_KEY_PASS") ?: "android"
+            }
+        }
+
+        val releaseKeystore = System.getenv("RELEASE_KEYSTORE")
+        if (!releaseKeystore.isNullOrBlank() && rootProject.file(releaseKeystore).exists()) {
+            create("release") {
+                storeFile = rootProject.file(releaseKeystore)
+                storePassword = System.getenv("RELEASE_KEYSTORE_PASS") ?: ""
+                keyAlias = System.getenv("RELEASE_KEY_ALIAS") ?: ""
+                keyPassword = System.getenv("RELEASE_KEY_PASS") ?: ""
+            }
         }
     }
 
@@ -50,8 +71,8 @@ android {
         release {
             isMinifyEnabled = false
             isShrinkResources = false
-            // LSPosed 模块必须签名；未配置签名时产出 unsigned，需自行签名后再安装
-            signingConfig = signingConfigs.getByName("debug")
+            // 未配置 release 密钥时保持 unsigned：宁可不发布，也不回退到 debug 密钥。
+            signingConfig = signingConfigs.findByName("release")
         }
         debug {
             isMinifyEnabled = false

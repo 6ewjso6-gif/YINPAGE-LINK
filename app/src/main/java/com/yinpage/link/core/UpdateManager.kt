@@ -41,11 +41,18 @@ import java.security.MessageDigest
  *  ⚠️ 免责声明：正常 App 无法静默覆盖安装，系统安装器确认弹窗不可绕过；
  *  且 Android 8+ 需要用户在「安装未知应用」里允许本应用。
  *
- *  🔒 完整性防线（v0.12 新增，防供应链替换）：
- *    1. **签名一致性**：安装前用 `getPackageArchiveInfo` 取下载包签名，
- *       与本机签名逐指纹比对，不一致直接拒绝 —— 这一条即可堵死镜像/中间人替换；
- *    2. **SHA-256**：若 Release 附带 `<apk>.sha256` 附件，下载后比对哈希，
- *       不一致删除并拒绝（未提供时跳过，仍有第 1 条兜底）。
+ *  🔒 完整性防线（issue #6 重做）：
+ *    1. **证书指纹白名单**：安装前用 `getPackageArchiveInfo` 取下载包签名，
+ *       必须等于内置的官方发布证书 SHA-256（[TRUSTED_SIGNER_SHA256]）。
+ *       不再用「与本机签名一致」做判据 —— 早期分发的 debug 包签名密钥公开可查，
+ *       "签名一致"对它们等于没有校验；
+ *    2. **SHA-256 附件必填**：Release 必须附 `<apk>.sha256`，缺失时直接拒绝检查/安装，
+ *       不再"取不到就跳过"；
+ *    3. **元数据不信任镜像**：镜像只当传输通道。`tag_name` / 附件名都要过严格白名单，
+ *       下载地址由本地按 `https://github.com/<repo>/releases/download/<tag>/<name>`
+ *       重新拼装，镜像无法把下载指向任意主机；
+ *    4. **识别非官方构建**：若当前安装包不是官方证书签名（如 debug 包），
+ *       直接禁用应用内更新并提示重新安装官方版本。
  * ============================================================================
  */
 object UpdateManager {
@@ -57,9 +64,22 @@ object UpdateManager {
     private const val LATEST_API = "https://api.github.com/repos/$REPO/releases/latest"
 
     /**
-     * Release 附件前缀：只认 `APP-t-*.apk` 形态的产物。
+     * 官方发布证书 SHA-256（DER 编码，小写十六进制）。
+     * 取自 `APP-t-v0.17-signed.apk`：`CN=YINPAGE-LINK, O=YINPAGE-LINK, C=CN`。
+     * 这是更新链路唯一的信任锚点，轮换发布密钥时必须同步修改此处。
      */
-    private const val APK_PREFIX = "APP-t-"
+    private const val TRUSTED_SIGNER_SHA256 =
+        "c2a08c607f0164bcb28cf57cba7571410d358870eafa570a34291af2c1bb2571"
+
+    /**
+     * 仓库历史 debug keystore 的证书指纹（`CN=Android Debug`）。
+     * 该私钥曾随仓库公开，仅用于识别「不应支持自助更新」的旧构建。
+     */
+    private const val LEAKED_DEBUG_SHA256 =
+        "84cf2da177fb58e90bca950846d668a02170527e37db9b62431c743f480d6ee5"
+
+    /** Release tag 白名单：只接受 `APP-t-v1.2.3` 形态，杜绝任意字符串拼进 URL。 */
+    private val TAG_PATTERN = Regex("^APP-t-v\\d+(?:\\.\\d+)*$")
 
     private const val CONNECT_TIMEOUT_MS = 10_000
     private const val CHECK_READ_TIMEOUT_MS = 15_000
@@ -69,8 +89,8 @@ object UpdateManager {
      * 国内加速镜像前缀。用法：`前缀 + GitHub 完整 URL` 即为镜像地址。
      * 直连失败时按此顺序回退（谁先通就用谁）。
      *
-     * ⚠️ 镜像站返回的内容完全由第三方决定，因此下载完成后**必须**经过
-     * [install] 的签名校验 +（可用的）SHA-256 校验，二者缺一不可当成可信来源。
+     * ⚠️ 镜像站返回的内容完全由第三方决定，因此它们**只承担传输**：
+     * 元数据要过白名单、下载地址由本地重新拼装，安装前还要过证书指纹白名单校验。
      */
     private data class Line(val name: String, val prefix: String)
 
@@ -103,6 +123,9 @@ object UpdateManager {
 
         /** 检查失败（网络 / 解析 / 无 APK）。 */
         data class Failed(val message: String) : CheckResult
+
+        /** 当前安装包不是官方签名（debug / 第三方重签名），不支持应用内更新。 */
+        data object UnofficialBuild : CheckResult
     }
 
     /**
@@ -121,6 +144,9 @@ object UpdateManager {
         /** 安装包签名与本机不一致（无法覆盖安装）。 */
         data object SignatureMismatch : InstallResult
 
+        /** 当前安装包不是官方签名版本，无法自助更新到官方包。 */
+        data object NotOfficialBuild : InstallResult
+
         /** 未授予「安装未知应用」权限，需要引导用户去设置页。 */
         data object UnknownSourcesRequired : InstallResult
 
@@ -134,7 +160,17 @@ object UpdateManager {
      * 拉取 GitHub 最新 Release 并判断是否比当前版本新。
      * 直连失败会自动改走镜像线路（带时间戳防缓存）。
      */
-    suspend fun checkForUpdate(): CheckResult = withContext(Dispatchers.IO) {
+    suspend fun checkForUpdate(context: Context): CheckResult = withContext(Dispatchers.IO) {
+        // issue #6-4：debug / 第三方重签名的安装包无法验证更新来源，直接禁用。
+        if (!isOfficialBuild(context)) {
+            val legacyDebug = installedSigners(context).contains(LEAKED_DEBUG_SHA256)
+            EventLog.info(
+                TAG,
+                if (legacyDebug) "当前为历史 debug 签名版本（密钥已公开），已禁用应用内更新，请安装官方签名版本"
+                else "当前安装包不是官方签名，已禁用应用内更新",
+            )
+            return@withContext CheckResult.UnofficialBuild
+        }
         val apiLines = buildList {
             add(Line("GitHub 直连", LATEST_API))
             for (m in MIRRORS) {
@@ -172,45 +208,58 @@ object UpdateManager {
         }
     }
 
+    /**
+     * 解析 Release JSON。
+     *
+     * issue #6-3：**不再使用响应里的 `browser_download_url`**。
+     * 直连和镜像返回的是同一份 JSON，但镜像那份额外可被篡改；因此这里只取
+     * `tag_name` 与附件**名字**，并通过白名单校验后用本地规则拼出官方下载地址。
+     * 攻击者即使控制镜像，也无法把下载指向任意主机或伪造 tag。
+     */
     private fun parseLatest(json: String): CheckResult {
         val root = JSONObject(json)
-        val tag = root.optString("tag_name", "")
+        val tag = root.optString("tag_name", "").trim()
+        if (!TAG_PATTERN.matches(tag)) {
+            return CheckResult.Failed("Release 版本号格式异常，已拒绝更新：$tag")
+        }
         val published = root.optString("published_at", "")
         val body = root.optString("body", "")
         val assets = root.optJSONArray("assets") ?: return CheckResult.Failed("Release 中没有可下载的文件")
 
-        var apkUrl = ""
+        // 附件名必须与 tag 严格对应，避免"名字像 APK 但内容/主机由响应决定"。
+        val expectedApkNames = setOf("$tag-signed.apk", "$tag.apk")
         var apkName = ""
         var apkSize = 0L
-        val shaAssets = LinkedHashMap<String, String>()
+        var hasChecksum = false
         for (i in 0 until assets.length()) {
             val asset = assets.optJSONObject(i) ?: continue
             val name = asset.optString("name", "")
-            val url = asset.optString("browser_download_url", "")
-            if (name.startsWith(APK_PREFIX) && name.endsWith(".apk") && apkUrl.isBlank()) {
-                apkName = name
-                apkUrl = url
-                apkSize = asset.optLong("size", 0L)
-            } else if (name.endsWith(".sha256")) {
-                shaAssets[name] = url
+            when {
+                apkName.isBlank() && name in expectedApkNames -> {
+                    apkName = name
+                    apkSize = asset.optLong("size", 0L)
+                }
+                name == "$apkName.sha256" && apkName.isNotBlank() -> hasChecksum = true
+                expectedApkNames.any { name == "$it.sha256" } -> hasChecksum = true
             }
         }
-        if (apkUrl.isBlank()) return CheckResult.Failed("Release 中没有找到 APK 安装包")
+        if (apkName.isBlank()) {
+            return CheckResult.Failed("Release 中没有找到与 $tag 匹配的 APK 安装包")
+        }
+        if (!hasChecksum) {
+            return CheckResult.Failed("Release 未提供 SHA-256 校验文件，已拒绝更新（请等待发布方补齐）")
+        }
 
-        // 优先取与 APK 同名的 <apk>.sha256；否则任取一个 .sha256 附件。
-        val shaEntry = shaAssets.entries.firstOrNull { it.key == "$apkName.sha256" }
-            ?: shaAssets.entries.firstOrNull { it.key.substringBeforeLast(".sha256") == apkName }
-            ?: shaAssets.entries.firstOrNull()
-
+        val base = "https://github.com/$REPO/releases/download/$tag"
         val info = ReleaseInfo(
             tagName = tag,
             publishedAt = published,
             body = body,
-            apkUrl = apkUrl,
+            apkUrl = "$base/$apkName",
             apkName = apkName,
             apkSize = apkSize,
-            apkSha256Url = shaEntry?.value.orEmpty(),
-            apkSha256Name = shaEntry?.key.orEmpty(),
+            apkSha256Url = "$base/$apkName.sha256",
+            apkSha256Name = "$apkName.sha256",
         )
         return if (isNewerVersion(tag, BuildConfig.VERSION_NAME)) {
             CheckResult.Available(info)
@@ -383,17 +432,20 @@ object UpdateManager {
 
     // ------------------------------------------------------------------ 完整性校验
 
-    /** 若 Release 附带 SHA-256 附件则下载并比对；不通过删除文件并抛异常。 */
+    /**
+     * 下载 SHA-256 附件并比对；任何一步失败都抛异常（fail-closed）。
+     * issue #6-3：以前"取不到就跳过"，等于把完整性校验变成可选项。
+     */
     private fun verifyDownloaded(info: ReleaseInfo, apk: File) {
         if (info.apkSha256Url.isBlank()) {
-            EventLog.info(TAG, "Release 未提供 SHA-256 附件，跳过哈希校验（安装前仍有签名校验兜底）")
-            return
+            runCatching { apk.delete() }
+            throw IOException("Release 未提供 SHA-256 校验文件，已拒绝安装")
         }
         val expected = fetchSha256(info)
-        if (expected == null) {
-            EventLog.info(TAG, "SHA-256 附件下载失败，跳过哈希校验（安装前仍有签名校验兜底）")
-            return
-        }
+            ?: run {
+                runCatching { apk.delete() }
+                throw IOException("无法获取 SHA-256 校验文件，已拒绝安装")
+            }
         val actual = fileSha256(apk)
         if (!expected.equals(actual, ignoreCase = true)) {
             runCatching { apk.delete() }
@@ -403,19 +455,25 @@ object UpdateManager {
     }
 
     /**
-     * 下载 `<apk>.sha256` 附件并解析出 64 位十六进制哈希（失败返回 null）。
+     * 下载 `<apk>.sha256` 附件并解析出 64 位十六进制哈希（全部线路失败返回 null）。
      *
-     * v0.14：**只走 GitHub 直连，不挂镜像**。
-     * 哈希的意义是防镜像/中间人替换；如果哈希本身也从镜像取，攻击者可以
-     * 同时替换 APK 与哈希，"双重校验"就退化成只剩签名一重。直连失败时宁可
-     * 跳过哈希（日志记录），也不能用不可信来源的哈希。
+     * 允许镜像，是因为信任锚点已经变成[TRUSTED_SIGNER_SHA256]：
+     * 敌手即使同时替换 APK 与哈希，也无法伪造官方证书签名，安装阶段仍会拒绝。
+     * 哈希在这里只承担"传输完整性/损坏检测"，不承担来源认证。
      */
     private fun fetchSha256(info: ReleaseInfo): String? {
-        val text = runCatching { fetchText(info.apkSha256Url) }.getOrElse { e ->
-            EventLog.info(TAG, "SHA-256 直连获取失败（不降级到镜像）：${e.message}")
-            return null
+        val lines = buildList {
+            add(Line("GitHub 直连", info.apkSha256Url))
+            for (m in MIRRORS) add(Line(m.name, m.prefix + info.apkSha256Url))
         }
-        return Regex("[0-9a-fA-F]{64}").find(text)?.value?.lowercase()
+        for (line in lines) {
+            val text = runCatching { fetchText(line.prefix) }.getOrElse { e ->
+                EventLog.info(TAG, "SHA-256 获取失败（${line.name}）：${e.message}")
+                null
+            } ?: continue
+            Regex("[0-9a-fA-F]{64}").find(text)?.value?.let { return it.lowercase() }
+        }
+        return null
     }
 
     private fun fetchText(urlText: String): String {
@@ -467,6 +525,10 @@ object UpdateManager {
             @Suppress("DEPRECATION")
             PackageManager.GET_SIGNATURES
         }
+
+    /** 当前安装包是否由官方发布证书签名（issue #6 的信任锚点）。 */
+    private fun isOfficialBuild(context: Context): Boolean =
+        installedSigners(context.applicationContext).contains(TRUSTED_SIGNER_SHA256)
 
     /** 本机已安装版本的签名指纹。 */
     private fun installedSigners(context: Context): List<String> = runCatching {
@@ -521,12 +583,17 @@ object UpdateManager {
             EventLog.info(TAG, "安装失败：APK 不存在 ${apk.absolutePath}")
             return InstallResult.FileMissing
         }
-        val self = installedSigners(appContext)
+        // issue #6-3：判据从"与本机签名一致"改为"等于内置官方证书"。
+        // 本机不是官方包时（debug / 第三方重签名），即使下载包签名与本机相同也不能装。
+        if (!isOfficialBuild(appContext)) {
+            EventLog.info(TAG, "拒绝安装：当前不是官方签名版本，无法覆盖更新")
+            return InstallResult.NotOfficialBuild
+        }
         val downloaded = archiveSigners(appContext, apk)
-        if (self.isEmpty() || downloaded.isEmpty() || self != downloaded) {
+        if (downloaded != listOf(TRUSTED_SIGNER_SHA256)) {
             EventLog.info(
                 TAG,
-                "拒绝安装：安装包签名与本应用不一致（本机=${self.size} 包=${downloaded.size}）——疑似镜像/中间人替换",
+                "拒绝安装：更新包签名不在官方证书白名单（包签名=${downloaded.firstOrNull() ?: "无"}）——疑似镜像/中间人替换",
             )
             return InstallResult.SignatureMismatch
         }
